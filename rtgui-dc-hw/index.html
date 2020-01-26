@@ -1,0 +1,1221 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="RT-Thread GUI 繪圖引擎 - 硬體, 討厭下雨">
+    <meta name="description" content="Rtgui 中的 dc（drawable canvas） 也就是繪圖引擎，可以說是 rtgui 中最重要的一個部分，其中分成 3 個部分：給硬體的 dc_hw、給 buffer 的 dc_buffer 以及給 client 的。
+接下來將會">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>RT-Thread GUI 繪圖引擎 - 硬體 | 討厭下雨</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#59f">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+        
+    </style>
+    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
+    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">討厭下雨</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>回家</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>標籤雲</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>所有分類</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>全部文章</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>關於</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情贊助</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/favicon.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">討厭下雨</div>
+        <div class="logo-desc">
+            
+            真討厭下雨天
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                回家
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                標籤雲
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                所有分類
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                全部文章
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                關於
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情贊助
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('WARNING!! Please enter password.')).toString(CryptoJS.enc.Hex)) {
+                alert('Bad request. Back to home.');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        RT-Thread GUI 繪圖引擎 - 硬體
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #59f;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #59f;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #59f;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/kernel/" target="_blank">
+                                <span class="chip bg-color">kernel</span>
+                            </a>
+                        
+                            <a href="/tags/RT-Thread/" target="_blank">
+                                <span class="chip bg-color">RT-Thread</span>
+                            </a>
+                        
+                            <a href="/tags/GUI/" target="_blank">
+                                <span class="chip bg-color">GUI</span>
+                            </a>
+                        
+                            <a href="/tags/dc/" target="_blank">
+                                <span class="chip bg-color">dc</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/RT-Thread-GUI/" class="post-category" target="_blank">
+                                RT-Thread GUI
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    2019-03-13
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Rtgui 中的 dc（drawable canvas） 也就是繪圖引擎，可以說是 rtgui 中最重要的一個部分，其中分成 3 個部分：給硬體的 dc_hw、給 buffer 的 dc_buffer 以及給 client 的。</p>
+<p>接下來將會追蹤 dc_hw 中的程式碼，分析 rtgui 是如何在螢幕上面描繪點線面。</p>
+<hr>
+<h2 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h2><blockquote>
+<p>File: dc.h</p>
+</blockquote>
+<h3 id="dc"><a href="#dc" class="headerlink" title="dc"></a>dc</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+ * The abstract device context
+ *
+ * Normally, a DC is a drawable canvas, user can draw point/line/cycle etc
+ * on the DC.
+ *
+ * There are several kinds of DC:
+ * - Hardware DC;
+ * - Client DC;
+ * - Buffer DC;
+ */</span>
+<span class="token keyword">struct</span> rtgui_dc
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* type of device context */</span>
+    rt_uint32_t type<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* dc engine */</span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> rtgui_dc_engine <span class="token operator">*</span>engine<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h3 id="dc-engine"><a href="#dc-engine" class="headerlink" title="dc_engine"></a>dc_engine</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> rtgui_dc_engine
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* interface */</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>draw_point<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>draw_color_point<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> rtgui_color_t color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>draw_vline<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y1<span class="token punctuation">,</span> <span class="token keyword">int</span> y2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>draw_hline<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> <span class="token keyword">int</span> x1<span class="token punctuation">,</span> <span class="token keyword">int</span> x2<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>fill_rect<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>blit_line<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> <span class="token keyword">int</span> x1<span class="token punctuation">,</span> <span class="token keyword">int</span> x2<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> rt_uint8_t <span class="token operator">*</span>line_data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>blit<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span> <span class="token keyword">struct</span> rtgui_point <span class="token operator">*</span>dc_point<span class="token punctuation">,</span> <span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dest<span class="token punctuation">,</span> rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">rt_bool_t</span> <span class="token punctuation">(</span><span class="token operator">*</span>fini<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h3 id="dc-hw"><a href="#dc-hw" class="headerlink" title="dc_hw"></a>dc_hw</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+ * The hardware device context
+ *
+ * The hardware DC is a context based on hardware device, for examle the
+ * LCD device. The operations on the hardware DC are reflected to the real
+ * hardware.
+ *
+ */</span>
+<span class="token keyword">struct</span> rtgui_dc_hw
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc parent<span class="token punctuation">;</span>
+    rtgui_widget_t <span class="token operator">*</span>owner<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token keyword">struct</span> rtgui_graphic_driver <span class="token operator">*</span>hw_driver<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h3 id="hw-engine"><a href="#hw-engine" class="headerlink" title="hw_engine"></a>hw_engine</h3><blockquote>
+<p>File: dc_hw.c</p>
+</blockquote>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">const</span> <span class="token keyword">struct</span> rtgui_dc_engine dc_hw_engine <span class="token operator">=</span>
+<span class="token punctuation">{</span>
+    rtgui_dc_hw_draw_point<span class="token punctuation">,</span>
+    rtgui_dc_hw_draw_color_point<span class="token punctuation">,</span>
+    rtgui_dc_hw_draw_vline<span class="token punctuation">,</span>
+    rtgui_dc_hw_draw_hline<span class="token punctuation">,</span>
+    rtgui_dc_hw_fill_rect<span class="token punctuation">,</span>
+    rtgui_dc_hw_blit_line<span class="token punctuation">,</span>
+    rtgui_dc_hw_blit<span class="token punctuation">,</span>
+
+    rtgui_dc_hw_fini<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h2 id="啟動-dc"><a href="#啟動-dc" class="headerlink" title="啟動 dc"></a>啟動 dc</h2><p>我們可以從 rtgui 官方提供的範例發現，在使用 dc 前，需要先利用 <code>rtgui_dc_begin_drawing</code> 來啟動引擎，並在結束時呼叫 <code>rtgui_dc_end_drawing</code>；而啟動時，會判斷要使用哪種 dc，並啟動，如 1866 至 1871 行</p>
+<pre><code>/* create client or hardware DC */
+    if ((rtgui_region_is_flat(&amp;owner-&gt;clip) == RT_EOK) &amp;&amp;
+            rtgui_rect_is_equal(&amp;(owner-&gt;extent), &amp;(owner-&gt;clip.extents)) == RT_EOK)
+        dc = rtgui_dc_hw_create(owner);
+    else
+        dc = rtgui_dc_client_create(owner);
+</code></pre><p>如果判斷為 hw，則進入 <code>rtgui_dc_hw_create</code> </p>
+<hr>
+<h2 id="建立-dc"><a href="#建立-dc" class="headerlink" title="建立 dc"></a>建立 dc</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_dc_hw_create</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建立 dc</td>
+<td>dc 指標</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*owner</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dc 擁有者</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span><span class="token function">rtgui_dc_hw_create</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>owner<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* adjudge owner */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>owner <span class="token operator">==</span> RT_NULL <span class="token operator">||</span> owner<span class="token operator">-></span>toplevel <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span> <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* create DC */</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">rtgui_malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>dc<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        dc<span class="token operator">-></span>parent<span class="token punctuation">.</span>type <span class="token operator">=</span> RTGUI_DC_HW<span class="token punctuation">;</span>
+        dc<span class="token operator">-></span>parent<span class="token punctuation">.</span>engine <span class="token operator">=</span> <span class="token operator">&amp;</span>dc_hw_engine<span class="token punctuation">;</span>
+        dc<span class="token operator">-></span>owner <span class="token operator">=</span> owner<span class="token punctuation">;</span>
+        dc<span class="token operator">-></span>hw_driver <span class="token operator">=</span> <span class="token function">rtgui_graphic_driver_get_default</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>dc<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="運作-dc-畫圖"><a href="#運作-dc-畫圖" class="headerlink" title="運作 dc (畫圖)"></a>運作 dc (畫圖)</h2><h3 id="點"><a href="#點" class="headerlink" title="點"></a>點</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_dc_hw_draw_point</code></p>
+<!-- tab 性質 -->
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>畫點</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<!-- endtab -->
+<!-- tab 元素 -->
+<table>
+<thead>
+<tr>
+<th><code>*self</code></th>
+<th style="text-align:center"><code>x</code></th>
+<th style="text-align:center"><code>y</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dc 本體</td>
+<td style="text-align:center">座標 x</td>
+<td style="text-align:center">座標 y</td>
+</tr>
+</tbody>
+</table>
+<!-- endtab -->
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+ * draw a logic point on device
+ */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_draw_point</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>self<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>self <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> self<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> y <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    x <span class="token operator">=</span> x <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">>=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    y <span class="token operator">=</span> y <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">>=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* draw this point */</span>
+    dc<span class="token operator">-></span>hw_driver<span class="token operator">-></span>ops<span class="token operator">-></span><span class="token function">set_pixel</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>dc<span class="token operator">-></span>owner<span class="token operator">-></span>gc<span class="token punctuation">.</span>foreground<span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>首先傳進去的座標一律為邏輯位置，也就是以此 dc 所屬物件（有可能是視窗、元件等）的 $(x_1,y_1)$ 為原點之座標；由於 $(x_1,y_1)$ 為該物件（通常為矩形）的左下角，所以傳入的座標不會有負號。</p>
+<p>接著將邏輯座標轉為實際座標（也就是螢幕上的真正位置），所以把 $(x,y)$ 轉成 $(x+x_1,y+y_1)$；由於 dc 是跟隨物件的，所以新座標不可超過 $(x_2,y_2)$，也就是右上角。</p>
+<p>最後利用驅動中設定好的 <code>set_pixel</code> 函數來上色，這裡使用預設顏色。</p>
+<hr>
+<h3 id="彩色點"><a href="#彩色點" class="headerlink" title="彩色點"></a>彩色點</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_dc_hw_draw_color_point</code></p>
+<!-- tab 性質 -->
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>畫彩色點</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<!-- endtab -->
+<!-- tab 元素 -->
+<table>
+<thead>
+<tr>
+<th><code>*self</code></th>
+<th style="text-align:center"><code>x</code></th>
+<th style="text-align:center"><code>y</code></th>
+<th><code>color</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dc 本體</td>
+<td style="text-align:center">座標 x</td>
+<td style="text-align:center">座標 y</td>
+<td>所選的顏色</td>
+</tr>
+</tbody>
+</table>
+<!-- endtab -->
+<pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_draw_color_point</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>self<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> rtgui_color_t color<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>self <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> self<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> y <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    x <span class="token operator">=</span> x <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">>=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    y <span class="token operator">=</span> y <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">>=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* draw this point */</span>
+    dc<span class="token operator">-></span>hw_driver<span class="token operator">-></span>ops<span class="token operator">-></span><span class="token function">set_pixel</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>color<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>跟上面最大的不同是可以選顏色 (131)。</p>
+<hr>
+<h3 id="水平線"><a href="#水平線" class="headerlink" title="水平線"></a>水平線</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+ * draw a logic vertical line on device
+ */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_draw_vline</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>self<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y1<span class="token punctuation">,</span> <span class="token keyword">int</span> y2<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>self <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> self<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">>=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    y1 <span class="token operator">=</span> y1 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    y2 <span class="token operator">=</span> y2 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y1 <span class="token operator">></span> y2<span class="token punctuation">)</span>
+        <span class="token function">_int_swap</span><span class="token punctuation">(</span>y1<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y1 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2 <span class="token operator">||</span> y2 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y1 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">)</span>
+        y1 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y2 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        y2 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">;</span>
+
+
+    <span class="token comment" spellcheck="true">/* draw vline */</span>
+    dc<span class="token operator">-></span>hw_driver<span class="token operator">-></span>ops<span class="token operator">-></span><span class="token function">draw_vline</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>dc<span class="token operator">-></span>owner<span class="token operator">-></span>gc<span class="token punctuation">.</span>foreground<span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h3 id="鉛直線"><a href="#鉛直線" class="headerlink" title="鉛直線"></a>鉛直線</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+ * draw a logic horizontal line on device
+ */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_draw_hline</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>self<span class="token punctuation">,</span> <span class="token keyword">int</span> x1<span class="token punctuation">,</span> <span class="token keyword">int</span> x2<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>self <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> self<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    y <span class="token operator">=</span> y <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">>=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* convert logic to device */</span>
+    x1 <span class="token operator">=</span> x1 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    x2 <span class="token operator">=</span> x2 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">></span> x2<span class="token punctuation">)</span>
+        <span class="token function">_int_swap</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> x2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2 <span class="token operator">||</span> x2 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">)</span>
+        x1 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x2 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        x2 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* draw hline */</span>
+    dc<span class="token operator">-></span>hw_driver<span class="token operator">-></span>ops<span class="token operator">-></span><span class="token function">draw_hline</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>dc<span class="token operator">-></span>owner<span class="token operator">-></span>gc<span class="token punctuation">.</span>foreground<span class="token punctuation">)</span><span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h3 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_fill_rect</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>self<span class="token punctuation">,</span> <span class="token keyword">struct</span> rtgui_rect <span class="token operator">*</span>rect<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    rtgui_color_t color<span class="token punctuation">;</span>
+    <span class="token keyword">register</span> rt_base_t y1<span class="token punctuation">,</span> y2<span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>self <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> self<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* get background color */</span>
+    color <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>gc<span class="token punctuation">.</span>background<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* convert logic to device */</span>
+    x1 <span class="token operator">=</span> rect<span class="token operator">-></span>x1 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">)</span>
+        x1 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    x2 <span class="token operator">=</span> rect<span class="token operator">-></span>x2 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x2 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x2 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        x2 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">;</span>
+
+    y1 <span class="token operator">=</span> rect<span class="token operator">-></span>y1 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y1 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y1 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">)</span>
+        y1 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    y2 <span class="token operator">=</span> rect<span class="token operator">-></span>y2 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y2 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y2 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        y2 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* fill rect */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> y1 <span class="token operator">&lt;</span> y2<span class="token punctuation">;</span> y1<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        dc<span class="token operator">-></span>hw_driver<span class="token operator">-></span>ops<span class="token operator">-></span><span class="token function">draw_hline</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>color<span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h3 id="blit"><a href="#blit" class="headerlink" title="blit(?)"></a>blit(?)</h3><pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_blit_line</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>self<span class="token punctuation">,</span> <span class="token keyword">int</span> x1<span class="token punctuation">,</span> <span class="token keyword">int</span> x2<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> rt_uint8_t <span class="token operator">*</span>line_data<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span>dc<span class="token punctuation">;</span>
+
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>self <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dc <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc_hw <span class="token operator">*</span><span class="token punctuation">)</span> self<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* convert logic to device */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    y <span class="token operator">=</span> y <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>y2<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    x1 <span class="token operator">=</span> x1 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    x2 <span class="token operator">=</span> x2 <span class="token operator">+</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">></span> x2<span class="token punctuation">)</span>
+        <span class="token function">_int_swap</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> x2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2 <span class="token operator">||</span> x2 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x1 <span class="token operator">&lt;</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">)</span>
+        x1 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x2 <span class="token operator">></span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">)</span>
+        x2 <span class="token operator">=</span> dc<span class="token operator">-></span>owner<span class="token operator">-></span>extent<span class="token punctuation">.</span>x2<span class="token punctuation">;</span>
+
+    dc<span class="token operator">-></span>hw_driver<span class="token operator">-></span>ops<span class="token operator">-></span><span class="token function">draw_raw_hline</span><span class="token punctuation">(</span>line_data<span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_dc_hw_blit</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">,</span>
+                             <span class="token keyword">struct</span> rtgui_point <span class="token operator">*</span>dc_point<span class="token punctuation">,</span>
+                             <span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dest<span class="token punctuation">,</span>
+                             rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* not blit in hardware dc */</span>
+    <span class="token keyword">return</span> <span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+            
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
+                    </span>
+                    <a href="http://blog.omuskywalker.com" class="b-link-green">討厭下雨</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/rtgui-dc-hw/" class="b-link-green">RT-Thread GUI 繪圖引擎 - 硬體</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '97c34b7bba491c6a5007',
+        clientSecret: '6140d208bae6bbbc69c65e3e332a46d090094fc8',
+        repo: 'hexo-gitalk-comment',
+        owner: 'omuskywalker',
+        admin: "omuskywalker",
+        id: '/rtgui-dc-hw/',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/ascii-color/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="使用 ANSI 跳脫碼印出有色文字">
+                        
+                        <span class="card-title">使用 ANSI 跳脫碼印出有色文字</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">ANSI 跳脫碼ANSI 跳脫碼，即 ASCII Escape Code，標準 CSI 格式為
+CSI n1 [;n2 [;...]] m
+
+
+n1 通常填入 \x1b，在 ASCII 表中 0x1b 代表著 escape。
+n1、n2 為</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Note/" class="post-category" target="_blank">
+                                    Note
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/note/" target="_blank">
+                        <span class="chip bg-color">note</span>
+                    </a>
+                    
+                    <a href="/tags/C/" target="_blank">
+                        <span class="chip bg-color">C</span>
+                    </a>
+                    
+                    <a href="/tags/ANSI/" target="_blank">
+                        <span class="chip bg-color">ANSI</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/rtgui-server/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="RT-Thread GUI Server">
+                        
+                        <span class="card-title">RT-Thread GUI Server</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">基本事件結構server 掌管整個 GUI system 的所有事件 (event)，而根據不同的事件定義不同的結構；在每個不同的結構中都有基本的欄位 _RTGUI_EVENT_WIN_ELEMENTS：
+
+File: event.c
+
+/</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/RT-Thread-GUI/" class="post-category" target="_blank">
+                                    RT-Thread GUI
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/kernel/" target="_blank">
+                        <span class="chip bg-color">kernel</span>
+                    </a>
+                    
+                    <a href="/tags/RT-Thread/" target="_blank">
+                        <span class="chip bg-color">RT-Thread</span>
+                    </a>
+                    
+                    <a href="/tags/GUI/" target="_blank">
+                        <span class="chip bg-color">GUI</span>
+                    </a>
+                    
+                    <a href="/tags/server/" target="_blank">
+                        <span class="chip bg-color">server</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '來源: 討厭下雨<br />'
+            + '作者: OMU Skywalker<br />'
+            + '連結: <a href="' + url + '">' + url + '</a><br />'
+            + '本文著作權歸作者所有，任何形式的轉載都須註明出處。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy;2019&nbsp;&nbsp;<i class="fa fa-plug"></i><a href="/"> OMU Skywalker</a>
+            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
+
+            
+
+            
+			
+                
+                
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
+        <i class="fa fa-linkedin"></i>
+    </a>
+
+
+
+    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
+        <i class="fa fa-stack-overflow"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
+                   class="search-input" autocomplete="off">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-124928169-1');
+</script>
+
+
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

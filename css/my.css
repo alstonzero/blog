@@ -1,0 +1,60 @@
+/* Here is your custom css styles. */
+table {
+    margin: 1em 0;
+    display: block;
+    overflow: auto;
+}
+table::-webkit-scrollbar { 
+    height: 0; 
+}
+th , td {
+    border: 1px solid #dfe2e5 !important;
+}
+
+.clearfix {
+    border-width: 1px;
+}
+
+h2 {
+    border-bottom: 1px solid #dfe2e5;
+    padding-bottom: 5px;
+}
+
+.search-input:focus {
+    border-bottom-color: #59f !important;
+}
+
+.img-shadow {
+    box-shadow: none;
+}
+
+.article .article-content .summary {
+    height: 3em;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 601px) {
+    footer .container {
+        width: 60%;
+    }
+    footer .container .copy-right {
+        padding-bottom: 1em;
+    } 
+}
+
+html {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.article-tags {
+    height: 47px;
+    overflow-y: auto;
+}
+
+footer .social-statis {
+    margin-top: 0;
+}
+
+.chip .tag-length {
+    margin-right: 0;
+}

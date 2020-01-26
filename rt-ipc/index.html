@@ -1,0 +1,2827 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="RT-Thread IPC 同步, 討厭下雨">
+    <meta name="description" content="
+兩個 thread 要溝通的方式，是透過共享的記憶體來完成；而如果此記憶體沒有排他性，這個記憶體有可能會不同步。
+因此進入一塊共享的記憶體一次只允許一個 thread 來使用，這樣即可保證其資料的一致性
+進入此共享記憶體則叫做 criti">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>RT-Thread IPC 同步 | 討厭下雨</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#59f">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+        
+    </style>
+    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
+    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">討厭下雨</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>回家</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>標籤雲</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>所有分類</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>全部文章</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>關於</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情贊助</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/favicon.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">討厭下雨</div>
+        <div class="logo-desc">
+            
+            真討厭下雨天
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                回家
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                標籤雲
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                所有分類
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                全部文章
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                關於
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情贊助
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('WARNING!! Please enter password.')).toString(CryptoJS.enc.Hex)) {
+                alert('Bad request. Back to home.');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        RT-Thread IPC 同步
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #59f;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #59f;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #59f;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/kernel/" target="_blank">
+                                <span class="chip bg-color">kernel</span>
+                            </a>
+                        
+                            <a href="/tags/RT-Thread/" target="_blank">
+                                <span class="chip bg-color">RT-Thread</span>
+                            </a>
+                        
+                            <a href="/tags/semaphore/" target="_blank">
+                                <span class="chip bg-color">semaphore</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                                RT-Thread
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    2018-11-26
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
+<li>兩個 thread 要溝通的方式，是透過共享的記憶體來完成；而如果此記憶體沒有排他性，這個記憶體有可能會不同步。</li>
+<li>因此進入一塊共享的記憶體一次只允許一個 thread 來使用，這樣即可保證其資料的一致性</li>
+<li>進入此共享記憶體則叫做 <strong>critical region</strong></li>
+<li>RT-Thread 利用 7 種方式來完成同步：關閉中斷、scheduler lock、semaphore、互斥鎖、事件、mail box 及 message</li>
+</ul>
+<hr>
+<h2 id="關閉中斷"><a href="#關閉中斷" class="headerlink" title="關閉中斷"></a>關閉中斷</h2><pre class=" language-c"><code class="language-c">level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
+     *  critical region 
+     */</span>
+<span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>此方式是最強大的一種，但此 critical region 不可以佔用太多時間</li>
+</ul>
+<hr>
+<h2 id="Scheduler-lock"><a href="#Scheduler-lock" class="headerlink" title="Scheduler lock"></a>Scheduler lock</h2><pre class=" language-c"><code class="language-c"><span class="token function">rt_enter_critical</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">/**
+    *  critical region 
+    */</span>
+<span class="token function">rt_exit_critical</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>使用此方式可確保當前 thread 不會被 scheduler 踢出，但還是有可能會被中斷影響。</li>
+</ul>
+<hr>
+<h3 id="進入-scheuler-鎖"><a href="#進入-scheuler-鎖" class="headerlink" title="進入 scheuler 鎖"></a>進入 scheuler 鎖</h3><p><i class="fa fa-code"></i> Code: <code>rt_enter_critical</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>進入 scheuler 鎖</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will lock the thread scheduler.
+ */</span>
+<span class="token keyword">void</span> <span class="token function">rt_enter_critical</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">register</span> rt_base_t level<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/*
+     * the maximal number of nest is RT_UINT16_MAX, which is big
+     * enough and does not check here
+     */</span>
+    rt_scheduler_lock_nest <span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+    <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_enter_critical<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>即，將 <code>rt_scheduler_lock_nest</code> 加一</li>
+</ul>
+<hr>
+<h3 id="離開-scheduler-鎖"><a href="#離開-scheduler-鎖" class="headerlink" title="離開 scheduler 鎖"></a>離開 scheduler 鎖</h3><p><i class="fa fa-code"></i> Code: <code>rt_exit_critical</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>離開 scheuler 鎖</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will unlock the thread scheduler.
+ */</span>
+<span class="token keyword">void</span> <span class="token function">rt_exit_critical</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">register</span> rt_base_t level<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    rt_scheduler_lock_nest <span class="token operator">--</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>即，將 <code>rt_scheduler_lock_nest</code> 減一</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">if</span> <span class="token punctuation">(</span>rt_scheduler_lock_nest <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        rt_scheduler_lock_nest <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+        <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+        <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果 <code>rt_scheduler_lock_nest</code> 被減至 0 或以下，進行一次調度</li>
+</ul>
+<hr>
+<p><i class="fa fa-code"></i> Code: <code>rt_critical_level</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回傳 scheuler 鎖的值</td>
+<td>scheuler 鎖的值</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * Get the scheduler lock level
+ *
+ * @return the level of the scheduler lock. 0 means unlocked.
+ */</span>
+rt_uint16_t <span class="token function">rt_critical_level</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> rt_scheduler_lock_nest<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_critical_level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>即，回傳 <code>rt_scheduler_lock_nest</code> 值</li>
+</ul>
+<hr>
+<h2 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h2><blockquote>
+<p>File: ipc.c</p>
+</blockquote>
+<ul>
+<li>為一個值，代表同時可用的個數</li>
+<li>不等於 0 時可用，取用時將值減 1</li>
+<li>當不可用時，將 thread 掛在等待的鏈上</li>
+</ul>
+<h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_SEMAPHORE</span>
+<span class="token comment" spellcheck="true">/**
+ * Semaphore structure
+ */</span>
+<span class="token keyword">struct</span> rt_semaphore
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rt_ipc_object parent<span class="token punctuation">;</span>                        <span class="token comment" spellcheck="true">/**&lt; inherit from ipc_object */</span>
+
+    rt_uint16_t          value<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; value of semaphore. */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_semaphore <span class="token operator">*</span>rt_sem_t<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre>
+<hr>
+<h3 id="建立-semaphore"><a href="#建立-semaphore" class="headerlink" title="建立 semaphore"></a>建立 semaphore</h3><h4 id="動態記憶體管理"><a href="#動態記憶體管理" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_create</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建立 semaphore</td>
+<td>semaphore</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*name</code></th>
+<th><code>value</code></th>
+<th><code>flag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>名字</td>
+<td>semaphore 值，即最大可同時使用人數</td>
+<td>FIFO / PRIO</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will create a semaphore from system resource
+ *
+ * @param name the name of semaphore
+ * @param value the init value of semaphore
+ * @param flag the flag of semaphore
+ *
+ * @return the created semaphore, RT_NULL on error happen
+ *
+ * @see rt_sem_init
+ */</span>
+rt_sem_t <span class="token function">rt_sem_create</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span> rt_uint32_t value<span class="token punctuation">,</span> rt_uint8_t flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    rt_sem_t sem<span class="token punctuation">;</span>
+
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* allocate object */</span>
+    sem <span class="token operator">=</span> <span class="token punctuation">(</span>rt_sem_t<span class="token punctuation">)</span><span class="token function">rt_object_allocate</span><span class="token punctuation">(</span>RT_Object_Class_Semaphore<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sem <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> sem<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init ipc object */</span>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set init value */</span>
+    sem<span class="token operator">-></span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set parent */</span>
+    sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> sem<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>首先需要一塊 semaphore 的大小，初始化 ipc 物件，再依序寫入初始值及 flag</li>
+</ul>
+<hr>
+<h4 id="靜態記憶體管理"><a href="#靜態記憶體管理" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_init</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始化 semaphore</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>sem</code></th>
+<th><code>*name</code></th>
+<th><code>value</code></th>
+<th><code>flag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>semaphore 本體</td>
+<td>名字</td>
+<td>semaphore 值，即最大可同時使用人數</td>
+<td>FIFO / PRIO</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will initialize a semaphore and put it under control of
+ * resource management.
+ *
+ * @param sem the semaphore object
+ * @param name the name of semaphore
+ * @param value the init value of semaphore
+ * @param flag the flag of semaphore
+ *
+ * @return the operation status, RT_EOK on successful
+ */</span>
+rt_err_t <span class="token function">rt_sem_init</span><span class="token punctuation">(</span>rt_sem_t    sem<span class="token punctuation">,</span>
+                     <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span>
+                     rt_uint32_t value<span class="token punctuation">,</span>
+                     rt_uint8_t  flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>sem <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init object */</span>
+    <span class="token function">rt_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">,</span> RT_Object_Class_Semaphore<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init ipc object */</span>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set init value */</span>
+    sem<span class="token operator">-></span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set parent */</span>
+    sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>由於使用靜態記憶體，這裡就不需要再 allocate。</li>
+</ul>
+<hr>
+<h3 id="flags"><a href="#flags" class="headerlink" title="flags"></a>flags</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * IPC flags and control command definitions
+ */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_IPC_FLAG_FIFO                0x00            </span><span class="token comment" spellcheck="true">/**&lt; FIFOed IPC. @ref IPC. */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_IPC_FLAG_PRIO                0x01            </span><span class="token comment" spellcheck="true">/**&lt; PRIOed IPC. @ref IPC. */</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_IPC_CMD_UNKNOWN              0x00            </span><span class="token comment" spellcheck="true">/**&lt; unknown IPC command */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_IPC_CMD_RESET                0x01            </span><span class="token comment" spellcheck="true">/**&lt; reset IPC object */</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_WAITING_FOREVER              -1              </span><span class="token comment" spellcheck="true">/**&lt; Block forever until get resource. */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_WAITING_NO                   0               </span><span class="token comment" spellcheck="true">/**&lt; Non-block. */</span>
+</code></pre>
+<hr>
+<h3 id="刪除-semaphore"><a href="#刪除-semaphore" class="headerlink" title="刪除 semaphore"></a>刪除 semaphore</h3><h4 id="動態記憶體管理-1"><a href="#動態記憶體管理-1" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_delete</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刪除 semaphore</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>sem</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲刪除的 semaphore</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will delete a semaphore object and release the memory
+ *
+ * @param sem the semaphore object
+ *
+ * @return the error code
+ *
+ * @see rt_sem_detach
+ */</span>
+rt_err_t <span class="token function">rt_sem_delete</span><span class="token punctuation">(</span>rt_sem_t sem<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>sem <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Semaphore<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* wakeup all suspend threads */</span>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* delete semaphore object */</span>
+    <span class="token function">rt_object_delete</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>首先需把所有正在等待此 semaphore 的 thread 叫醒</li>
+<li>接著呼叫 <code>rt_object_delete</code> 清除此物件（semaphore）</li>
+</ul>
+<hr>
+<h4 id="靜態記憶體管理-1"><a href="#靜態記憶體管理-1" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_detach</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刪除 semaphore</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>sem</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲刪除的 semaphore</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will detach a semaphore from resource management
+ *
+ * @param sem the semaphore object
+ *
+ * @return the operation status, RT_EOK on successful
+ *
+ * @see rt_sem_delete
+ */</span>
+rt_err_t <span class="token function">rt_sem_detach</span><span class="token punctuation">(</span>rt_sem_t sem<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>sem <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Semaphore<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* wakeup all suspend threads */</span>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* detach semaphore object */</span>
+    <span class="token function">rt_object_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>這裡則透過 <code>rt_object_detach</code> 清除</li>
+</ul>
+<hr>
+<h3 id="使用-semaphore"><a href="#使用-semaphore" class="headerlink" title="使用 semaphore"></a>使用 semaphore</h3><ul>
+<li>呼叫 <code>rt_sem_take</code> 來取得 semaphore，傳入的 time 是等待時間</li>
+</ul>
+<p><i class="fa fa-code"></i> Code: <code>rt_sem_take</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要求 semaphore</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>sem</code></th>
+<th><code>time</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲要求的 semaphore</td>
+<td>等待時間（如果需要）</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will take a semaphore, if the semaphore is unavailable, the
+ * thread shall wait for a specified time.
+ *
+ * @param sem the semaphore object
+ * @param time the waiting time
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_sem_take</span><span class="token punctuation">(</span>rt_sem_t sem<span class="token punctuation">,</span> rt_int32_t time<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">register</span> rt_base_t temp<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>sem <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Semaphore<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_trytake_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>由於待會會修改 semaphore 的值，這裡先將中斷關閉</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"thread %s take sem:%s, which value is: %d\n"</span><span class="token punctuation">,</span>
+                                <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span>name<span class="token punctuation">,</span>
+                                <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_object <span class="token operator">*</span><span class="token punctuation">)</span>sem<span class="token punctuation">)</span><span class="token operator">-></span>name<span class="token punctuation">,</span>
+                                sem<span class="token operator">-></span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>sem<span class="token operator">-></span>value <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* semaphore is available */</span>
+        sem<span class="token operator">-></span>value <span class="token operator">--</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+        <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如過 <code>sem-&gt;value</code> 值大於 0 代表可用，接著減一，並開啟中斷</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* no waiting, return with timeout */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>time <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果 semaphore 不可用時：</li>
+<li>且 time 為 0，表示不等待，直接開啟中斷並 return</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* current context checking */</span>
+            RT_DEBUG_IN_THREAD_CONTEXT<span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* semaphore is unavailable, push to suspend list */</span>
+            <span class="token comment" spellcheck="true">/* get current thread */</span>
+            thread <span class="token operator">=</span> <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* reset thread error number */</span>
+            thread<span class="token operator">-></span>error <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+
+            <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"sem take: suspend thread - %s\n"</span><span class="token punctuation">,</span>
+                                        thread<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* suspend thread */</span>
+            <span class="token function">rt_ipc_list_suspend</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                thread<span class="token punctuation">,</span>
+                                sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>如果要等待，則將 thread 插入 suspend list</li>
+</ul>
+<pre class=" language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* has waiting time, start thread timer */</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>time <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"set thread:%s to timer list\n"</span><span class="token punctuation">,</span>
+                                            thread<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment" spellcheck="true">/* reset the timeout of thread timer and start it */</span>
+                <span class="token function">rt_timer_control</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                 RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
+                                 <span class="token operator">&amp;</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>且如果等待時間大於 0，則啟動一個 timeout 為 time 的 timer</li>
+</ul>
+<pre class=" language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+            <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* do schedule */</span>
+            <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>error <span class="token operator">!=</span> RT_EOK<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> thread<span class="token operator">-></span>error<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_take_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_take<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>最後開啟中斷，做一次調度</li>
+</ul>
+<hr>
+<ul>
+<li>若是不想等待，可以呼叫 <code>rt_sem_trytake</code></li>
+<li>即呼叫 <code>rt_sem_take</code> 及傳入 <code>time</code> 為 0</li>
+</ul>
+<p><i class="fa fa-code"></i> Code: <code>rt_sem_trytake</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要求 semaphore（不等待）</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>sem</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲要求的 semaphore</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will try to take a semaphore and immediately return
+ *
+ * @param sem the semaphore object
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_sem_trytake</span><span class="token punctuation">(</span>rt_sem_t sem<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">rt_sem_take</span><span class="token punctuation">(</span>sem<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_trytake<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<ul>
+<li>還 semaphore 則使用 <code>rt_sem_release</code></li>
+</ul>
+<p><i class="fa fa-code"></i> Code: <code>rt_sem_release</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>釋放 semaphore</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>sem</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲要求的 semaphore</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will release a semaphore, if there are threads suspended on
+ * semaphore, it will be waked up.
+ *
+ * @param sem the semaphore object
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_sem_release</span><span class="token punctuation">(</span>rt_sem_t sem<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">register</span> rt_base_t temp<span class="token punctuation">;</span>
+    <span class="token keyword">register</span> rt_bool_t need_schedule<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>sem <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Semaphore<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_put_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    need_schedule <span class="token operator">=</span> RT_FALSE<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>首先將待會會遇到的 flag（<code>need_schedule</code>）設為 false</li>
+<li>因為待會也會修改 semaphore 的值，這裡需要關閉中斷</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"thread %s releases sem:%s, which value is: %d\n"</span><span class="token punctuation">,</span>
+                                <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span>name<span class="token punctuation">,</span>
+                                <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_object <span class="token operator">*</span><span class="token punctuation">)</span>sem<span class="token punctuation">)</span><span class="token operator">-></span>name<span class="token punctuation">,</span>
+                                sem<span class="token operator">-></span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">rt_list_isempty</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* resume the suspended thread */</span>
+        <span class="token function">rt_ipc_list_resume</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        need_schedule <span class="token operator">=</span> RT_TRUE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果有人在等此 semaphore，先恢復他，並修改 <code>need_schedule</code> 為 true</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">else</span>
+        sem<span class="token operator">-></span>value <span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* increase value */</span>
+</code></pre>
+<ul>
+<li>如果沒有人在等待，則加一</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+    <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* resume a thread, re-schedule */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>need_schedule <span class="token operator">==</span> RT_TRUE<span class="token punctuation">)</span>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_release<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>最後開啟中斷，並根據 <code>need_schedule</code> 來決定需不需要執行一次調度</li>
+</ul>
+<hr>
+<h2 id="互斥鎖（mutex）"><a href="#互斥鎖（mutex）" class="headerlink" title="互斥鎖（mutex）"></a>互斥鎖（mutex）</h2><ul>
+<li>即一種值為 1 的特殊 semaphore，特別的是具有防止優先級翻轉的特性</li>
+</ul>
+<h3 id="結構-1"><a href="#結構-1" class="headerlink" title="結構"></a>結構</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_MUTEX</span>
+<span class="token comment" spellcheck="true">/**
+ * Mutual exclusion (mutex) structure
+ */</span>
+<span class="token keyword">struct</span> rt_mutex
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rt_ipc_object parent<span class="token punctuation">;</span>                        <span class="token comment" spellcheck="true">/**&lt; inherit from ipc_object */</span>
+
+    rt_uint16_t          value<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; value of mutex */</span>
+
+    rt_uint8_t           original_priority<span class="token punctuation">;</span>             <span class="token comment" spellcheck="true">/**&lt; priority of last thread hold the mutex */</span>
+    rt_uint8_t           hold<span class="token punctuation">;</span>                          <span class="token comment" spellcheck="true">/**&lt; numbers of thread hold the mutex */</span>
+
+    <span class="token keyword">struct</span> rt_thread    <span class="token operator">*</span>owner<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; current owner of mutex */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_mutex <span class="token operator">*</span>rt_mutex_t<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre>
+<ul>
+<li>為了防止優先權翻轉，在持有鎖的過程中可能會被提升優先權，在結構中就需要紀錄原本的優先級。</li>
+</ul>
+<hr>
+<h3 id="建立-mutex"><a href="#建立-mutex" class="headerlink" title="建立 mutex"></a>建立 mutex</h3><h4 id="動態記憶體管理-2"><a href="#動態記憶體管理-2" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_create</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建立 mutex</td>
+<td>mutex</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*name</code></th>
+<th><code>flag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>名字</td>
+<td>FIFO / PRIO</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will create a mutex from system resource
+ *
+ * @param name the name of mutex
+ * @param flag the flag of mutex
+ *
+ * @return the created mutex, RT_NULL on error happen
+ *
+ * @see rt_mutex_init
+ */</span>
+rt_mutex_t <span class="token function">rt_mutex_create</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span> rt_uint8_t flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rt_mutex <span class="token operator">*</span>mutex<span class="token punctuation">;</span>
+
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* allocate object */</span>
+    mutex <span class="token operator">=</span> <span class="token punctuation">(</span>rt_mutex_t<span class="token punctuation">)</span><span class="token function">rt_object_allocate</span><span class="token punctuation">(</span>RT_Object_Class_Mutex<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mutex <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> mutex<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>首先 allocate 一個物件，初始化</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* init ipc object */</span>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    mutex<span class="token operator">-></span>value              <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    mutex<span class="token operator">-></span>owner              <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
+    mutex<span class="token operator">-></span>original_priority  <span class="token operator">=</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
+    mutex<span class="token operator">-></span>hold               <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>value 設為 1，擁有者為 NULL，原始權限最低（255），持有次數為 0</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* set flag */</span>
+    mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> mutex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>同時填入 flag</li>
+</ul>
+<hr>
+<h4 id="靜態記憶體管理-2"><a href="#靜態記憶體管理-2" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_init</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始化 mutex</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>mutex</code></th>
+<th><code>*name</code></th>
+<th><code>flag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mutex 本體</td>
+<td>名字</td>
+<td>FIFO / PRIO</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will initialize a mutex and put it under control of resource
+ * management.
+ *
+ * @param mutex the mutex object
+ * @param name the name of mutex
+ * @param flag the flag of mutex
+ *
+ * @return the operation status, RT_EOK on successful
+ */</span>
+rt_err_t <span class="token function">rt_mutex_init</span><span class="token punctuation">(</span>rt_mutex_t mutex<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span> rt_uint8_t flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mutex <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init object */</span>
+    <span class="token function">rt_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">,</span> RT_Object_Class_Mutex<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init ipc object */</span>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    mutex<span class="token operator">-></span>value <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    mutex<span class="token operator">-></span>owner <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
+    mutex<span class="token operator">-></span>original_priority <span class="token operator">=</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
+    mutex<span class="token operator">-></span>hold  <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set flag */</span>
+    mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>這裡不需要 allocate，只需要初始化物件</li>
+</ul>
+<hr>
+<h3 id="刪除-mutex"><a href="#刪除-mutex" class="headerlink" title="刪除 mutex"></a>刪除 mutex</h3><h4 id="動態記憶體管理-3"><a href="#動態記憶體管理-3" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_delete</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刪除 mutex</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>mutex</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲刪除的 mutex</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will delete a mutex object and release the memory
+ *
+ * @param mutex the mutex object
+ *
+ * @return the error code
+ *
+ * @see rt_mutex_detach
+ */</span>
+rt_err_t <span class="token function">rt_mutex_delete</span><span class="token punctuation">(</span>rt_mutex_t mutex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mutex <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* wakeup all suspend threads */</span>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* delete semaphore object */</span>
+    <span class="token function">rt_object_delete</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>與 semaphore 類似，先將正在等待此鎖的所有 thread 叫醒，接著透過 <code>rt_object_delete</code> 刪除 mutex</li>
+</ul>
+<hr>
+<h4 id="靜態記憶體管理-3"><a href="#靜態記憶體管理-3" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_detach</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刪除 mutex</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>mutex</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲刪除的 mutex</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will detach a mutex from resource management
+ *
+ * @param mutex the mutex object
+ *
+ * @return the operation status, RT_EOK on successful
+ *
+ * @see rt_mutex_delete
+ */</span>
+rt_err_t <span class="token function">rt_mutex_detach</span><span class="token punctuation">(</span>rt_mutex_t mutex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mutex <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* wakeup all suspend threads */</span>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* detach semaphore object */</span>
+    <span class="token function">rt_object_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>這裡則運用 <code>rt_object_detach</code> 刪除</li>
+</ul>
+<hr>
+<h3 id="使用-mutex"><a href="#使用-mutex" class="headerlink" title="使用 mutex"></a>使用 mutex</h3><ul>
+<li>呼叫 <code>rt_mutex_take</code> 來取得鎖</li>
+</ul>
+<p><i class="fa fa-code"></i> Code: <code>rt_mutex_take</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要求 mutex</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>mutex</code></th>
+<th><code>time</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲要求的 mutex</td>
+<td>等待時間（如果需要）</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will take a mutex, if the mutex is unavailable, the
+ * thread shall wait for a specified time.
+ *
+ * @param mutex the mutex object
+ * @param time the waiting time
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_mutex_take</span><span class="token punctuation">(</span>rt_mutex_t mutex<span class="token punctuation">,</span> rt_int32_t time<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">register</span> rt_base_t temp<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* this function must not be used in interrupt even if time = 0 */</span>
+    RT_DEBUG_IN_THREAD_CONTEXT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mutex <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* get current thread */</span>
+    thread <span class="token operator">=</span> <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>下面將會修改 mutex 的一些資料，這裡先將中斷關閉</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_trytake_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span>
+                 <span class="token punctuation">(</span><span class="token string">"mutex_take: current thread %s, mutex value: %d, hold: %d\n"</span><span class="token punctuation">,</span>
+                  thread<span class="token operator">-></span>name<span class="token punctuation">,</span> mutex<span class="token operator">-></span>value<span class="token punctuation">,</span> mutex<span class="token operator">-></span>hold<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* reset thread error */</span>
+    thread<span class="token operator">-></span>error <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mutex<span class="token operator">-></span>owner <span class="token operator">==</span> thread<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* it's the same thread */</span>
+        mutex<span class="token operator">-></span>hold <span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>若此 mutex 的擁有者與要求著相同，持有數加 1</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+__again<span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true">/* The value of mutex is 1 in initial status. Therefore, if the
+         * value is great than 0, it indicates the mutex is avaible.
+         */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>mutex<span class="token operator">-></span>value <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* mutex is available */</span>
+            mutex<span class="token operator">-></span>value <span class="token operator">--</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* set mutex owner and original priority */</span>
+            mutex<span class="token operator">-></span>owner             <span class="token operator">=</span> thread<span class="token punctuation">;</span>
+            mutex<span class="token operator">-></span>original_priority <span class="token operator">=</span> thread<span class="token operator">-></span>current_priority<span class="token punctuation">;</span>
+            mutex<span class="token operator">-></span>hold <span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果不同，且 mutex 可用，先將 value –</li>
+<li>設定所有者，紀錄當前權限，持有數加 1</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* no waiting, return with timeout */</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>time <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/* set error as timeout */</span>
+                thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
+
+                <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+                <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">return</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果不可用，且不等待，則啟用中斷，<code>return -RT_ETIMEOUT</code></li>
+</ul>
+<pre class=" language-c"><code class="language-c">            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/* mutex is unavailable, push to suspend list */</span>
+                <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"mutex_take: suspend thread: %s\n"</span><span class="token punctuation">,</span>
+                                            thread<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment" spellcheck="true">/* change the owner thread priority of mutex */</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>current_priority <span class="token operator">&lt;</span> mutex<span class="token operator">-></span>owner<span class="token operator">-></span>current_priority<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">/* change the owner thread priority */</span>
+                    <span class="token function">rt_thread_control</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>owner<span class="token punctuation">,</span>
+                                      RT_THREAD_CTRL_CHANGE_PRIORITY<span class="token punctuation">,</span>
+                                      <span class="token operator">&amp;</span>thread<span class="token operator">-></span>current_priority<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>若需要等待：</li>
+<li>為了避免優先權翻轉的情形發生，如需等待的 thread 的優先級大於持有 mutex 的優先級，提升持有者的</li>
+</ul>
+<pre class=" language-c"><code class="language-c">                <span class="token comment" spellcheck="true">/* suspend current thread */</span>
+                <span class="token function">rt_ipc_list_suspend</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                    thread<span class="token punctuation">,</span>
+                                    mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment" spellcheck="true">/* has waiting time, start thread timer */</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>time <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span>
+                                 <span class="token punctuation">(</span><span class="token string">"mutex_take: start the timer of thread:%s\n"</span><span class="token punctuation">,</span>
+                                  thread<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment" spellcheck="true">/* reset the timeout of thread timer and start it */</span>
+                    <span class="token function">rt_timer_control</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                     RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
+                                     <span class="token operator">&amp;</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>插入 suspend list，並啟動一個 timeout 為 time 的 timer</li>
+</ul>
+<pre class=" language-c"><code class="language-c">                <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+                <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment" spellcheck="true">/* do schedule */</span>
+                <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>開啟中斷，並做一次調度</li>
+</ul>
+<pre class=" language-c"><code class="language-c">                <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>error <span class="token operator">!=</span> RT_EOK<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">/* interrupt by signal, try it again */</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>error <span class="token operator">==</span> <span class="token operator">-</span>RT_EINTR<span class="token punctuation">)</span> <span class="token keyword">goto</span> __again<span class="token punctuation">;</span>
+
+                    <span class="token comment" spellcheck="true">/* return error */</span>
+                    <span class="token keyword">return</span> thread<span class="token operator">-></span>error<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果因為中斷再次回到此 thread，重新要一次 mutex</li>
+</ul>
+<pre class=" language-c"><code class="language-c">                <span class="token keyword">else</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">/* the mutex is taken successfully. */</span>
+                    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+                    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+    <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_take_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_take<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<ul>
+<li>還鎖則使用 <code>rt_mutex_release</code></li>
+</ul>
+<p><i class="fa fa-code"></i> Code: <code>rt_mutex_release</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>釋放 mutex</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>mutex</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲釋放的 mutex</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will release a mutex, if there are threads suspended on mutex,
+ * it will be waked up.
+ *
+ * @param mutex the mutex object
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_mutex_release</span><span class="token punctuation">(</span>rt_mutex_t mutex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">register</span> rt_base_t temp<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
+    rt_bool_t need_schedule<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mutex <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    need_schedule <span class="token operator">=</span> RT_FALSE<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* only thread could release mutex because we need test the ownership */</span>
+    RT_DEBUG_IN_THREAD_CONTEXT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* get current thread */</span>
+    thread <span class="token operator">=</span> <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>下面將會修改 mutex 的一些資料，這裡先將中斷關閉</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span>
+                 <span class="token punctuation">(</span><span class="token string">"mutex_release:current thread %s, mutex value: %d, hold: %d\n"</span><span class="token punctuation">,</span>
+                  thread<span class="token operator">-></span>name<span class="token punctuation">,</span> mutex<span class="token operator">-></span>value<span class="token punctuation">,</span> mutex<span class="token operator">-></span>hold<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_put_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* mutex only can be released by owner */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>thread <span class="token operator">!=</span> mutex<span class="token operator">-></span>owner<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+        <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>檢查歸還者是否為擁有者</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* decrease hold */</span>
+    mutex<span class="token operator">-></span>hold <span class="token operator">--</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>持有數減 1</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* if no hold */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>mutex<span class="token operator">-></span>hold <span class="token operator">==</span> 才會
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* change the owner thread to original priority */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>mutex<span class="token operator">-></span>original_priority <span class="token operator">!=</span> mutex<span class="token operator">-></span>owner<span class="token operator">-></span>current_priority<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">rt_thread_control</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>owner<span class="token punctuation">,</span>
+                              RT_THREAD_CTRL_CHANGE_PRIORITY<span class="token punctuation">,</span>
+                              <span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>original_priority<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>若已不再擁有此 mutex，且優先權有被更改過，調整回來</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* wakeup suspended thread */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">rt_list_isempty</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* get suspended thread */</span>
+            thread <span class="token operator">=</span> <span class="token function">rt_list_entry</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">.</span>next<span class="token punctuation">,</span>
+                                   <span class="token keyword">struct</span> rt_thread<span class="token punctuation">,</span>
+                                   tlist<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_IPC<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"mutex_release: resume thread: %s\n"</span><span class="token punctuation">,</span>
+                                        thread<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* set new owner and priority */</span>
+            mutex<span class="token operator">-></span>owner             <span class="token operator">=</span> thread<span class="token punctuation">;</span>
+            mutex<span class="token operator">-></span>original_priority <span class="token operator">=</span> thread<span class="token operator">-></span>current_priority<span class="token punctuation">;</span>
+            mutex<span class="token operator">-></span>hold <span class="token operator">++</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* resume thread */</span>
+            <span class="token function">rt_ipc_list_resume</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            need_schedule <span class="token operator">=</span> RT_TRUE<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>若有人在等待此 mutex，將 mutex 傳遞給第一個正在等待的 thread</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* increase value */</span>
+            mutex<span class="token operator">-></span>value <span class="token operator">++</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">/* clear owner */</span>
+            mutex<span class="token operator">-></span>owner             <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
+            mutex<span class="token operator">-></span>original_priority <span class="token operator">=</span> <span class="token number">0xff</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果沒有人在等，value 加 1，將資料初始化</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+    <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* perform a schedule */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>need_schedule <span class="token operator">==</span> RT_TRUE<span class="token punctuation">)</span>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_release<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>開啟中斷，並視情況做一次調度</li>
+</ul>
+<hr>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><ul>
+<li>可實現一對多，多對多</li>
+<li>僅用來同步，無傳輸的功能</li>
+</ul>
+<h3 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h3><ul>
+<li>thread 的結構中有一個 32 位的事件標記，一個事件的資訊</li>
+</ul>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">if</span> defined(RT_USING_EVENT)</span>
+    <span class="token comment" spellcheck="true">/* thread event */</span>
+    rt_uint32_t event_set<span class="token punctuation">;</span>
+    rt_uint8_t  event_info<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre>
+<ul>
+<li>標記的每一位代表一個事件，資訊包含 AND、OR 及 CLEAR</li>
+<li>當事件標記的第 2、4 位為 1，其餘為 0，代表此 thread 設置第 2、4 個事件<ul>
+<li>AND：即需同時接收到 2 號與 4 號事件才會被喚醒</li>
+<li>OR：只需接收到一個</li>
+<li>CLEAR：表示接收完事件喚醒後，是否須將標記清除</li>
+</ul>
+</li>
+</ul>
+<h3 id="結構-2"><a href="#結構-2" class="headerlink" title="結構"></a>結構</h3><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_EVENT</span>
+<span class="token comment" spellcheck="true">/**
+ * flag defintions in event
+ */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_EVENT_FLAG_AND               0x01            </span><span class="token comment" spellcheck="true">/**&lt; logic and */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_EVENT_FLAG_OR                0x02            </span><span class="token comment" spellcheck="true">/**&lt; logic or */</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_EVENT_FLAG_CLEAR             0x04            </span><span class="token comment" spellcheck="true">/**&lt; clear flag */</span>
+
+<span class="token comment" spellcheck="true">/*
+ * event structure
+ */</span>
+<span class="token keyword">struct</span> rt_event
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rt_ipc_object parent<span class="token punctuation">;</span>                        <span class="token comment" spellcheck="true">/**&lt; inherit from ipc_object */</span>
+
+    rt_uint32_t          set<span class="token punctuation">;</span>                           <span class="token comment" spellcheck="true">/**&lt; event set */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_event <span class="token operator">*</span>rt_event_t<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</code></pre>
+<hr>
+<h3 id="建立事件"><a href="#建立事件" class="headerlink" title="建立事件"></a>建立事件</h3><h4 id="動態記憶體管理-4"><a href="#動態記憶體管理-4" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_create</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建立事件</td>
+<td>事件</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*name</code></th>
+<th><code>flag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>名字</td>
+<td>FIFO / PRIO</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will create an event object from system resource
+ *
+ * @param name the name of event
+ * @param flag the flag of event
+ *
+ * @return the created event, RT_NULL on error happen
+ */</span>
+rt_event_t <span class="token function">rt_event_create</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span> rt_uint8_t flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    rt_event_t event<span class="token punctuation">;</span>
+
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* allocate object */</span>
+    event <span class="token operator">=</span> <span class="token punctuation">(</span>rt_event_t<span class="token punctuation">)</span><span class="token function">rt_object_allocate</span><span class="token punctuation">(</span>RT_Object_Class_Event<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>event <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> event<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set parent */</span>
+    event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init ipc object */</span>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init event */</span>
+    event<span class="token operator">-></span>set <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> event<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>一樣 allocate 記憶體，填入 flag，初始化，最後設定值為 0</li>
+</ul>
+<hr>
+<h4 id="靜態記憶體管理-4"><a href="#靜態記憶體管理-4" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_init</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始化事件</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>event</code></th>
+<th><code>*name</code></th>
+<th><code>flag</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件本體</td>
+<td>名字</td>
+<td>FIFO / PRIO</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will initialize an event and put it under control of resource
+ * management.
+ *
+ * @param event the event object
+ * @param name the name of event
+ * @param flag the flag of event
+ *
+ * @return the operation status, RT_EOK on successful
+ */</span>
+rt_err_t <span class="token function">rt_event_init</span><span class="token punctuation">(</span>rt_event_t event<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">,</span> rt_uint8_t flag<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>event <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init object */</span>
+    <span class="token function">rt_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">,</span> RT_Object_Class_Event<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* set parent flag */</span>
+    event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init ipc object */</span>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init event */</span>
+    event<span class="token operator">-></span>set <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>這裡則不需要 allocate</li>
+</ul>
+<hr>
+<h3 id="刪除事件"><a href="#刪除事件" class="headerlink" title="刪除事件"></a>刪除事件</h3><h4 id="靜態記憶體管理-5"><a href="#靜態記憶體管理-5" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_delete</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刪除事件</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>event</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲刪除的事件</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will delete an event object and release the memory
+ *
+ * @param event the event object
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_event_delete</span><span class="token punctuation">(</span>rt_event_t event<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>event <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* resume all suspended thread */</span>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* delete event object */</span>
+    <span class="token function">rt_object_delete</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>相同的，需要先將正在等待此事件的 thread 叫醒，再刪除</li>
+</ul>
+<hr>
+<h4 id="靜態記憶體管理-6"><a href="#靜態記憶體管理-6" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_detach</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刪除事件</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>event</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲刪除的事件</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will detach an event object from resource management
+ *
+ * @param event the event object
+ *
+ * @return the operation status, RT_EOK on successful
+ */</span>
+rt_err_t <span class="token function">rt_event_detach</span><span class="token punctuation">(</span>rt_event_t event<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>event <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* resume all suspended thread */</span>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* detach event object */</span>
+    <span class="token function">rt_object_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>這裡則用 <code>rt_object_detach</code></li>
+</ul>
+<hr>
+<h3 id="傳遞事件"><a href="#傳遞事件" class="headerlink" title="傳遞事件"></a>傳遞事件</h3><p><i class="fa fa-code"></i> Code: <code>rt_event_send</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>傳遞事件</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>event</code></th>
+<th><code>set</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲傳遞的事件</td>
+<td>事件編號</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will send an event to the event object, if there are threads
+ * suspended on event object, it will be waked up.
+ *
+ * @param event the event object
+ * @param set the event set
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_event_send</span><span class="token punctuation">(</span>rt_event_t event<span class="token punctuation">,</span> rt_uint32_t set<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rt_list_node <span class="token operator">*</span>n<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
+    <span class="token keyword">register</span> rt_ubase_t level<span class="token punctuation">;</span>
+    <span class="token keyword">register</span> rt_base_t status<span class="token punctuation">;</span>
+    rt_bool_t need_schedule<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>event <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>set <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
+
+    need_schedule <span class="token operator">=</span> RT_FALSE<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>下面會修改事件的資料，這裡先將中斷關閉</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* set event */</span>
+    event<span class="token operator">-></span>set <span class="token operator">|</span><span class="token operator">=</span> set<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>設定事件編號</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_put_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">rt_list_isempty</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* search thread list to resume thread */</span>
+        n <span class="token operator">=</span> event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>n <span class="token operator">!=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* get thread */</span>
+            thread <span class="token operator">=</span> <span class="token function">rt_list_entry</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token keyword">struct</span> rt_thread<span class="token punctuation">,</span> tlist<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            status <span class="token operator">=</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>event_info <span class="token operator">&amp;</span> RT_EVENT_FLAG_AND<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>event_set <span class="token operator">&amp;</span> event<span class="token operator">-></span>set<span class="token punctuation">)</span> <span class="token operator">==</span> thread<span class="token operator">-></span>event_set<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">/* received an AND event */</span>
+                    status <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果有人在等待此事件，且滿足條件時，設定為 OK</li>
+<li>這裡為 AND，即事件編號應與 thread 所設定的一致</li>
+</ul>
+<pre class=" language-c"><code class="language-c">            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>event_info <span class="token operator">&amp;</span> RT_EVENT_FLAG_OR<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>event_set <span class="token operator">&amp;</span> event<span class="token operator">-></span>set<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment" spellcheck="true">/* save recieved event set */</span>
+                    thread<span class="token operator">-></span>event_set <span class="token operator">=</span> thread<span class="token operator">-></span>event_set <span class="token operator">&amp;</span> event<span class="token operator">-></span>set<span class="token punctuation">;</span>
+
+                    <span class="token comment" spellcheck="true">/* received an OR event */</span>
+                    status <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>若為 OR，則只需有一位相同即可</li>
+</ul>
+<pre class=" language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* move node to the next */</span>
+            n <span class="token operator">=</span> n<span class="token operator">-></span>next<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>接著走向下一顆</li>
+</ul>
+<pre class=" language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* condition is satisfied, resume thread */</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">==</span> RT_EOK<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/* clear event */</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>event_info <span class="token operator">&amp;</span> RT_EVENT_FLAG_CLEAR<span class="token punctuation">)</span>
+                    event<span class="token operator">-></span>set <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>thread<span class="token operator">-></span>event_set<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>如有人滿足條件，且被設定 CLEAR，清除其標記位</li>
+</ul>
+<pre class=" language-c"><code class="language-c">                <span class="token comment" spellcheck="true">/* resume thread, and thread list breaks out */</span>
+                <span class="token function">rt_thread_resume</span><span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment" spellcheck="true">/* need do a scheduling */</span>
+                need_schedule <span class="token operator">=</span> RT_TRUE<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>並恢復此 thread，設定待會需要調度</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+    <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* do a schedule */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>need_schedule <span class="token operator">==</span> RT_TRUE<span class="token punctuation">)</span>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_send<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>最後開啟中斷，視情況做一次調度</li>
+</ul>
+<hr>
+<h3 id="接收事件"><a href="#接收事件" class="headerlink" title="接收事件"></a>接收事件</h3><p><i class="fa fa-code"></i> Code: <code>rt_event_recv</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>接收事件</td>
+<td><code>RT_EOK</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>event</code></th>
+<th><code>set</code></th>
+<th><code>option</code></th>
+<th><code>timeout</code></th>
+<th><code>*recved</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲接收的事件</td>
+<td>事件編號</td>
+<td>AND /OR</td>
+<td>等待時間（如果需要）</td>
+<td>傳遞成功的事件號碼</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+ * This function will receive an event from event object, if the event is
+ * unavailable, the thread shall wait for a specified time.
+ *
+ * @param event the fast event object
+ * @param set the interested event set
+ * @param option the receive option, either RT_EVENT_FLAG_AND or
+ *        RT_EVENT_FLAG_OR should be set.
+ * @param timeout the waiting time
+ * @param recved the received event, if you don't care, RT_NULL can be set.
+ *
+ * @return the error code
+ */</span>
+rt_err_t <span class="token function">rt_event_recv</span><span class="token punctuation">(</span>rt_event_t   event<span class="token punctuation">,</span>
+                       rt_uint32_t  set<span class="token punctuation">,</span>
+                       rt_uint8_t   option<span class="token punctuation">,</span>
+                       rt_int32_t   timeout<span class="token punctuation">,</span>
+                       rt_uint32_t <span class="token operator">*</span>recved<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
+    <span class="token keyword">register</span> rt_ubase_t level<span class="token punctuation">;</span>
+    <span class="token keyword">register</span> rt_base_t status<span class="token punctuation">;</span>
+
+    RT_DEBUG_IN_THREAD_CONTEXT<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* parameter check */</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>event <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>set <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* init status */</span>
+    status <span class="token operator">=</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* get current thread */</span>
+    thread <span class="token operator">=</span> <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/* reset thread error */</span>
+    thread<span class="token operator">-></span>error <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_trytake_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/* disable interrupt */</span>
+    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>下面會修改事件的資料，這裡先將中斷關閉</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* check event set */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>option <span class="token operator">&amp;</span> RT_EVENT_FLAG_AND<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>event<span class="token operator">-></span>set <span class="token operator">&amp;</span> set<span class="token punctuation">)</span> <span class="token operator">==</span> set<span class="token punctuation">)</span>
+            status <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>option <span class="token operator">&amp;</span> RT_EVENT_FLAG_OR<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>event<span class="token operator">-></span>set <span class="token operator">&amp;</span> set<span class="token punctuation">)</span>
+            status <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* either RT_EVENT_FLAG_AND or RT_EVENT_FLAG_OR should be set */</span>
+        <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果滿足條件，表示已接收到事件，設定為 OK</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">==</span> RT_EOK<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* set received event */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>recved<span class="token punctuation">)</span>
+            <span class="token operator">*</span>recved <span class="token operator">=</span> <span class="token punctuation">(</span>event<span class="token operator">-></span>set <span class="token operator">&amp;</span> set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* received event */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>option <span class="token operator">&amp;</span> RT_EVENT_FLAG_CLEAR<span class="token punctuation">)</span>
+            event<span class="token operator">-></span>set <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>set<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>如果已接收到事件，設定 recved 參數</li>
+<li>視情況看需不需要清除標記</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* no waiting */</span>
+        thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>若需等待事件，但 timeout 為 0</li>
+<li>即不等待，將錯誤碼設為 TIMEOUT</li>
+</ul>
+<pre class=" language-c"><code class="language-c">    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">/* fill thread event info */</span>
+        thread<span class="token operator">-></span>event_set  <span class="token operator">=</span> set<span class="token punctuation">;</span>
+        thread<span class="token operator">-></span>event_info <span class="token operator">=</span> option<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>如欲等待，將資訊掛在 thread 的結構上</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* put thread to suspended thread list */</span>
+        <span class="token function">rt_ipc_list_suspend</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                            thread<span class="token punctuation">,</span>
+                            event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>並插入等待的鏈上</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* if there is a waiting timeout, active thread timer */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* reset the timeout of thread timer and start it */</span>
+            <span class="token function">rt_timer_control</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
+                             <span class="token operator">&amp;</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>啟動一個 timer</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+        <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* do a schedule */</span>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>最後開啟中斷，並做一次調度</li>
+</ul>
+<pre class=" language-c"><code class="language-c">        <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>error <span class="token operator">!=</span> RT_EOK<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* return error */</span>
+            <span class="token keyword">return</span> thread<span class="token operator">-></span>error<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">/* received an event, disable interrupt to protect */</span>
+        level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">/* set received event */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>recved<span class="token punctuation">)</span>
+            <span class="token operator">*</span>recved <span class="token operator">=</span> thread<span class="token operator">-></span>event_set<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/* enable interrupt */</span>
+    <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_take_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> thread<span class="token operator">-></span>error<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_recv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>最終接收到事件，一樣設定 recved 參數，回傳錯誤碼</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+            
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
+                    </span>
+                    <a href="http://blog.omuskywalker.com" class="b-link-green">討厭下雨</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/rt-ipc/" class="b-link-green">RT-Thread IPC 同步</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '97c34b7bba491c6a5007',
+        clientSecret: '6140d208bae6bbbc69c65e3e332a46d090094fc8',
+        repo: 'hexo-gitalk-comment',
+        owner: 'omuskywalker',
+        admin: "omuskywalker",
+        id: '/rt-ipc/',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/rt-ipc-2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="RT-Thread IPC 通信">
+                        
+                        <span class="card-title">RT-Thread IPC 通信</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+File: ipc.c
+
+Mail Box
+類似於 pipe，主要用來傳輸資料
+每一封郵件大小為 4 bytes（即 32 位元）
+
+結構#ifdef RT_USING_MAILBOX
+/**
+ * mailbox structure
+ </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                                    RT-Thread
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/kernel/" target="_blank">
+                        <span class="chip bg-color">kernel</span>
+                    </a>
+                    
+                    <a href="/tags/RT-Thread/" target="_blank">
+                        <span class="chip bg-color">RT-Thread</span>
+                    </a>
+                    
+                    <a href="/tags/event/" target="_blank">
+                        <span class="chip bg-color">event</span>
+                    </a>
+                    
+                    <a href="/tags/message/" target="_blank">
+                        <span class="chip bg-color">message</span>
+                    </a>
+                    
+                    <a href="/tags/mailbox/" target="_blank">
+                        <span class="chip bg-color">mailbox</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/rt-clock/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="RT-Thread Clock">
+                        
+                        <span class="card-title">RT-Thread Clock</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+File: clock.c
+
+取得當前 tick
+即回傳全域變數 rt_tick 值
+
+ Code: rt_tick_get
+
+
+
+功能
+回傳值
+
+
+
+
+取得當前的 system tick
+tick 值
+
+
+
+/**
+ * This fu</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                                    RT-Thread
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/kernel/" target="_blank">
+                        <span class="chip bg-color">kernel</span>
+                    </a>
+                    
+                    <a href="/tags/RT-Thread/" target="_blank">
+                        <span class="chip bg-color">RT-Thread</span>
+                    </a>
+                    
+                    <a href="/tags/clock/" target="_blank">
+                        <span class="chip bg-color">clock</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '來源: 討厭下雨<br />'
+            + '作者: OMU Skywalker<br />'
+            + '連結: <a href="' + url + '">' + url + '</a><br />'
+            + '本文著作權歸作者所有，任何形式的轉載都須註明出處。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy;2019&nbsp;&nbsp;<i class="fa fa-plug"></i><a href="/"> OMU Skywalker</a>
+            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
+
+            
+
+            
+			
+                
+                
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
+        <i class="fa fa-linkedin"></i>
+    </a>
+
+
+
+    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
+        <i class="fa fa-stack-overflow"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
+                   class="search-input" autocomplete="off">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-124928169-1');
+</script>
+
+
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

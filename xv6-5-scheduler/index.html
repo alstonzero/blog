@@ -1,0 +1,1646 @@
+<!DOCTYPE HTML>
+<html lang="zh-TW">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="XV6 Ch5 Scheduling, 討厭下雨">
+    <meta name="description" content="Multiplexing
+如果 process 需要等待 I/O 或是子 process 結束，XV6 讓其進入睡眠狀態，接著將處理器 switch 給其他 process。 
+此機制使 process 有獨佔 CPU 的假象。
+完成 sw">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>XV6 Ch5 Scheduling | 討厭下雨</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="theme-color" content="#59f">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+        
+    </style>
+    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
+    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">討厭下雨</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>回家</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>標籤雲</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>所有分類</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>全部文章</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>關於</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情贊助</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/favicon.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">討厭下雨</div>
+        <div class="logo-desc">
+            
+            真討厭下雨天
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                回家
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                標籤雲
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                所有分類
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                全部文章
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                關於
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情贊助
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('WARNING!! Please enter password.')).toString(CryptoJS.enc.Hex)) {
+                alert('Bad request. Back to home.');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        XV6 Ch5 Scheduling
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #59f;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #59f;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #59f;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/XV6/" target="_blank">
+                                <span class="chip bg-color">XV6</span>
+                            </a>
+                        
+                            <a href="/tags/kernel/" target="_blank">
+                                <span class="chip bg-color">kernel</span>
+                            </a>
+                        
+                            <a href="/tags/scheduler/" target="_blank">
+                                <span class="chip bg-color">scheduler</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/XV6/" class="post-category" target="_blank">
+                                XV6
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    2018-08-14
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Multiplexing"><a href="#Multiplexing" class="headerlink" title="Multiplexing"></a>Multiplexing</h2><ul>
+<li>如果 process 需要等待 I/O 或是子 process 結束，XV6 讓其進入睡眠狀態，接著將處理器 switch 給其他 process。 </li>
+<li>此機制使 process 有獨佔 CPU 的假象。</li>
+<li>完成 switch 的動作由 context switch 完成：<ul>
+<li>透明化 -&gt; 使用 <strong>timer interrupt handler</strong> 驅動 context switch。</li>
+<li>同時多個 process 需要 switch -&gt; lock</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Code-Context-switch"><a href="#Code-Context-switch" class="headerlink" title="Code: Context switch"></a>Code: Context switch</h2><ul>
+<li>從 process 的 kernel stack -&gt; schedluler kernel stack (CPU) -&gt; 另一個 process 的 kernel stack。</li>
+<li>永遠不會從 process 的 kernel stack -&gt; process 的 kernel stack。 </li>
+</ul>
+<p><img src="https://i.imgur.com/qtfH1Vj.png" alt="context switch" title="Switching from one user process to another."></p>
+<ul>
+<li>每個 process 都有自己的 kernel stack 及暫存器集合，每個 CPU 有自己的 scheduler stack。</li>
+<li>context 即 process 的暫存器集合，用一個 <code>struct context *</code> 表示。</li>
+</ul>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> context <span class="token punctuation">{</span>
+  uint edi<span class="token punctuation">;</span>
+  uint esi<span class="token punctuation">;</span>
+  uint ebx<span class="token punctuation">;</span>
+  uint ebp<span class="token punctuation">;</span>
+  uint eip<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>trap 有可能會呼叫 <code>yield</code>，<code>yield</code> 會呼叫 <code>sched</code>，最後 <code>sched</code> 呼叫 <code>swtch(&amp;proc-&gt;context, cpu-&gt;scheduler);</code>。</li>
+</ul>
+<h3 id="File-swtch-S"><a href="#File-swtch-S" class="headerlink" title="File: swtch.S"></a>File: swtch.S</h3><ul>
+<li><em>swtch</em> 有兩個參數：<code>struct context ** old</code>、<code>struct context * new</code>。</li>
+</ul>
+<pre class=" language-x86asm"><code class="language-x86asm"># Context switch
+#
+#   void swtch(struct context **old, struct context *new);
+# 
+# Save current register context in old
+# and then load register context from new.
+
+.globl swtch
+swtch:
+  movl 4(%esp), %eax
+  movl 8(%esp), %edx
+</code></pre>
+<ul>
+<li>將 <code>%eax</code> 指向 <code>struct context ** old</code>，<code>%ebx</code> 指向 <code>struct context * new</code>。</li>
+</ul>
+<p><img src="https://i.imgur.com/0QWW7gZ.png" alt="swtch" title="Context switch step. 1"></p>
+<pre class=" language-x86asm"><code class="language-x86asm">  # Save old callee-save registers
+  pushl %ebp
+  pushl %ebx
+  pushl %esi
+  pushl %edi
+</code></pre>
+<ul>
+<li>依序將 context push 進堆疊</li>
+</ul>
+<p><img src="https://i.imgur.com/CXUNIYY.png" alt="swtch" title="Context switch step. 2"> </p>
+<pre class=" language-x86asm"><code class="language-x86asm">  # Switch stacks
+  movl %esp, (%eax)
+  movl %edx, %esp
+</code></pre>
+<ul>
+<li>將 <code>struct context ** old</code>（<code>%eax</code>） 指向 <code>%esp</code>（當前堆疊的 <strong>top</strong>）</li>
+<li>將 <code>%esp</code> 指向 <code>struct context * new</code>（<code>%ebx</code>）</li>
+</ul>
+<p><img src="https://i.imgur.com/AB38T7t.png" alt="swtch" title="Context switch step. 3"></p>
+<pre class=" language-x86asm"><code class="language-x86asm">  # Load new callee-save registers
+  popl %edi
+  popl %esi
+  popl %ebx
+  popl %ebp
+  ret
+</code></pre>
+<ul>
+<li>恢復保存的暫存器，用<code>ret</code> 指令跳回</li>
+</ul>
+<hr>
+<h2 id="Scheduling"><a href="#Scheduling" class="headerlink" title="Scheduling"></a>Scheduling</h2><blockquote>
+<p>File: proc.c</p>
+</blockquote>
+<ul>
+<li>process 要讓出 CPU 前需要先取得 ptable.lock，釋放其他擁有的鎖，修改 p-&gt;state，呼叫 <code>sched</code>。</li>
+<li><code>sched</code> 會再次檢查以上動作，並且確定此時中斷是關閉的，最後呼叫 <code>swtch</code>，將 process 的暫存器保存在 proc-&gt;context，switch 到 cpu-&gt;scheduler。</li>
+</ul>
+<h3 id="sched"><a href="#sched" class="headerlink" title="sched"></a>sched</h3><p><i class="fa fa-code"></i> Code: <code>sched</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>檢查並跳至 swtch.h</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span>
+<span class="token function">sched</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> intena<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">holding</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sched ptable.lock"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>cpu<span class="token operator">-></span>ncli <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sched locks"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>proc<span class="token operator">-></span>state <span class="token operator">==</span> RUNNING<span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sched running"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">readeflags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>FL_IF<span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sched interruptible"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  intena <span class="token operator">=</span> cpu<span class="token operator">-></span>intena<span class="token punctuation">;</span>
+  <span class="token function">swtch</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>proc<span class="token operator">-></span>context<span class="token punctuation">,</span> cpu<span class="token operator">-></span>scheduler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  cpu<span class="token operator">-></span>intena <span class="token operator">=</span> intena<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><code>swtch</code> 會 return 回 scheduler 的堆疊上，scheduler 繼續執行迴圈：找到一個 process 運行，<code>swtch</code> 到該 process，repeat。</li>
+</ul>
+<h3 id="scheduler"><a href="#scheduler" class="headerlink" title="scheduler"></a>scheduler</h3><p><i class="fa fa-code"></i> Code: <code>scheduler</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>執行調度，指定執行的 process</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span>
+<span class="token function">scheduler</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Enable interrupts on this processor.</span>
+    <span class="token function">sti</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Loop over process table looking for process to run.</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">!=</span> RUNNABLE<span class="token punctuation">)</span>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+      <span class="token comment" spellcheck="true">// Switch to chosen process.  It is the process's job</span>
+      <span class="token comment" spellcheck="true">// to release ptable.lock and then reacquire it</span>
+      <span class="token comment" spellcheck="true">// before jumping back to us.</span>
+      proc <span class="token operator">=</span> p<span class="token punctuation">;</span>
+      <span class="token function">switchuvm</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      p<span class="token operator">-></span>state <span class="token operator">=</span> RUNNING<span class="token punctuation">;</span>
+      <span class="token function">swtch</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cpu<span class="token operator">-></span>scheduler<span class="token punctuation">,</span> proc<span class="token operator">-></span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">switchkvm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment" spellcheck="true">// Process is done running for now.</span>
+      <span class="token comment" spellcheck="true">// It should have changed its p->state before coming back.</span>
+      proc <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><code>scheduler</code> 找到一個 <code>RUNNABLE</code> 的 process，將 per-cpu 設為此 process，呼叫 <code>switchuvm</code> 切換到該 process 的頁表，更新狀態為<code>RUNNING</code>，<code>swtch</code> 到該 process 中運行。</li>
+</ul>
+<hr>
+<h2 id="Code-mycpu-and-myproc"><a href="#Code-mycpu-and-myproc" class="headerlink" title="Code:  mycpu  and  myproc"></a>Code:  mycpu  and  myproc</h2><ul>
+<li>CPU 需要辨識目前正在執行的 process，XV6 有一個 struct cpu 的陣列，裡面包含了一些 CPU 的資訊，及當前 process 的資訊。</li>
+<li><code>mycpu</code> 尋找當前的 <code>lapicid</code> 是哪顆 CPU 的。</li>
+</ul>
+<h3 id="mycpu"><a href="#mycpu" class="headerlink" title="mycpu"></a>mycpu</h3><p><i class="fa fa-code"></i> Code: <code>mycpu</code></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>找到目前所在的 CPU</td>
+<td>CPU 結構指標</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> cpu<span class="token operator">*</span>
+<span class="token function">mycpu</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> apicid<span class="token punctuation">,</span> i<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">readeflags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>FL_IF<span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"mycpu called with interrupts enabled\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  apicid <span class="token operator">=</span> <span class="token function">lapicid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// APIC IDs are not guaranteed to be contiguous. Maybe we should have</span>
+  <span class="token comment" spellcheck="true">// a reverse map, or reserve a register to store &amp;cpus[i].</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> ncpu<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cpus<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>apicid <span class="token operator">==</span> apicid<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> <span class="token operator">&amp;</span>cpus<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"unknown apicid\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><code>myproc</code> 呼叫 <code>mycpu</code>，從正確的 CPU 上尋找當前的 process。<br><i class="fa fa-code"></i> Code: <code>myproc</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>找到當前的 process</td>
+<td>proc 結構指標</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> proc<span class="token operator">*</span>
+<span class="token function">myproc</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> cpu <span class="token operator">*</span>c<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
+  <span class="token function">pushcli</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  c <span class="token operator">=</span> <span class="token function">mycpu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  p <span class="token operator">=</span> c<span class="token operator">-></span>proc<span class="token punctuation">;</span>
+  <span class="token function">popcli</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="睡眠與喚醒（例子）"><a href="#睡眠與喚醒（例子）" class="headerlink" title="睡眠與喚醒（例子）"></a>睡眠與喚醒（例子）</h2><pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> q <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span><span class="token operator">*</span>
+<span class="token function">send</span><span class="token punctuation">(</span><span class="token keyword">struct</span> q <span class="token operator">*</span>q<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>p<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>q<span class="token operator">-></span>ptr <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">;</span>
+    q<span class="token operator">-></span>ptr <span class="token operator">=</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span><span class="token operator">*</span>
+<span class="token function">recv</span><span class="token punctuation">(</span><span class="token keyword">struct</span> q <span class="token operator">*</span> q<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span>p <span class="token operator">=</span> q<span class="token operator">-></span>ptr<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">;</span>
+    q<span class="token operator">-></span>ptr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><code>send</code> 直到隊伍 <code>q</code> 為空時，將要傳送的資料 <code>p</code> 放入隊中，<code>recv</code> 直到 <code>q</code> 有東西時將資料取出，把 <code>q</code> 再次設為 <code>0</code></li>
+<li>這允許不同的 process 交換資料，但是很耗資源。</li>
+</ul>
+<h3 id="方案-1"><a href="#方案-1" class="headerlink" title="方案 1"></a>方案 1</h3><ul>
+<li>加入 <code>sleep</code> 及 <code>wakeup</code> 機制，<code>sleep(chan)</code> 將 process 在 <code>chan</code> 中睡眠（一個 wait channel），<code>wakeup(chan)</code> 將 <code>chan</code> 上睡眠的 process 喚醒。</li>
+</ul>
+<pre class=" language-diff"><code class="language-diff">void*
+send(struct q *q, void *p)
+{
+    while(q->ptr != 0)
+        ;
+    q->ptr = p;
+<span class="token inserted">+    wakeup(q);    /*wake recv*/</span>
+}
+
+void*
+recv(struct q *q)
+{
+    void *p;
+    while((p = q->ptr) == 0)
+<span class="token inserted">+        sleep(q);</span>
+    q->ptr = 0;
+    return p;
+}
+</code></pre>
+<ul>
+<li>如此一來 <code>recv</code> 能讓出 CPU，直到有人（<code>send</code>）將它喚醒。</li>
+</ul>
+<blockquote>
+<p><strong>問題</strong>：遺失的喚醒：<br><img src="https://i.imgur.com/aPcvuOZ.png" alt="遺失的喚醒" title="Example lost wakeup problem"></p>
+<ul>
+<li>假設 <code>recv</code> 在 215 行查看隊伍，發現需要睡眠，就在要呼叫 <code>sleep</code> 之前發生中斷，<code>send</code> 在其他的 CPU 將資料放進隊伍中，呼叫 <code>wakeup</code>，發現沒有正在休眠的 process，於是不做事；接著 <code>recv</code> 終於呼叫 <code>sleep</code> 進入睡眠。</li>
+<li>此時，<code>revc</code> 正在等待 <code>send</code> 將它喚醒，但是 <code>send</code> 正在等待隊伍清空，清空的動作須由 <code>recv</code> 完成（休眠中），於是就產生了 <strong>deadlock</strong>。</li>
+</ul>
+</blockquote>
+<h3 id="方案-2"><a href="#方案-2" class="headerlink" title="方案 2"></a>方案 2</h3><ul>
+<li>讓 <code>send</code> 及 <code>recv</code> 在睡眠及喚醒前都持有鎖。</li>
+</ul>
+<pre class=" language-diff"><code class="language-diff">struct q {
+    struct spinlock lock;
+    void *ptr;
+};
+
+void *
+send(struct q *q, void *p)
+{
+<span class="token inserted">+    acquire(&amp;q->lock);</span>
+    while(q->ptr != 0)
+        ;
+    q->ptr = p;
+    wakeup(q);
+<span class="token inserted">+    release(&amp;q->lock);</span>
+}
+
+void*
+recv(struct q *q)
+{
+    void *p;
+<span class="token inserted">+    acquire(&amp;q->lock);</span>
+    while((p = q->ptr) == 0)
+        sleep(q);
+    q->ptr = 0;
+<span class="token inserted">+    release(&amp;q->lock);</span>
+    return p;
+}
+</code></pre>
+<ul>
+<li>但這一樣有問題：<code>recv</code> 帶著鎖進入睡眠，<code>send</code> 也同時需要鎖來喚醒，於是就產生了 <strong>deadlock</strong>。</li>
+</ul>
+<h3 id="方案-3"><a href="#方案-3" class="headerlink" title="方案 3"></a>方案 3</h3><ul>
+<li>在 <code>sleep</code> 時一併釋放鎖，也就是將鎖當成參數傳進去。</li>
+</ul>
+<pre class=" language-diff"><code class="language-diff">struct q {
+    struct spinlock lock;
+    void *ptr;
+};
+
+void *
+send(struct q *q, void *p)
+{
+    acquire(&amp;q->lock);
+    while(q->ptr != 0)
+        ;
+    q->ptr = p;
+    wakeup(q);
+    release(&amp;q->lock);
+}
+
+void*
+recv(struct q *q)
+{
+    void *p;
+    acquire(&amp;q->lock);
+    while((p = q->ptr) == 0)
+<span class="token inserted">+        sleep(q, &amp;q->lock);</span>
+    q->ptr = 0;
+    release(&amp;q->lock);
+    return p;
+}
+</code></pre>
+<hr>
+<h2 id="Code-睡眠與喚醒"><a href="#Code-睡眠與喚醒" class="headerlink" title="Code: 睡眠與喚醒"></a>Code: 睡眠與喚醒</h2><table>
+<thead>
+<tr>
+<th>副程式</th>
+<th>目標</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sleep</code></td>
+<td>將狀態改成 <code>SLEEPING</code>，呼叫 <code>sched</code> 釋放 CPU</td>
+</tr>
+<tr>
+<td><code>wakeup</code></td>
+<td>尋找狀態為 <code>SLEEPING</code> 的 process，改成 <code>RUNNABLE</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>讓 process 睡眠</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*chan</code></th>
+<th><code>*lk</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲睡眠的頻道</td>
+<td>持有的鎖</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span>
+<span class="token function">sleep</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>chan<span class="token punctuation">,</span> <span class="token keyword">struct</span> spinlock <span class="token operator">*</span>lk<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token function">myproc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span>p <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sleep"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span>lk <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sleep without lk"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>首先確保 process 存在，及持有鎖。</li>
+</ul>
+<pre class=" language-c"><code class="language-c">  <span class="token keyword">if</span><span class="token punctuation">(</span>lk <span class="token operator">!=</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//DOC: sleeplock0</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: sleeplock1</span>
+    <span class="token function">release</span><span class="token punctuation">(</span>lk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>接著檢查是否持有 <code>ptable-&gt;lock</code>，如果沒有則要求一個，把 <code>lk</code> 釋出。</li>
+</ul>
+<pre class=" language-c"><code class="language-c">  <span class="token comment" spellcheck="true">// Go to sleep.</span>
+  p<span class="token operator">-></span>chan <span class="token operator">=</span> chan<span class="token punctuation">;</span>
+  p<span class="token operator">-></span>state <span class="token operator">=</span> SLEEPING<span class="token punctuation">;</span>
+
+  <span class="token function">sched</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>睡眠，並呼叫 <code>sched</code></li>
+</ul>
+<pre class=" language-c"><code class="language-c">  <span class="token comment" spellcheck="true">// Tidy up.</span>
+  p<span class="token operator">-></span>chan <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Reacquire original lock.</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>lk <span class="token operator">!=</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//DOC: sleeplock2</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span>lk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h3 id="wakeup1"><a href="#wakeup1" class="headerlink" title="wakeup1"></a>wakeup1</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>叫醒頻道上的 process</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*chan</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>頻道</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// </span>
+<span class="token keyword">static</span> <span class="token keyword">void</span>
+<span class="token function">wakeup1</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>chan<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
+
+  <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">==</span> SLEEPING <span class="token operator">&amp;&amp;</span> p<span class="token operator">-></span>chan <span class="token operator">==</span> chan<span class="token punctuation">)</span>
+      p<span class="token operator">-></span>state <span class="token operator">=</span> RUNNABLE<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h3 id="wakeup"><a href="#wakeup" class="headerlink" title="wakeup"></a>wakeup</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>叫醒頻道上的 process</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*chan</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>頻道</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span>
+<span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>chan<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">wakeup1</span><span class="token punctuation">(</span>chan<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><code>wakeup</code> 找到 <code>chan</code> 上在睡眠的 process，並喚醒。</li>
+</ul>
+<hr>
+<h2 id="Code-Pipes"><a href="#Code-Pipes" class="headerlink" title="Code: Pipes"></a>Code: Pipes</h2><blockquote>
+<p>File: pipe.c</p>
+</blockquote>
+<ul>
+<li>pipe 為一個結構，包含一個鎖，一個 <code>buf</code> 等。</li>
+<li>當 pipe 為空時，<code>nread == nwrite</code></li>
+<li>當 pipe 為滿時，<code>nwrite == nread % PIPESIZE</code></li>
+</ul>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">struct</span> pipe <span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> spinlock lock<span class="token punctuation">;</span>
+  <span class="token keyword">char</span> data<span class="token punctuation">[</span>PIPESIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  uint nread<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// number of bytes read</span>
+  uint nwrite<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// number of bytes written</span>
+  <span class="token keyword">int</span> readopen<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// read fd is still open</span>
+  <span class="token keyword">int</span> writeopen<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// write fd is still open</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<hr>
+<h3 id="pipewrite"><a href="#pipewrite" class="headerlink" title="pipewrite"></a>pipewrite</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>寫入 pipe</td>
+<td>寫入的大小</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*p</code></th>
+<th><code>*addr</code></th>
+<th><code>n</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲寫入的 pipe</td>
+<td>欲寫入的值</td>
+<td>欲寫入的大小</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span>
+<span class="token function">pipewrite</span><span class="token punctuation">(</span><span class="token keyword">struct</span> pipe <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">-></span>nwrite <span class="token operator">==</span> p<span class="token operator">-></span>nread <span class="token operator">+</span> PIPESIZE<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//DOC: pipewrite-full</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>readopen <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token function">myproc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span>killed<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nwrite<span class="token punctuation">,</span> <span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: pipewrite-sleep</span>
+    <span class="token punctuation">}</span>
+    p<span class="token operator">-></span>data<span class="token punctuation">[</span>p<span class="token operator">-></span>nwrite<span class="token operator">++</span> <span class="token operator">%</span> PIPESIZE<span class="token punctuation">]</span> <span class="token operator">=</span> addr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nread<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: pipewrite-wakeup1</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>首先須取得鎖。</li>
+<li><code>pipewrite</code> 從 0 開始將資料讀入 <code>buf</code>，更新 <code>nwrite</code> 計數器，當 <code>buf</code> 滿了，則喚醒 <code>piperead</code> 並睡眠；或是讀入完畢，一樣喚醒 <code>pipiread</code>。</li>
+</ul>
+<hr>
+<h3 id="piperead"><a href="#piperead" class="headerlink" title="piperead"></a>piperead</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>讀取 pipe</td>
+<td>讀入的大小</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>*p</code></th>
+<th><code>*addr</code></th>
+<th><code>n</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲讀取的 pipe</td>
+<td>讀取資料存放區</td>
+<td>欲讀入的大小</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span>
+<span class="token function">piperead</span><span class="token punctuation">(</span><span class="token keyword">struct</span> pipe <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">-></span>nread <span class="token operator">==</span> p<span class="token operator">-></span>nwrite <span class="token operator">&amp;&amp;</span> p<span class="token operator">-></span>writeopen<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//DOC: pipe-empty</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">myproc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span>killed<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nread<span class="token punctuation">,</span> <span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//DOC: piperead-sleep</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//DOC: piperead-copy</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>nread <span class="token operator">==</span> p<span class="token operator">-></span>nwrite<span class="token punctuation">)</span>
+      <span class="token keyword">break</span><span class="token punctuation">;</span>
+    addr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token operator">-></span>data<span class="token punctuation">[</span>p<span class="token operator">-></span>nread<span class="token operator">++</span> <span class="token operator">%</span> PIPESIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nwrite<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: piperead-wakeup</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>首先須取得鎖。</li>
+<li><code>piperead</code> 確認 pipe 是否為空，為空則進入睡眠。</li>
+<li>當 pipe 不為空時，寫入資料，更新 <code>nread</code> 計數器。</li>
+<li>讀取完畢後，喚醒 <code>pipewrite</code>。</li>
+</ul>
+<hr>
+<h2 id="Code-Wait-exit-and-kill"><a href="#Code-Wait-exit-and-kill" class="headerlink" title="Code: Wait, exit and kill"></a>Code: Wait, exit and kill</h2><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等待子 process 結束</td>
+<td>pid (ok) / -1 (err)</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span>
+<span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> havekids<span class="token punctuation">,</span> pid<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>curproc <span class="token operator">=</span> <span class="token function">myproc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// Scan through table looking for exited children.</span>
+    havekids <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>parent <span class="token operator">!=</span> curproc<span class="token punctuation">)</span>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+      havekids <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">==</span> ZOMBIE<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// Found one.</span>
+        pid <span class="token operator">=</span> p<span class="token operator">-></span>pid<span class="token punctuation">;</span>
+        <span class="token function">kfree</span><span class="token punctuation">(</span>p<span class="token operator">-></span>kstack<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p<span class="token operator">-></span>kstack <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token function">freevm</span><span class="token punctuation">(</span>p<span class="token operator">-></span>pgdir<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p<span class="token operator">-></span>pid <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        p<span class="token operator">-></span>parent <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        p<span class="token operator">-></span>name<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        p<span class="token operator">-></span>killed <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        p<span class="token operator">-></span>state <span class="token operator">=</span> UNUSED<span class="token punctuation">;</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> pid<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// No point waiting if we don't have any children.</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>havekids <span class="token operator">||</span> curproc<span class="token operator">-></span>killed<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// Wait for children to exit.  (See wakeup1 call in proc_exit.)</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span>curproc<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: wait-sleep</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>首先須取得鎖。</li>
+<li>接著尋找是否有子 process，如果有，並且還沒退出，則睡眠，等待子 process 退出。</li>
+<li>如果找到已退出的子 process，紀錄該子 process 的 pid，清理 <code>struct proc</code>，釋放相關記憶體。</li>
+</ul>
+<hr>
+<h3 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自行結束 process</td>
+<td>void</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span>
+<span class="token function">exit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>curproc <span class="token operator">=</span> <span class="token function">myproc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> fd<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span>curproc <span class="token operator">==</span> initproc<span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"init exiting"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Close all open files.</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>fd <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> fd <span class="token operator">&lt;</span> NOFILE<span class="token punctuation">;</span> fd<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>curproc<span class="token operator">-></span>ofile<span class="token punctuation">[</span>fd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token function">fileclose</span><span class="token punctuation">(</span>curproc<span class="token operator">-></span>ofile<span class="token punctuation">[</span>fd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      curproc<span class="token operator">-></span>ofile<span class="token punctuation">[</span>fd<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">begin_op</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">iput</span><span class="token punctuation">(</span>curproc<span class="token operator">-></span>cwd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">end_op</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  curproc<span class="token operator">-></span>cwd <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Parent might be sleeping in wait().</span>
+  <span class="token function">wakeup1</span><span class="token punctuation">(</span>curproc<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Pass abandoned children to init.</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>parent <span class="token operator">==</span> curproc<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      p<span class="token operator">-></span>parent <span class="token operator">=</span> initproc<span class="token punctuation">;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">==</span> ZOMBIE<span class="token punctuation">)</span>
+        <span class="token function">wakeup1</span><span class="token punctuation">(</span>initproc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment" spellcheck="true">// Jump into the scheduler, never to return.</span>
+  curproc<span class="token operator">-></span>state <span class="token operator">=</span> ZOMBIE<span class="token punctuation">;</span>
+  <span class="token function">sched</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"zombie exit"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>首先須取得鎖。</li>
+<li>喚醒父 process，將子 process 交給 <em>initproc</em>，修改狀態，呼叫 <code>sched</code> switch 至 scheduler。</li>
+</ul>
+<hr>
+<h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使 process 終止</td>
+<td>0 (ok) / -1 (err)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>pid</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>欲終止的 process id</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span>
+<span class="token function">kill</span><span class="token punctuation">(</span><span class="token keyword">int</span> pid<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
+
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>pid <span class="token operator">==</span> pid<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      p<span class="token operator">-></span>killed <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// Wake process from sleep if necessary.</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">==</span> SLEEPING<span class="token punctuation">)</span>
+        p<span class="token operator">-></span>state <span class="token operator">=</span> RUNNABLE<span class="token punctuation">;</span>
+      <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><code>kill</code> 將 <code>p-&gt;killed</code> 設為 1 ，當此 process 發生中斷或是 system call 進入 kernel，離開時 <code>trap</code> 會檢查 <code>p-&gt;killed</code>，如果被設置了，則呼叫 <code>exit</code>。</li>
+<li>當要被 kill 的 process 處於睡眠狀態，則喚醒它。 </li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+            
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
+                    </span>
+                    <a href="http://blog.omuskywalker.com" class="b-link-green">討厭下雨</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/xv6-5-scheduler/" class="b-link-green">XV6 Ch5 Scheduling</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '97c34b7bba491c6a5007',
+        clientSecret: '6140d208bae6bbbc69c65e3e332a46d090094fc8',
+        repo: 'hexo-gitalk-comment',
+        owner: 'omuskywalker',
+        admin: "omuskywalker",
+        id: '/xv6-5-scheduler/',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/xv6-6-fs/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="XV6 Ch6 檔案系統">
+                        
+                        <span class="card-title">XV6 Ch6 檔案系統</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+本文沒有按照 XV6 官方文本的順序介紹
+
+概觀
+XV6 的檔案系統分為 6 層，本文將從上到下介紹。
+
+
+檔案描述符
+File: file.c
+
+
+UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實現。
+每個 process </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-23
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/XV6/" class="post-category" target="_blank">
+                                    XV6
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/XV6/" target="_blank">
+                        <span class="chip bg-color">XV6</span>
+                    </a>
+                    
+                    <a href="/tags/file-system/" target="_blank">
+                        <span class="chip bg-color">file system</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/xv6-4-lock/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="XV6 Ch4 鎖">
+                        
+                        <span class="card-title">XV6 Ch4 鎖</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Race conditions例子struct list{
+    int data;
+    struct list *next;
+};
+
+struct list *list = 0;
+
+void
+insert(int data)
+{
+ </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/XV6/" class="post-category" target="_blank">
+                                    XV6
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/XV6/" target="_blank">
+                        <span class="chip bg-color">XV6</span>
+                    </a>
+                    
+                    <a href="/tags/kernel/" target="_blank">
+                        <span class="chip bg-color">kernel</span>
+                    </a>
+                    
+                    <a href="/tags/lock/" target="_blank">
+                        <span class="chip bg-color">lock</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '來源: 討厭下雨<br />'
+            + '作者: OMU Skywalker<br />'
+            + '連結: <a href="' + url + '">' + url + '</a><br />'
+            + '本文著作權歸作者所有，任何形式的轉載都須註明出處。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy;2019&nbsp;&nbsp;<i class="fa fa-plug"></i><a href="/"> OMU Skywalker</a>
+            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
+
+            
+
+            
+			
+                
+                
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
+        <i class="fa fa-linkedin"></i>
+    </a>
+
+
+
+    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
+        <i class="fa fa-stack-overflow"></i>
+    </a>
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
+                   class="search-input" autocomplete="off">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-124928169-1');
+</script>
+
+
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
