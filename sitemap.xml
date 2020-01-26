@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.omuskywalker.com/perl-install-module/</loc>
+    
+    <lastmod>2020-01-26T17:00:53.451Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.omuskywalker.com/tags/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://blog.omuskywalker.com/friends/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.omuskywalker.com/ItC-algorithm/</loc>
-    
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
@@ -205,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/perl-install-module/</loc>
+    <loc>http://blog.omuskywalker.com/ItC-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -352,14 +352,14 @@
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-intro/</loc>
+    <loc>http://blog.omuskywalker.com/ItC-gate/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-gate/</loc>
+    <loc>http://blog.omuskywalker.com/ItC-algorithm/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
