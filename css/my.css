@@ -20,10 +20,6 @@ h2 {
     padding-bottom: 5px;
 }
 
-.search-input:focus {
-    border-bottom-color: #59f !important;
-}
-
 .img-shadow {
     box-shadow: none;
 }
