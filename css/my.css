@@ -1,63 +1,65 @@
 /* Here is your custom css styles. */
-table {
-    margin: 1em 0;
-    display: block;
-    overflow: auto;
-}
-table::-webkit-scrollbar { 
-    height: 0; 
-}
-th , td {
-    border: 1px solid #dfe2e5 !important;
-}
-
-.clearfix {
-    border-width: 1px;
-}
-
-h2 {
-    border-bottom: 1px solid #dfe2e5;
-    padding-bottom: 5px;
-}
-
-.img-shadow {
-    box-shadow: none;
+.block-with-text:before {
+    content: none;
 }
 
 .article .article-content .summary {
     height: 3em;
     overflow: hidden;
 }
-
-@media only screen and (max-width: 601px) {
-    footer .container {
-        width: 60%;
+/* hexo-filter-github-emojis */
+.github-emoji{
+    height: 2em;
+    width: 2em;
+    display: inline-block !important;
+    position: relative;
+    margin: 0 3px !important;
+    padding: 0;
+}
+.github-emoji:hover{
+    animation: emoji-face 5s infinite ease-in-out;
+}
+@keyframes emoji-face {
+    2% {
+        transform: translate(0, 1.5px) rotate(1.5deg);
     }
-    footer .container .copy-right {
-        padding-bottom: 1em;
-    } 
-}
-
-html {
-    font-family: 'Noto Sans TC', sans-serif;
-}
-
-.article-tags {
-    height: 47px;
-    overflow-y: auto;
-}
-
-footer .social-statis {
-    margin-top: 0;
-}
-
-.chip .tag-length {
-    margin-right: 0;
-}
-
-@media only screen and (min-width: 601px)
-{
-    nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
-        font-size: 16px;
+    4% {
+        transform: translate(0, -1.5px) rotate(-0.5deg);
+    }
+    6% {
+        transform: translate(0, 1.5px) rotate(-1.5deg);
+    }
+    8% {
+        transform: translate(0, -1.5px) rotate(-1.5deg);
+    }
+    10% {
+        transform: translate(0, 2.5px) rotate(1.5deg);
+    }
+    12% {
+        transform: translate(0, -0.5px) rotate(1.5deg);
+    }
+    14% {
+        transform: translate(0, -1.5px) rotate(1.5deg);
+    }
+    16% {
+        transform: translate(0, -0.5px) rotate(-1.5deg);
+    }
+    18% {
+        transform: translate(0, 0.5px) rotate(-1.5deg);
+    }
+    20% {
+        transform: translate(0, -1.5px) rotate(2.5deg);
+    }
+    22% {
+        transform: translate(0, 0.5px) rotate(-1.5deg);
+    }
+    24% {
+        transform: translate(0, 1.5px) rotate(1.5deg);
+    }
+    26% {
+        transform: translate(0, 0.5px) rotate(0.5deg);
+    }
+    28% {
+        transform: translate(0, 0.5px) rotate(1.5deg);
     }
 }

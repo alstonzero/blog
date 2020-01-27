@@ -23,37 +23,26 @@ result:
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Ubuntu 更改家目錄位置 | 天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -64,75 +53,87 @@ result:
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -146,58 +147,70 @@ result:
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -211,7 +224,7 @@ result:
 
 </header>
 
-
+    
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
@@ -229,13 +242,11 @@ result:
 
 
 <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
-    <div class="container">
+    <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        Ubuntu 更改家目錄位置
-                    </div>
+                    <h1 class="description center-align post-title">Ubuntu 更改家目錄位置</h1>
                 </div>
             </div>
         </div>
@@ -244,10 +255,11 @@ result:
 
 
 
+
 <main class="post-container content">
 
     
-        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -272,6 +284,7 @@ result:
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
@@ -288,6 +301,11 @@ result:
         list-style: none;
     }
 
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
     #toc-content ol {
         padding-left: 10px;
     }
@@ -297,7 +315,7 @@ result:
     }
 
     #toc-content .toc-link:hover {
-        color: #59f;
+        color: #42b983;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -308,16 +326,16 @@ result:
     }
 
     #toc-content .is-active-link {
-        color: #59f;
+        color: #42b983;
     }
 
     #toc-content .is-active-link::before {
-        background-color: #59f;
+        background-color: #42b983;
     }
 
     #floating-toc-btn {
         position: fixed;
-        right: 20px;
+        right: 15px;
         bottom: 76px;
         padding-top: 15px;
         margin-bottom: 0;
@@ -345,15 +363,15 @@ result:
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/note/" target="_blank">
+                            <a href="/tags/note/">
                                 <span class="chip bg-color">note</span>
                             </a>
                         
-                            <a href="/tags/linux/" target="_blank">
+                            <a href="/tags/linux/">
                                 <span class="chip bg-color">linux</span>
                             </a>
                         
-                            <a href="/tags/Ubuntu/" target="_blank">
+                            <a href="/tags/Ubuntu/">
                                 <span class="chip bg-color">Ubuntu</span>
                             </a>
                         
@@ -363,9 +381,9 @@ result:
                 <div class="col s5 right-align">
                     
                     <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Note/" class="post-category" target="_blank">
+                            <a href="/categories/Note/" class="post-category">
                                 Note
                             </a>
                         
@@ -375,20 +393,27 @@ result:
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
-                    <i class="fas fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
                     2018-11-01
                 </div>
+                
 
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
+                    420
+                </div>
+                
+
+                
+
+                
             </div>
+
         </div>
         <hr class="clearfix">
         <div class="card-content article-card-content">
@@ -397,13 +422,13 @@ result:
 <h2 id="1-找到目標分割的-UUID"><a href="#1-找到目標分割的-UUID" class="headerlink" title="1. 找到目標分割的 UUID"></a>1. 找到目標分割的 UUID</h2><ul>
 <li>command:</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">sudo blkid
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo blkid
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>result:</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">/dev/sda1: UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f" TYPE="ext4" PARTUUID="12345678-01"
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">/dev/sda1: UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f" TYPE="ext4" PARTUUID="12345678-01"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>其中 <code>UUID=&quot;1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f&quot;</code> 為此分割的 UUID，記著。</li>
 </ul>
@@ -412,18 +437,18 @@ result:
 <ul>
 <li>備份 (Duplicate)</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">sudo cp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo cp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>比較兩檔案</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">cmp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">cmp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>開啟文字編輯器修改 fstab</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">sudo gedit /etc/fstab 
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo gedit /etc/fstab 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>(gedit 可替換成任何文字編輯器，如 vim)<br>加入以下文字：</p>
 <pre><code># (identifier)  (location, eg sda5)   (format, eg ext3 or ext4)      (some settings) 
 UUID=1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f   /media/home    ext4          defaults       0       2 
@@ -432,35 +457,35 @@ UUID=1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f   /media/home    ext4          default
 <ul>
 <li>建立新資料夾</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">sudo mkdir /media/home
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo mkdir /media/home
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此資料夾是為了掛載新的分割，需與上一步驟填入的相同。</p>
 <ul>
 <li>重開機。</li>
 </ul>
 <hr>
-<h2 id="3-複製原本的-home-到新分割"><a href="#3-複製原本的-home-到新分割" class="headerlink" title="3. 複製原本的 home 到新分割"></a>3. 複製原本的 home 到新分割</h2><pre class=" language-shell"><code class="language-shell">sudo rsync -aXS --progress --exclude='/*/.gvfs' /home/. /media/home/.
-</code></pre>
+<h2 id="3-複製原本的-home-到新分割"><a href="#3-複製原本的-home-到新分割" class="headerlink" title="3. 複製原本的 home 到新分割"></a>3. 複製原本的 home 到新分割</h2><pre class="line-numbers language-shell"><code class="language-shell">sudo rsync -aXS --progress --exclude='/*/.gvfs' /home/. /media/home/.
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>檢查是否全複製過去了</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">sudo diff -r /home /media/home -x ".gvfs/*"
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo diff -r /home /media/home -x ".gvfs/*"
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <hr>
 <h2 id="4-再次修改-fstab"><a href="#4-再次修改-fstab" class="headerlink" title="4. 再次修改 fstab"></a>4. 再次修改 fstab</h2><ul>
 <li>開啟</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell">sudo gedit /etc/fstab
-</code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo gedit /etc/fstab
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>修改上次新增的部分，將 <code>/media/home</code> 改成 <code>default</code>:</li>
 </ul>
-<pre class=" language-shell"><code class="language-shell"># (identifier)  (location, eg sda5)   (format, eg ext3 or ext4)      (some settings) 
+<pre class="line-numbers language-shell"><code class="language-shell"># (identifier)  (location, eg sda5)   (format, eg ext3 or ext4)      (some settings) 
 UUID=????????   /home    ext3          defaults       0       2
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <hr>
-<h2 id="5-備份舊的家目錄"><a href="#5-備份舊的家目錄" class="headerlink" title="5. 備份舊的家目錄"></a>5. 備份舊的家目錄</h2><pre class=" language-shell"><code class="language-shell">cd / && sudo mv /home /old_home && sudo mkdir /home
-</code></pre>
+<h2 id="5-備份舊的家目錄"><a href="#5-備份舊的家目錄" class="headerlink" title="5. 備份舊的家目錄"></a>5. 備份舊的家目錄</h2><pre class="line-numbers language-shell"><code class="language-shell">cd / && sudo mv /home /old_home && sudo mkdir /home
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <hr>
 <h2 id="6-重開機，大功告成"><a href="#6-重開機，大功告成" class="headerlink" title="6. 重開機，大功告成"></a>6. 重開機，大功告成</h2><ol>
 <li>fstab 將新分割掛載在 /home 上</li>
@@ -468,27 +493,104 @@ UUID=????????   /home    ext3          defaults       0       2
 </ol>
 <hr>
 <h2 id="刪除-old-home"><a href="#刪除-old-home" class="headerlink" title="刪除 old_home"></a>刪除 old_home</h2><p>如果磁碟空間不夠，或是想清理磁碟的話，可透過以下指令刪除。</p>
-<pre class=" language-shell"><code class="language-shell">cd /
+<pre class="line-numbers language-shell"><code class="language-shell">cd /
 sudo rm -rI /old_home
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://help.ubuntu.com/community/Partitioning/Home/Moving" target="_blank" rel="noopener">Partitioning/Home/Moving</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
             </div>
             <hr/>
 
             
 
-            
-
-            <div class="reprint">
-                <p>
-                    <span class="reprint-tip">
-                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
-                    </span>
-                    <a href="http://blog.lusw.dev" class="b-link-green">天行者</a>
-                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/Ubuntu-change-home-partition/" class="b-link-green">Ubuntu 更改家目錄位置</a>
-                </p>
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">OMU Skywalker</a>
+                </span>
             </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        連結:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev/Ubuntu-change-home-partition/">http://blog.lusw.dev/Ubuntu-change-home-partition/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        轉貼請註明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本網站所有文章除特別聲明外，均採用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    許可協議。轉貼請註明出處
+                    <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/note/">
+                                    <span class="chip bg-color">note</span>
+                                </a>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
 
@@ -497,6 +599,10 @@ sudo rm -rI /old_home
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>留言區</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -508,7 +614,7 @@ sudo rm -rI /old_home
         repo: 'hexo-gitalk-comment',
         owner: 'omuskywalker',
         admin: "omuskywalker",
-        id: '/Ubuntu-change-home-partition/',
+        id: '2018-11-01T10-18-59',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -529,9 +635,9 @@ sudo rm -rI /old_home
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/RT-Thread-GUI/">
                     <div class="card-image">
@@ -543,20 +649,24 @@ sudo rm -rI /old_home
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">RT-Thread 的 GUI 放在 package 中（git 原始碼），本文將簡單將此 GUI engine 分工。
+                    <div class="summary block-with-text">
+                        
+                            RT-Thread 的 GUI 放在 package 中（git 原始碼），本文將簡單將此 GUI engine 分工。
 Font處理文字編碼，及字型相關的
 |-- src
 |    |-- asc12font.c
-|    |-- asc</div>
+|    |-- asc
+                        
+                    </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-11-10
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                     RT-Thread
                                 </a>
                             
@@ -567,11 +677,11 @@ Font處理文字編碼，及字型相關的
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/GUI/" target="_blank">
+                    <a href="/tags/GUI/">
                         <span class="chip bg-color">GUI</span>
                     </a>
                     
@@ -581,9 +691,9 @@ Font處理文字編碼，及字型相關的
         </div>
         
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/c-attribute/">
@@ -596,20 +706,24 @@ Font處理文字編碼，及字型相關的
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">有分三種： ① 對副函式的　② 對資料的　③ 對結構的
+                    <div class="summary block-with-text">
+                        
+                            有分三種： ① 對副函式的　② 對資料的　③ 對結構的
  註：attribute 是給 compiler 看的。
 對結構的packedC語言在宣告結構的時候，會對裡面的元素作對齊，給個例子：
 struct sample {
-    int </div>
+    int 
+                        
+                    </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-10-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-10-12
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Note/" class="post-category" target="_blank">
+                            <a href="/categories/Note/" class="post-category">
                                     Note
                                 </a>
                             
@@ -620,11 +734,11 @@ struct sample {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/note/" target="_blank">
+                    <a href="/tags/note/">
                         <span class="chip bg-color">note</span>
                     </a>
                     
-                    <a href="/tags/C/" target="_blank">
+                    <a href="/tags/C/">
                         <span class="chip bg-color">C</span>
                     </a>
                     
@@ -635,6 +749,7 @@ struct sample {
         
     </div>
 </article>
+
 </div>
 
 
@@ -675,10 +790,34 @@ struct sample {
     });
 </script>
 
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -688,7 +827,7 @@ struct sample {
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
     <a class="btn-floating btn-large bg-color">
-        <i class="fa fa-list"></i>
+        <i class="fas fa-list-ul"></i>
     </a>
 </div>
 
@@ -700,7 +839,7 @@ struct sample {
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -757,10 +896,10 @@ struct sample {
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -768,48 +907,55 @@ struct sample {
         
     });
 </script>
+
     
 
 </main>
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -819,13 +965,13 @@ struct sample {
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -837,22 +983,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -866,10 +1012,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>

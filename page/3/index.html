@@ -14,37 +14,26 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -55,75 +44,87 @@
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -137,58 +138,70 @@
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -202,7 +215,7 @@
 
 </header>
 
-
+    
     <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
@@ -210,27 +223,160 @@
         <div class="brand">
             <div class="title center-align">
                 
-                    技術筆記
+                技術筆記
                 
             </div>
 
             <div class="description center-align">
                 
-                    單晶片、即時作業系統與韌體相關之技術筆記
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: ['單晶片、即時作業系統與韌體相關之技術筆記','Notes of single-chip microcompute, RTOS and Firmware.'],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
                 
             </div>
         </div>
     </div>
 </div>
+
+
 <script>
-// 每天切换 banner 图.  Switch banner image every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+    // 每天切换 banner 图.  Switch banner image every day.
+    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
 </script>
+
+
     </div>
 </div>
 
 
 <main class="content">
+
+    
+    <div id="indexCard" class="index-card">
+        <div class="container ">
+            <div class="card">
+                <div class="card-content">
+                    
+                        <div class="dream">
+    
+    <div class="title center-align">
+        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我就廢
+    </div>
+    
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
+            我廢，故我在。
+        </div>
+    </div>
+</div>
+                    
+
+                    
+
+                    
+
+                    
+                    <div id="recommend-sections" class="recommend">
+                        
+
+
+
+
+
+<div class="title"><i class="far fa-thumbs-up"></i>&nbsp;&nbsp;推薦文章</div>
+
+<div class="row">
+
+    
+    
+    <div class="col s12 m6" >
+        <div class="post-card" style="background-image: url('/medias/featureimages/5.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
+                    
+                        
+                            <a href="/categories/Note/" class="category">Note</a>
+                        
+                    
+                </div>
+                <a href="/vim-instruction/">
+                    <h3 class="post-title">vim 指令筆記</h3>
+                </a>
+                <p class="post-description">
+                    
+                        編輯
+
+
+指令
+功能
+
+
+
+
+i
+游標位置進入編輯模式（insert mode）[1]
+
+
+I
+在游標行的第一個非空字元進入編輯模式
+
+
+A
+                    
+                </p>
+                <a href="/vim-instruction/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
+                    <i class="icon far fa-eye fa-fw"></i>更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col s12 m6" >
+        <div class="post-card" style="background-image: url('/medias/featureimages/10.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
+                    
+                        
+                            <a href="/categories/RT-Thread-GUI/" class="category">RT-Thread GUI</a>
+                        
+                    
+                </div>
+                <a href="/rtgui-dc-hw/">
+                    <h3 class="post-title">RT-Thread GUI 繪圖引擎 - 硬體</h3>
+                </a>
+                <p class="post-description">
+                    
+                        GUI 最重要的繪圖核心，第一部分：硬體；說明 GUI 是如何透過硬體的驅動來畫上點線面。
+                    
+                </p>
+                <a href="/rtgui-dc-hw/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
+                    <i class="icon far fa-eye fa-fw"></i>更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     
 
@@ -240,7 +386,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
     <article id="articles" class="container articles">
         <div class="row article-row">
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/vim-instruction/">
                         <div class="card-image">
@@ -253,7 +399,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 編輯
 
@@ -273,17 +419,26 @@ I
 
 
 A
+在游標行的最後一位進入編輯模式
+
+
+o
+向下新增一行，進入編輯模式
+
+
+O
+向下新增一行，進入編輯
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-31
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Note/" class="post-category" target="_blank">
+                                <a href="/categories/Note/" class="post-category">
                                     Note
                                 </a>
                                 
@@ -295,11 +450,11 @@ A
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/vim/" target="_blank">
+                        <a href="/tags/vim/">
                             <span class="chip bg-color">vim</span>
                         </a>
                         
-                        <a href="/tags/note/" target="_blank">
+                        <a href="/tags/note/">
                             <span class="chip bg-color">note</span>
                         </a>
                         
@@ -308,7 +463,7 @@ A
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/starting-xv6/">
                         <div class="card-image">
@@ -321,21 +476,23 @@ A
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
-BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5及App
+BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5及Appendix B，本文強調 CPU0 以外的 CPU 啟動流程及更詳細的 main 解析。
+
+Code
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-27
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -347,7 +504,7 @@ BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
@@ -356,7 +513,7 @@ BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5�
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/running-xv6/">
                         <div class="card-image">
@@ -369,25 +526,29 @@ BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5�
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 Makefile 解析OBJS = \
     bio.o\
     console.o\
     exec.o\
     file.o\
-
+    fs.o\
+    ide.o\
+    ioapic.o\
+    kalloc.o\
+ 
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-27
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -399,11 +560,11 @@ BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/makefile/" target="_blank">
+                        <a href="/tags/makefile/">
                             <span class="chip bg-color">makefile</span>
                         </a>
                         
@@ -412,7 +573,7 @@ BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5�
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-b-bootloader/">
                         <div class="card-image">
@@ -425,23 +586,24 @@ BIOS -&gt; boot section -&gt; main -&gt; scheduler 的詳細流程在 Ch1、Ch5�
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
 x86 開機時，會先呼叫位於主機板上的 BIOS。
 BIOS 的工作：準備硬體，將控制權轉給 OS (XV6)。
-準確的說，控制權轉給 b
+準確的說，控制權轉給 boot sector，位於開機碟的第一個磁碟扇區(512 byte)。
+Boot sector 包含
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-27
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -453,11 +615,11 @@ BIOS 的工作：準備硬體，將控制權轉給 OS (XV6)。
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/函數指標/" target="_blank">
+                        <a href="/tags/函數指標/">
                             <span class="chip bg-color">函數指標</span>
                         </a>
                         
@@ -466,7 +628,7 @@ BIOS 的工作：準備硬體，將控制權轉給 OS (XV6)。
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-a-headware/">
                         <div class="card-image">
@@ -479,7 +641,7 @@ BIOS 的工作：準備硬體，將控制權轉給 OS (XV6)。
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 通用暫存器
 
@@ -498,18 +660,27 @@ Accumulator 累加器
 Based 基址暫存器
 
 
-%e
+%ecx
+Counter 計數器
+
+
+%edx
+Data 數據暫存器
+
+
+%edi
+Destinatio
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-27
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -521,15 +692,15 @@ Based 基址暫存器
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/暫存器/" target="_blank">
+                        <a href="/tags/暫存器/">
                             <span class="chip bg-color">暫存器</span>
                         </a>
                         
-                        <a href="/tags/x86/" target="_blank">
+                        <a href="/tags/x86/">
                             <span class="chip bg-color">x86</span>
                         </a>
                         
@@ -538,7 +709,7 @@ Based 基址暫存器
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-6-fs/">
                         <div class="card-image">
@@ -551,7 +722,7 @@ Based 基址暫存器
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
 本文沒有按照 XV6 官方文本的順序介紹
@@ -561,18 +732,22 @@ XV6 的檔案系統分為 6 層，本文將從上到下介紹。
 
 
 檔案描述符
-File: fil
+File: file.c
+
+
+UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實現。
+每個 process 
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-23
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -584,11 +759,11 @@ File: fil
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/file-system/" target="_blank">
+                        <a href="/tags/file-system/">
                             <span class="chip bg-color">file system</span>
                         </a>
                         
@@ -597,7 +772,7 @@ File: fil
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-5-scheduler/">
                         <div class="card-image">
@@ -610,21 +785,23 @@ File: fil
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 Multiplexing
-如果 process 需要等待 I/O 或是子 process 結束，XV6 讓其進入睡眠狀態，接著將處理器 sw
+如果 process 需要等待 I/O 或是子 process 結束，XV6 讓其進入睡眠狀態，接著將處理器 switch 給其他 process。 
+此機制使 process 有獨佔 CPU 的假象。
+完成 sw
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-14
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -636,15 +813,15 @@ File: fil
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/kernel/" target="_blank">
+                        <a href="/tags/kernel/">
                             <span class="chip bg-color">kernel</span>
                         </a>
                         
-                        <a href="/tags/scheduler/" target="_blank">
+                        <a href="/tags/scheduler/">
                             <span class="chip bg-color">scheduler</span>
                         </a>
                         
@@ -653,7 +830,7 @@ File: fil
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-4-lock/">
                         <div class="card-image">
@@ -666,24 +843,30 @@ File: fil
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 Race conditions例子struct list{
     int data;
     struct list *next;
 };
 
+struct list *list = 0;
+
+void
+insert(int data)
+{
+ 
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-08-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-07
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -695,15 +878,15 @@ File: fil
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/kernel/" target="_blank">
+                        <a href="/tags/kernel/">
                             <span class="chip bg-color">kernel</span>
                         </a>
                         
-                        <a href="/tags/lock/" target="_blank">
+                        <a href="/tags/lock/">
                             <span class="chip bg-color">lock</span>
                         </a>
                         
@@ -712,7 +895,7 @@ File: fil
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-3-trap/">
                         <div class="card-image">
@@ -725,21 +908,21 @@ File: fil
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
-CPU 執行一個 process 時，是不斷的進行：讀取指令、增加程式計數器、執行指令的迴圈；但有時候一個程式需要進入 kernel，而不
+CPU 執行一個 process 時，是不斷的進行：讀取指令、增加程式計數器、執行指令的迴圈；但有時候一個程式需要進入 kernel，而不是執行下一行指令；包括：設備信號的發出、使用者程式做一些非法的事或是呼叫一個 system call
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-07-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-07-30
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -751,19 +934,19 @@ CPU 執行一個 process 時，是不斷的進行：讀取指令、增加程式�
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/kernel/" target="_blank">
+                        <a href="/tags/kernel/">
                             <span class="chip bg-color">kernel</span>
                         </a>
                         
-                        <a href="/tags/interrupt/" target="_blank">
+                        <a href="/tags/interrupt/">
                             <span class="chip bg-color">interrupt</span>
                         </a>
                         
-                        <a href="/tags/trap/" target="_blank">
+                        <a href="/tags/trap/">
                             <span class="chip bg-color">trap</span>
                         </a>
                         
@@ -772,7 +955,7 @@ CPU 執行一個 process 時，是不斷的進行：讀取指令、增加程式�
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-2-mem/">
                         <div class="card-image">
@@ -785,25 +968,29 @@ CPU 執行一個 process 時，是不斷的進行：讀取指令、增加程式�
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
 File: vm.c
 
 分頁硬體
 PTE：Page table entry，包含 20-bit PPN 及 flags
-PPN：Physi
+PPN：Physical Page number
+x86的頁表：$2^{20}$ 條 PTE。
+
+目標
+分頁硬體使用虛
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-07-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-07-23
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -815,19 +1002,19 @@ PPN：Physi
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/kernel/" target="_blank">
+                        <a href="/tags/kernel/">
                             <span class="chip bg-color">kernel</span>
                         </a>
                         
-                        <a href="/tags/分頁/" target="_blank">
+                        <a href="/tags/分頁/">
                             <span class="chip bg-color">分頁</span>
                         </a>
                         
-                        <a href="/tags/記憶體管理/" target="_blank">
+                        <a href="/tags/記憶體管理/">
                             <span class="chip bg-color">記憶體管理</span>
                         </a>
                         
@@ -836,7 +1023,7 @@ PPN：Physi
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-1-process/">
                         <div class="card-image">
@@ -849,24 +1036,26 @@ PPN：Physi
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
 OS 必須具備三項技能：多工、獨立及交流。
 
 kernel 組織
-Monolithic kernel：整個 OS 都位於 kernel 中
+Monolithic kernel：整個 OS 都位於 kernel 中，如此一來所有 system calls 都會在 kernel 中執行（XV6）。
+好處
+設計者不須
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-07-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-07-16
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -878,15 +1067,15 @@ Monolithic kernel：整個 OS 都位於 kernel 中
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
-                        <a href="/tags/kernel/" target="_blank">
+                        <a href="/tags/kernel/">
                             <span class="chip bg-color">kernel</span>
                         </a>
                         
-                        <a href="/tags/process/" target="_blank">
+                        <a href="/tags/process/">
                             <span class="chip bg-color">process</span>
                         </a>
                         
@@ -895,7 +1084,7 @@ Monolithic kernel：整個 OS 都位於 kernel 中
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4 overflow-policy" data-aos="zoom-in">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
                     <a href="/xv6-0-intro/">
                         <div class="card-image">
@@ -908,23 +1097,26 @@ Monolithic kernel：整個 OS 都位於 kernel 中
                     </a>
 
                     <div class="card-content article-content">
-                        <div class="summary">
+                        <div class="summary block-with-text">
                             
                                 
 OS的工作：有效率的在電腦上執行數個程式。
 Kernel：提供 process 服務
-Process：執行中的程式，擁有記憶體存放指令、資
+Process：執行中的程式，擁有記憶體存放指令、資料、及堆疊。
+指令：實現程式的運算。
+資料：運算中所用到的變數。
+堆疊：組織 procedure 呼
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-07-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-07-09
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/XV6/" class="post-category" target="_blank">
+                                <a href="/categories/XV6/" class="post-category">
                                     XV6
                                 </a>
                                 
@@ -936,7 +1128,7 @@ Process：執行中的程式，擁有記憶體存放指令、資
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/XV6/" target="_blank">
+                        <a href="/tags/XV6/">
                             <span class="chip bg-color">XV6</span>
                         </a>
                         
@@ -957,7 +1149,7 @@ Process：執行中的程式，擁有記憶體存放指令、資
             
             <a href="/page/2/"
                class="left btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fa fa-angle-left"></i>
+                <i class="fas fa-angle-left"></i>
             </a>
             
         </div>
@@ -968,7 +1160,7 @@ Process：執行中的程式，擁有記憶體存放指令、資
             
             <a href="/page/4/"
                class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fa fa-angle-right"></i>
+                <i class="fas fa-angle-right"></i>
             </a>
             
         </div>
@@ -977,43 +1169,49 @@ Process：執行中的程式，擁有記憶體存放指令、資
 
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -1023,13 +1221,13 @@ Process：執行中的程式，擁有記憶體存放指令、資
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -1041,22 +1239,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -1070,10 +1268,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>

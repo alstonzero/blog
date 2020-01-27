@@ -23,37 +23,26 @@ struct rt_thread
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>RT-Thread Thread | 天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -64,75 +53,87 @@ struct rt_thread
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -146,58 +147,70 @@ struct rt_thread
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -211,7 +224,7 @@ struct rt_thread
 
 </header>
 
-
+    
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
@@ -229,13 +242,11 @@ struct rt_thread
 
 
 <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
-    <div class="container">
+    <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        RT-Thread Thread
-                    </div>
+                    <h1 class="description center-align post-title">RT-Thread Thread</h1>
                 </div>
             </div>
         </div>
@@ -244,10 +255,11 @@ struct rt_thread
 
 
 
+
 <main class="post-container content">
 
     
-        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -272,6 +284,7 @@ struct rt_thread
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
@@ -288,6 +301,11 @@ struct rt_thread
         list-style: none;
     }
 
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
     #toc-content ol {
         padding-left: 10px;
     }
@@ -297,7 +315,7 @@ struct rt_thread
     }
 
     #toc-content .toc-link:hover {
-        color: #59f;
+        color: #42b983;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -308,16 +326,16 @@ struct rt_thread
     }
 
     #toc-content .is-active-link {
-        color: #59f;
+        color: #42b983;
     }
 
     #toc-content .is-active-link::before {
-        background-color: #59f;
+        background-color: #42b983;
     }
 
     #floating-toc-btn {
         position: fixed;
-        right: 20px;
+        right: 15px;
         bottom: 76px;
         padding-top: 15px;
         margin-bottom: 0;
@@ -345,15 +363,15 @@ struct rt_thread
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/kernel/" target="_blank">
+                            <a href="/tags/kernel/">
                                 <span class="chip bg-color">kernel</span>
                             </a>
                         
-                            <a href="/tags/RT-Thread/" target="_blank">
+                            <a href="/tags/RT-Thread/">
                                 <span class="chip bg-color">RT-Thread</span>
                             </a>
                         
-                            <a href="/tags/thread/" target="_blank">
+                            <a href="/tags/thread/">
                                 <span class="chip bg-color">thread</span>
                             </a>
                         
@@ -363,9 +381,9 @@ struct rt_thread
                 <div class="col s5 right-align">
                     
                     <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                 RT-Thread
                             </a>
                         
@@ -375,20 +393,27 @@ struct rt_thread
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
-                    <i class="fas fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
                     2018-11-19
                 </div>
+                
 
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+
+                
             </div>
+
         </div>
         <hr class="clearfix">
         <div class="card-content article-card-content">
@@ -396,7 +421,7 @@ struct rt_thread
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h2><blockquote>
 <p>File: rtdef.h</p>
 </blockquote>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * Thread structure
  */</span>
 <span class="token keyword">struct</span> rt_thread
@@ -409,35 +434,35 @@ struct rt_thread
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_MODULE</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>module_id<span class="token punctuation">;</span>                              <span class="token comment" spellcheck="true">/**&lt; id of application module */</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一些基本資料，如名字等</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    rt_list_t   list<span class="token punctuation">;</span>                                   <span class="token comment" spellcheck="true">/**&lt; the object list */</span>
+<pre class="line-numbers language-c"><code class="language-c">    rt_list_t   list<span class="token punctuation">;</span>                                   <span class="token comment" spellcheck="true">/**&lt; the object list */</span>
     rt_list_t   tlist<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; the thread list */</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>兩條鏈：thread list、object list</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* stack point and entry */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* stack point and entry */</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>sp<span class="token punctuation">;</span>                                     <span class="token comment" spellcheck="true">/**&lt; stack point */</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>entry<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; entry */</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>parameter<span class="token punctuation">;</span>                              <span class="token comment" spellcheck="true">/**&lt; parameter */</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>stack_addr<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; stack address */</span>
     rt_uint32_t stack_size<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; stack size */</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>stack 相關的</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* error code */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* error code */</span>
     rt_err_t    error<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; error code */</span>
 
     rt_uint8_t  stat<span class="token punctuation">;</span>                                   <span class="token comment" spellcheck="true">/**&lt; thread status */</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>狀態，下面會列出來所有可能</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* priority */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* priority */</span>
     rt_uint8_t  current_priority<span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">/**&lt; current priority */</span>
     rt_uint8_t  init_priority<span class="token punctuation">;</span>                          <span class="token comment" spellcheck="true">/**&lt; initialized priority */</span>
 <span class="token macro property">#<span class="token directive keyword">if</span> RT_THREAD_PRIORITY_MAX > 32</span>
@@ -445,11 +470,11 @@ struct rt_thread
     rt_uint8_t  high_mask<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
     rt_uint32_t number_mask<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與權限相關的</li>
 </ul>
-<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">if</span> defined(RT_USING_EVENT)</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">if</span> defined(RT_USING_EVENT)</span>
     <span class="token comment" spellcheck="true">/* thread event */</span>
     rt_uint32_t event_set<span class="token punctuation">;</span>
     rt_uint8_t  event_info<span class="token punctuation">;</span>
@@ -468,11 +493,11 @@ struct rt_thread
     rt_ubase_t  remaining_tick<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; remaining tick */</span>
 
     <span class="token keyword">struct</span> rt_timer thread_timer<span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">/**&lt; built-in thread timer */</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>event、sig、tick</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>cleanup<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>tid<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment" spellcheck="true">/**&lt; cleanup function when thread exit */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>cleanup<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>tid<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token comment" spellcheck="true">/**&lt; cleanup function when thread exit */</span>
 
     <span class="token comment" spellcheck="true">/* light weight process if present */</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_LWP</span>
@@ -482,7 +507,7 @@ struct rt_thread
     rt_uint32_t user_data<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; private user data beyond this thread */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>rt_thread_t<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>cleanup</code> 函數及 <code>user_data</code></li>
 </ul>
@@ -490,14 +515,14 @@ struct rt_thread
 <h2 id="狀態"><a href="#狀態" class="headerlink" title="狀態"></a>狀態</h2><ul>
 <li>一共有 6 種狀態</li>
 </ul>
-<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_INIT                  0x00                </span><span class="token comment" spellcheck="true">/**&lt; Initialized status */</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_INIT                  0x00                </span><span class="token comment" spellcheck="true">/**&lt; Initialized status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_READY                 0x01                </span><span class="token comment" spellcheck="true">/**&lt; Ready status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_SUSPEND               0x02                </span><span class="token comment" spellcheck="true">/**&lt; Suspend status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_RUNNING               0x03                </span><span class="token comment" spellcheck="true">/**&lt; Running status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_BLOCK                 RT_THREAD_SUSPEND   </span><span class="token comment" spellcheck="true">/**&lt; Blocked status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_CLOSE                 0x04                </span><span class="token comment" spellcheck="true">/**&lt; Closed status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_STAT_MASK             0x0f</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <blockquote>
 <p>File: thread.h</p>
@@ -557,7 +582,7 @@ struct rt_thread
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a thread, normally it's used to initialize a
  * static thread object.
  *
@@ -598,7 +623,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
                            tick<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>透過 <code>_rt_thread_init</code> 完成初始化</li>
 </ul>
@@ -654,7 +679,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">static</span> rt_err_t <span class="token function">_rt_thread_init</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">,</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> rt_err_t <span class="token function">_rt_thread_init</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">,</span>
                                 <span class="token keyword">const</span> <span class="token keyword">char</span>       <span class="token operator">*</span>name<span class="token punctuation">,</span>
                                 <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>entry<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>parameter<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                 <span class="token keyword">void</span>             <span class="token operator">*</span>parameter<span class="token punctuation">,</span>
@@ -672,20 +697,20 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
     <span class="token comment" spellcheck="true">/* stack init */</span>
     thread<span class="token operator">-></span>stack_addr <span class="token operator">=</span> stack_start<span class="token punctuation">;</span>
     thread<span class="token operator">-></span>stack_size <span class="token operator">=</span> stack_size<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將傳入的資料填入結構</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* init thread stack */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* init thread stack */</span>
     <span class="token function">rt_memset</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>stack_addr<span class="token punctuation">,</span> <span class="token string">'#'</span><span class="token punctuation">,</span> thread<span class="token operator">-></span>stack_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
     thread<span class="token operator">-></span>sp <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">rt_hw_stack_init</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>entry<span class="token punctuation">,</span> thread<span class="token operator">-></span>parameter<span class="token punctuation">,</span>
                                           <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>thread<span class="token operator">-></span>stack_addr <span class="token operator">+</span> thread<span class="token operator">-></span>stack_size <span class="token operator">-</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
                                           <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>rt_thread_exit<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設定堆疊，使用 <code>rt_hw_stack_init</code> 來完成（根據不同 cpu 有不同的方式，<code>rt_hw_stack_init</code> 在 /libcpu 中針對不同的 cpu 有不同的函式宣告）</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* priority init */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* priority init */</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>priority <span class="token operator">&lt;</span> RT_THREAD_PRIORITY_MAX<span class="token punctuation">)</span><span class="token punctuation">;</span>
     thread<span class="token operator">-></span>init_priority    <span class="token operator">=</span> priority<span class="token punctuation">;</span>
     thread<span class="token operator">-></span>current_priority <span class="token operator">=</span> priority<span class="token punctuation">;</span>
@@ -695,11 +720,11 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
     thread<span class="token operator">-></span>number <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     thread<span class="token operator">-></span>high_mask <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 priority 及 mask</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* tick init */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* tick init */</span>
     thread<span class="token operator">-></span>init_tick      <span class="token operator">=</span> tick<span class="token punctuation">;</span>
     thread<span class="token operator">-></span>remaining_tick <span class="token operator">=</span> tick<span class="token punctuation">;</span>
 
@@ -737,7 +762,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後依序完成 tick、sig、hook 等的初始化</li>
 </ul>
@@ -791,7 +816,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a thread object and allocate thread object memory
  * and stack.
  *
@@ -840,7 +865,7 @@ rt_thread_t <span class="token function">rt_thread_create</span><span class="tok
     <span class="token keyword">return</span> thread<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先 allocate 一塊給 thread，一塊給堆疊</li>
 <li>再呼叫 <code>_rt_thread_init</code> 完成初始化</li>
@@ -873,7 +898,7 @@ rt_thread_t <span class="token function">rt_thread_create</span><span class="tok
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will start a thread and put it to system ready queue
  *
  * @param thread the thread to be started
@@ -889,11 +914,11 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
 
     <span class="token comment" spellcheck="true">/* set current priority to init priority */</span>
     thread<span class="token operator">-></span>current_priority <span class="token operator">=</span> thread<span class="token operator">-></span>init_priority<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 priority</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* calculate priority attribute */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* calculate priority attribute */</span>
 <span class="token macro property">#<span class="token directive keyword">if</span> RT_THREAD_PRIORITY_MAX > 32</span>
     thread<span class="token operator">-></span>number      <span class="token operator">=</span> thread<span class="token operator">-></span>current_priority <span class="token operator">>></span> <span class="token number">3</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">/* 5bit */</span>
     thread<span class="token operator">-></span>number_mask <span class="token operator">=</span> <span class="token number">1L</span> <span class="token operator">&lt;&lt;</span> thread<span class="token operator">-></span>number<span class="token punctuation">;</span>
@@ -901,11 +926,11 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
 <span class="token macro property">#<span class="token directive keyword">else</span></span>
     thread<span class="token operator">-></span>number_mask <span class="token operator">=</span> <span class="token number">1L</span> <span class="token operator">&lt;&lt;</span> thread<span class="token operator">-></span>current_priority<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這些參數是用來計算權限的，<code>scheudler</code> 會用到</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_THREAD<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"startup a thread:%s with priority:%d\n"</span><span class="token punctuation">,</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_THREAD<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"startup a thread:%s with priority:%d\n"</span><span class="token punctuation">,</span>
                                    thread<span class="token operator">-></span>name<span class="token punctuation">,</span> thread<span class="token operator">-></span>init_priority<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* change thread stat */</span>
     thread<span class="token operator">-></span>stat <span class="token operator">=</span> RT_THREAD_SUSPEND<span class="token punctuation">;</span>
@@ -920,7 +945,7 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_startup<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後將 stat 設為 <code>RT_THREAD_SUSPEND</code>，再透過 <code>rt_thread_resume</code> 來完成啟動</li>
 <li>啟動完成後呼叫 <code>rt_scheduler()</code> 來執行一次調度</li>
@@ -953,7 +978,7 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will suspend the specified thread.
  *
  * @param thread the thread to be suspended
@@ -998,7 +1023,7 @@ rt_err_t <span class="token function">rt_thread_suspend</span><span class="token
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_suspend<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將狀態修改為 <code>RT_THREAD_SUSPEND</code>，接著將 thread 從 tlist 移除，結束 timer</li>
 </ul>
@@ -1030,7 +1055,7 @@ rt_err_t <span class="token function">rt_thread_suspend</span><span class="token
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will let current thread delay for some ticks.
  *
  * @param tick the delay ticks
@@ -1042,7 +1067,7 @@ rt_err_t <span class="token function">rt_thread_delay</span><span class="token p
     <span class="token keyword">return</span> <span class="token function">rt_thread_sleep</span><span class="token punctuation">(</span>tick<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_delay<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>透過 <code>rt_thread_sleep</code> 實作</li>
 </ul>
@@ -1074,7 +1099,7 @@ rt_err_t <span class="token function">rt_thread_delay</span><span class="token p
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will let current thread sleep for some ticks.
  *
  * @param tick the sleep ticks
@@ -1111,7 +1136,7 @@ rt_err_t <span class="token function">rt_thread_sleep</span><span class="token p
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="復原-thread"><a href="#復原-thread" class="headerlink" title="復原 thread"></a>復原 thread</h3><p><i class="fa fa-code"></i> Code: <code>rt_thread_resume</code></p>
 <table>
@@ -1140,7 +1165,7 @@ rt_err_t <span class="token function">rt_thread_sleep</span><span class="token p
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will resume a thread and put it to system ready queue.
  *
  * @param thread the thread to be resumed
@@ -1183,7 +1208,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_resume<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先從 suspend list 移除，停止 timer，掛回去 ready list</li>
 <li><code>rt_schedule_insert_thread</code> 會將狀態修改成 <code>RT_THREAD_READY</code></li>
@@ -1204,7 +1229,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rt_thread_exit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rt_thread_exit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
     <span class="token keyword">register</span> rt_base_t level<span class="token punctuation">;</span>
@@ -1222,11 +1247,11 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
 
     <span class="token comment" spellcheck="true">/* remove it from timer list */</span>
     <span class="token function">rt_timer_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先從 ready list 中移除，修改狀態為 <code>RT_THREAD_CLOSE</code>，從 timer list 中移除</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_object_t<span class="token punctuation">)</span>thread<span class="token punctuation">)</span> <span class="token operator">==</span> RT_TRUE<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_object_t<span class="token punctuation">)</span>thread<span class="token punctuation">)</span> <span class="token operator">==</span> RT_TRUE<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
         thread<span class="token operator">-></span>cleanup <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         <span class="token function">rt_object_detach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_object_t<span class="token punctuation">)</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1244,7 +1269,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
     <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果為系統的 thread，且 <code>cleanup</code> 函式沒有被定義時，呼叫 <code>rt_object_detach</code> 來完成移除的動作</li>
 <li>否則，將 thread 插入至 <code>rt_thread_defunct</code>，此鏈上面的 thread 會由 idle 清除。</li>
@@ -1277,7 +1302,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a thread. The thread object will be removed from
  * thread queue and deleted from system object management in the idle thread.
  *
@@ -1299,11 +1324,11 @@ rt_err_t <span class="token function">rt_thread_delete</span><span class="token 
         <span class="token comment" spellcheck="true">/* remove from schedule */</span>
         <span class="token function">rt_schedule_remove_thread</span><span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果此 thread 已經啟動過了，將此 thread 從 ready list 移除</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* release thread timer */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* release thread timer */</span>
     <span class="token function">rt_timer_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* change stat */</span>
@@ -1321,7 +1346,7 @@ rt_err_t <span class="token function">rt_thread_delete</span><span class="token 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著將 timer 還回去，修改狀態為 <code>RT_THREAD_CLOSE</code>，插入至 <code>rt_thread_defunct</code></li>
 </ul>
@@ -1353,7 +1378,7 @@ rt_err_t <span class="token function">rt_thread_delete</span><span class="token 
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a thread. The thread object will be removed from
  * thread queue and detached/deleted from system object management.
  *
@@ -1400,7 +1425,7 @@ rt_err_t <span class="token function">rt_thread_detach</span><span class="token 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與 delete 不同的差在第32行</li>
 </ul>
@@ -1435,7 +1460,7 @@ rt_err_t <span class="token function">rt_thread_detach</span><span class="token 
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will control thread behaviors according to control command.
  *
  * @param thread the specified thread to be controlled
@@ -1515,25 +1540,102 @@ rt_err_t <span class="token function">rt_thread_control</span><span class="token
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_control<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
 
             
 
-            
-
-            <div class="reprint">
-                <p>
-                    <span class="reprint-tip">
-                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
-                    </span>
-                    <a href="http://blog.lusw.dev" class="b-link-green">天行者</a>
-                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/rt-thread-thread/" class="b-link-green">RT-Thread Thread</a>
-                </p>
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">OMU Skywalker</a>
+                </span>
             </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        連結:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev/rt-thread-thread/">http://blog.lusw.dev/rt-thread-thread/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        轉貼請註明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本網站所有文章除特別聲明外，均採用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    許可協議。轉貼請註明出處
+                    <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/kernel/">
+                                    <span class="chip bg-color">kernel</span>
+                                </a>
+                            
+                                <a href="/tags/RT-Thread/">
+                                    <span class="chip bg-color">RT-Thread</span>
+                                </a>
+                            
+                                <a href="/tags/thread/">
+                                    <span class="chip bg-color">thread</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
 
@@ -1542,6 +1644,10 @@ rt_err_t <span class="token function">rt_thread_control</span><span class="token
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>留言區</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -1553,7 +1659,7 @@ rt_err_t <span class="token function">rt_thread_control</span><span class="token
         repo: 'hexo-gitalk-comment',
         owner: 'omuskywalker',
         admin: "omuskywalker",
-        id: '/rt-thread-thread/',
+        id: '2018-11-19T13-08-24',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1574,9 +1680,9 @@ rt_err_t <span class="token function">rt_thread_control</span><span class="token
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/rt-thread-timer/">
                     <div class="card-image">
@@ -1588,21 +1694,25 @@ rt_err_t <span class="token function">rt_thread_control</span><span class="token
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">
+                    <div class="summary block-with-text">
+                        
+                            
 File: timer.c
 
 
 timer 的作用：當時間到時，觸發一個事件；如文本的圖：
-timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸發該 timer 的 timeout_func，同時將該 timer</div>
+timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸發該 timer 的 timeout_func，同時將該 timer
+                        
+                    </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-11-20
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                     RT-Thread
                                 </a>
                             
@@ -1613,15 +1723,15 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kernel/" target="_blank">
+                    <a href="/tags/kernel/">
                         <span class="chip bg-color">kernel</span>
                     </a>
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/timer/" target="_blank">
+                    <a href="/tags/timer/">
                         <span class="chip bg-color">timer</span>
                     </a>
                     
@@ -1631,9 +1741,9 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
         </div>
         
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/rt-thread-RTM-EXPORT/">
@@ -1646,20 +1756,24 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">在 RT-Thread 的 kernel 中，許多副程式的結尾都有 RTM_EXPORT，如：
+                    <div class="summary block-with-text">
+                        
+                            在 RT-Thread 的 kernel 中，許多副程式的結尾都有 RTM_EXPORT，如：
 /** 
  * This function will lock the thread scheduler.
  */
-void rt_enter_</div>
+void rt_enter_
+                        
+                    </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-15
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                     RT-Thread
                                 </a>
                             
@@ -1670,15 +1784,15 @@ void rt_enter_</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kernel/" target="_blank">
+                    <a href="/tags/kernel/">
                         <span class="chip bg-color">kernel</span>
                     </a>
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/RTM-EXPORT/" target="_blank">
+                    <a href="/tags/RTM-EXPORT/">
                         <span class="chip bg-color">RTM_EXPORT</span>
                     </a>
                     
@@ -1689,6 +1803,7 @@ void rt_enter_</div>
         
     </div>
 </article>
+
 </div>
 
 
@@ -1729,10 +1844,34 @@ void rt_enter_</div>
     });
 </script>
 
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1742,7 +1881,7 @@ void rt_enter_</div>
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
     <a class="btn-floating btn-large bg-color">
-        <i class="fa fa-list"></i>
+        <i class="fas fa-list-ul"></i>
     </a>
 </div>
 
@@ -1754,7 +1893,7 @@ void rt_enter_</div>
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -1811,10 +1950,10 @@ void rt_enter_</div>
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -1822,48 +1961,55 @@ void rt_enter_</div>
         
     });
 </script>
+
     
 
 </main>
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -1873,13 +2019,13 @@ void rt_enter_</div>
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -1891,22 +2037,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -1920,10 +2066,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>

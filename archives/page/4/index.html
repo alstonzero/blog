@@ -14,37 +14,26 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>全部文章 | 天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -55,75 +44,87 @@
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -137,58 +138,70 @@
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -202,29 +215,44 @@
 
 </header>
 
-<div class="bg-cover pd-header about-cover">
+    <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
         <div class="brand">
             <div class="title center-align">
                 
-                    技術筆記
+                技術筆記
                 
             </div>
 
             <div class="description center-align">
                 
-                    單晶片、即時作業系統與韌體相關之技術筆記
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: ['單晶片、即時作業系統與韌體相關之技術筆記','Notes of single-chip microcompute, RTOS and Firmware.'],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
                 
             </div>
         </div>
     </div>
 </div>
+
+
 <script>
-// 每天切换 banner 图.  Switch banner image every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+    // 每天切换 banner 图.  Switch banner image every day.
+    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
 </script>
+
+
     </div>
 </div>
 
@@ -285,6 +313,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 show: false
             },
             itemStyle: {
+                color: '#196127',
                 borderColor: '#fff',
                 borderWidth: 2
             },
@@ -341,7 +370,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <span>13</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-overflow/">
                             <div class="card-image">
@@ -353,25 +382,26 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     硬體算數上的限制
 整數32位元→ $-2^{31}$ ~ $2^{31}-1$
 實數
 精確度：可以被表示的有效位數的最大數值。
 
-假設一個精確度為4位元，第五個
+假設一個精確度為4位元，第五個位元表示指數，如：
++  +  9 1 2 3 4 為 1234 * 10^9，
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-13
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-13
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -405,7 +435,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <span>12</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-internet/">
                             <div class="card-image">
@@ -417,23 +447,24 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     網路連接
 網路的任一裝置被稱作節點或是主機 host。
 資料傳輸率：即數據在網路上從一個點到另一個點的速度，也稱作網路頻寬 bandwidth。
-通訊協定 pr
+通訊協定 protocol：用來描述所傳輸的資料如何格式化及處理。
+主/從架構模式 clien
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-12
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-12
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -467,7 +498,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <span>09</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-database/">
                             <div class="card-image">
@@ -479,21 +510,21 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     管理資訊有三種普遍的資訊系統：電子試算表、資料庫管理系統及電子商務。
-試算表試算表 spreadsheet 允許使用者以標籤畫的儲存格來組織、分析資料，一個儲存
+試算表試算表 spreadsheet 允許使用者以標籤畫的儲存格來組織、分析資料，一個儲存格可儲存資料，如數字、文字等，或公式求值。試算表通常以字母表示直欄 column
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-09
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-09
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -527,7 +558,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <span>09</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-FS/">
                             <div class="card-image">
@@ -539,24 +570,28 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     檔案系統
 檔案：一個命名的資料集合。
 檔案系統：將一群檔案集合成目錄。
 檔案型態：檔案中所含的資訊種類。
-檔案名稱：主要名稱＋檔案延伸檔名（副檔名），如1023
+檔案名稱：主要名稱＋檔案延伸檔名（副檔名），如1023.c。
+
+檔案的操作
+檔案存取
+循序檔案存取：將檔案中的資訊依序存取，依照進度移
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-09
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-09
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -590,7 +625,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <span>08</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-OS/">
                             <div class="card-image">
@@ -602,23 +637,28 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     作業系統的角色記憶體、程序與CPU管理
 持續追蹤什麼程式在記憶體，及其位置。
 程序 process 為執行中的程式，追蹤程序的進展及記錄。
-CPU 排程，為決定
+CPU 排程，為決定哪個程序可以執行。
+
+
+記憶體管理
+邏輯位址：相對位址。
+位址聯繫 addres
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-08
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-08
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -652,7 +692,7 @@ CPU 排程，為決定
                 <span>08</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-OOP/">
                             <div class="card-image">
@@ -664,22 +704,26 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     物件導向方法論物件導向 OOP
 物件 object：問題內可顯現的實體或事物。
-類別 class：物件類別，將有共同特性的物件分類成相關群組，物件則為類別的實例
+類別 class：物件類別，將有共同特性的物件分類成相關群組，物件則為類別的實例。
+
+設計方法論
+腦力激盪：來產生一個候補的類別表單。
+過濾：決定哪些類別是問題
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-08
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-08
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -713,7 +757,7 @@ CPU 排程，為決定
                 <span>08</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-data-structure/">
                             <div class="card-image">
@@ -725,21 +769,24 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     抽象資料型態Abstract data type, ADT，就是一種容器。
-堆疊 Stack為LIFO(Last In First Out)，後進先出，即當我們
+堆疊 Stack為LIFO(Last In First Out)，後進先出，即當我們要放資料時，放在最上面（也就是最後一個），要拿資料的時候也是拿最上面。
+
+
+插入
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-08
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-08
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -775,7 +822,7 @@ CPU 排程，為決定
                 <span>07</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-algorithm/">
                             <div class="card-image">
@@ -787,25 +834,29 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     如何解決問題
 以問題取代未知數、以資訊取代資料、以解待取待理論。
 
 
 一般的問題解決過程提出問題  尋找熟悉的事物  分割並征服  演算法。
-電腦的問題解決過程
+電腦的問題解決過程分析與定義階段  演算法開發階段  實作階段  維護階段。
+
+
+簡單變數演算法
+
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-07
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-07
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -839,7 +890,7 @@ CPU 排程，為決定
                 <span>07</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-code/">
                             <div class="card-image">
@@ -851,23 +902,24 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     電腦的動作
 即可程式化 programmable、儲存 store、擷取 retrieve 及運算 process。
 
-機器語言機器語言是電腦唯一能執行的指令，
+機器語言機器語言是電腦唯一能執行的指令，由二進制的數字組成。
+Pep/8 虛擬電腦依據不同的CPU會有不同的機器語言，而
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-07
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-07
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -901,7 +953,7 @@ CPU 排程，為決定
                 <span>07</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-com/">
                             <div class="card-image">
@@ -913,25 +965,26 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     個別電腦元件
 處理器速度 Hz 表示，如 2.7GHz。
 計時器速度，如1066MHz；FSB，front side bus 前端匯排流。
 
 
-程式儲存化概念范
+程式儲存化概念范紐曼架構：資料與指令可存於同個地方，具有五個元件：
+記憶體單元：具有儲存格，及定
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-07
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-07
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -967,7 +1020,7 @@ CPU 排程，為決定
                 <span>05</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-gate/">
                             <div class="card-image">
@@ -979,22 +1032,22 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     電腦與電學電子訊號有某個電壓準位，一般而言電壓準位在 0~2 伏特時屬於「低」，代表二進制的 0，而位於 2~5 伏特時則為「高」，代表二進制的 1。
 
-閘 g
+閘 gate：是完成電子訊號基本運算的裝置。閘接受一至多個輸入訊號，產生單一輸出訊號；
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-05
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-05
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -1034,7 +1087,7 @@ CPU 排程，為決定
                 <span>05</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6 overflow-policy">
+                <div class="article col s12 m6">
                     <div class="card">
                         <a href="/ItC-data/">
                             <div class="card-image">
@@ -1046,25 +1099,25 @@ CPU 排程，為決定
                             </div>
                         </a>
                         <div class="card-content article-content">
-                            <div class="summary">
+                            <div class="summary block-with-text">
                                 
                                     資料與電腦
 資料 data：事實的基本數值。
 資訊 infromation：經過組織、處理過的資料。
 
 資料壓縮 data compression
-壓縮率 co
+壓縮率 compression ration：壓縮過後的大小 / 原始大小，介於 0 與 1
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-02-05
+                                    <i class="far fa-clock fa-fw icon-date"></i>2018-02-05
                                 </span>
                                 <span class="publish-author">
                                     
-                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
                                     
-                                    <a href="/categories/計算機概論/" class="post-category" target="_blank">
+                                    <a href="/categories/計算機概論/" class="post-category">
                                     計算機概論
                                     </a>
                                     
@@ -1098,7 +1151,7 @@ CPU 排程，為決定
             
             <a href="/archives/page/3/"
                class="left btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fa fa-angle-left"></i>
+                <i class="fas fa-angle-left"></i>
             </a>
             
         </div>
@@ -1109,7 +1162,7 @@ CPU 排程，為決定
             
             <a href="/archives/page/5/"
                class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fa fa-angle-right"></i>
+                <i class="fas fa-angle-right"></i>
             </a>
             
         </div>
@@ -1117,43 +1170,50 @@ CPU 排程，為決定
 </div>
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -1163,13 +1223,13 @@ CPU 排程，為決定
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -1181,22 +1241,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -1210,10 +1270,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>

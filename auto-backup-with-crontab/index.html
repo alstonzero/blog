@@ -5,12 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="使用 crontab 自動備份網站原始碼, 天行者">
-    <meta name="description" content="shell script透過 git 備份時，一定是使用下列指令
-git add .
-git commit -m &#39;log&#39;
-git push
-
-而使用 shell script 可以讓我們一次執行一大串指令，因此我們來寫一個 shell ">
+    <meta name="description" content="自動備份 hexo 中的 md 檔及主題配置，因為 hexo 生成網頁時不會上傳原始的 md 與主題資源">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,37 +14,26 @@ git push
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>使用 crontab 自動備份網站原始碼 | 天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -60,75 +44,87 @@ git push
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -142,58 +138,70 @@ git push
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -207,7 +215,7 @@ git push
 
 </header>
 
-
+    
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
@@ -225,13 +233,11 @@ git push
 
 
 <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
-    <div class="container">
+    <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        使用 crontab 自動備份網站原始碼
-                    </div>
+                    <h1 class="description center-align post-title">使用 crontab 自動備份網站原始碼</h1>
                 </div>
             </div>
         </div>
@@ -240,10 +246,11 @@ git push
 
 
 
+
 <main class="post-container content">
 
     
-        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -268,6 +275,7 @@ git push
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
@@ -284,6 +292,11 @@ git push
         list-style: none;
     }
 
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
     #toc-content ol {
         padding-left: 10px;
     }
@@ -293,7 +306,7 @@ git push
     }
 
     #toc-content .toc-link:hover {
-        color: #59f;
+        color: #42b983;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -304,16 +317,16 @@ git push
     }
 
     #toc-content .is-active-link {
-        color: #59f;
+        color: #42b983;
     }
 
     #toc-content .is-active-link::before {
-        background-color: #59f;
+        background-color: #42b983;
     }
 
     #floating-toc-btn {
         position: fixed;
-        right: 20px;
+        right: 15px;
         bottom: 76px;
         padding-top: 15px;
         margin-bottom: 0;
@@ -341,11 +354,11 @@ git push
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/note/" target="_blank">
+                            <a href="/tags/note/">
                                 <span class="chip bg-color">note</span>
                             </a>
                         
-                            <a href="/tags/crontab/" target="_blank">
+                            <a href="/tags/crontab/">
                                 <span class="chip bg-color">crontab</span>
                             </a>
                         
@@ -355,9 +368,9 @@ git push
                 <div class="col s5 right-align">
                     
                     <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Note/" class="post-category" target="_blank">
+                            <a href="/categories/Note/" class="post-category">
                                 Note
                             </a>
                         
@@ -367,31 +380,38 @@ git push
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
-                    <i class="fas fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
                     2018-12-26
                 </div>
+                
 
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
+                    369
+                </div>
+                
+
+                
+
+                
             </div>
+
         </div>
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="shell-script"><a href="#shell-script" class="headerlink" title="shell script"></a>shell script</h2><p>透過 git 備份時，一定是使用下列指令</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">git</span> add <span class="token keyword">.</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> add <span class="token keyword">.</span>
 <span class="token function">git</span> commit -m <span class="token string">'log'</span>
 <span class="token function">git</span> push
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>而使用 shell script 可以讓我們一次執行一大串指令，因此我們來寫一個 shell script</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#!/bin/zsh</span>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#!/bin/zsh</span>
 nowTime<span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +'%Y-%m-%d %H:%M:%S'<span class="token variable">)</span></span>"</span>
 <span class="token keyword">echo</span> <span class="token string">"# Using crontab with auto.sh"</span>
 <span class="token keyword">echo</span> <span class="token string">"# File in ~/Desktop/auto.sh"</span>
@@ -419,19 +439,19 @@ result<span class="token operator">=</span><span class="token variable"><span cl
 esac
 <span class="token keyword">echo</span> <span class="token variable">${result}</span>
 <span class="token keyword">echo</span> <span class="token string">"Backup complete."</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中我們為了方便整理，在提交的紀錄上增加了時間；並且在 push 完根據結果有不同的通知</p>
 <blockquote>
 <p>此通知是基於 mac 上的 applescript 所寫的，在 linux 上會產生錯誤</p>
 </blockquote>
 <h2 id="建立-crontab"><a href="#建立-crontab" class="headerlink" title="建立 crontab"></a>建立 crontab</h2><p>寫好 script shell 後，再來就是要定時的執行它。使用 crontab 可以在指定的時間，或是固定的區間內執行。</p>
 <p>使用方式，輸入指令 <code>crontab -e</code>，接著會跳進 vim，寫入</p>
-<pre class=" language-vim"><code class="language-vim">@hourly chmod <span class="token operator">+</span><span class="token keyword">x</span> <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span><span class="token keyword">sh</span>
+<pre class="line-numbers language-vim"><code class="language-vim">@hourly chmod <span class="token operator">+</span><span class="token keyword">x</span> <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span><span class="token keyword">sh</span>
 @hourly <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span><span class="token keyword">sh</span> PATH_TO_YOUR_SOURCE <span class="token operator">></span><span class="token operator">></span> <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span>log <span class="token number">2</span><span class="token operator">></span>&amp;<span class="token number">1</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>這裡首先提升一次權限，並設定每一次整點都備份一次 <code>@hourly</code>，並將結果寫入 log 中。我們需要先建立一個 .log 檔：</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">touch</span> /Users/PATH_TO_YOUR.log
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">touch</span> /Users/PATH_TO_YOUR.log
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>當然這裡的所有路徑因人而異，檔名也無所謂，最後 <code>:wq</code> 存檔退出，安裝完畢</p>
 <p><img src="https://i.imgur.com/w3qGjus.png" alt title="大功告成"></p>
 
@@ -440,18 +460,91 @@ esac
 
             
 
-            
-
-            <div class="reprint">
-                <p>
-                    <span class="reprint-tip">
-                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
-                    </span>
-                    <a href="http://blog.lusw.dev" class="b-link-green">天行者</a>
-                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/auto-backup-with-crontab/" class="b-link-green">使用 crontab 自動備份網站原始碼</a>
-                </p>
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">OMU Skywalker</a>
+                </span>
             </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        連結:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev/auto-backup-with-crontab/">http://blog.lusw.dev/auto-backup-with-crontab/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        轉貼請註明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本網站所有文章除特別聲明外，均採用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    許可協議。轉貼請註明出處
+                    <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/note/">
+                                    <span class="chip bg-color">note</span>
+                                </a>
+                            
+                                <a href="/tags/crontab/">
+                                    <span class="chip bg-color">crontab</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
 
@@ -460,6 +553,10 @@ esac
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>留言區</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -471,7 +568,7 @@ esac
         repo: 'hexo-gitalk-comment',
         owner: 'omuskywalker',
         admin: "omuskywalker",
-        id: '/auto-backup-with-crontab/',
+        id: '2018-12-26T12-14-07',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -492,9 +589,9 @@ esac
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/rtgui-object/">
                     <div class="card-image">
@@ -506,16 +603,20 @@ esac
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">RT-Thread GUI 物件架構在 RTGUI 中，最小的物件為 widget，再來是 window，window 也是一個 widget；而每個 widget 也是一個 object，這是為了仿造 C++ 的物件導向所設計的，相同的概</div>
+                    <div class="summary block-with-text">
+                        
+                            GUI 中的物件最下層，為了實現如 C++ 的 class 所創造出來的產物
+                        
+                    </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-01-01
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread-GUI/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread-GUI/" class="post-category">
                                     RT-Thread GUI
                                 </a>
                             
@@ -526,19 +627,19 @@ esac
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kernel/" target="_blank">
+                    <a href="/tags/kernel/">
                         <span class="chip bg-color">kernel</span>
                     </a>
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/GUI/" target="_blank">
+                    <a href="/tags/GUI/">
                         <span class="chip bg-color">GUI</span>
                     </a>
                     
-                    <a href="/tags/OOP/" target="_blank">
+                    <a href="/tags/OOP/">
                         <span class="chip bg-color">OOP</span>
                     </a>
                     
@@ -548,9 +649,9 @@ esac
         </div>
         
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/custom-domain-by-google-domain/">
@@ -563,19 +664,20 @@ esac
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">購買網域網路上已經有很多如何在 Google Domain 上買網域的文章了，在此就不特別贅述，放上我看的幾篇文章：
-
-台灣用戶也能在 Google Domains 註冊購買網域名稱，詳細申請設定教學
-[教學]如何用 Google Doma</div>
+                    <div class="summary block-with-text">
+                        
+                            一整套的教學-在 google domain 上購買網域名稱，並自訂 github page 的網址。
+                        
+                    </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-13
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Note/" class="post-category" target="_blank">
+                            <a href="/categories/Note/" class="post-category">
                                     Note
                                 </a>
                             
@@ -586,19 +688,19 @@ esac
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/note/" target="_blank">
+                    <a href="/tags/note/">
                         <span class="chip bg-color">note</span>
                     </a>
                     
-                    <a href="/tags/hexo/" target="_blank">
+                    <a href="/tags/hexo/">
                         <span class="chip bg-color">hexo</span>
                     </a>
                     
-                    <a href="/tags/github-page/" target="_blank">
+                    <a href="/tags/github-page/">
                         <span class="chip bg-color">github-page</span>
                     </a>
                     
-                    <a href="/tags/CNAME/" target="_blank">
+                    <a href="/tags/CNAME/">
                         <span class="chip bg-color">CNAME</span>
                     </a>
                     
@@ -609,6 +711,7 @@ esac
         
     </div>
 </article>
+
 </div>
 
 
@@ -649,10 +752,34 @@ esac
     });
 </script>
 
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -662,7 +789,7 @@ esac
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
     <a class="btn-floating btn-large bg-color">
-        <i class="fa fa-list"></i>
+        <i class="fas fa-list-ul"></i>
     </a>
 </div>
 
@@ -674,7 +801,7 @@ esac
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -731,10 +858,10 @@ esac
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -742,48 +869,55 @@ esac
         
     });
 </script>
+
     
 
 </main>
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -793,13 +927,13 @@ esac
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -811,22 +945,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -840,10 +974,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>

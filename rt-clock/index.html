@@ -5,29 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="RT-Thread Clock, 天行者">
-    <meta name="description" content="
-File: clock.c
-
-取得當前 tick
-即回傳全域變數 rt_tick 值
-
- Code: rt_tick_get
-
-
-
-功能
-回傳值
-
-
-
-
-取得當前的 system tick
-tick 值
-
-
-
-/**
- * This fu">
+    <meta name="description" content="RTT 中負責 system tick 的程式，可以是取得現在的 tick，也可以處理時間中斷">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -36,37 +14,26 @@ tick 值
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>RT-Thread Clock | 天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -77,75 +44,87 @@ tick 值
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -159,58 +138,70 @@ tick 值
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -224,7 +215,7 @@ tick 值
 
 </header>
 
-
+    
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
@@ -242,13 +233,11 @@ tick 值
 
 
 <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
-    <div class="container">
+    <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        RT-Thread Clock
-                    </div>
+                    <h1 class="description center-align post-title">RT-Thread Clock</h1>
                 </div>
             </div>
         </div>
@@ -257,10 +246,11 @@ tick 值
 
 
 
+
 <main class="post-container content">
 
     
-        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -285,6 +275,7 @@ tick 值
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
@@ -301,6 +292,11 @@ tick 值
         list-style: none;
     }
 
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
     #toc-content ol {
         padding-left: 10px;
     }
@@ -310,7 +306,7 @@ tick 值
     }
 
     #toc-content .toc-link:hover {
-        color: #59f;
+        color: #42b983;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -321,16 +317,16 @@ tick 值
     }
 
     #toc-content .is-active-link {
-        color: #59f;
+        color: #42b983;
     }
 
     #toc-content .is-active-link::before {
-        background-color: #59f;
+        background-color: #42b983;
     }
 
     #floating-toc-btn {
         position: fixed;
-        right: 20px;
+        right: 15px;
         bottom: 76px;
         padding-top: 15px;
         margin-bottom: 0;
@@ -358,15 +354,15 @@ tick 值
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/kernel/" target="_blank">
+                            <a href="/tags/kernel/">
                                 <span class="chip bg-color">kernel</span>
                             </a>
                         
-                            <a href="/tags/RT-Thread/" target="_blank">
+                            <a href="/tags/RT-Thread/">
                                 <span class="chip bg-color">RT-Thread</span>
                             </a>
                         
-                            <a href="/tags/clock/" target="_blank">
+                            <a href="/tags/clock/">
                                 <span class="chip bg-color">clock</span>
                             </a>
                         
@@ -376,9 +372,9 @@ tick 值
                 <div class="col s5 right-align">
                     
                     <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                 RT-Thread
                             </a>
                         
@@ -388,20 +384,27 @@ tick 值
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
-                    <i class="fas fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
                     2018-11-25
                 </div>
+                
 
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
+                    313
+                </div>
+                
+
+                
+
+                
             </div>
+
         </div>
         <hr class="clearfix">
         <div class="card-content article-card-content">
@@ -427,7 +430,7 @@ tick 值
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will return current tick from operating system startup
  *
  * @return current tick
@@ -438,7 +441,7 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
     <span class="token keyword">return</span> rt_tick<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_tick_get<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="設定當前-tick"><a href="#設定當前-tick" class="headerlink" title="設定當前 tick"></a>設定當前 tick</h2><p><i class="fa fa-code"></i> Code: <code>rt_tick_set</code></p>
 <table>
 <thead>
@@ -469,7 +472,7 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
 <ul>
 <li>由於需要修改全域變數，因此這裡需要將中斷關閉進入 critical region</li>
 </ul>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will set current tick
  */</span>
 <span class="token keyword">void</span> <span class="token function">rt_tick_set</span><span class="token punctuation">(</span>rt_tick_t tick<span class="token punctuation">)</span>
@@ -480,7 +483,7 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
     rt_tick <span class="token operator">=</span> tick<span class="token punctuation">;</span>
     <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="增加-tick"><a href="#增加-tick" class="headerlink" title="增加 tick"></a>增加 tick</h2><ul>
 <li>增加 tick 是由 ISR 所執行的動作，因此修改 <code>rt_tick</code> 值不需進入 critical region</li>
@@ -501,7 +504,7 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will notify kernel there is one tick passed. Normally,
  * this function is invoked by clock ISR.
  */</span>
@@ -528,7 +531,7 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
     <span class="token comment" spellcheck="true">/* check timer */</span>
     <span class="token function">rt_timer_check</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>在增加 <code>rt_tick</code> 值的同時，也減少當前 thread 的剩餘 tick 值；當減至 0 時，重設剩餘 tick 並讓出處理器。</li>
 <li>（rt_timer_check()）</li>
@@ -539,18 +542,95 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
 
             
 
-            
-
-            <div class="reprint">
-                <p>
-                    <span class="reprint-tip">
-                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
-                    </span>
-                    <a href="http://blog.lusw.dev" class="b-link-green">天行者</a>
-                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/rt-clock/" class="b-link-green">RT-Thread Clock</a>
-                </p>
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">OMU Skywalker</a>
+                </span>
             </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        連結:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev/rt-clock/">http://blog.lusw.dev/rt-clock/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        轉貼請註明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本網站所有文章除特別聲明外，均採用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    許可協議。轉貼請註明出處
+                    <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/kernel/">
+                                    <span class="chip bg-color">kernel</span>
+                                </a>
+                            
+                                <a href="/tags/RT-Thread/">
+                                    <span class="chip bg-color">RT-Thread</span>
+                                </a>
+                            
+                                <a href="/tags/clock/">
+                                    <span class="chip bg-color">clock</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
 
@@ -559,6 +639,10 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>留言區</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -570,7 +654,7 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
         repo: 'hexo-gitalk-comment',
         owner: 'omuskywalker',
         admin: "omuskywalker",
-        id: '/rt-clock/',
+        id: '2018-11-25T20-32-18',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -591,9 +675,9 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/rt-ipc/">
                     <div class="card-image">
@@ -605,19 +689,20 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">
-兩個 thread 要溝通的方式，是透過共享的記憶體來完成；而如果此記憶體沒有排他性，這個記憶體有可能會不同步。
-因此進入一塊共享的記憶體一次只允許一個 thread 來使用，這樣即可保證其資料的一致性
-進入此共享記憶體則叫做 criti</div>
+                    <div class="summary block-with-text">
+                        
+                            RTT IPC 1，一些同步的方式，包括 semaphore、mutex 及 event
+                        
+                    </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-26
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-11-26
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                     RT-Thread
                                 </a>
                             
@@ -628,15 +713,15 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kernel/" target="_blank">
+                    <a href="/tags/kernel/">
                         <span class="chip bg-color">kernel</span>
                     </a>
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/semaphore/" target="_blank">
+                    <a href="/tags/semaphore/">
                         <span class="chip bg-color">semaphore</span>
                     </a>
                     
@@ -646,9 +731,9 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
         </div>
         
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/rt-thread-timer/">
@@ -661,21 +746,25 @@ rt_tick_t <span class="token function">rt_tick_get</span><span class="token punc
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">
+                    <div class="summary block-with-text">
+                        
+                            
 File: timer.c
 
 
 timer 的作用：當時間到時，觸發一個事件；如文本的圖：
-timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸發該 timer 的 timeout_func，同時將該 timer</div>
+timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸發該 timer 的 timeout_func，同時將該 timer
+                        
+                    </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-11-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-20
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                     RT-Thread
                                 </a>
                             
@@ -686,15 +775,15 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kernel/" target="_blank">
+                    <a href="/tags/kernel/">
                         <span class="chip bg-color">kernel</span>
                     </a>
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/timer/" target="_blank">
+                    <a href="/tags/timer/">
                         <span class="chip bg-color">timer</span>
                     </a>
                     
@@ -705,6 +794,7 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
         
     </div>
 </article>
+
 </div>
 
 
@@ -745,10 +835,34 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
     });
 </script>
 
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -758,7 +872,7 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
     <a class="btn-floating btn-large bg-color">
-        <i class="fa fa-list"></i>
+        <i class="fas fa-list-ul"></i>
     </a>
 </div>
 
@@ -770,7 +884,7 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -827,10 +941,10 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -838,48 +952,55 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
         
     });
 </script>
+
     
 
 </main>
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -889,13 +1010,13 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -907,22 +1028,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -936,10 +1057,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>

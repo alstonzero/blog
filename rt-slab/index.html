@@ -5,11 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="RT-Thread SLAB 動態管理, 天行者">
-    <meta name="description" content="
-File: slab.c
-
-SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常是大小，也可看成是一個 zone 代表一個 pool，不同的 zone 放在一個 array 管理。
-一個 zone 大小介於 32kB~12">
+    <meta name="description" content="RTT 記憶體管理 4 slab，進階的動態的記憶體管理法，類似分頁管理。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,37 +14,26 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>RT-Thread SLAB 動態管理 | 天行者</title>
-    <link rel="icon" type="image/png" href="/medias/jedi2.png">
-    <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+    <link rel="icon" type="image/png" href="jedi2.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
-    <style type="text/css">
-        
-        code[class*="language-"], pre[class*="language-"] {
-            white-space: pre !important;
-        }
-        
-    </style>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;type=content-script&amp;dmn=realfavicongenerator.net&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
-    <script type="text/javascript" nonce="da92377e2ac849859d61cefad44" src="//local.adguard.org?ts=1571207687627&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&amp;subset=chinese-traditional" rel="stylesheet">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
-    
-<header class="navbar-fixed">
+    <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
+        <div id="navContainer" class="nav-wrapper head-container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -59,75 +44,87 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
             </div>
             
 
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
-<ul class="right">
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/" class="waves-effect waves-light">
-            
-            <i class="fas fa-home"></i>
-            
-            <span>回家</span>
-        </a>
-    </li>
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>回家</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/tags" class="waves-effect waves-light">
-            
-            <i class="fas fa-tags"></i>
-            
-            <span>標籤雲</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/categories" class="waves-effect waves-light">
-            
-            <i class="fas fa-bookmark"></i>
-            
-            <span>所有分類</span>
-        </a>
-    </li>
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>標籤雲</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/archives" class="waves-effect waves-light">
-            
-            <i class="fas fa-archive"></i>
-            
-            <span>全部文章</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li class="hide-on-med-and-down">
-        <a href="/about" class="waves-effect waves-light">
-            
-            <i class="fas fa-user-circle"></i>
-            
-            <span>關於</span>
-        </a>
-    </li>
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>所有分類</span>
+    </a>
     
-    <li class="hide-on-med-and-down">
-        <a href="/friends" class="waves-effect waves-light">
-            
-            <i class="fas fa-address-book"></i>
-            
-            <span>友情贊助</span>
-        </a>
-    </li>
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
     
-    <li>
-        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-            <i id="searchIcon" class="fa fa-search" title="搜尋"></i>
-        </a>
-    </li>
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>全部文章</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>關於</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情贊助</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜尋" style="zoom: 0.85;"></i>
+    </a>
+  </li>
 </ul>
 
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/jedi2.png" class="logo-img circle responsive-img">
+        <img src="/medias/jedi1.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">天行者</div>
         <div class="logo-desc">
@@ -141,58 +138,70 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 
     <ul class="menu-list mobile-menu-list">
         
-        <li>
-            <a href="/" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-home"></i>
-                
-                回家
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			回家
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/tags" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-tags"></i>
-                
-                標籤雲
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			標籤雲
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/categories" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-bookmark"></i>
-                
-                所有分類
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			所有分類
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/archives" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-archive"></i>
-                
-                全部文章
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			全部文章
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/about" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-user-circle"></i>
-                
-                關於
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			關於
+		</a>
+          
         </li>
         
-        <li>
-            <a href="/friends" class="waves-effect waves-light">
-                
-                <i class="fa fa-fw fas fa-address-book"></i>
-                
-                友情贊助
-            </a>
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情贊助
+		</a>
+          
         </li>
         
         
@@ -206,7 +215,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 
 </header>
 
-
+    
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
@@ -224,13 +233,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 
 
 <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
-    <div class="container">
+    <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        RT-Thread SLAB 動態管理
-                    </div>
+                    <h1 class="description center-align post-title">RT-Thread SLAB 動態管理</h1>
                 </div>
             </div>
         </div>
@@ -239,10 +246,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 
 
 
+
 <main class="post-container content">
 
     
-        <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -267,6 +275,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
@@ -283,6 +292,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
         list-style: none;
     }
 
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
     #toc-content ol {
         padding-left: 10px;
     }
@@ -292,7 +306,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     }
 
     #toc-content .toc-link:hover {
-        color: #59f;
+        color: #42b983;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -303,16 +317,16 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     }
 
     #toc-content .is-active-link {
-        color: #59f;
+        color: #42b983;
     }
 
     #toc-content .is-active-link::before {
-        background-color: #59f;
+        background-color: #42b983;
     }
 
     #floating-toc-btn {
         position: fixed;
-        right: 20px;
+        right: 15px;
         bottom: 76px;
         padding-top: 15px;
         margin-bottom: 0;
@@ -340,19 +354,19 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/kernel/" target="_blank">
+                            <a href="/tags/kernel/">
                                 <span class="chip bg-color">kernel</span>
                             </a>
                         
-                            <a href="/tags/RT-Thread/" target="_blank">
+                            <a href="/tags/RT-Thread/">
                                 <span class="chip bg-color">RT-Thread</span>
                             </a>
                         
-                            <a href="/tags/記憶體管理/" target="_blank">
+                            <a href="/tags/記憶體管理/">
                                 <span class="chip bg-color">記憶體管理</span>
                             </a>
                         
-                            <a href="/tags/SLAB/" target="_blank">
+                            <a href="/tags/SLAB/">
                                 <span class="chip bg-color">SLAB</span>
                             </a>
                         
@@ -362,9 +376,9 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
                 <div class="col s5 right-align">
                     
                     <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                 RT-Thread
                             </a>
                         
@@ -374,20 +388,27 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
-                    <i class="fas fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
                     2018-12-05
                 </div>
+                
 
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
+                    3.5k
+                </div>
+                
+
+                
+
+                
             </div>
+
         </div>
         <hr class="clearfix">
         <div class="card-content article-card-content">
@@ -410,7 +431,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 <p>使用此管理方式： <code>#defined RT_USING_HEAP &amp;&amp; #defined RT_USING_SLAB</code></p>
 </blockquote>
 <hr>
-<h2 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h2><h3 id="Zone"><a href="#Zone" class="headerlink" title="Zone"></a>Zone</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+<h2 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h2><h3 id="Zone"><a href="#Zone" class="headerlink" title="Zone"></a>Zone</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * The IN-BAND zone header is placed at the beginning of each zone.
  */</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> slab_zone
@@ -425,17 +446,17 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     rt_int32_t  z_zoneindex<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* zone index */</span>
     slab_chunk  <span class="token operator">*</span>z_freechunk<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">/* free chunk list */</span>
 <span class="token punctuation">}</span> slab_zone<span class="token punctuation">;</span>
-</code></pre>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Chunk structure for free elements
  */</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> slab_chunk
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> slab_chunk <span class="token operator">*</span>c_next<span class="token punctuation">;</span>
 <span class="token punctuation">}</span> slab_chunk<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="Page-Allocator"><a href="#Page-Allocator" class="headerlink" title="Page Allocator"></a>Page Allocator</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* page allocator */</span>
+<h3 id="Page-Allocator"><a href="#Page-Allocator" class="headerlink" title="Page Allocator"></a>Page Allocator</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* page allocator */</span>
 <span class="token keyword">struct</span> rt_page_head
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span>next<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">/* next valid page */</span>
@@ -443,9 +464,9 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     <span class="token comment" spellcheck="true">/* dummy */</span>
     <span class="token keyword">char</span> dummy<span class="token punctuation">[</span>RT_MM_PAGE_SIZE <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>rt_size_t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="Descriptor"><a href="#Descriptor" class="headerlink" title="Descriptor"></a>Descriptor</h3><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+<h3 id="Descriptor"><a href="#Descriptor" class="headerlink" title="Descriptor"></a>Descriptor</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Array of descriptors that describe the contents of each page
  */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> PAGE_TYPE_FREE      0x00</span>
@@ -456,7 +477,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     rt_uint32_t type<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">/* page type */</span>
     rt_uint32_t size<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">/* pages allocated or offset from zone */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="初始化-heap"><a href="#初始化-heap" class="headerlink" title="初始化 heap"></a>初始化 heap</h2><p><i class="fa fa-code"></i> Code: <code>rt_system_heap_init</code></p>
 <table>
@@ -487,7 +508,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @ingroup SystemInit
  *
  * This function will init system heap
@@ -512,33 +533,33 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 
         <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>向上對齊起始位址，向下對其結束位址</li>
 <li>檢查是否合法</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    limsize <span class="token operator">=</span> heap_end <span class="token operator">-</span> heap_start<span class="token punctuation">;</span>
+<pre class="line-numbers language-c"><code class="language-c">    limsize <span class="token operator">=</span> heap_end <span class="token operator">-</span> heap_start<span class="token punctuation">;</span>
     npages  <span class="token operator">=</span> limsize <span class="token operator">/</span> RT_MM_PAGE_SIZE<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>計算最大的 size，設定頁數量</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* initialize heap semaphore */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* initialize heap semaphore */</span>
     <span class="token function">rt_sem_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> <span class="token string">"heap"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> RT_IPC_FLAG_FIFO<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"heap[0x%x - 0x%x], size 0x%x, 0x%x pages\n"</span><span class="token punctuation">,</span>
                                  heap_start<span class="token punctuation">,</span> heap_end<span class="token punctuation">,</span> limsize<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>初始化 semaphore，值為 1</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* init pages */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* init pages */</span>
     <span class="token function">rt_page_init</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>heap_start<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>初始化 page</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* calculate zone size */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* calculate zone size */</span>
     zone_size <span class="token operator">=</span> ZALLOC_MIN_ZONE_SIZE<span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>zone_size <span class="token operator">&lt;</span> ZALLOC_MAX_ZONE_SIZE <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>zone_size <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span>limsize <span class="token operator">/</span> <span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
         zone_size <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
@@ -548,11 +569,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
         zone_limit <span class="token operator">=</span> ZALLOC_ZONE_LIMIT<span class="token punctuation">;</span>
 
     zone_page_cnt <span class="token operator">=</span> zone_size <span class="token operator">/</span> RT_MM_PAGE_SIZE<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>計算 zone 的大小、對象大小的上限及總頁數</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"zone size 0x%x, zone page count 0x%x\n"</span><span class="token punctuation">,</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"zone size 0x%x, zone page count 0x%x\n"</span><span class="token punctuation">,</span>
                                  zone_size<span class="token punctuation">,</span> zone_page_cnt<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* allocate memusage array */</span>
@@ -563,7 +584,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"memusage 0x%x, size 0x%x\n"</span><span class="token punctuation">,</span>
                                  <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>memusage<span class="token punctuation">,</span> limsize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後建立一個陣列紀錄頁的資訊</li>
 </ul>
@@ -596,7 +617,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Initialize the page allocator
  */</span>
 <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rt_page_init</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> rt_size_t npages<span class="token punctuation">)</span>
@@ -607,7 +628,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     rt_page_list <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
     <span class="token function">rt_page_free</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>將 page list 設為空，釋放所有的 page</li>
 </ul>
@@ -638,7 +659,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will allocate a block from system heap memory.
  * - If the nbytes is less than zero,
  * or
@@ -659,11 +680,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
     <span class="token comment" spellcheck="true">/* zero size, return RT_NULL */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 size = 0，回傳 NULL</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
      * Handle large allocations directly.  There should not be very many of
      * these so performance is not a big issue.
      */</span>
@@ -674,16 +695,16 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
         chunk <span class="token operator">=</span> <span class="token function">rt_page_alloc</span><span class="token punctuation">(</span>size <span class="token operator">>></span> RT_MM_PAGE_BITS<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>chunk <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
             <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 size 超過一個 chunk 的上限，則透過頁分配器來分配</li>
 <li>且如果失敗了，直接回傳 NULL</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* set kup */</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* set kup */</span>
         kup <span class="token operator">=</span> <span class="token function">btokup</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span><span class="token punctuation">;</span>
         kup<span class="token operator">-></span>type <span class="token operator">=</span> PAGE_TYPE_LARGE<span class="token punctuation">;</span>
         kup<span class="token operator">-></span>size <span class="token operator">=</span> size <span class="token operator">>></span> RT_MM_PAGE_BITS<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定頁的資訊：<ul>
 <li>type：<code>PAGE_TYPE_LARGE</code></li>
@@ -695,7 +716,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </ul>
 </li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span>
                      <span class="token punctuation">(</span><span class="token string">"malloc a large memory 0x%x, page cnt %d, kup %d\n"</span><span class="token punctuation">,</span>
                       size<span class="token punctuation">,</span>
                       size <span class="token operator">>></span> RT_MM_PAGE_BITS<span class="token punctuation">,</span>
@@ -711,11 +732,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
         <span class="token keyword">goto</span> done<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>要鎖，更新使用大小，跳到 <code>__done</code></li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* lock heap */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* lock heap */</span>
     <span class="token function">rt_sem_take</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> RT_WAITING_FOREVER<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/*
@@ -728,11 +749,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
      */</span>
     zi <span class="token operator">=</span> <span class="token function">zoneindex</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>zi <span class="token operator">&lt;</span> NZONES<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 size 小於一個 chunk 的上限，尋找此大小對應的 zone</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"try to malloc 0x%x on zone: %d\n"</span><span class="token punctuation">,</span> size<span class="token punctuation">,</span> zi<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"try to malloc 0x%x on zone: %d\n"</span><span class="token punctuation">,</span> size<span class="token punctuation">,</span> zi<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>z <span class="token operator">=</span> zone_array<span class="token punctuation">[</span>zi<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
@@ -744,11 +765,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
             zone_array<span class="token punctuation">[</span>zi<span class="token punctuation">]</span> <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span>
             z<span class="token operator">-></span>z_next <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果該 zone 不為空，且此 zone 剩最後一顆可用時，將此 zone 刪除</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/*
          * No chunks are available but nfree said we had some memory, so
          * it must be available in the never-before-used-memory area
          * governed by uindex.  The consequences are very serious if our zone
@@ -776,7 +797,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 
         <span class="token keyword">goto</span> done<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>取得一塊，跳至 done<ul>
 <li>從 <code>uindex</code> 找，這種方式取得的屬於此 zone 最初的 chunk</li>
@@ -784,7 +805,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </ul>
 </li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
      * If all zones are exhausted we need to allocate a new zone for this
      * index.
      *
@@ -801,11 +822,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
             zone_free <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span>
             <span class="token operator">--</span> zone_free_cnt<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果找到的 zone 為空，且 zone_free 不為空：代表有可用的空 zone 可以使用</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token keyword">else</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token keyword">else</span>
         <span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">/* unlock heap, since page allocator will think about lock */</span>
             <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -817,11 +838,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
                 chunk <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
                 <span class="token keyword">goto</span> __exit<span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>否則需要重新與頁分配器要一個 zone</li>
 </ul>
-<pre class=" language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* lock heap */</span>
+<pre class="line-numbers language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* lock heap */</span>
             <span class="token function">rt_sem_take</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> RT_WAITING_FOREVER<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
             <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"alloc a new zone: 0x%x\n"</span><span class="token punctuation">,</span>
@@ -836,17 +857,17 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
                 kup <span class="token operator">++</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設定每一頁的資訊</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* clear to zero */</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* clear to zero */</span>
         <span class="token function">rt_memset</span><span class="token punctuation">(</span>z<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>slab_zone<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>清空整個 zone</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* offset of slab zone struct in zone */</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* offset of slab zone struct in zone */</span>
         off <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>slab_zone<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/*
@@ -857,7 +878,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
             off <span class="token operator">=</span> <span class="token punctuation">(</span>off <span class="token operator">+</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token punctuation">(</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">else</span>
             off <span class="token operator">=</span> <span class="token punctuation">(</span>off <span class="token operator">+</span> MIN_CHUNK_MASK<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span>MIN_CHUNK_MASK<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>計算我們要用的對齊法：<ul>
 <li>如果 size 是二的次方，將 off (zone 的頭) 與 size 向上對齊</li>
@@ -865,14 +886,14 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </ul>
 </li>
 </ul>
-<pre class=" language-c"><code class="language-c">        z<span class="token operator">-></span>z_magic     <span class="token operator">=</span> ZALLOC_SLAB_MAGIC<span class="token punctuation">;</span>
+<pre class="line-numbers language-c"><code class="language-c">        z<span class="token operator">-></span>z_magic     <span class="token operator">=</span> ZALLOC_SLAB_MAGIC<span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_zoneindex <span class="token operator">=</span> zi<span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_nmax      <span class="token operator">=</span> <span class="token punctuation">(</span>zone_size <span class="token operator">-</span> off<span class="token punctuation">)</span> <span class="token operator">/</span> size<span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_nfree     <span class="token operator">=</span> z<span class="token operator">-></span>z_nmax <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_baseptr   <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>z <span class="token operator">+</span> off<span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_uindex    <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_chunksize <span class="token operator">=</span> size<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 magic、對應 <code>zone_array</code> 的 index<ul>
 <li>最大數量為 <code>zone_size</code> - off 再除以一個 chunk 的大小</li>
@@ -882,7 +903,7 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
 </ul>
 </li>
 </ul>
-<pre class=" language-c"><code class="language-c">        chunk <span class="token operator">=</span> <span class="token punctuation">(</span>slab_chunk <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>z<span class="token operator">-></span>z_baseptr <span class="token operator">+</span> z<span class="token operator">-></span>z_uindex <span class="token operator">*</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-c"><code class="language-c">        chunk <span class="token operator">=</span> <span class="token punctuation">(</span>slab_chunk <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>z<span class="token operator">-></span>z_baseptr <span class="token operator">+</span> z<span class="token operator">-></span>z_uindex <span class="token operator">*</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* link to zone array */</span>
         z<span class="token operator">-></span>z_next <span class="token operator">=</span> zone_array<span class="token punctuation">[</span>zi<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -894,11 +915,11 @@ SLAB 將記憶體根據不同的對象切成不同的區 (zone)，對象通常�
             max_mem <span class="token operator">=</span> used_mem<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>拿走第一塊，並將這個 zone 插上對應的 zone array entry</li>
 </ul>
-<pre class=" language-c"><code class="language-c">done<span class="token punctuation">:</span>
+<pre class="line-numbers language-c"><code class="language-c">done<span class="token punctuation">:</span>
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_malloc_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>chunk<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -906,7 +927,7 @@ __exit<span class="token punctuation">:</span>
     <span class="token keyword">return</span> chunk<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_malloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後回傳找到的 chunk</li>
 </ul>
@@ -938,7 +959,7 @@ __exit<span class="token punctuation">:</span>
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Calculate the zone index for the allocation request size and set the
  * allocation request size to that particular zone's chunk size.
  */</span>
@@ -1001,7 +1022,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>根據不同的 range，將傳入的大小對齊，並平均分配每個 range 有 16 個 zone index</p>
 <hr>
 <h4 id="rt-page-alloc"><a href="#rt-page-alloc" class="headerlink" title="rt_page_alloc"></a>rt_page_alloc</h4><table>
@@ -1030,7 +1051,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">rt_page_alloc</span><span class="token punctuation">(</span>rt_size_t npages<span class="token punctuation">)</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">rt_page_alloc</span><span class="token punctuation">(</span>rt_size_t npages<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span>b<span class="token punctuation">,</span> <span class="token operator">*</span>n<span class="token punctuation">;</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span><span class="token operator">*</span>prev<span class="token punctuation">;</span>
@@ -1051,11 +1072,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
             <span class="token operator">*</span>prev   <span class="token operator">=</span> n<span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果找到一個頁數大於需求的，選擇此頁，並分割</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token keyword">if</span> <span class="token punctuation">(</span>b<span class="token operator">-></span>page <span class="token operator">==</span> npages<span class="token punctuation">)</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token keyword">if</span> <span class="token punctuation">(</span>b<span class="token operator">-></span>page <span class="token operator">==</span> npages<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">/* this node fit, remove this node */</span>
             <span class="token operator">*</span>prev <span class="token operator">=</span> b<span class="token operator">-></span>next<span class="token punctuation">;</span>
@@ -1068,7 +1089,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
     <span class="token keyword">return</span> b<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有一個剛剛好，選擇此頁</li>
 <li>最後回傳選擇的頁</li>
@@ -1102,7 +1123,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will change the size of previously allocated memory block.
  *
  * @param ptr the previously allocated memory block
@@ -1124,12 +1145,12 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果傳入的 ptr 為空，malloc(size)</li>
 <li>如果傳入的 size 為 0，free(ptr)</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
      * Get the original allocation's zone.  If the new request winds up
      * using the same chunk size we do not have to do anything.
      */</span>
@@ -1146,12 +1167,12 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
         <span class="token keyword">return</span> nptr<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著檢查此 ptr 所在的頁資訊，如果是 LARGE，代表原來的 ptr 是由頁分配器所分配的</li>
 <li>新 malloc(size)，並還原資料，釋放舊的記憶體</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>kup<span class="token operator">-></span>type <span class="token operator">==</span> PAGE_TYPE_SMALL<span class="token punctuation">)</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>kup<span class="token operator">-></span>type <span class="token operator">==</span> PAGE_TYPE_SMALL<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
         z <span class="token operator">=</span> <span class="token punctuation">(</span>slab_zone <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>ptr <span class="token operator">&amp;</span> <span class="token operator">~</span>RT_MM_PAGE_MASK<span class="token punctuation">)</span> <span class="token operator">-</span>
                           kup<span class="token operator">-></span>size <span class="token operator">*</span> RT_MM_PAGE_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1160,7 +1181,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token function">zoneindex</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>z<span class="token operator">-></span>z_chunksize <span class="token operator">==</span> size<span class="token punctuation">)</span>
             <span class="token keyword">return</span> <span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* same chunk */</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果是 SMALL，首先找到歸屬得 zone：<ul>
 <li>透過減掉頁資訊上的 size 乘以頁的大小，即可找到zone的初始位址</li>
@@ -1169,7 +1190,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 </ul>
 </li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/*
          * Allocate memory for the new request size.  Note that zoneindex has
          * already adjusted the request size to the appropriate chunk size, which
          * should optimize our bcopy().  Then copy and return the new pointer.
@@ -1186,7 +1207,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_realloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果不同，malloc(size)，並還原資料，釋放舊的記憶體</li>
 </ul>
@@ -1219,7 +1240,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will contiguously allocate enough space for count objects
  * that are size bytes of memory each and returns a pointer to the allocated
  * memory.
@@ -1242,7 +1263,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token keyword">return</span> p<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_calloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與 memheap 相同，一次要一塊 count 乘 size 的記憶體</li>
 <li>清 0 並回傳起始位址</li>
@@ -1275,7 +1296,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will release the previous allocated memory block by rt_malloc.
  * The released memory block is taken back to system heap.
  *
@@ -1331,12 +1352,12 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
         <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果要釋放的記憶體是由頁分配器分配的，根據頁資訊中的 size 來釋放，並清 0</li>
 <li>實際呼叫 <code>rt_page_free(ptr, size)</code> 來完成</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* lock heap */</span>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* lock heap */</span>
     <span class="token function">rt_sem_take</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> RT_WAITING_FOREVER<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* zone case. get out zone. */</span>
@@ -1351,11 +1372,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_MEM_STATS</span>
     used_mem <span class="token operator">-</span><span class="token operator">=</span> z<span class="token operator">-></span>z_chunksize<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果是由 zone 分配，找到歸屬的 zone，並將需要釋放的 chunk 插到 free list 上</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
      * Bump the number of free chunks.  If it becomes non-zero the zone
      * must be added back onto the appropriate list.
      */</span>
@@ -1364,11 +1385,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         z<span class="token operator">-></span>z_next <span class="token operator">=</span> zone_array<span class="token punctuation">[</span>z<span class="token operator">-></span>z_zoneindex<span class="token punctuation">]</span><span class="token punctuation">;</span>
         zone_array<span class="token punctuation">[</span>z<span class="token operator">-></span>z_zoneindex<span class="token punctuation">]</span> <span class="token operator">=</span> z<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>更新 <code>nfree</code>，如果本來為 0 ，則需要將此 zone 插回 zone array</li>
 </ul>
-<pre class=" language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/*
      * If the zone becomes totally free, and there are other zones we
      * can allocate from, move this zone to the FreeZones list.  Since
      * this code can be called from an IPI callback, do *NOT* try to mess
@@ -1386,13 +1407,13 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token keyword">for</span> <span class="token punctuation">(</span>pz <span class="token operator">=</span> <span class="token operator">&amp;</span>zone_array<span class="token punctuation">[</span>z<span class="token operator">-></span>z_zoneindex<span class="token punctuation">]</span><span class="token punctuation">;</span> z <span class="token operator">!=</span> <span class="token operator">*</span>pz<span class="token punctuation">;</span> pz <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">*</span>pz<span class="token punctuation">)</span><span class="token operator">-></span>z_next<span class="token punctuation">)</span>
             <span class="token punctuation">;</span>
         <span class="token operator">*</span>pz <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果釋放完這個 chunk 後整個 zone 都釋放完了，我們需要釋放整個 zone</li>
 <li>這裡還同時確保在同一個 zone array entry 中還有其他的 zone 可以分配</li>
 <li>接著我們把這個 zone 從 zone array 移除</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* reset zone */</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* reset zone */</span>
         z<span class="token operator">-></span>z_magic <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* insert to free zone list */</span>
@@ -1400,11 +1421,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         zone_free <span class="token operator">=</span> z<span class="token punctuation">;</span>
 
         <span class="token operator">++</span> zone_free_cnt<span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>重設 magic，將這個 zone 插上 free zone，free count 加一</li>
 </ul>
-<pre class=" language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* release zone to page allocator */</span>
+<pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* release zone to page allocator */</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>zone_free_cnt <span class="token operator">></span> ZONE_RELEASE_THRESH<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             <span class="token keyword">register</span> rt_base_t i<span class="token punctuation">;</span>
@@ -1434,7 +1455,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_free<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果已經有 <code>ZONE_RELEASE_THRESH</code> (2) 個以上的 free zone，完全釋放一個 zone 給頁分配器<ul>
 <li>從 free zone 中移除，free count 減一</li>
@@ -1472,7 +1493,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 </tr>
 </tbody>
 </table>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rt_page_free</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> rt_size_t npages<span class="token punctuation">)</span>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rt_page_free</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> rt_size_t npages<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span>b<span class="token punctuation">,</span> <span class="token operator">*</span>n<span class="token punctuation">;</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span><span class="token operator">*</span>prev<span class="token punctuation">;</span>
@@ -1512,25 +1533,106 @@ _return<span class="token punctuation">:</span>
     <span class="token comment" spellcheck="true">/* unlock heap */</span>
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
 
             
 
-            
-
-            <div class="reprint">
-                <p>
-                    <span class="reprint-tip">
-                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
-                    </span>
-                    <a href="http://blog.lusw.dev" class="b-link-green">天行者</a>
-                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/rt-slab/" class="b-link-green">RT-Thread SLAB 動態管理</a>
-                </p>
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">OMU Skywalker</a>
+                </span>
             </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        連結:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.lusw.dev/rt-slab/">http://blog.lusw.dev/rt-slab/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        轉貼請註明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本網站所有文章除特別聲明外，均採用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    許可協議。轉貼請註明出處
+                    <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/kernel/">
+                                    <span class="chip bg-color">kernel</span>
+                                </a>
+                            
+                                <a href="/tags/RT-Thread/">
+                                    <span class="chip bg-color">RT-Thread</span>
+                                </a>
+                            
+                                <a href="/tags/記憶體管理/">
+                                    <span class="chip bg-color">記憶體管理</span>
+                                </a>
+                            
+                                <a href="/tags/SLAB/">
+                                    <span class="chip bg-color">SLAB</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
         </div>
     </div>
 
@@ -1539,6 +1641,10 @@ _return<span class="token punctuation">:</span>
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>留言區</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -1550,7 +1656,7 @@ _return<span class="token punctuation">:</span>
         repo: 'hexo-gitalk-comment',
         owner: 'omuskywalker',
         admin: "omuskywalker",
-        id: '/rt-slab/',
+        id: '2018-12-05T15-42-50',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1571,9 +1677,9 @@ _return<span class="token punctuation">:</span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/custom-domain-by-google-domain/">
                     <div class="card-image">
@@ -1585,19 +1691,20 @@ _return<span class="token punctuation">:</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">購買網域網路上已經有很多如何在 Google Domain 上買網域的文章了，在此就不特別贅述，放上我看的幾篇文章：
-
-台灣用戶也能在 Google Domains 註冊購買網域名稱，詳細申請設定教學
-[教學]如何用 Google Doma</div>
+                    <div class="summary block-with-text">
+                        
+                            一整套的教學-在 google domain 上購買網域名稱，並自訂 github page 的網址。
+                        
+                    </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-13
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-12-13
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Note/" class="post-category" target="_blank">
+                            <a href="/categories/Note/" class="post-category">
                                     Note
                                 </a>
                             
@@ -1608,19 +1715,19 @@ _return<span class="token punctuation">:</span>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/note/" target="_blank">
+                    <a href="/tags/note/">
                         <span class="chip bg-color">note</span>
                     </a>
                     
-                    <a href="/tags/hexo/" target="_blank">
+                    <a href="/tags/hexo/">
                         <span class="chip bg-color">hexo</span>
                     </a>
                     
-                    <a href="/tags/github-page/" target="_blank">
+                    <a href="/tags/github-page/">
                         <span class="chip bg-color">github-page</span>
                     </a>
                     
-                    <a href="/tags/CNAME/" target="_blank">
+                    <a href="/tags/CNAME/">
                         <span class="chip bg-color">CNAME</span>
                     </a>
                     
@@ -1630,9 +1737,9 @@ _return<span class="token punctuation">:</span>
         </div>
         
         
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/rt-small-mem/">
@@ -1645,26 +1752,20 @@ _return<span class="token punctuation">:</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">
-File: mem.c
-
-
-與 memory heap 的做法類似，一開始是一塊大的記憶體，包含 header
-分配記憶體時適當的切割
-所有的記憶體塊透過 header 串起來，形成一個雙向鏈結
-
-
-
-使用此管理方式： #defined </div>
+                    <div class="summary block-with-text">
+                        
+                            RTT 記憶體管理 4，專門給總記憶體小的情況使用
+                        
+                    </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-05
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RT-Thread/" class="post-category" target="_blank">
+                            <a href="/categories/RT-Thread/" class="post-category">
                                     RT-Thread
                                 </a>
                             
@@ -1675,15 +1776,15 @@ File: mem.c
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kernel/" target="_blank">
+                    <a href="/tags/kernel/">
                         <span class="chip bg-color">kernel</span>
                     </a>
                     
-                    <a href="/tags/RT-Thread/" target="_blank">
+                    <a href="/tags/RT-Thread/">
                         <span class="chip bg-color">RT-Thread</span>
                     </a>
                     
-                    <a href="/tags/記憶體管理/" target="_blank">
+                    <a href="/tags/記憶體管理/">
                         <span class="chip bg-color">記憶體管理</span>
                     </a>
                     
@@ -1694,6 +1795,7 @@ File: mem.c
         
     </div>
 </article>
+
 </div>
 
 
@@ -1734,10 +1836,34 @@ File: mem.c
     });
 </script>
 
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget">
-            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1747,7 +1873,7 @@ File: mem.c
 
 <div id="floating-toc-btn" class="hide-on-med-and-down">
     <a class="btn-floating btn-large bg-color">
-        <i class="fa fa-list"></i>
+        <i class="fas fa-list-ul"></i>
     </a>
 </div>
 
@@ -1759,7 +1885,7 @@ File: mem.c
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -1816,10 +1942,10 @@ File: mem.c
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -1827,48 +1953,55 @@ File: mem.c
         
     });
 </script>
+
     
 
 </main>
 
 
-<footer class="page-footer bg-color">
-    <div class="container row center-align">
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fas fa-jedi"></i><a href="/"> OMU Skywalker</a>
-            <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
-
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="http://blog.lusw.dev" target="_blank">OMU Skywalker</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
             
-
             
-			
-                
-                
-                
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github-alt"></i>
+    <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fas fa-envelope"></i>
+    <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
 
 
 
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
+
+
+
+
+
 
 
 </div>
@@ -1878,13 +2011,13 @@ File: mem.c
 <div class="progress-bar"></div>
 
 
-<!-- 搜索遮罩框 -->
+    <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜尋</span>
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
             <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input" autocomplete="off">
+                   class="search-input">
         </div>
         <div id="searchResult"></div>
     </div>
@@ -1896,22 +2029,22 @@ $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
-<!-- 回到顶部按钮 -->
+    <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fa fa-angle-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </a>
 </div>
 
 
-<script src="/libs/materialize/materialize.min.js"></script>
-<script src="/libs/masonry/masonry.pkgd.min.js"></script>
-<script src="/libs/aos/aos.js"></script>
-<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-<script src="/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
 <script>
@@ -1925,10 +2058,43 @@ $(function () {
 </script>
 
 
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
 
 </body>
+
 </html>
