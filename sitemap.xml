@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.lusw.dev/rtgui-dc-hw/</loc>
+    
+    <lastmod>2020-01-27T18:38:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/perl-install-module/</loc>
     
     <lastmod>2020-01-27T17:40:24.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://blog.lusw.dev/rtgui-server/</loc>
     
     <lastmod>2020-01-27T17:25:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.lusw.dev/rtgui-dc-hw/</loc>
-    
-    <lastmod>2020-01-27T17:23:37.000Z</lastmod>
     
   </url>
   

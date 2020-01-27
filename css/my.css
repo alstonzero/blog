@@ -16,6 +16,10 @@
     border-right-width: 1px !important;
 }
 
+*::-webkit-scrollbar { 
+    height: 0; 
+}
+
 /* hexo-filter-github-emojis */
 .github-emoji{
     height: 2em;
