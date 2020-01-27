@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="XV6 Ch6 檔案系統, 討厭下雨">
+    <meta name="keywords" content="XV6 Ch6 檔案系統, 天行者">
     <meta name="description" content="
 本文沒有按照 XV6 官方文本的順序介紹
 
@@ -25,12 +25,12 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>XV6 Ch6 檔案系統 | 討厭下雨</title>
+    <title>XV6 Ch6 檔案系統 | 天行者</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <meta name="theme-color" content="#59f">
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.csse">
     <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
@@ -62,7 +62,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
                     
                     <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">討厭下雨</span>
+                    <span class="logo-span">天行者</span>
                 </a>
             </div>
             
@@ -73,7 +73,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <li class="hide-on-med-and-down">
         <a href="/" class="waves-effect waves-light">
             
-            <i class="fa fa-home"></i>
+            <i class="fas fa-home"></i>
             
             <span>回家</span>
         </a>
@@ -82,7 +82,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <li class="hide-on-med-and-down">
         <a href="/tags" class="waves-effect waves-light">
             
-            <i class="fa fa-tags"></i>
+            <i class="fas fa-tags"></i>
             
             <span>標籤雲</span>
         </a>
@@ -91,7 +91,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <li class="hide-on-med-and-down">
         <a href="/categories" class="waves-effect waves-light">
             
-            <i class="fa fa-bookmark"></i>
+            <i class="fas fa-bookmark"></i>
             
             <span>所有分類</span>
         </a>
@@ -100,7 +100,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <li class="hide-on-med-and-down">
         <a href="/archives" class="waves-effect waves-light">
             
-            <i class="fa fa-archive"></i>
+            <i class="fas fa-archive"></i>
             
             <span>全部文章</span>
         </a>
@@ -109,7 +109,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <li class="hide-on-med-and-down">
         <a href="/about" class="waves-effect waves-light">
             
-            <i class="fa fa-user-circle-o"></i>
+            <i class="fas fa-user-circle"></i>
             
             <span>關於</span>
         </a>
@@ -118,7 +118,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <li class="hide-on-med-and-down">
         <a href="/friends" class="waves-effect waves-light">
             
-            <i class="fa fa-address-book"></i>
+            <i class="fas fa-address-book"></i>
             
             <span>友情贊助</span>
         </a>
@@ -137,10 +137,10 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         
         <img src="/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">討厭下雨</div>
+        <div class="logo-name">天行者</div>
         <div class="logo-desc">
             
-            真討厭下雨天
+            單晶片、即時作業系統與韌體相關之技術筆記
             
         </div>
     </div>
@@ -152,7 +152,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         <li>
             <a href="/" class="waves-effect waves-light">
                 
-                <i class="fa fa-fw fa-home"></i>
+                <i class="fa fa-fw fas fa-home"></i>
                 
                 回家
             </a>
@@ -161,7 +161,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         <li>
             <a href="/tags" class="waves-effect waves-light">
                 
-                <i class="fa fa-fw fa-tags"></i>
+                <i class="fa fa-fw fas fa-tags"></i>
                 
                 標籤雲
             </a>
@@ -170,7 +170,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         <li>
             <a href="/categories" class="waves-effect waves-light">
                 
-                <i class="fa fa-fw fa-bookmark"></i>
+                <i class="fa fa-fw fas fa-bookmark"></i>
                 
                 所有分類
             </a>
@@ -179,7 +179,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         <li>
             <a href="/archives" class="waves-effect waves-light">
                 
-                <i class="fa fa-fw fa-archive"></i>
+                <i class="fa fa-fw fas fa-archive"></i>
                 
                 全部文章
             </a>
@@ -188,7 +188,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         <li>
             <a href="/about" class="waves-effect waves-light">
                 
-                <i class="fa fa-fw fa-user-circle-o"></i>
+                <i class="fa fa-fw fas fa-user-circle"></i>
                 
                 關於
             </a>
@@ -197,7 +197,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
         <li>
             <a href="/friends" class="waves-effect waves-light">
                 
-                <i class="fa fa-fw fa-address-book"></i>
+                <i class="fa fa-fw fas fa-address-book"></i>
                 
                 友情贊助
             </a>
@@ -375,7 +375,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>發表日期:&nbsp;&nbsp;
+                    <i class="fas fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
                     2018-08-23
                 </div>
 
@@ -917,7 +917,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;轉貼請註明:
                     </span>
-                    <a href="http://blog.omuskywalker.com" class="b-link-green">討厭下雨</a>
+                    <a href="http://blog.lusw.dev" class="b-link-green">天行者</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/xv6-6-fs/" class="b-link-green">XV6 Ch6 檔案系統</a>
                 </p>
@@ -1127,7 +1127,7 @@ Destinatio</div>
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '來源: 討厭下雨<br />'
+            + '來源: 天行者<br />'
             + '作者: OMU Skywalker<br />'
             + '連結: <a href="' + url + '">' + url + '</a><br />'
             + '本文著作權歸作者所有，任何形式的轉載都須註明出處。';
@@ -1238,7 +1238,7 @@ Destinatio</div>
 <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy;2019&nbsp;&nbsp;<i class="fa fa-plug"></i><a href="/"> OMU Skywalker</a>
+            &copy;2019&nbsp;&nbsp;<i class="fas fa-jadi"></i><a href="/"> OMU Skywalker</a>
             <!---Powered by <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
 
             
@@ -1252,25 +1252,25 @@ Destinatio</div>
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
     <a href="https://github.com/omuskywalker" class="tooltipped" target="_blank" data-tooltip="Visited my GitHub" data-position="top" data-delay="50">
-        <i class="fa fa-github"></i>
+        <i class="fab fa-github-alt"></i>
     </a>
 
 
 
     <a href="mailto:info@omuskywalker.com" class="tooltipped" target="_blank" data-tooltip="Contant me" data-position="top" data-delay="50">
-        <i class="fa fa-envelope-open"></i>
+        <i class="fas fa-envelope"></i>
     </a>
 
 
 
     <a href="https://www.linkedin.com/in/callum-lu-0aa77066/ˋ" class="tooltipped" target="_blank" data-tooltip="Visited my Linkedin" data-position="top" data-delay="50">
-        <i class="fa fa-linkedin"></i>
+        <i class="fab fa-linkedin"></i>
     </a>
 
 
 
     <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="Visited my StackOverflow" data-position="top" data-delay="50">
-        <i class="fa fa-stack-overflow"></i>
+        <i class="fab fa-stack-overflow"></i>
     </a>
 
 

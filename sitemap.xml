@@ -2,371 +2,371 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.omuskywalker.com/perl-install-module/</loc>
+    <loc>http://blog.lusw.dev/perl-install-module/</loc>
     
     <lastmod>2020-01-26T17:15:22.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/tags/index.html</loc>
+    <loc>http://blog.lusw.dev/tags/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/categories/index.html</loc>
+    <loc>http://blog.lusw.dev/categories/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/friends/index.html</loc>
+    <loc>http://blog.lusw.dev/friends/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-code/</loc>
+    <loc>http://blog.lusw.dev/ItC-code/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-com/</loc>
+    <loc>http://blog.lusw.dev/ItC-com/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-OOP/</loc>
+    <loc>http://blog.lusw.dev/ItC-OOP/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-OS/</loc>
+    <loc>http://blog.lusw.dev/ItC-OS/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-data-structure/</loc>
+    <loc>http://blog.lusw.dev/ItC-data-structure/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-FS/</loc>
+    <loc>http://blog.lusw.dev/ItC-FS/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-database/</loc>
+    <loc>http://blog.lusw.dev/ItC-database/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-internet/</loc>
+    <loc>http://blog.lusw.dev/ItC-internet/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-overflow/</loc>
+    <loc>http://blog.lusw.dev/ItC-overflow/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-0-intro/</loc>
+    <loc>http://blog.lusw.dev/xv6-0-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-4-lock/</loc>
+    <loc>http://blog.lusw.dev/xv6-4-lock/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/starting-xv6/</loc>
+    <loc>http://blog.lusw.dev/starting-xv6/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-a-headware/</loc>
+    <loc>http://blog.lusw.dev/xv6-a-headware/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/vim-instruction/</loc>
+    <loc>http://blog.lusw.dev/vim-instruction/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/c-attribute/</loc>
+    <loc>http://blog.lusw.dev/c-attribute/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/Ubuntu-change-home-partition/</loc>
+    <loc>http://blog.lusw.dev/Ubuntu-change-home-partition/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/RT-Thread-GUI/</loc>
+    <loc>http://blog.lusw.dev/RT-Thread-GUI/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-thread-RTM-EXPORT/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-RTM-EXPORT/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-clock/</loc>
+    <loc>http://blog.lusw.dev/rt-clock/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/custom-domain-by-google-domain/</loc>
+    <loc>http://blog.lusw.dev/custom-domain-by-google-domain/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/auto-backup-with-crontab/</loc>
+    <loc>http://blog.lusw.dev/auto-backup-with-crontab/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rtgui-object/</loc>
+    <loc>http://blog.lusw.dev/rtgui-object/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-data/</loc>
+    <loc>http://blog.lusw.dev/ItC-data/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/arduino-interrupt/</loc>
+    <loc>http://blog.lusw.dev/arduino-interrupt/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ascii-color/</loc>
+    <loc>http://blog.lusw.dev/ascii-color/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-intro/</loc>
+    <loc>http://blog.lusw.dev/ItC-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-1-process/</loc>
+    <loc>http://blog.lusw.dev/xv6-1-process/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-2-mem/</loc>
+    <loc>http://blog.lusw.dev/xv6-2-mem/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-5-scheduler/</loc>
+    <loc>http://blog.lusw.dev/xv6-5-scheduler/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-6-fs/</loc>
+    <loc>http://blog.lusw.dev/xv6-6-fs/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/running-xv6/</loc>
+    <loc>http://blog.lusw.dev/running-xv6/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-b-bootloader/</loc>
+    <loc>http://blog.lusw.dev/xv6-b-bootloader/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-thread-scheduler/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-scheduler/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-thread-timer/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-timer/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rtgui-dc-hw/</loc>
+    <loc>http://blog.lusw.dev/rtgui-dc-hw/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/xv6-3-trap/</loc>
+    <loc>http://blog.lusw.dev/xv6-3-trap/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-mem/</loc>
+    <loc>http://blog.lusw.dev/rt-mem/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-small-mem/</loc>
+    <loc>http://blog.lusw.dev/rt-small-mem/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rtgui-widget/</loc>
+    <loc>http://blog.lusw.dev/rtgui-widget/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-thread-thread/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-thread/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-slab/</loc>
+    <loc>http://blog.lusw.dev/rt-slab/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rtgui-window/</loc>
+    <loc>http://blog.lusw.dev/rtgui-window/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-ipc-2/</loc>
+    <loc>http://blog.lusw.dev/rt-ipc-2/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-memheap/</loc>
+    <loc>http://blog.lusw.dev/rt-memheap/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rt-ipc/</loc>
+    <loc>http://blog.lusw.dev/rt-ipc/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/about/index.html</loc>
+    <loc>http://blog.lusw.dev/about/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-gate/</loc>
+    <loc>http://blog.lusw.dev/ItC-gate/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/ItC-algorithm/</loc>
+    <loc>http://blog.lusw.dev/ItC-algorithm/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.omuskywalker.com/rtgui-server/</loc>
+    <loc>http://blog.lusw.dev/rtgui-server/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
