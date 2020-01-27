@@ -489,13 +489,14 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="啟動-dc"><a href="#啟動-dc" class="headerlink" title="啟動 dc"></a>啟動 dc</h2><p>我們可以從 rtgui 官方提供的範例發現，在使用 dc 前，需要先利用 <code>rtgui_dc_begin_drawing</code> 來啟動引擎，並在結束時呼叫 <code>rtgui_dc_end_drawing</code>；而啟動時，會判斷要使用哪種 dc，並啟動，如 1866 至 1871 行</p>
-<pre><code>/* create client or hardware DC */
-    if ((rtgui_region_is_flat(&amp;owner-&gt;clip) == RT_EOK) &amp;&amp;
-            rtgui_rect_is_equal(&amp;(owner-&gt;extent), &amp;(owner-&gt;clip.extents)) == RT_EOK)
-        dc = rtgui_dc_hw_create(owner);
-    else
-        dc = rtgui_dc_client_create(owner);
-</code></pre><p>如果判斷為 hw，則進入 <code>rtgui_dc_hw_create</code> </p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* create client or hardware DC */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">rtgui_region_is_flat</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>owner<span class="token operator">-></span>clip<span class="token punctuation">)</span> <span class="token operator">==</span> RT_EOK<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+            <span class="token function">rtgui_rect_is_equal</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>owner<span class="token operator">-></span>extent<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span>owner<span class="token operator">-></span>clip<span class="token punctuation">.</span>extents<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> RT_EOK<span class="token punctuation">)</span>
+        dc <span class="token operator">=</span> <span class="token function">rtgui_dc_hw_create</span><span class="token punctuation">(</span>owner<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        dc <span class="token operator">=</span> <span class="token function">rtgui_dc_client_create</span><span class="token punctuation">(</span>owner<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果判斷為 hw，則進入 <code>rtgui_dc_hw_create</code> </p>
 <hr>
 <h2 id="建立-dc"><a href="#建立-dc" class="headerlink" title="建立 dc"></a>建立 dc</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_dc_hw_create</code></p>
 <table>

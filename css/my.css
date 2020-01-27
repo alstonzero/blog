@@ -9,7 +9,7 @@
 }
 
 .line-numbers-rows > span:before {
-    height: 22px;
+    padding-bottom: 2px;
 }
 /* hexo-filter-github-emojis */
 .github-emoji{
