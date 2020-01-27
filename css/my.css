@@ -7,6 +7,10 @@
     height: 3em;
     overflow: hidden;
 }
+
+.line-numbers-rows > span:before {
+    height: 22px;
+}
 /* hexo-filter-github-emojis */
 .github-emoji{
     height: 2em;
