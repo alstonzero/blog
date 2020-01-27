@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.lusw.dev/rtgui-server/</loc>
+    
+    <lastmod>2020-01-27T17:25:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/rtgui-dc-hw/</loc>
     
     <lastmod>2020-01-27T17:23:37.000Z</lastmod>
@@ -45,13 +52,6 @@
   
   <url>
     <loc>http://blog.lusw.dev/ItC-OOP/</loc>
-    
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.lusw.dev/ItC-OS/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -205,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-intro/</loc>
+    <loc>http://blog.lusw.dev/ItC-OS/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -268,7 +268,7 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-gate/</loc>
+    <loc>http://blog.lusw.dev/ItC-code/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -359,14 +359,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-code/</loc>
+    <loc>http://blog.lusw.dev/ItC-gate/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-server/</loc>
+    <loc>http://blog.lusw.dev/ItC-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     

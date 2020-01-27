@@ -11,6 +11,11 @@
 .line-numbers-rows > span:before {
     padding-bottom: 2px;
 }
+
+.line-numbers-rows {
+    border-right-width: 1px !important;
+}
+
 /* hexo-filter-github-emojis */
 .github-emoji{
     height: 2em;
