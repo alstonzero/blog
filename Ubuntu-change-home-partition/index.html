@@ -405,7 +405,7 @@ result:
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    420
+                    470
                 </div>
                 
 
@@ -430,7 +430,7 @@ result:
 <pre class="line-numbers language-shell"><code class="language-shell">/dev/sda1: UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f" TYPE="ext4" PARTUUID="12345678-01"
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
-<li>其中 <code>UUID=&quot;1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f&quot;</code> 為此分割的 UUID，記著。</li>
+<li>其中 <code>UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f"</code> 為此分割的 UUID，記著。</li>
 </ul>
 <hr>
 <h2 id="2-設定-fstab"><a href="#2-設定-fstab" class="headerlink" title="2. 設定 fstab"></a>2. 設定 fstab</h2><p>fstab 是用來設定開機時哪些分割需要被載入，接下來會將原本的 fstab 備份，並於檔名中加入當前日期，接著修改該文件。</p>
@@ -496,7 +496,25 @@ UUID=????????   /home    ext3          defaults       0       2
 <pre class="line-numbers language-shell"><code class="language-shell">cd /
 sudo rm -rI /old_home
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://help.ubuntu.com/community/Partitioning/Home/Moving" target="_blank" rel="noopener">Partitioning/Home/Moving</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://help.ubuntu.com/community/Partitioning/Home/Moving" target="_blank" rel="noopener">Partitioning/Home/Moving</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

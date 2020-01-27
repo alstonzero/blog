@@ -396,7 +396,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    187
+                    239
                 </div>
                 
 
@@ -419,14 +419,32 @@
 <h2 id="顏色輸出"><a href="#顏色輸出" class="headerlink" title="顏色輸出"></a>顏色輸出</h2><h3 id="範例：粗紅體"><a href="#範例：粗紅體" class="headerlink" title="範例：粗紅體"></a>範例：粗紅體</h3><pre class="line-numbers language-c"><code class="language-c">\x1b<span class="token punctuation">[</span><span class="token punctuation">;</span><span class="token number">31</span><span class="token punctuation">;</span>1m
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
-<li>SGR 30~37 代表著顏色，可參照此表格<br><img src="https://i.imgur.com/8HEFwxZ.png" alt><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[ANSI跳脫序列](https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97)">[2]</span></a></sup></li>
+<li>SGR 30~37 代表著顏色，可參照此表格<br><img src="https://i.imgur.com/8HEFwxZ.png" alt=""><sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[ANSI跳脫序列](https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97)">[2]</span></a></sup></li>
 <li>後面的 1 代表粗體，不寫則為一般字型；通常一般的終端機會將粗體顯示成較亮的顏色，而非粗體。</li>
-<li>有些終端機提供用高位的數字指定較亮的顏色，90-97 及 100-107，如下圖<br><img src="https://i.imgur.com/mEP8AjU.png" alt></li>
+<li>有些終端機提供用高位的數字指定較亮的顏色，90-97 及 100-107，如下圖<br><img src="https://i.imgur.com/mEP8AjU.png" alt=""></li>
 </ul>
 <h3 id="xterm-256color"><a href="#xterm-256color" class="headerlink" title="xterm-256color"></a>xterm-256color</h3><ul>
-<li>使用 8 位元的 SGR，進而提供 256 色的輸出。<br><img src="https://i.imgur.com/hjjHfve.png" alt></li>
+<li>使用 8 位元的 SGR，進而提供 256 色的輸出。<br><img src="https://i.imgur.com/hjjHfve.png" alt=""></li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://naeilproj.blogspot.com/2015/08/linux-c-c-printf.html" target="_blank" rel="noopener">[Linux C] ANSI逃脫碼與printf顏色教學</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97" target="_blank" rel="noopener">ANSI跳脫序列</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://naeilproj.blogspot.com/2015/08/linux-c-c-printf.html" target="_blank" rel="noopener">[Linux C] ANSI逃脫碼與printf顏色教學</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97" target="_blank" rel="noopener">ANSI跳脫序列</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

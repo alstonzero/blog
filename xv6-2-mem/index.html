@@ -409,7 +409,7 @@ x86的頁表：$2^{20}$ 條 PTE。
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    2.5k
+                    2.6k
                 </div>
                 
 
@@ -433,7 +433,7 @@ x86的頁表：$2^{20}$ 條 PTE。
 <h3 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h3><blockquote>
 <p>分頁硬體使用虛擬位址找到對應的 PTE，接著把高 20-bit 替換為 PTE 的 PPN，低 12-bit 直接沿用，即完成轉譯的動作。</p>
 </blockquote>
-<h3 id="XV6-頁表"><a href="#XV6-頁表" class="headerlink" title="XV6 頁表"></a>XV6 頁表</h3><p><img src="https://i.imgur.com/Jj4vbJt.png" alt title="x86 page table hardware."></p>
+<h3 id="XV6-頁表"><a href="#XV6-頁表" class="headerlink" title="XV6 頁表"></a>XV6 頁表</h3><p><img src="https://i.imgur.com/Jj4vbJt.png" alt="" title="x86 page table hardware."></p>
 <ul>
 <li>一個頁表在物理記憶體中為一顆兩層的樹<ul>
 <li>樹根為一個 4096 字節的目錄（page dir），包含 1024 個類 PTE，分別指向不同的頁表頁（page table page）。</li>
@@ -514,7 +514,7 @@ x86的頁表：$2^{20}$ 條 PTE。
 </ul>
 <hr>
 <h2 id="Process-address-space"><a href="#Process-address-space" class="headerlink" title="Process address space"></a>Process address space</h2><ul>
-<li><code>main</code> 呼叫 <code>kvmalloc</code> 跳到新的頁表，重新映射至記憶體。<br><img src="https://i.imgur.com/xq8Po1n.png" alt title="Layout of the virtual address space of a process and physical address space."></li>
+<li><code>main</code> 呼叫 <code>kvmalloc</code> 跳到新的頁表，重新映射至記憶體。<br><img src="https://i.imgur.com/xq8Po1n.png" alt="" title="Layout of the virtual address space of a process and physical address space."></li>
 <li>每個 process 都有自己的頁表，在切換 process 時也會切換頁表。</li>
 <li>process 的頁表從 0 開始，最多至 <code>KERNBASE</code>，限制 process 最多使用 2GB。</li>
 <li>如果需要更多記憶體時：<ol>
@@ -923,7 +923,7 @@ pde_t<span class="token operator">*</span>
 <li>接著把 v 轉為 <code>struct run</code> 的指標，插在 free list 的第一顆。</li>
 </ul>
 <hr>
-<h2 id="User-part-of-an-address-space"><a href="#User-part-of-an-address-space" class="headerlink" title="User part of an address space"></a>User part of an address space</h2><p><img src="https://i.imgur.com/sZaPwda.png" alt title="Memory layout of a user process with its initial stack"></p>
+<h2 id="User-part-of-an-address-space"><a href="#User-part-of-an-address-space" class="headerlink" title="User part of an address space"></a>User part of an address space</h2><p><img src="https://i.imgur.com/sZaPwda.png" alt="" title="Memory layout of a user process with its initial stack"></p>
 <h2 id="Code-sbrk"><a href="#Code-sbrk" class="headerlink" title="Code: sbrk"></a>Code: sbrk</h2><table>
 <thead>
 <tr>
@@ -1257,8 +1257,26 @@ pde_t<span class="token operator">*</span>
 <p>  sp -= (3+argc+1) <em> 4;<br>  if(copyout(pgdir, sp, ustack, (3+argc+1)</em>4) &lt; 0)<br>    goto bad;</p>
 <p>  // Save program name for debugging.<br>  for(last=s=path; <em>s; s++)<br>    if(</em>s == ‘/‘)<br>      last = s+1;<br>  safestrcpy(proc-&gt;name, last, sizeof(proc-&gt;name));</p>
 <p>  // Commit to the user image.<br>  oldpgdir = proc-&gt;pgdir;<br>  proc-&gt;pgdir = pgdir;<br>  proc-&gt;sz = sz;<br>  proc-&gt;tf-&gt;eip = elf.entry;  // main<br>  proc-&gt;tf-&gt;esp = sp;<br>  switchuvm(proc);<br>  freevm(oldpgdir);<br>  return 0;</p>
-<p> bad:<br>  if(pgdir)<br>    freevm(pgdir);<br>  if(ip)<br>    iunlockput(ip);<br>  return -1;<br>}<br><code>`</code><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.csie.ntu.edu.tw/~wcchen/asm98/asm/proj/b85506061/chap2/paging.html" target="_blank" rel="noopener">記憶體管理／分頁架構</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div></p>
-
+<p> bad:<br>  if(pgdir)<br>    freevm(pgdir);<br>  if(ip)<br>    iunlockput(ip);<br>  return -1;<br>}<br><code>`</code></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.csie.ntu.edu.tw/~wcchen/asm98/asm/proj/b85506061/chap2/paging.html" target="_blank" rel="noopener">記憶體管理／分頁架構</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

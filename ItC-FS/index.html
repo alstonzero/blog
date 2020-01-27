@@ -396,7 +396,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    393
+                    445
                 </div>
                 
 
@@ -441,7 +441,25 @@
 <h3 id="FCFS"><a href="#FCFS" class="headerlink" title="FCFS"></a>FCFS</h3><p>即先到先服務</p>
 <h3 id="SSTF"><a href="#SSTF" class="headerlink" title="SSTF"></a>SSTF</h3><p>即最短搜尋時間優先，讀寫完一個後會找一個最近的讀寫。</p>
 <h3 id="SCAN"><a href="#SCAN" class="headerlink" title="SCAN"></a>SCAN</h3><p>從特定的方向開始，從頭走到尾，不斷的來回，有經過的都會服務；c-SCAN指的是只有一個方向會服務。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

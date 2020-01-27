@@ -640,7 +640,7 @@ found<span class="token punctuation">:</span>
   p<span class="token operator">-></span>tf<span class="token operator">-></span>eip <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// beginning of initcode.S</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li><code>p-&gt;name</code> 設為 <code>&quot;initcode&quot;</code> 是為了 debug，<code>p-&gt;cwd</code> 設在 process 的現在目錄。</li>
+<li><code>p-&gt;name</code> 設為 <code>"initcode"</code> 是為了 debug，<code>p-&gt;cwd</code> 設在 process 的現在目錄。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token function">safestrcpy</span><span class="token punctuation">(</span>p<span class="token operator">-></span>name<span class="token punctuation">,</span> <span class="token string">"initcode"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>p<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   p<span class="token operator">-></span>cwd <span class="token operator">=</span> <span class="token function">namei</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -853,7 +853,7 @@ trapret:
 <li>最後執行 <code>int $T_SYSCALL</code>。</li>
 <li>這告訴 kernel 來運行 <code>exec</code>。</li>
 <li>正常情況下，<code>exec</code> 不會返回；會運行名叫 <code>$init</code>(23) 的程式。</li>
-<li><code>$init</code> 會 return <code>&quot;/init\0&quot;</code></li>
+<li><code>$init</code> 會 return <code>"/init\0"</code></li>
 <li>若 <code>exec</code> 失敗了且返回，<em>initcode</em> 會不斷的呼叫一個 system call：<code>exit()</code>(17)。</li>
 </ul>
 <h3 id="File-initcode-S"><a href="#File-initcode-S" class="headerlink" title="File: initcode.S"></a>File: initcode.S</h3><pre class="line-numbers language-x86asm"><code class="language-x86asm"># Initial process execs /init.
@@ -887,7 +887,25 @@ argv:
   .long init
   .long 0
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

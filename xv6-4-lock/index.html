@@ -406,7 +406,7 @@ insert(int data)
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    716
+                    768
                 </div>
                 
 
@@ -436,17 +436,17 @@ insert(int data)
     list <span class="token operator">=</span> l<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://i.imgur.com/T6893f9.png" alt title="Example race"></p>
+<p><img src="https://i.imgur.com/T6893f9.png" alt="" title="Example race"></p>
 <p>假設現在有兩個 process 同時在不同的 CPU 上執行上述程式碼，當兩個 process 都執行到 14 行，則兩條鏈結的 <code>next</code> 都設置為 <code>list</code>；接著，先執行的 process A 將 list 設定為自己的鏈結，後執行的 process B 也將 list 設為自己的鏈結。</p>
 <p><strong>問題</strong>：此時 list 上將會遺失原本 process A <code>insert</code> 的節點。</p>
 <h3 id="圖解"><a href="#圖解" class="headerlink" title="圖解"></a>圖解</h3><ul>
 <li>一開始的 list</li>
 </ul>
-<p><img src="https://i.imgur.com/2eXmAxp.png" alt></p>
+<p><img src="https://i.imgur.com/2eXmAxp.png" alt=""></p>
 <ul>
-<li>假設 pocess A 及 B 同時將自己的資料插在 list 的第一顆<br><img src="https://i.imgur.com/h95r477.png" alt></li>
-<li>接著 process A 以些微的差距先將 list 設為 l（自己的鏈結），此時 list 的第一顆為 A 的資料<br><img src="https://i.imgur.com/u0udl7M.png" alt></li>
-<li>最後 process B 也將 list 設為 l，此時 list 上的第一顆為 B 的資料，且 A 的資料遺失了。<br><img src="https://i.imgur.com/B659a3t.png" alt></li>
+<li>假設 pocess A 及 B 同時將自己的資料插在 list 的第一顆<br><img src="https://i.imgur.com/h95r477.png" alt=""></li>
+<li>接著 process A 以些微的差距先將 list 設為 l（自己的鏈結），此時 list 的第一顆為 A 的資料<br><img src="https://i.imgur.com/u0udl7M.png" alt=""></li>
+<li>最後 process B 也將 list 設為 l，此時 list 上的第一顆為 B 的資料，且 A 的資料遺失了。<br><img src="https://i.imgur.com/B659a3t.png" alt=""></li>
 </ul>
 <h3 id="使用鎖"><a href="#使用鎖" class="headerlink" title="使用鎖"></a>使用鎖</h3><pre class="line-numbers language-diff"><code class="language-diff">struct list *list = 0;
 struct lock listlock;
@@ -645,7 +645,25 @@ insert(int data)
   <span class="token keyword">return</span> result<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

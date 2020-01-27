@@ -400,7 +400,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    548
+                    600
                 </div>
                 
 
@@ -428,7 +428,7 @@
 <li>185.199.110.153</li>
 <li>185.199.111.153</li>
 </ul>
-<p>以及一個 CNAME，name 可以填任意字串，此字串就是你的 subdomain（像是我填 blog），如果不知道填什麼，可以填 www。最後你的畫面會長這樣：<br><img src="https://i.imgur.com/OTJsgaX.png" alt><br>CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，注意最後有一個點</p>
+<p>以及一個 CNAME，name 可以填任意字串，此字串就是你的 subdomain（像是我填 blog），如果不知道填什麼，可以填 www。最後你的畫面會長這樣：<br><img src="https://i.imgur.com/OTJsgaX.png" alt=""><br>CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，注意最後有一個點</p>
 <p>這些都設定完，之後你的網址就會變成 <code>subdomain.domain.com</code></p>
 <blockquote>
 <p>一個很重要的事情是，發布 hexo 的 github repo 須為 <strong>github.io</strong> 類型的，否則設定會有誤</p>
@@ -444,10 +444,28 @@ subdomain.domain.com
 <blockquote>
 <p>如果跟我一樣是用 hexo 的人，CNAME 請放在 /source 底下，這樣每次 <code>hexo d</code> 才不會被蓋掉</p>
 </blockquote>
-<p>如果這些都有設定好，你的 github 應該會長這樣：<br><img src="https://i.imgur.com/e5GzzZH.png" alt></p>
+<p>如果這些都有設定好，你的 github 應該會長這樣：<br><img src="https://i.imgur.com/e5GzzZH.png" alt=""></p>
 <p>大概過幾個小時，你的新網址就可以用了（大功告成）!</p>
-<h2 id="補充：HTTPS"><a href="#補充：HTTPS" class="headerlink" title="補充：HTTPS"></a>補充：HTTPS</h2><p>Github page 有提供內建的 HTTPS，只要你的網站設定好一陣子（不會很久，一天內），會有這個選項可以按：<br><img src="https://i.imgur.com/z9HdVbV.png" alt><br>按下去，就會獲得 HTTPS 了</p>
-
+<h2 id="補充：HTTPS"><a href="#補充：HTTPS" class="headerlink" title="補充：HTTPS"></a>補充：HTTPS</h2><p>Github page 有提供內建的 HTTPS，只要你的網站設定好一陣子（不會很久，一天內），會有這個選項可以按：<br><img src="https://i.imgur.com/z9HdVbV.png" alt=""><br>按下去，就會獲得 HTTPS 了</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

@@ -774,8 +774,26 @@ start32:
 <p>  epa = pa + count;</p>
 <p>  // Round down to sector boundary.<br>  pa -= offset % SECTSIZE;</p>
 <p>  // Translate from bytes to sectors; kernel starts at sector 1.<br>  offset = (offset / SECTSIZE) + 1;</p>
-<p>  // If this is too slow, we could read lots of sectors at a time.<br>  // We’d write more to memory than asked, but it doesn’t matter –<br>  // we load in increasing order.<br>  for(; pa &lt; epa; pa += SECTSIZE, offset++)<br>    readsect(pa, offset);<br>}<br><code>`</code><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://bluelove1968.pixnet.net/blog/post/222285883-%E6%8C%87%E6%A8%99%E5%87%BD%E6%95%B8%E5%92%8C%E5%87%BD%E6%95%B8%E6%8C%87%E6%A8%99%E6%9C%89%E4%BB%80%E9%BA%BC%E5%8D%80%E5%88%A5" target="_blank" rel="noopener">指標函數和函數指標有什麼區別</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div></p>
-
+<p>  // If this is too slow, we could read lots of sectors at a time.<br>  // We’d write more to memory than asked, but it doesn’t matter –<br>  // we load in increasing order.<br>  for(; pa &lt; epa; pa += SECTSIZE, offset++)<br>    readsect(pa, offset);<br>}<br><code>`</code></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://bluelove1968.pixnet.net/blog/post/222285883-%E6%8C%87%E6%A8%99%E5%87%BD%E6%95%B8%E5%92%8C%E5%87%BD%E6%95%B8%E6%8C%87%E6%A8%99%E6%9C%89%E4%BB%80%E9%BA%BC%E5%8D%80%E5%88%A5" target="_blank" rel="noopener">指標函數和函數指標有什麼區別</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

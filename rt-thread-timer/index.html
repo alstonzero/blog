@@ -401,7 +401,7 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    1.7k
+                    1.8k
                 </div>
                 
 
@@ -418,13 +418,13 @@ timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸�
 <p>File: timer.c</p>
 </blockquote>
 <ul>
-<li>timer 的作用：當時間到時，觸發一個事件；如文本的圖：<br><img src="https://i.imgur.com/6ois2av.png" alt></li>
+<li>timer 的作用：當時間到時，觸發一個事件；如文本的圖：<br><img src="https://i.imgur.com/6ois2av.png" alt=""></li>
 <li>timer 的實作是一條鏈，即當前 tick 到達指定的 timer 時，會觸發該 timer 的 <code>timeout_func</code>，同時將該 timer 從鏈結移除</li>
 <li>以上圖為例，當 <code>rt_tick</code> = 70 時，將會觸發 timer #1 的 <code>timeout_func</code>，並將 timer #1 移除</li>
 </ul>
 <hr>
 <ul>
-<li>而在新增一個 timer 時，會按照 timeout 的大小排列插入，如圖：<br><img src="https://i.imgur.com/yCkzoq0.png" alt></li>
+<li>而在新增一個 timer 時，會按照 timeout 的大小排列插入，如圖：<br><img src="https://i.imgur.com/yCkzoq0.png" alt=""></li>
 <li>我們想要新增一個 timer #4，並希望在 300 個 tick 過後觸發事件，所以 timeout 設為 330（rt_tick + 300）</li>
 <li>由於 timer 鏈需要由小到大排，所以將 timer #4 插在 #2 與 #3 之間</li>
 </ul>
@@ -1159,7 +1159,25 @@ rt_err_t <span class="token function">rt_timer_control</span><span class="token 
     <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_TIMER<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"timer check leave\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

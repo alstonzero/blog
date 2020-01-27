@@ -392,7 +392,7 @@ Pep/8 虛擬電腦依據不同的CPU會有不同的機器語言，而">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    694
+                    746
                 </div>
                 
 
@@ -546,7 +546,25 @@ ELSE …
 <li>重複</li>
 </ul>
 <pre><code>WHILE(counter &lt; limit) …
-</code></pre>
+</code></pre><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

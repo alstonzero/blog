@@ -404,7 +404,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    1.2k
+                    1.3k
                 </div>
                 
 
@@ -421,7 +421,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <p>本文沒有按照 XV6 官方文本的順序介紹</p>
 </blockquote>
 <h2 id="概觀"><a href="#概觀" class="headerlink" title="概觀"></a>概觀</h2><ul>
-<li>XV6 的檔案系統分為 6 層，本文將從上到下介紹。<br><img src="https://i.imgur.com/yTmir5p.png" alt title="Layers of the XV6 file system"></li>
+<li>XV6 的檔案系統分為 6 層，本文將從上到下介紹。<br><img src="https://i.imgur.com/yTmir5p.png" alt="" title="Layers of the XV6 file system"></li>
 </ul>
 <hr>
 <h2 id="檔案描述符"><a href="#檔案描述符" class="headerlink" title="檔案描述符"></a>檔案描述符</h2><blockquote>
@@ -929,7 +929,25 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 </ol>
 </li>
 </ul>
-<h3 id="Code-Buffer-cache"><a href="#Code-Buffer-cache" class="headerlink" title="Code: Buffer cache"></a>Code: Buffer cache</h3>
+<h3 id="Code-Buffer-cache"><a href="#Code-Buffer-cache" class="headerlink" title="Code: Buffer cache"></a>Code: Buffer cache</h3><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

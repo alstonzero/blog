@@ -768,7 +768,7 @@ SECTIONS
 <li><em>bootmain.c</em> 將 ELF 指標指向 <code>0x100000</code> 接著將 kernel 讀入。</li>
 </ul>
 <p><code>`</code>armasm<br>    .text : AT(0x100000) {<br>        <em>(.text .stub .text.</em> .gnu.linkonce.t.*)<br>    }</p>
-<pre><code>PROVIDE(etext = .);    /* Define the &#39;etext&#39; symbol to this value */
+<pre><code>PROVIDE(etext = .);    /* Define the 'etext' symbol to this value */
 
 .rodata : {
     *(.rodata .rodata.* .gnu.linkonce.r.*)
@@ -797,7 +797,7 @@ SECTIONS
 /* Conventionally, Unix linkers provide pseudo-symbols
  * etext, edata, and end, at the end of the text, data, and bss.
  * For the kernel mapping, we need the address at the beginning
- * of the data section, but that&#39;s not one of the conventional
+ * of the data section, but that's not one of the conventional
  * symbols, because the convention started before there was a
  * read-only rodata section between text and data. */
 PROVIDE(data = .);
@@ -818,8 +818,26 @@ PROVIDE(end = .);
 /DISCARD/ : {
     *(.eh_frame .note.GNU-stack)
 }
-</code></pre><p>}<br><code>`</code><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/QQ1452008/article/details/50855810" target="_blank" rel="noopener">Linux Makefile 生成 .d 依赖文件及 gcc -M -MF -MP 等相关选项说明</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://leenjewel.github.io/blog/2014/07/24/%5B%28xue-xi-xv6-%29%5D-zai-mac-osx-xia-yun-xing-xv6/" target="_blank" rel="noopener">【學習 XV6 】在 Mac OSX 下運行 XV6</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div></p>
-
+</code></pre><p>}<br><code>`</code></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/QQ1452008/article/details/50855810" target="_blank" rel="noopener">Linux Makefile 生成 .d 依赖文件及 gcc -M -MF -MP 等相关选项说明</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://leenjewel.github.io/blog/2014/07/24/%5B%28xue-xi-xv6-%29%5D-zai-mac-osx-xia-yun-xing-xv6/" target="_blank" rel="noopener">【學習 XV6 】在 Mac OSX 下運行 XV6</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 

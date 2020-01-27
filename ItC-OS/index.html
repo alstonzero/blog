@@ -396,7 +396,7 @@ CPU 排程，為決定哪個程序可以執行。
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    387
+                    439
                 </div>
                 
 
@@ -437,7 +437,25 @@ CPU 排程，為決定哪個程序可以執行。
 <li>非先佔式排程：程序不會在尚未執行完就被強制移出CPU。</li>
 </ul>
 <h3 id="先到先服務-FCFS（非先佔式）"><a href="#先到先服務-FCFS（非先佔式）" class="headerlink" title="先到先服務 FCFS（非先佔式）"></a>先到先服務 FCFS（非先佔式）</h3><h3 id="最短工作優先-SJN（非先佔式）"><a href="#最短工作優先-SJN（非先佔式）" class="headerlink" title="最短工作優先 SJN（非先佔式）"></a>最短工作優先 SJN（非先佔式）</h3><h3 id="循環輪流（先佔式）"><a href="#循環輪流（先佔式）" class="headerlink" title="循環輪流（先佔式）"></a>循環輪流（先佔式）</h3><p>建立一個時間片段 time slice，使用CPU時間超過時間片段的程序必須先移出，直到下一次輪到此程序時才能繼續使CPU。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
