@@ -1,4 +1,5 @@
 /* Here is your custom css styles. */
+.block-with-text:after,
 .block-with-text:before {
     content: none;
 }
@@ -20,6 +21,50 @@
     *::-webkit-scrollbar { 
         height: 0; 
     }
+}
+
+body {
+    background-color: #000;
+    color: #BDBDBD;
+}
+
+#artDetail .tag_share .article-tag .chip,
+.prev-next .article-badge,
+.card {
+    background-color: #212121;
+}
+
+.chip-container .chip-default,
+.profile .author .title,
+.chip-container .tag-title,
+.friends-container .card-content .tag-title,
+blockquote,
+#artDetail .post-info .post-date,
+#artDetail .post-info,
+article a {
+    color: #BDBDBD;
+}
+
+#artDetail .tag_share .article-tag .chip:hover {
+    border-color: #42b983;
+    background: #42b983;
+}
+
+code {
+    color: #B71C1C;
+    background-color: #FFCDD2;
+}
+
+.chip,
+.my-skills .skillbar,
+pre code,
+pre {
+    background-color: #424242;
+}
+
+.other-skills .chip {
+    background-color: #424242;
+    border: 1px solid #424242;
 }
 
 /* hexo-filter-github-emojis */

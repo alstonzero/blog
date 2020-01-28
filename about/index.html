@@ -422,7 +422,7 @@
 
 <div id="postCharts" class="post-charts">
     <div class="title center-align" data-aos="zoom-in-up">
-        <i class="far fa-bar-chart"></i>&nbsp;&nbsp;文章統計圖
+        <i class="fas fa-chart-bar"></i>&nbsp;&nbsp;文章統計圖
     </div>
     <div class="row">
         <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
@@ -450,18 +450,30 @@
     let postsOption = {
         title: {
             text: '文章發佈統計圖',
-            top: -5,
-            x: 'center'
+            top: 0,
+            x: 'center',
+            textStyle: {
+                color: '#9E9E9E'
+            }
         },
         tooltip: {
-            trigger: 'axis'
+            trigger: 'axis',
+            textStyle: {
+                color: '#9E9E9E'
+            }
         },
         xAxis: {
             type: 'category',
-            data: ["2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01"]
+            data: ["2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01"],
+            textStyle: {
+                color: '#9E9E9E'
+            }
         },
         yAxis: {
             type: 'value',
+            textStyle: {
+                color: '#9E9E9E'
+            }
         },
         series: [
             {
@@ -497,8 +509,11 @@
     let categoriesOption = {
         title: {
             text: '文章分類統計圖',
-            top: -4,
-            x: 'center'
+            top: 0,
+            x: 'center',
+            textStyle: {
+                color: '#9E9E9E'
+            }
         },
         tooltip: {
             trigger: 'item',
@@ -527,8 +542,11 @@
     let tagsOption = {
         title: {
             text: 'TOP10 標籤統計圖',
-            top: -5,
-            x: 'center'
+            top: 0,
+            x: 'center',
+            textStyle: {
+                color: '#9E9E9E'
+            }
         },
         tooltip: {},
         xAxis: [
