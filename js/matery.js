@@ -310,12 +310,14 @@ $(function () {
         }
 
         if ($('body').hasClass('dark')){
-            $('#toggle-dark-btn').removeClass('fas');
-            $('#toggle-dark-btn').addClass('far');
+            $('#toggle-dark-btn, #m-toggle-dark-btn').removeClass('fas');
+            $('#toggle-dark-btn, #m-toggle-dark-btn').addClass('far');
+            $('.brand-logo a img, .mobile-head img').attr("src","/medias/jedi_s.png");
         }
         else{
-            $('#toggle-dark-btn').removeClass('far');
-            $('#toggle-dark-btn').addClass('fas');
+            $('#toggle-dark-btn, #m-toggle-dark-btn').removeClass('far');
+            $('#toggle-dark-btn, #m-toggle-dark-btn').addClass('fas');
+            $('.brand-logo a img, .mobile-head img').attr("src","/medias/jedi_r.png");
         }
     });
 });

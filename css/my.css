@@ -27,6 +27,10 @@
     }
 }
 
+.friend-button .button-caution {
+    color: #fff;
+}
+
 .sidenav,
 .cd-timeline-content,
 .modal,
