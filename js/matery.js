@@ -168,7 +168,7 @@ $(function () {
     });
 
     /* toggle dark-light theme */
-    $('#toggle-dark-item').on('click', function() {
+    $('#toggle-dark-item, #m-toggle-dark-item').on('click', function() {
         $('body').toggleClass('dark');
 
         if ($('.container').hasClass('archive-calendar')) {
