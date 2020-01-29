@@ -177,6 +177,7 @@ td, th {
 .dark .progress-bar,
 .dark .bg-color:not(.chip) {
     background-image: linear-gradient(to right, #212121 0%, #424242 100%);
+    background-color: transparent !important;
 }
 
 .dark .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating),
