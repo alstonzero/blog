@@ -31,6 +31,23 @@
     color: #fff;
 }
 
+.avatar {
+    transform: translate3d(0, -65%, 0);
+    width: 200px;
+    margin: auto;
+    padding: 10px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    background: #CFD8DC;
+}
+
+.profile .avatar-img {
+    max-width: 120px;
+    margin: auto;
+    transform: unset;
+}
+
 .sidenav,
 .cd-timeline-content,
 .modal,
@@ -106,6 +123,7 @@ code {
     text-align: center;
 }
 
+.dark .avatar,
 .dark .code_lang,
 .dark table tbody tr:nth-child(2n), thead,
 .dark .search-result-list .search-keyword,
