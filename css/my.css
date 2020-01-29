@@ -27,40 +27,56 @@
     }
 }
 
-body {
-    background-color: #000;
-    color: #BDBDBD;
-}
-
 .sidenav,
 .cd-timeline-content,
 .modal,
 .modal::-webkit-scrollbar,
 #artDetail .tag_share .article-tag .chip,
 .prev-next .article-badge,
-.card {
-    background-color: #212121;
+.card,
+body {
+    transition: .3s;
+    transition-property: background-color, background, background-image;
 }
 
-#gitalk-container .gt-container .gt-header .gt-btn-preview {
-    background-color: #212121 !important;
-}
-
-input[type=search]:not(.browser-default),
-#searchModal .search-header .title,
-.chip-container .chip-default,
-.profile .author .title,
-.chip-container .tag-title,
-.friends-container .card-content .tag-title,
-blockquote,
-#artDetail .post-info .post-date,
-#artDetail .post-info,
-article a {
+body.dark {
+    background-color: #000;
     color: #BDBDBD;
 }
 
-.mobile-menu-list a i, 
-header .side-nav .menu-list a {
+.dark header .nav-transparent {
+    background-image: none !important;
+}
+
+.dark .sidenav,
+.dark .cd-timeline-content,
+.dark .modal,
+.dark .modal::-webkit-scrollbar,
+.dark #artDetail .tag_share .article-tag .chip,
+.dark .prev-next .article-badge,
+.dark .card {
+    background-color: #212121;
+}
+
+.dark #gitalk-container .gt-container .gt-header .gt-btn-preview {
+    background-color: #212121 !important;
+}
+
+.dark input[type=search]:not(.browser-default),
+.dark #searchModal .search-header .title,
+.dark .chip-container .chip-default,
+.dark .profile .author .title,
+.dark .chip-container .tag-title,
+.dark .friends-container .card-content .tag-title,
+.dark blockquote,
+.dark #artDetail .post-info .post-date,
+.dark #artDetail .post-info,
+.dark article a {
+    color: #BDBDBD;
+}
+
+.dark .mobile-menu-list a i, 
+.dark header .side-nav .menu-list a {
     color: #BDBDBD !important;
 }
 
@@ -86,34 +102,34 @@ code {
     text-align: center;
 }
 
-.code_lang,
-table tbody tr:nth-child(2n), thead,
-.search-result-list .search-keyword,
-#gitalk-container .gt-container .gt-header .gt-header-preview,
-#gitalk-container .gt-container .gt-header .gt-header-textarea,
-.chip,
-.my-skills .skillbar,
-pre code,
-pre {
+.dark .code_lang,
+.dark table tbody tr:nth-child(2n), thead,
+.dark .search-result-list .search-keyword,
+.dark #gitalk-container .gt-container .gt-header .gt-header-preview,
+.dark #gitalk-container .gt-container .gt-header .gt-header-textarea,
+.dark .chip,
+.dark .my-skills .skillbar,
+.dark pre code,
+.dark pre {
     background-color: #424242;
 }
 
-.other-skills .chip {
+.dark .other-skills .chip {
     background-color: #424242;
     border: 1px solid #424242;
 }
 
-tr {
+.dark tr {
     border-bottom: 1px solid #757575;
 }
 
-#articleContent table th {
+.dark #articleContent table th {
     background-color: #616161;
     border: 1px solid #757575;
 }
 
-#articleContent table td,
-#articleContent table, th, td {
+.dark #articleContent table td,
+.dark #articleContent table, th, td {
     border: 1px solid #757575;
 }
 
@@ -121,21 +137,21 @@ td, th {
     border-radius: 0;
 }
 
-pre::-webkit-scrollbar {
+.dark pre::-webkit-scrollbar {
     background: #2d2d2d;
 }
 
-.modal::-webkit-scrollbar-thumb,
-pre::-webkit-scrollbar-thumb { 
+.dark .modal::-webkit-scrollbar-thumb,
+.dark pre::-webkit-scrollbar-thumb { 
     background: #424242;
     border-radius: 16px;
 }
 
-.red {
+.dark .red {
     background-color: #212121 !important;
 }
 
-.amber {
+.dark amber {
     background-color: #263238 !important;
 }
 
@@ -154,25 +170,30 @@ pre::-webkit-scrollbar-thumb {
     border-color: #6CDF51;
 }
 
-.top-scroll .btn-floating {
+.dark .top-scroll .btn-floating {
     background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
 }
 
-.progress-bar,
-.bg-color:not(.chip) {
+.dark .progress-bar,
+.dark .bg-color:not(.chip) {
     background-image: linear-gradient(to right, #212121 0%, #424242 100%);
 }
 
-.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating),
-.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+.dark .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating),
+.dark .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
     color: #212121;
 }
 
-.page-footer {
+.dark .page-footer {
     background-color: transparent;
 }
 
-@keyframes rainbow {
+.dark .bg-cover:after {
+    -webkit-animation: rainbow_dark 60s infinite;
+    animation: rainbow_dark 60s infinite;
+}
+
+@keyframes rainbow_dark {
 
     0%,
     100% {

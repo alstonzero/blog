@@ -166,4 +166,156 @@ $(function () {
                 $('.m-nav-item.m-nav-show').removeClass('m-nav-show');
             }
     });
+
+    /* toggle dark-light theme */
+    $('#toggle-dark-btn').on('click', function() {
+        $('body').toggleClass('dark');
+
+        if ($('.container').hasClass('archive-calendar')) {
+            let loption = {
+                title: {
+                    textStyle: {
+                        color: '#3C4858'
+                    }
+                },
+                visualMap: {
+                    inRange: {
+                        color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+                    }
+                },
+                calendar: [{
+                    itemStyle: {
+                        borderColor: '#fff',
+                    },
+                    monthLabel: {
+                        textStyle: {
+                            color: '#3C4858'
+                        }
+                    },
+                    dayLabel: {
+                        textStyle: {
+                            color: '#3C4858'
+                        }
+                    }
+                }]
+            };
+    
+            let doption = {
+                title: {
+                    textStyle: {
+                        color: '#BDBDBD'
+                    }
+                },
+                visualMap: {
+                    inRange: {
+                        color: ['#424242', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+                    }
+                },
+                calendar: [{
+                    itemStyle: {
+                        borderColor: '#616161',
+                    },
+                    monthLabel: {
+                        textStyle: {
+                            color: '#BDBDBD'
+                        }
+                    },
+                    dayLabel: {
+                        textStyle: {
+                            color: '#BDBDBD'
+                        }
+                    }
+                }]
+            };
+    
+            if ($('body').hasClass('dark'))
+                myChart.setOption(doption);
+            else
+                myChart.setOption(loption);
+        }
+
+        if ($('.container').hasClass('about-container')) {
+            let loption = {
+                title: {
+                    textStyle: {
+                        color: '#000'
+                    }
+                }
+            }
+
+            let doption = {
+                title: {
+                    textStyle: {
+                        color: '#9E9E9E'
+                    }
+                }
+            }
+
+            let line_loption = {
+                xAxis: [
+                    {
+                        axisLine: {
+                            lineStyle: {color: '#212121'}
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        axisLine: {
+                            lineStyle: {color: '#212121'}
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {color: ['#E0E0E0']}
+                        }
+                    }
+                ]
+            }
+
+            let line_doption = {
+                xAxis: [
+                    {
+                        axisLine: {
+                            lineStyle: {color: '#757575'}
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        axisLine: {
+                            lineStyle: {color: '#757575'}
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {color: ['#424242']}
+                        }
+                    }
+                ]
+            }
+                
+            if ($('body').hasClass('dark')){
+                postsChart.setOption(doption);
+                postsChart.setOption(line_doption);
+                categoriesChart.setOption(doption);
+                tagsChart.setOption(doption);
+                tagsChart.setOption(line_doption);
+            }
+            else{
+                postsChart.setOption(loption);
+                postsChart.setOption(line_loption);
+                categoriesChart.setOption(loption);
+                tagsChart.setOption(loption);
+                tagsChart.setOption(line_loption);
+            }
+        }
+
+        if ($('body').hasClass('dark')){
+            $('#toggle-dark-btn').removeClass('fas');
+            $('#toggle-dark-btn').addClass('far');
+        }
+        else{
+            $('#toggle-dark-btn').removeClass('far');
+            $('#toggle-dark-btn').addClass('fas');
+        }
+    });
 });
