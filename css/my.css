@@ -9,7 +9,7 @@
     overflow: hidden;
 }
 
-#artDetail .tag_share .article-tag .chip:hover {
+#artDetail .tag_share .post-meta__tag-list .article-tag .chip:hover {
     border-color: #42b983;
     background: #42b983;
 }
