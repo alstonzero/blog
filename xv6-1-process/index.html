@@ -36,8 +36,8 @@ Monolithic kernel：整個 OS 都位於 kernel 中，如此一來所有 system c
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <script>
-    let ltheme = 'light';
-    var cookies = document.cookie.split(";")
+    let ltheme = '';
+    var cookies = document.cookie.split("; ")
     var cookie = cookies.forEach( function(item, index, array) {
                     var item_arr = item.split("=");
                     console.log(item_arr);
@@ -46,7 +46,10 @@ Monolithic kernel：整個 OS 都位於 kernel 中，如此一來所有 system c
                     }
                 });
 
-    console.log(ltheme);
+    if (ltheme == '') {
+        document.cookie="local_theme=light;path=/";
+        ltheme = 'light'
+    }
 
     $('html').addClass(ltheme);
 </script>

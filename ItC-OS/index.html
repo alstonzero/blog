@@ -38,8 +38,8 @@ CPU 排程，為決定哪個程序可以執行。
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <script>
-    let ltheme = 'light';
-    var cookies = document.cookie.split(";")
+    let ltheme = '';
+    var cookies = document.cookie.split("; ")
     var cookie = cookies.forEach( function(item, index, array) {
                     var item_arr = item.split("=");
                     console.log(item_arr);
@@ -48,7 +48,10 @@ CPU 排程，為決定哪個程序可以執行。
                     }
                 });
 
-    console.log(ltheme);
+    if (ltheme == '') {
+        document.cookie="local_theme=light;path=/";
+        ltheme = 'light'
+    }
 
     $('html').addClass(ltheme);
 </script>
