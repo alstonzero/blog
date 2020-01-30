@@ -104,23 +104,47 @@ code {
     transform: unset;
 }
 
-.sidenav,
-.cd-timeline-content,
-.modal,
-.modal::-webkit-scrollbar,
-#artDetail .tag_share .article-tag .chip,
-.prev-next .article-badge,
-.card,
-body {
-    transition: .3s;
-    transition-property: background-color, background, background-image;
+.post-calendar-card-d {
+    margin-top: -240px;
 }
 
-/* Dark mode */
+.category-radar-card-d {
+    margin-top: -374px;
+}
 
-body.dark {
+.dark .post-calendar-card-l,
+.light .post-calendar-card-d,
+.dark .category-radar-card-l,
+.light .category-radar-card-d  {
+    opacity: 0;
+}
+
+.dark .post-calendar-card-d,
+.light .post-calendar-card-l,
+.dark .category-radar-card-d,
+.light .category-radar-card-l {
+    opacity: 1;
+}
+
+/*.dark #postCharts,
+.light #postCharts-d {
+    display: none;
+}
+
+.light #postCharts,
+.dark #postCharts-d {
+    display: block;
+}*/
+
+/* Dark mode */
+.dark body{
     background-color: #000;
     color: #BDBDBD;
+}
+
+#post-calendar-d {
+    width: 100%;
+    height: 225px;
 }
 
 .dark header .nav-transparent {

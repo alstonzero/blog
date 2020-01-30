@@ -25,12 +25,28 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
     
     <script src="/libs/jquery/jquery.min.js"></script>
-    
+
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
+<script>
+    let ltheme = 'light';
+    var cookies = document.cookie.split(";")
+    var cookie = cookies.forEach( function(item, index, array) {
+                    var item_arr = item.split("=");
+                    console.log(item_arr);
+                    if (item_arr[0] == "local_theme") {
+                        ltheme = item_arr[1];
+                    }
+                });
 
-<body class="dark">
+    console.log(ltheme);
+
+    $('html').addClass(ltheme);
+</script>
+
+<body>
+
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper head-container">
@@ -424,7 +440,10 @@
                 <style type="text/css">
     #posts-chart,
     #categories-chart,
-    #tags-chart {
+    #tags-chart,
+    #posts-chart-d,
+    #categories-chart-d,
+    #tags-chart-d {
         width: 100%;
         height: 300px;
         margin: 0.5rem auto;
@@ -451,11 +470,34 @@
     </div>
 </div>
 
+<div id="postCharts-d" class="post-charts">
+    <div class="title center-align" data-aos="zoom-in-up">
+        <i class="fas fa-chart-bar"></i>&nbsp;&nbsp;文章統計圖
+    </div>
+    <div class="row">
+        <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
+            <div id="posts-chart-d"></div>
+        </div>
+
+        <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
+            <div id="categories-chart-d"></div>
+        </div>
+
+        <div class="chart col s12 m6 l4" data-aos="zoom-in-up">
+            <div id="tags-chart-d"></div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
 <script>
     let postsChart = echarts.init(document.getElementById('posts-chart'));
     let categoriesChart = echarts.init(document.getElementById('categories-chart'));
     let tagsChart = echarts.init(document.getElementById('tags-chart'));
+
+    let postsChart_d = echarts.init(document.getElementById('posts-chart-d'));
+    let categoriesChart_d = echarts.init(document.getElementById('categories-chart-d'));
+    let tagsChart_d = echarts.init(document.getElementById('tags-chart-d'));
 
     
 
@@ -617,10 +659,56 @@
         ]
     };
 
+    let loption = {
+        title: {
+            textStyle: {
+                color: '#000'
+            }
+        }
+    }
+    
+    let line_loption = {
+        xAxis: [
+            {
+                axisLine: {
+                    lineStyle: {color: '#212121'}
+                }
+            }
+        ],
+        yAxis: [
+            {
+                axisLine: {
+                    lineStyle: {color: '#212121'}
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {color: ['#E0E0E0']}
+                }
+            }
+        ]
+    }        
+
     // render the charts
     postsChart.setOption(postsOption);
     categoriesChart.setOption(categoriesOption);
     tagsChart.setOption(tagsOption);
+
+    postsChart_d.setOption(postsOption);
+    categoriesChart_d.setOption(categoriesOption);
+    tagsChart_d.setOption(tagsOption);
+
+    postsChart.setOption(loption);
+    postsChart.setOption(line_loption);
+    categoriesChart.setOption(loption);
+    tagsChart.setOption(loption);
+    tagsChart.setOption(line_loption);
+
+    if (ltheme == 'light') {
+        $('#postCharts-d').hide();
+    }
+    else {
+        $('#postCharts').hide();
+    }
 </script>
 
                 

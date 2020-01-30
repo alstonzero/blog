@@ -25,12 +25,28 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
     
     <script src="/libs/jquery/jquery.min.js"></script>
-    
+
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
+<script>
+    let ltheme = 'light';
+    var cookies = document.cookie.split(";")
+    var cookie = cookies.forEach( function(item, index, array) {
+                    var item_arr = item.split("=");
+                    console.log(item_arr);
+                    if (item_arr[0] == "local_theme") {
+                        ltheme = item_arr[1];
+                    }
+                });
 
-<body class="dark">
+    console.log(ltheme);
+
+    $('html').addClass(ltheme);
+</script>
+
+<body>
+
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper head-container">
@@ -352,6 +368,7 @@
 
     
     <style type="text/css">
+    #category-radar-d,
     #category-radar {
         width: 100%;
         height: 360px;
@@ -359,14 +376,18 @@
 </style>
 
 <div class="container" data-aos="fade-up">
-    <div class="card">
+    <div class="card category-radar-card-l">
         <div id="category-radar" class="card-content"></div>
+    </div>
+    <div class="card category-radar-card-d">
+        <div id="category-radar-d" class="card-content"></div>
     </div>
 </div>
 
 <script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
 <script type="text/javascript">
     let radarChart = echarts.init(document.getElementById('category-radar'));
+    let radarChart_d = echarts.init(document.getElementById('category-radar-d'));
 
     
 
@@ -405,7 +426,24 @@
         }]
     };
 
+    let loption = {
+        title: {
+            textStyle: {
+                color: '#000',
+            }
+        },
+        radar: {
+            name: {
+                textStyle: {
+                    color: '#000'
+                }
+            },
+        }
+    };   
+
     radarChart.setOption(option);
+    radarChart.setOption(loption);
+    radarChart_d.setOption(option);
 </script>
     
 
