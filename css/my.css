@@ -73,6 +73,10 @@ code {
     color: #fff;
 }
 
+.nav-item i {
+    font-size: 16px;
+}
+
 @media only screen and (max-width: 601px){
     *::-webkit-scrollbar { 
         height: 0; 
