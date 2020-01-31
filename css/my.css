@@ -126,16 +126,6 @@ code {
     opacity: 1;
 }
 
-/*.dark #postCharts,
-.light #postCharts-d {
-    display: none;
-}
-
-.light #postCharts,
-.dark #postCharts-d {
-    display: block;
-}*/
-
 /* Dark mode */
 .dark body{
     background-color: #000;
