@@ -60,7 +60,6 @@ O
     var cookies = document.cookie.split("; ")
     var cookie = cookies.forEach( function(item, index, array) {
                     var item_arr = item.split("=");
-                    console.log(item_arr);
                     if (item_arr[0] == "local_theme") {
                         ltheme = item_arr[1];
                     }

@@ -40,7 +40,6 @@ Monolithic kernel：整個 OS 都位於 kernel 中，如此一來所有 system c
     var cookies = document.cookie.split("; ")
     var cookie = cookies.forEach( function(item, index, array) {
                     var item_arr = item.split("=");
-                    console.log(item_arr);
                     if (item_arr[0] == "local_theme") {
                         ltheme = item_arr[1];
                     }
