@@ -226,6 +226,10 @@ td, th {
     border-radius: 16px;
 }
 
+.dark pre, .dark .modal  {
+    scrollbar-color:#424242 transparent ;
+}
+
 .dark .red {
     background-color: #212121 !important;
 }
