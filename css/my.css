@@ -1,9 +1,4 @@
 /* Here is your custom css styles. */
-.jf-active header .brand-logo .logo-span {
-    font-size: 2.5rem;
-    letter-spacing: -8px;
-}
-
 .block-with-text:after,
 .block-with-text:before {
     content: none;
