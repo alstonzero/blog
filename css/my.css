@@ -185,7 +185,8 @@ code {
 .dark #gitalk-container .gt-container .gt-header .gt-header-textarea,
 .dark .chip,
 .dark .my-skills .skillbar,
-.dark pre {
+.dark pre,
+.dark pre code {
     background-color: #424242;
 }
 
