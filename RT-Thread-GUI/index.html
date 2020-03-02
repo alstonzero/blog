@@ -7,9 +7,10 @@
     <meta name="keywords" content="RT-Thread GUI engine - 架構, 天行者">
     <meta name="description" content="RT-Thread 的 GUI 放在 package 中（git 原始碼），本文將簡單將此 GUI engine 分工。
 Font處理文字編碼，及字型相關的
+. 
 |-- src
 |    |-- asc12font.c
-|    |-- asc">
+|    |-- ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -440,7 +441,8 @@ Font處理文字編碼，及字型相關的
             <div id="articleContent">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>RT-Thread 的 GUI 放在 package 中（<a href="https://github.com/RT-Thread-packages/gui_engine.git" target="_blank" rel="noopener">git 原始碼</a>），本文將簡單將此 GUI engine 分工。</p>
 <h2 id="Font"><a href="#Font" class="headerlink" title="Font"></a>Font</h2><p>處理文字編碼，及字型相關的</p>
-<pre><code>|-- src
+<pre><code>. 
+|-- src
 |    |-- asc12font.c
 |    |-- asc16font.c
 |    |-- font_bmp.c
@@ -451,32 +453,34 @@ Font處理文字編碼，及字型相關的
 |    |-- font.c
 |    |-- hz12font.c
 |    |-- hz16font.c
-|    |-- gb2312.c
+|    \-- gb2312.c
 |
 |-- include
-|     |-- rtgui
+|     \-- rtgui
 |            |-- font_fnt.h
 |            |-- font_freetype.h
 |            |-- font.h
-|            |-- gb2312.h
+|            \-- gb2312.h
 </code></pre><h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h2><p>處理圖片格式相關的</p>
-<pre><code>|-- src
+<pre><code>.
+|-- src
 |    |-- blit.c
 |    |-- image_bmp.c
 |    |-- image_jpg.c
 |    |-- image_png.c
 |    |-- image_xpm.c
-|    |-- image.c
+|    \-- image.c
 |
 |-- include
-|     |-- rtgui
+|     \-- rtgui
 |            |-- bilt.h
 |            |-- image_bmp.h
 |            |-- image_container.h
 |            |-- image_hdc.h
-|            |-- image.h
+|            \-- image.h
 </code></pre><h2 id="Draw"><a href="#Draw" class="headerlink" title="Draw"></a>Draw</h2><p>協助使用者繪製一些圖形等</p>
-<pre><code>|-- src
+<pre><code>.
+|-- src
 |    |-- color.c
 |    |-- dc_blend.c
 |    |-- dc_duffer.c
@@ -484,16 +488,17 @@ Font處理文字編碼，及字型相關的
 |    |-- dc_hw.c
 |    |-- dc_rotozoom.c
 |    |-- dc_trans.c
-|    |-- dc.c
+|    \-- dc.c
 |
 |-- include
-|     |-- rtgui
+|     \-- rtgui
 |            |-- color.h
 |            |-- dc_draw.h
 |            |-- dc_trans.h
-|            |-- dc.h
+|            \-- dc.h
 </code></pre><h2 id="Widgets"><a href="#Widgets" class="headerlink" title="Widgets"></a>Widgets</h2><p>一些相關的 widgets，如按鈕、視窗等</p>
-<pre><code>|-- src
+<pre><code>.
+|-- src
 |    |-- box.c
 |    |-- container.c
 |    |-- matrix.c
@@ -502,20 +507,21 @@ Font處理文字編碼，及字型相關的
 |    |-- topwin.c
 |    |-- topwin.h
 |    |-- widgets.c
-|    |-- window.c
+|    \-- window.c
 |
 |-- include
-|     |-- rtgui
-|            |-- widgets
+|     \-- rtgui
+|            \-- widgets
 |                    |-- box.h
 |                    |-- container.h
 |                    |-- matrix.h
 |                    |-- region.h
 |                    |-- title.h
 |                    |-- widget.h
-|                    |-- window.h
+|                    \-- window.h
 </code></pre><h2 id="System"><a href="#System" class="headerlink" title="System"></a>System</h2><p>系統層面的工作、及協助外部硬體，如鍵盤等。</p>
-<pre><code>|-- src
+<pre><code>.
+|-- src
 |    |-- filerw.c
 |    |-- mouse.c
 |    |-- mouse.h
@@ -523,10 +529,10 @@ Font處理文字編碼，及字型相關的
 |    |-- rtgui_app.c
 |    |-- rtgui_driver.c
 |    |-- rtgui_object.c
-|    |-- rtgui_system.c
+|    \-- rtgui_system.c
 |
 |-- include
-|     |-- rtgui
+|     \-- rtgui
 |            |-- driver.h
 |            |-- event.h
 |            |-- filerw.h
@@ -538,7 +544,7 @@ Font處理文字編碼，及字型相關的
 |            |-- rtgui_server.h
 |            |-- rtgui_system.h
 |            |-- rtgui.h
-|            |-- tree.h
+|            \-- tree.h
 </code></pre><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
