@@ -14,7 +14,7 @@
     background: #42b983;
 }
 
-:not(pre) > code[class*="language-"], pre[class*="language-"] {
+:not(pre) > code[class*="language-"], pre[class*="language-"], pre, pre code  {
     background: #1d262f !important;
 }
 
@@ -184,9 +184,7 @@ code {
 .dark #gitalk-container .gt-container .gt-header .gt-header-preview,
 .dark #gitalk-container .gt-container .gt-header .gt-header-textarea,
 .dark .chip,
-.dark .my-skills .skillbar,
-.dark pre,
-.dark pre code {
+.dark .my-skills .skillbar {
     background-color: #424242;
 }
 
