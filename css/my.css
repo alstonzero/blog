@@ -115,8 +115,35 @@ header .brand-logo .logo-span {
     font-weight: 700;
 }
 
+nav#headNav:not(.nav-transparent) {
+    backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(255,255,257,0.3);
+}
+
+.light nav#headNav:not(.nav-transparent) a {
+    color: #34495e;
+}
+
+nav#headNav a {
+    transition: none;
+}
+
+
+.dark nav#headNav:not(.nav-transparent) {
+    backdrop-filter: saturate(180%) blur(20px);
+    background: rgba(0,0,0,0.3);
+}
+
 .carousel-control i {
     padding-top: 5px;
+}
+
+nav .brand-logo {
+    margin-top: -5px;
+}
+
+ul:not(.browser-default)>li {
+    margin-top: -2px;
 }
 
 .block-with-text:after,
@@ -377,8 +404,7 @@ td, th {
 }
 
 .dark .chip-container a .chip:hover,
-.dark .progress-bar,
-.dark .bg-color {
+.dark .progress-bar {
     background-image: linear-gradient(to right, #263238 0%, #37474F 100%) !important;
     background-color: transparent !important;
     border-color: #263238;
