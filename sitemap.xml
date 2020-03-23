@@ -184,7 +184,7 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-algorithm/</loc>
+    <loc>http://blog.lusw.dev/ItC-gate/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -205,7 +205,7 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-gate/</loc>
+    <loc>http://blog.lusw.dev/ItC-algorithm/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-6-fs/</loc>
+    <loc>http://blog.lusw.dev/xv6-5-scheduler/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-5-scheduler/</loc>
+    <loc>http://blog.lusw.dev/xv6-6-fs/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
