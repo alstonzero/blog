@@ -137,7 +137,11 @@ nav#headNav:not(.nav-transparent) {
     content:url("/medias/jedi_r.png");
 }
 
-.light nav#headNav:not(.nav-transparent) .logo-img {
+.light nav#headNav:not(.nav-transparent) .logo-img.responsive-img {
+    content:url("/medias/jedi_r.png");
+}
+
+.light nav#headNav:not(.nav-transparent) .logo-img:not(.responsive-img) {
     content:url("/medias/jedi_rb.png");
 }
 
