@@ -1,4 +1,6 @@
 /* Here is your custom css styles. */
+
+/* Noto Sans TC */
 @font-face {
     font-family: 'Noto-Sans-TC';
     font-style: normal;
@@ -41,8 +43,80 @@
     src: url('/Noto_Sans_TC/NotoSansTC-Black.otf') format('opentype');
 }
 
+/* Noto Serif TC */
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 200;
+    src: url('/Noto_Serif_TC/NotoSerifTC-ExtraLight.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 300;
+    src: url('/Noto_Serif_TC/NotoSerifTC-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/Noto_Serif_TC/NotoSerifTC-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/Noto_Serif_TC/NotoSerifTC-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 600;
+    src: url('/Noto_Serif_TC/NotoSerifTC-SemiBold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/Noto_Serif_TC/NotoSerifTC-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto-Serif-TC';
+    font-style: normal;
+    font-weight: 900;
+    src: url('/Noto_Serif_TC/NotoSerifTC-Black.otf') format('opentype');
+}
+
+
+@font-face {
+    font-family: 'Varela-Round';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/Varela_Round/VarelaRound-Regular.ttf') format('truetype');
+}
+
 html {
     font-family: 'Noto-Sans-TC';
+}
+
+footer {
+    font-family: 'Varela-Round';
+}
+
+.bg-cover .title, .bg-cover .post-title ,
+header .brand-logo .logo-span {
+    font-family: "Noto-Serif-TC";
+    font-weight: 700;
+}
+
+.carousel-control i {
+    padding-top: 5px;
 }
 
 .block-with-text:after,
