@@ -170,13 +170,6 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-gate/</loc>
-    
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.lusw.dev/auto-backup-with-crontab/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
@@ -185,6 +178,13 @@
   
   <url>
     <loc>http://blog.lusw.dev/rtgui-object/</loc>
+    
+    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.lusw.dev/ItC-gate/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -268,14 +268,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-timer/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-scheduler/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-scheduler/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-timer/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     

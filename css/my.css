@@ -125,6 +125,18 @@ nav#headNav:not(.nav-transparent) {
     color: #34495e;
 }
 
+.dark nav#headNav .logo-img {
+    content:url("/medias/jedi_s.png");
+}
+
+.light nav#headNav.nav-transparent .logo-img {
+    content:url("/medias/jedi_r.png");
+}
+
+.light nav#headNav:not(.nav-transparent) .logo-img {
+    content:url("/medias/jedi_rb.png");
+}
+
 nav#headNav a {
     transition: none;
 }
