@@ -3,11 +3,11 @@ $(function () {
     $(".dark #m-toggle-dark-item span, .dark #toggle-dark-item span").text("開燈");
     $(".light #m-toggle-dark-item span, .light #toggle-dark-item span").text("關燈");
 
-    $('.light #toggle-dark-btn, #m-toggle-dark-btn').removeClass('far');
-    $('.light #toggle-dark-btn, #m-toggle-dark-btn').addClass('fas');
+    $('.light #toggle-dark-btn, .light #m-toggle-dark-btn').removeClass('far');
+    $('.light #toggle-dark-btn, .light  #m-toggle-dark-btn').addClass('fas');
 
-    $('.dark #toggle-dark-btn, #m-toggle-dark-btn').addClass('far');
-    $('.dark #toggle-dark-btn, #m-toggle-dark-btn').removeClass('fas');
+    $('.dark #toggle-dark-btn, .dark #m-toggle-dark-btn').addClass('far');
+    $('.dark #toggle-dark-btn, .dark #m-toggle-dark-btn').removeClass('fas');
 
     /**
      * 添加文章卡片hover效果.
