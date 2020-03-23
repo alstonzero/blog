@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>在 Xcode 中為免費開發者帳戶重新建立憑證</title>
+      <link href="/renew-xcode-profile-free-develope-account/"/>
+      <url>/renew-xcode-profile-free-develope-account/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="免費帳戶憑證"><a href="#免費帳戶憑證" class="headerlink" title="免費帳戶憑證"></a>免費帳戶憑證</h2><p>免費版開發者帳戶的憑證有效期限只有 7 天，可以參考此連結。<br><a href="https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94%E9%9B%86/%E5%85%8D%E8%B2%BB%E9%96%8B%E7%99%BC%E5%B8%B3%E8%99%9F%E7%9A%84-ios-app-%E5%91%BD%E4%B8%AD%E6%B3%A8%E5%AE%9A%E5%8F%AA%E8%83%BD%E6%B4%BB%E4%B8%83%E5%A4%A9-8fd2cc849bfb" target="_blank" rel="noopener">免費開發帳號的 iOS App 命中注定只能活七天 !</a></p><p>理論上來說，超過期限只要重新從 Xcode 安裝 App 就會自動重簽 (renew)，但如果在期限內想要直接延期呢？</p><h2 id="建立新的憑證"><a href="#建立新的憑證" class="headerlink" title="建立新的憑證"></a>建立新的憑證</h2><p>如果想要直接延期，唯一的方法只有重新建立一個憑證：</p><ul><li><p>從 Preference 中的 Accounts<br><img src="https://i.imgur.com/JfTJGet.png" alt="Preference > Accounts"></p></li><li><p>選擇右下角的 Manage Certificates…<br><img src="https://i.imgur.com/r5PAFur.png" alt="黃框處"></p></li><li><p>按下去，選擇左下角的 <code>+</code><br><img src="https://i.imgur.com/Q59J2Tj.png" alt="黃框處"></p></li><li><p>選擇 Apple Development<br><img src="https://i.imgur.com/bSelwuz.png" alt=""></p></li></ul><p>之後就會新增一個憑證，可以回去 Targets 看憑證的確更新了。<br><img src="https://i.imgur.com/9MsNUqd.png" alt="紅字"></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Xcode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Xcode </tag>
+            
+            <tag> ios </tag>
+            
+            <tag> renew </tag>
+            
+            <tag> certificate </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CSS3選擇器 :not()</title>
       <link href="/css-not-selecter/"/>
       <url>/css-not-selecter/</url>
