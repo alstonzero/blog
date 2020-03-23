@@ -117,7 +117,7 @@ header .brand-logo .logo-span {
 
 nav#headNav:not(.nav-transparent) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(120px);
+    backdrop-filter: saturate(180%) blur(20px);
     background: rgba(255,255,257,0.4);
 }
 
@@ -152,7 +152,7 @@ nav#headNav a {
 
 .dark nav#headNav:not(.nav-transparent) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(120px);
+    backdrop-filter: saturate(180%) blur(20px);
     background: rgba(0,0,0,0.4);
 }
 
