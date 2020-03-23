@@ -125,6 +125,10 @@ nav#headNav:not(.nav-transparent) {
     color: #34495e;
 }
 
+.sidenav {
+    height: calc(100vh + 60px);
+}
+
 .dark nav#headNav .logo-img {
     content:url("/medias/jedi_s.png");
 }
