@@ -142,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-gate/</loc>
+    <loc>http://blog.lusw.dev/ItC-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-intro/</loc>
-    
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.lusw.dev/rtgui-object/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
@@ -191,7 +184,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-algorithm/</loc>
+    <loc>http://blog.lusw.dev/ItC-gate/</loc>
+    
+    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.lusw.dev/ItC-data/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -205,14 +205,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-code/</loc>
+    <loc>http://blog.lusw.dev/ItC-algorithm/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-data/</loc>
+    <loc>http://blog.lusw.dev/ItC-code/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -268,14 +268,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-timer/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-scheduler/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-scheduler/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-timer/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     

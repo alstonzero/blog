@@ -183,13 +183,13 @@ code {
     height: 200px;
     border-radius: 50%;
     display: flex;
-    background: #CFD8DC;
+    background: #EEE;
 }
 
 .profile .avatar-img {
-    max-width: 120px;
     margin: auto;
     transform: unset;
+    margin-left: 13px
 }
 
 .post-calendar-card-d {
