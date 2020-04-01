@@ -9,6 +9,10 @@ $(function () {
     $('.dark #toggle-dark-btn, .dark #m-toggle-dark-btn').addClass('far');
     $('.dark #toggle-dark-btn, .dark #m-toggle-dark-btn').removeClass('fas');
 
+    if ($('html').hasClass('.light'))
+        $('#postCharts-d').hide();
+    else 
+        $('#postCharts').hide();
     /**
      * 添加文章卡片hover效果.
      */
