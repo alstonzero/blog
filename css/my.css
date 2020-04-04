@@ -37,6 +37,11 @@ footer .social-statis {
     margin-top: 0;
 }
 
+.article-tags {
+    height: 47px;
+    overflow-y: auto;
+}
+
 .light nav#headNav:not(.nav-transparent) a {
     color: #34495e;
 }
