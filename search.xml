@@ -13,12 +13,14 @@
       
       <categories>
           
-          <category> Xcode </category>
+          <category> Note </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> note </tag>
             
             <tag> Xcode </tag>
             
@@ -44,12 +46,14 @@
       
       <categories>
           
-          <category> 網頁設計 </category>
+          <category> Note </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> note </tag>
             
             <tag> css </tag>
             
