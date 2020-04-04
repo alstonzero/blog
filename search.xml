@@ -102,12 +102,14 @@
       
       <categories>
           
-          <category> Arduino </category>
+          <category> Note </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> note </tag>
             
             <tag> Arduino </tag>
             
