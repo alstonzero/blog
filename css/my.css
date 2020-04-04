@@ -42,6 +42,21 @@ footer .social-statis {
     overflow-y: auto;
 }
 
+.article-tags::-webkit-scrollbar {
+    background: transparent;
+    width: 10px;
+}
+
+.dark .article-tags::-webkit-scrollbar-thumb {
+    background: #646464;
+    border-radius: 10px;
+}
+
+.light .article-tags::-webkit-scrollbar-thumb {
+    background: #BDBDBD;
+    border-radius: 10px;
+}
+
 .light nav#headNav:not(.nav-transparent) a {
     color: #34495e;
 }
