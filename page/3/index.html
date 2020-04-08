@@ -340,7 +340,7 @@
                 <div class="post-categories">
                     
                         
-                            <a href="/categories/Note/" class="category">Note</a>
+                            <a href="/categories/Linux/" class="category">Linux</a>
                         
                     
                 </div>
@@ -425,6 +425,62 @@ A
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/RT-Thread-GUI/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="RT-Thread GUI engine - 架構">
+                            
+                            <span class="card-title">RT-Thread GUI engine - 架構</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                RT-Thread 的 GUI 放在 package 中（git 原始碼），本文將簡單將此 GUI engine 分工。
+Font處理文字編碼，及字型相關的
+. 
+|-- src
+| |-- asc12font.c
+| |-- asc16f
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/RT-Thread/" class="post-category">
+                                    RT-Thread
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/RT-Thread/">
+                            <span class="chip bg-color">RT-Thread</span>
+                        </a>
+                        
+                        <a href="/tags/GUI/">
+                            <span class="chip bg-color">GUI</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/Ubuntu-change-home-partition/">
                         <div class="card-image">
                             
@@ -458,8 +514,8 @@ result:
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Note/" class="post-category">
-                                    Note
+                                <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                                 
                                 
@@ -470,12 +526,8 @@ result:
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/note/">
-                            <span class="chip bg-color">note</span>
-                        </a>
-                        
-                        <a href="/tags/linux/">
-                            <span class="chip bg-color">linux</span>
+                        <a href="/tags/Linux/">
+                            <span class="chip bg-color">Linux</span>
                         </a>
                         
                         <a href="/tags/Ubuntu/">
@@ -529,12 +581,16 @@ struct sample {
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/note/">
-                            <span class="chip bg-color">note</span>
-                        </a>
-                        
                         <a href="/tags/C/">
                             <span class="chip bg-color">C</span>
+                        </a>
+                        
+                        <a href="/tags/Clang/">
+                            <span class="chip bg-color">Clang</span>
+                        </a>
+                        
+                        <a href="/tags/attribute/">
+                            <span class="chip bg-color">attribute</span>
                         </a>
                         
                     </div>
@@ -594,8 +650,8 @@ O
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Note/" class="post-category">
-                                    Note
+                                <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                                 
                                 
@@ -610,8 +666,8 @@ O
                             <span class="chip bg-color">vim</span>
                         </a>
                         
-                        <a href="/tags/note/">
-                            <span class="chip bg-color">note</span>
+                        <a href="/tags/Linux/">
+                            <span class="chip bg-color">Linux</span>
                         </a>
                         
                     </div>
@@ -1104,74 +1160,6 @@ CPU 執行一個 process 時，是不斷的進行：讀取指令、增加程式�
                         
                         <a href="/tags/trap/">
                             <span class="chip bg-color">trap</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/xv6-2-mem/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="XV6 Ch2 Page tables">
-                            
-                            <span class="card-title">XV6 Ch2 Page tables</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-File: vm.c
-
-分頁硬體
-PTE：Page table entry，包含 20-bit PPN 及 flags
-PPN：Physical Page number
-x86的頁表：$2^{20}$ 條 PTE。
-
-目標
-分頁硬體使用虛
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-07-23
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/XV6/" class="post-category">
-                                    XV6
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/XV6/">
-                            <span class="chip bg-color">XV6</span>
-                        </a>
-                        
-                        <a href="/tags/kernel/">
-                            <span class="chip bg-color">kernel</span>
-                        </a>
-                        
-                        <a href="/tags/分頁/">
-                            <span class="chip bg-color">分頁</span>
-                        </a>
-                        
-                        <a href="/tags/記憶體管理/">
-                            <span class="chip bg-color">記憶體管理</span>
                         </a>
                         
                     </div>
