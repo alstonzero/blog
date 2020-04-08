@@ -73,6 +73,17 @@ nav#headNav .logo-img {
     display: none;
 }
 
+header .side-nav .mobile-head .logo-name {
+    margin-top: 0;
+    padding-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+header .side-nav .mobile-head {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 .dark nav#headNav:not(.nav-transparent) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
