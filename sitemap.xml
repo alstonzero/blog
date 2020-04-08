@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.lusw.dev/linux-lookup-port/</loc>
+    
+    <lastmod>2020-04-08T12:16:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/linux-init-number/</loc>
     
-    <lastmod>2020-04-08T07:07:28.000Z</lastmod>
+    <lastmod>2020-04-08T12:16:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.lusw.dev/auto-backup-with-crontab/</loc>
+    
+    <lastmod>2020-04-08T07:11:37.000Z</lastmod>
     
   </url>
   
@@ -40,13 +54,6 @@
     <loc>http://blog.lusw.dev/custom-domain-by-google-domain/</loc>
     
     <lastmod>2020-04-08T06:21:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.lusw.dev/auto-backup-with-crontab/</loc>
-    
-    <lastmod>2020-04-08T06:20:58.000Z</lastmod>
     
   </url>
   
@@ -107,13 +114,6 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/categories/index.html</loc>
-    
-    <lastmod>2020-01-26T16:54:30.125Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.lusw.dev/tags/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
@@ -121,14 +121,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/running-xv6/</loc>
+    <loc>http://blog.lusw.dev/categories/index.html</loc>
     
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
+    <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/starting-xv6/</loc>
+    <loc>http://blog.lusw.dev/xv6-6-fs/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -142,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-0-intro/</loc>
+    <loc>http://blog.lusw.dev/xv6-4-lock/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -163,14 +163,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-overflow/</loc>
+    <loc>http://blog.lusw.dev/xv6-0-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-internet/</loc>
+    <loc>http://blog.lusw.dev/ItC-overflow/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -184,6 +184,13 @@
   </url>
   
   <url>
+    <loc>http://blog.lusw.dev/ItC-internet/</loc>
+    
+    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/ItC-database/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
@@ -191,14 +198,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-FS/</loc>
+    <loc>http://blog.lusw.dev/ItC-data/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-data/</loc>
+    <loc>http://blog.lusw.dev/ItC-FS/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -233,14 +240,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-2-mem/</loc>
+    <loc>http://blog.lusw.dev/xv6-1-process/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-1-process/</loc>
+    <loc>http://blog.lusw.dev/xv6-2-mem/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -254,14 +261,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-4-lock/</loc>
+    <loc>http://blog.lusw.dev/starting-xv6/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-6-fs/</loc>
+    <loc>http://blog.lusw.dev/running-xv6/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     

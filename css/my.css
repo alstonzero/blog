@@ -33,6 +33,10 @@ footer a:hover i {
     text-shadow: 0px 0px 20px #fff;
 }
 
+.sub-nav li i {
+    display: none;
+}
+
 footer .social-statis {
     margin-top: 0;
 }
@@ -65,26 +69,9 @@ footer .social-statis {
     height: calc(100vh + 60px);
 }
 
-.dark nav#headNav .logo-img {
-    content:url("/medias/jedi_s.png");
+nav#headNav .logo-img {
+    display: none;
 }
-
-.light nav#headNav.nav-transparent .logo-img {
-    content:url("/medias/jedi_r.png");
-}
-
-.light nav#headNav:not(.nav-transparent) .logo-img.responsive-img {
-    content:url("/medias/jedi_r.png");
-}
-
-.light nav#headNav:not(.nav-transparent) .logo-img:not(.responsive-img) {
-    content:url("/medias/jedi_rb.png");
-}
-
-nav#headNav a {
-    transition: none;
-}
-
 
 .dark nav#headNav:not(.nav-transparent) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -250,6 +237,12 @@ code {
     background-image: none !important;
 }
 
+.dark .menus_item_child:before {
+    border-color: transparent transparent #212121;
+}
+
+.dark .m-nav-item ul,
+.dark .menus_item_child,
 .dark .sidenav,
 .dark .cd-timeline-content,
 .dark .modal,
@@ -264,6 +257,7 @@ code {
     background-color: #212121 !important;
 }
 
+.dark .nav-menu li .sub-nav li a,
 .dark .my-projects .info .info-title a,
 .dark input[type=search]:not(.browser-default),
 .dark #searchModal .search-header .title,
@@ -283,6 +277,7 @@ code {
     color: #BDBDBD !important;
 }
 
+.dark .m-nav-show,
 .dark .avatar,
 .dark table tbody tr:nth-child(2n), thead,
 .dark .search-result-list .search-keyword,
