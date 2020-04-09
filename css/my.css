@@ -65,10 +65,6 @@ footer .social-statis {
     height: calc(100vh + 60px);
 }
 
-nav#headNav .brand-logo .logo-img {
-    display: none;
-}
-
 header .side-nav .mobile-head .logo-name {
     margin-top: -20px;
 }

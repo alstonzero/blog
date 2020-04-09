@@ -191,14 +191,12 @@ $(function () {
         if ($('html').hasClass('dark')) {
             $('#toggle-dark-btn, #m-toggle-dark-btn').removeClass('fas');
             $('#toggle-dark-btn, #m-toggle-dark-btn').addClass('far');
-            $('.brand-logo a img, .mobile-head img').attr("src","/medias/jedi_s.png");
             $('#toggle-dark-item span, #m-toggle-dark-item span').text("開燈")
             document.cookie="local_theme=dark;path=/";
         }
         else if ($('html').hasClass('light')) {
             $('#toggle-dark-btn, #m-toggle-dark-btn').removeClass('far');
             $('#toggle-dark-btn, #m-toggle-dark-btn').addClass('fas');
-            $('.brand-logo a img, .mobile-head img').attr("src","/medias/jedi_r.png");
             $('#toggle-dark-item span, #m-toggle-dark-item span').text("關燈")
             document.cookie="local_theme=light;path=/";
         }
