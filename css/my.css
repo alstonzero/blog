@@ -80,6 +80,10 @@ header .side-nav .mobile-head {
     padding-bottom: 1rem;
 }
 
+.dark nav ul a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
 .dark nav#headNav:not(.nav-transparent) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
