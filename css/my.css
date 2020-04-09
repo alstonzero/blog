@@ -42,11 +42,6 @@ footer .social-statis {
     margin-top: 0;
 }
 
-.article-tags {
-    height: 47px;
-    overflow-y: auto;
-}
-
 .article-tags::-webkit-scrollbar {
     background: transparent;
     width: 10px;
@@ -106,11 +101,6 @@ ul:not(.browser-default)>li {
 .block-with-text:after,
 .block-with-text:before {
     content: none;
-}
-
-.article .article-content .summary {
-    height: 3em;
-    overflow: hidden;
 }
 
 #artDetail .tag_share .post-meta__tag-list .article-tag .chip:hover {
