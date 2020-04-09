@@ -10,6 +10,7 @@ footer {
     font-family: 'Varela Round', sans-serif;
 }
 
+.nav-item,
 .profile .author .title,
 .bg-cover .title, .bg-cover .post-title ,
 header .brand-logo .logo-span {
