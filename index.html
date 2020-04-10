@@ -98,7 +98,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="\#" class="waves-effect waves-light">
+    <a href="./#!" class="waves-effect waves-light">
 
       
       <i class="fas fa-list"></i>
@@ -484,19 +484,8 @@
 
         let carouselIntervalId;
         
-        // Loop to call the next cover article picture.
-        let autoCarousel = function() {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
 
         let restartPlay = function () {
-            
-            clearInterval(carouselIntervalId);
-            autoCarousel();
             
         };
 
