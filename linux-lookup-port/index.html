@@ -490,7 +490,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    344
+                    361
                 </div>
                 
 
@@ -526,7 +526,16 @@
 <h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p>netstat 可以用來查看各種網路狀態，一樣可以拿來查找被佔用的 port。</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">netstat</span> -tulpn
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>其中 <code>-t</code> 代表找走 <code>TCP</code> 協定的，<code>-u</code> 代表找走 <code>UDP</code> 協定的，<code>-l</code> 代表找 <code>LISTEN</code> 的 socket，<code>-n</code> 代表顯示硬體名稱，<code>-p</code> 代表顯示 PID。<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[netstat Command Usage on Linux](https://geekflare.com/netstat/)">[2]</span></a></sup></p>
+<p>其中：</p>
+<ul>
+<li><code>-t</code> 代表找走 <code>TCP</code> 協定的</li>
+<li><code>-u</code> 代表找走 <code>UDP</code> 協定的</li>
+<li><code>-l</code> 代表找 <code>LISTEN</code> 的 socket</li>
+<li><code>-n</code> 代表顯示硬體名稱，<code>-p</code> 代表顯示 PID。<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[netstat Command Usage on Linux](https://geekflare.com/netstat/)">[2]</span></a></sup></li>
+</ul>
+<p>我們一樣可以用 <code>grep</code> 來協助尋找</p>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">netstat</span> -tulpn <span class="token operator">|</span> <span class="token function">grep</span> :4000
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <hr>
 <ul>
 <li>Reference<ul>
