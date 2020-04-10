@@ -182,7 +182,7 @@ code {
     color: #fff;
 }
 
-.avatar {
+/*.avatar {
     transform: translate3d(0, -65%, 0);
     width: 200px;
     margin: auto;
@@ -197,7 +197,7 @@ code {
     margin: auto;
     transform: unset;
     margin-left: 13px
-}
+}*/
 
 .post-calendar-card-d {
     margin-top: -240px;
@@ -277,7 +277,6 @@ code {
 }
 
 .dark .m-nav-show,
-.dark .avatar,
 .dark table tbody tr:nth-child(2n), thead,
 .dark .search-result-list .search-keyword,
 .dark #gitalk-container .gt-container .gt-header .gt-header-preview,
