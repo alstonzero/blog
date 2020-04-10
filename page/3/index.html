@@ -408,7 +408,7 @@
 
     
     
-    <div class="col s12 m6" >
+    <div class="col s12" >
         <div class="post-card" style="background-image: url('/medias/featureimages/5.jpg')">
             <div class="post-body">
                 <div class="post-categories">
@@ -421,9 +421,7 @@
                 <a href="/vim-instruction/">
                     <h3 class="post-title">vim 指令筆記</h3>
                 </a>
-                <p class="post-description">
-                    
-                        編輯
+                <p class="post-description">編輯
 
 
 指令
@@ -441,9 +439,8 @@ I
 
 
 A
-                    
-                </p>
-                <a href="/vim-instruction/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
+在游標行的最後一位進入編輯模</p>
+                <a href="/vim-instruction/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)">
                     <i class="icon far fa-eye fa-fw"></i>更多
                 </a>
             </div>
@@ -451,7 +448,7 @@ A
     </div>
     
     
-    <div class="col s12 m6" >
+    <div class="col s12 m6" data-aos="zoom-in-up">
         <div class="post-card" style="background-image: url('/medias/featureimages/17.jpg')">
             <div class="post-body">
                 <div class="post-categories">
@@ -464,12 +461,31 @@ A
                 <a href="/linux-lookup-port/">
                     <h3 class="post-title">如何查看 Linux 被佔用的 port</h3>
                 </a>
-                <p class="post-description">
+                <p class="post-description">介紹幾種在 Linux CLI 下查看哪些人佔用哪幾個 port</p>
+                <a href="/linux-lookup-port/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)">
+                    <i class="icon far fa-eye fa-fw"></i>更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col s12 m6" data-aos="zoom-in-up">
+        <div class="post-card" style="background-image: url('/medias/featureimages/23.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
                     
-                        介紹幾種在 Linux CLI 下查看哪些人佔用哪幾個 port
+                        
+                            <a href="/categories/C語言/" class="category">C語言</a>
+                        
                     
-                </p>
-                <a href="/linux-lookup-port/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
+                </div>
+                <a href="/c-bit-operation/">
+                    <h3 class="post-title">C 語言使用 Union 與位元欄位來改特定 bit 區間值</h3>
+                </a>
+                <p class="post-description">在 C 語言中，如果我們要對特定的 bit(s) 做操作的話，最直覺的方式是用 bit and（&amp;）跟 bit or（|）：
+int</p>
+                <a href="/c-bit-operation/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #1AD6FD 0%, #1D62F0 100%)">
                     <i class="icon far fa-eye fa-fw"></i>更多
                 </a>
             </div>
@@ -495,6 +511,65 @@ A
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/rt-thread-RTM-EXPORT/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="RT-Thread 理解 RTM_EXPORT">
+                            
+                            <span class="card-title">RT-Thread 理解 RTM_EXPORT</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                在 RT-Thread 的 kernel 中，許多副程式的結尾都有 RTM_EXPORT，如：
+/** 
+ * This function will lock the thread scheduler.
+ */
+void rt_enter_
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/RT-Thread/" class="post-category">
+                                    RT-Thread
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/kernel/">
+                            <span class="chip bg-color">kernel</span>
+                        </a>
+                        
+                        <a href="/tags/RT-Thread/">
+                            <span class="chip bg-color">RT-Thread</span>
+                        </a>
+                        
+                        <a href="/tags/RTM-EXPORT/">
+                            <span class="chip bg-color">RTM_EXPORT</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -1172,71 +1247,6 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
                         
                         <a href="/tags/scheduler/">
                             <span class="chip bg-color">scheduler</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/xv6-4-lock/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="XV6 Ch4 鎖">
-                            
-                            <span class="card-title">XV6 Ch4 鎖</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Race conditions例子struct list{
-    int data;
-    struct list *next;
-};
-
-struct list *list = 0;
-
-void
-insert(int data)
-{
- 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-07
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/XV6/" class="post-category">
-                                    XV6
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/XV6/">
-                            <span class="chip bg-color">XV6</span>
-                        </a>
-                        
-                        <a href="/tags/kernel/">
-                            <span class="chip bg-color">kernel</span>
-                        </a>
-                        
-                        <a href="/tags/lock/">
-                            <span class="chip bg-color">lock</span>
                         </a>
                         
                     </div>

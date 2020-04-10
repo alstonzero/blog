@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.lusw.dev/c-bit-operation/</loc>
+    
+    <lastmod>2020-04-10T10:20:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/ascii-color/</loc>
     
     <lastmod>2020-04-10T09:25:48.000Z</lastmod>
@@ -114,14 +121,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/tags/index.html</loc>
+    <loc>http://blog.lusw.dev/categories/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/categories/index.html</loc>
+    <loc>http://blog.lusw.dev/tags/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
@@ -142,13 +149,6 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-4-lock/</loc>
-    
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.lusw.dev/rt-thread-RTM-EXPORT/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
@@ -163,6 +163,13 @@
   </url>
   
   <url>
+    <loc>http://blog.lusw.dev/xv6-4-lock/</loc>
+    
+    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/xv6-0-intro/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
@@ -170,14 +177,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-overflow/</loc>
+    <loc>http://blog.lusw.dev/rtgui-object/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-object/</loc>
+    <loc>http://blog.lusw.dev/ItC-overflow/</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
