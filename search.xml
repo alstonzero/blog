@@ -183,7 +183,7 @@
       
       <categories>
           
-          <category> Note </category>
+          <category> C語言 </category>
           
       </categories>
       
@@ -193,6 +193,8 @@
             <tag> C </tag>
             
             <tag> Clang </tag>
+            
+            <tag> C語言 </tag>
             
             <tag> ASCII </tag>
             
@@ -808,7 +810,7 @@
       
       <categories>
           
-          <category> Note </category>
+          <category> C語言 </category>
           
       </categories>
       
@@ -818,6 +820,8 @@
             <tag> C </tag>
             
             <tag> Clang </tag>
+            
+            <tag> C語言 </tag>
             
             <tag> attribute </tag>
             
