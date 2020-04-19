@@ -591,8 +591,7 @@
 
     <span class="token comment" spellcheck="true">/* win magic flag, magic value is 0xA5A55A5A */</span>
     rt_uint32_t    magic<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="定義物件類型"><a href="#定義物件類型" class="headerlink" title="定義物件類型"></a>定義物件類型</h3><blockquote>
 <p>File: window.c</p>
@@ -601,10 +600,9 @@
                   <span class="token function">RTGUI_PARENT_TYPE</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span><span class="token punctuation">,</span>
                   _rtgui_win_constructor<span class="token punctuation">,</span>
                   _rtgui_win_destructor<span class="token punctuation">,</span>
-                  <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                  <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h2 id="建立視窗"><a href="#建立視窗" class="headerlink" title="建立視窗"></a>建立視窗</h2><p><i class"fa="" fa-code"=""></i> Code: <code>rtgui_win_create</code></p>
+<h2 id="建立視窗"><a href="#建立視窗" class="headerlink" title="建立視窗"></a>建立視窗</h2><p>&lt;i class”fa fa-code”&gt; Code: <code>rtgui_win_create</code></p>
 <table>
 <thead>
 <tr>
@@ -612,13 +610,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立視窗</td>
 <td>視窗指標</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -628,15 +624,13 @@
 <th><code>style</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>上層視窗</td>
 <td>視窗標題</td>
 <td>視窗的大小</td>
 <td>一些風格</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_win_t <span class="token operator">*</span><span class="token function">rtgui_win_create</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>parent_window<span class="token punctuation">,</span>
                               <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>title<span class="token punctuation">,</span>
                               rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">,</span>
@@ -657,8 +651,7 @@
 
     <span class="token keyword">return</span> win<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>透過 <code>rtgui_win_init</code> 完成設定</p>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>rtgui_win_init</code></p>
@@ -669,13 +662,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化視窗</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -686,16 +677,14 @@
 <th><code>style</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>上層視窗</td>
 <td>視窗標題</td>
 <td>視窗的大小</td>
 <td>一些風格</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">rtgui_win_init</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">,</span> <span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>parent_window<span class="token punctuation">,</span>
                    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>title<span class="token punctuation">,</span>
                    rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">,</span>
@@ -759,8 +748,7 @@
 __on_err<span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="建立主視窗"><a href="#建立主視窗" class="headerlink" title="建立主視窗"></a>建立主視窗</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_mainwin_create</code></p>
 <table>
 <thead>
@@ -769,13 +757,11 @@ __on_err<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立主視窗</td>
 <td>視窗指標</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -784,14 +770,12 @@ __on_err<span class="token punctuation">:</span>
 <th><code>style</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>上層視窗</td>
 <td>視窗標題</td>
 <td>一些風格</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_win_t <span class="token operator">*</span><span class="token function">rtgui_mainwin_create</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>parent_window<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>title<span class="token punctuation">,</span> rt_uint16_t style<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_rect rect<span class="token punctuation">;</span>
@@ -801,8 +785,7 @@ __on_err<span class="token punctuation">:</span>
 
     <span class="token keyword">return</span> <span class="token function">rtgui_win_create</span><span class="token punctuation">(</span>parent_window<span class="token punctuation">,</span> title<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rect<span class="token punctuation">,</span> style<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_mainwin_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_mainwin_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>建立一個固定大小的視窗，這個大小被設定在 <code>_mainwin_rect</code> 這個全域變數裡面，可以透過 <code>rtgui_get_mainwin_rect</code> 來取得這個值。</p>
 <hr>
 <h2 id="刪除視窗"><a href="#刪除視窗" class="headerlink" title="刪除視窗"></a>刪除視窗</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_win_destroy</code></p>
@@ -813,25 +796,21 @@ __on_err<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除視窗</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>目標視窗</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_destroy</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">/* close the window first if it's not. */</span>
@@ -867,8 +846,7 @@ __on_err<span class="token punctuation">:</span>
         <span class="token function">rtgui_widget_destroy</span><span class="token punctuation">(</span><span class="token function">RTGUI_WIDGET</span><span class="token punctuation">(</span>win<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_destroy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_destroy<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="關閉視窗"><a href="#關閉視窗" class="headerlink" title="關閉視窗"></a>關閉視窗</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_win_close</code></p>
 <table>
@@ -878,25 +856,21 @@ __on_err<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>關閉視窗</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>目標視窗</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* send a close event to myself to get a consistent behavior */</span>
 rt_bool_t <span class="token function">rtgui_win_close</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -908,8 +882,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
                                  <span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_event <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>eclose<span class="token punctuation">,</span>
                                  RT_FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_close<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_close<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>使用 <code>_rtgui_win_deal_close</code> 完成關閉動作</p>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>_rtgui_win_deal_close</code></p>
@@ -920,13 +893,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除視窗</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -935,14 +906,12 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>force_close</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>目標視窗</td>
 <td>關閉事件</td>
 <td>是否要強致關閉</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> rt_bool_t <span class="token function">_rtgui_win_deal_close</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">,</span>
                                        <span class="token keyword">struct</span> rtgui_event <span class="token operator">*</span>event<span class="token punctuation">,</span>
                                        rt_bool_t force_close<span class="token punctuation">)</span>
@@ -976,8 +945,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
     <span class="token punctuation">}</span>
 
     <span class="token keyword">return</span> RT_TRUE<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="設定視窗"><a href="#設定視窗" class="headerlink" title="設定視窗"></a>設定視窗</h2><h3 id="大小"><a href="#大小" class="headerlink" title="大小"></a>大小</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_set_rect</code></p>
 <table>
@@ -987,13 +955,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定視窗大小</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1001,13 +967,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>*rect</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>新大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_set_rect</span><span class="token punctuation">(</span>rtgui_win_t <span class="token operator">*</span>win<span class="token punctuation">,</span> rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_event_win_resize event<span class="token punctuation">;</span>
@@ -1026,8 +990,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         <span class="token function">rtgui_server_post_event</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_event_win_resize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_rect<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="OnActive-函式"><a href="#OnActive-函式" class="headerlink" title="OnActive 函式"></a>OnActive 函式</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_set_onactivate</code></p>
 <table>
@@ -1037,13 +1000,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 OnActive 函式</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1051,13 +1012,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>handler</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>OnActive 函式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_set_onactivate</span><span class="token punctuation">(</span>rtgui_win_t <span class="token operator">*</span>win<span class="token punctuation">,</span> rtgui_event_handler_ptr handler<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>win <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span>
@@ -1065,8 +1024,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         win<span class="token operator">-></span>on_activate <span class="token operator">=</span> handler<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_onactivate<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_onactivate<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="OnDeactive-函式"><a href="#OnDeactive-函式" class="headerlink" title="OnDeactive 函式"></a>OnDeactive 函式</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_set_ondeactivate</code></p>
 <table>
@@ -1076,13 +1034,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 OnDeactive 函式</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1090,13 +1046,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>handler</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>OnDeactive 函式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_set_ondeactivate</span><span class="token punctuation">(</span>rtgui_win_t <span class="token operator">*</span>win<span class="token punctuation">,</span> rtgui_event_handler_ptr handler<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>win <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span>
@@ -1104,8 +1058,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         win<span class="token operator">-></span>on_deactivate <span class="token operator">=</span> handler<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_ondeactivate<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_ondeactivate<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="OnClose-函式"><a href="#OnClose-函式" class="headerlink" title="OnClose 函式"></a>OnClose 函式</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_set_onclose</code></p>
 <table>
@@ -1115,13 +1068,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 OnClose 函式</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1129,13 +1080,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>handler</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>OnClose 函式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_set_onclose</span><span class="token punctuation">(</span>rtgui_win_t <span class="token operator">*</span>win<span class="token punctuation">,</span> rtgui_event_handler_ptr handler<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>win <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span>
@@ -1143,8 +1092,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         win<span class="token operator">-></span>on_close <span class="token operator">=</span> handler<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_onclose<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_onclose<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="OnKey"><a href="#OnKey" class="headerlink" title="OnKey"></a>OnKey</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_set_onkey</code></p>
 <table>
@@ -1154,13 +1102,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 OnKey 函式</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1168,13 +1114,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>handler</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>OnKey 函式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_set_onkey</span><span class="token punctuation">(</span>rtgui_win_t <span class="token operator">*</span>win<span class="token punctuation">,</span> rtgui_event_handler_ptr handler<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>win <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span>
@@ -1182,8 +1126,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         win<span class="token operator">-></span>on_key <span class="token operator">=</span> handler<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_onkey<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_set_onkey<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="視窗的行為"><a href="#視窗的行為" class="headerlink" title="視窗的行為"></a>視窗的行為</h2><h3 id="動態模式"><a href="#動態模式" class="headerlink" title="動態模式"></a>動態模式</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_enter_modal</code></p>
 <table>
@@ -1193,25 +1136,21 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>進入動態模式</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rt_base_t <span class="token function">rtgui_win_enter_modal</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rt_base_t exit_code <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
@@ -1233,8 +1172,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 
     <span class="token keyword">return</span> exit_code<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_enter_modal<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_enter_modal<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>rtgui_win_end_modal</code></p>
 <table>
@@ -1244,13 +1182,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>離開動態模式</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1258,13 +1194,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>modal_code</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>動態模式編號</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_end_modal</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">,</span> rtgui_modal_code_t modal_code<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -1288,8 +1222,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
     <span class="token comment" spellcheck="true">/* remove modal mode */</span>
     win<span class="token operator">-></span>flag <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>RTGUI_WIN_FLAG_MODAL<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_end_modal<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_end_modal<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="現身"><a href="#現身" class="headerlink" title="現身"></a>現身</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_show</code></p>
 <table>
@@ -1299,13 +1232,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>現身該視窗</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1313,13 +1244,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>is_modal</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 <td>是否為動態模式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rt_base_t <span class="token function">rtgui_win_show</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">,</span> rt_bool_t is_modal<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RTGUI_WIDGET_UNHIDE</span><span class="token punctuation">(</span>win<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1332,8 +1261,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         <span class="token keyword">return</span> win<span class="token operator">-></span><span class="token function">_do_show</span><span class="token punctuation">(</span>win<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token function">rtgui_win_do_show</span><span class="token punctuation">(</span>win<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_show<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_show<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果視窗本身有設定 <code>_do_show</code> 函式的話，則呼叫本身的；否則呼叫 <code>rtgui_win_do_show</code></p>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>rtgui_win_do_show</code></p>
@@ -1344,25 +1272,21 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗現身</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rt_base_t <span class="token function">rtgui_win_do_show</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rt_base_t exit_code <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
@@ -1413,8 +1337,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 
     <span class="token keyword">return</span> exit_code<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_do_show<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_do_show<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="隱藏"><a href="#隱藏" class="headerlink" title="隱藏"></a>隱藏</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_hide</code></p>
 <table>
@@ -1424,25 +1347,21 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>隱藏視窗</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_hide</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>win <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1466,8 +1385,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         win<span class="token operator">-></span>flag <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>RTGUI_WIN_FLAG_ACTIVATE<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_hide<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_hide<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_activate</code></p>
 <table>
@@ -1477,25 +1395,21 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>啟動視窗</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rt_err_t <span class="token function">rtgui_win_activate</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_event_win_activate eact<span class="token punctuation">;</span>
@@ -1505,8 +1419,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
     <span class="token keyword">return</span> <span class="token function">rtgui_server_post_event_sync</span><span class="token punctuation">(</span><span class="token function">RTGUI_EVENT</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>eact<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                         <span class="token keyword">sizeof</span><span class="token punctuation">(</span>eact<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_activate<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_activate<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="移動"><a href="#移動" class="headerlink" title="移動"></a>移動</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_move</code></p>
 <table>
@@ -1516,29 +1429,25 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>進入動態模式</td>
 <td>檢查碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
-<th style="text-align:center"><code>x</code></th>
-<th style="text-align:center"><code>y</code></th>
+<th align="center"><code>x</code></th>
+<th align="center"><code>y</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
-<td style="text-align:center">目標 x</td>
-<td style="text-align:center">目標 y</td>
+<td align="center">目標 x</td>
+<td align="center">目標 y</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_move</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_widget <span class="token operator">*</span>wgt<span class="token punctuation">;</span>
@@ -1585,8 +1494,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
     <span class="token function">rtgui_widget_show</span><span class="token punctuation">(</span><span class="token function">RTGUI_WIDGET</span><span class="token punctuation">(</span>win<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_move<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_move<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="OnDraw"><a href="#OnDraw" class="headerlink" title="OnDraw"></a>OnDraw</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_ondraw</code></p>
 <table>
@@ -1596,25 +1504,21 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>OnDraw</td>
 <td>boolean</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> rt_bool_t <span class="token function">rtgui_win_ondraw</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_dc <span class="token operator">*</span>dc<span class="token punctuation">;</span>
@@ -1643,8 +1547,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
     <span class="token function">rtgui_dc_end_drawing</span><span class="token punctuation">(</span>dc<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> RT_FALSE<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="更新重疊區域"><a href="#更新重疊區域" class="headerlink" title="更新重疊區域"></a>更新重疊區域</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_win_update_clip</code></p>
 <table>
@@ -1654,25 +1557,21 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>更新重疊區域</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*win</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>視窗本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_win_update_clip</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_container <span class="token operator">*</span>cnt<span class="token punctuation">;</span>
@@ -1712,8 +1611,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
         <span class="token function">rtgui_widget_update_clip</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_update_clip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_update_clip<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Event-Handler"><a href="#Event-Handler" class="headerlink" title="Event Handler"></a>Event Handler</h2><p>此 event handler 也就是 window 的函式進入點</p>
 <p><i class="fa fa-code"></i> Code: <code>rtgui_win_event_handler</code></p>
@@ -1724,13 +1622,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>window 函式進入點</td>
 <td>boolean</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1738,13 +1634,11 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 <th><code>*event</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>物件本體</td>
 <td>行為本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rt_bool_t <span class="token function">rtgui_win_event_handler</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_object <span class="token operator">*</span>object<span class="token punctuation">,</span> <span class="token keyword">struct</span> rtgui_event <span class="token operator">*</span>event<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span>win<span class="token punctuation">;</span>
@@ -1907,8 +1801,7 @@ rt_bool_t <span class="token function">rtgui_win_close</span><span class="token 
 
     <span class="token keyword">return</span> RT_FALSE<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_event_handler<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_win_event_handler<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

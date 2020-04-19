@@ -548,8 +548,7 @@ void rt_enter_">
     <span class="token comment" spellcheck="true">/* enable interrupt */</span>
     <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_enter_critical<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_enter_critical<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>RTM_EXPORT</code> 是在 <em>rtm.h</em> 中所定義的一個巨集。</p>
 <h2 id="File-rtm-h"><a href="#File-rtm-h" class="headerlink" title="File: rtm.h"></a>File: rtm.h</h2><ul>
 <li><code>RTM_EXPORT</code> 可被定義的方式有三種：</li>
@@ -558,11 +557,9 @@ void rt_enter_">
 <span class="token macro property">#<span class="token directive keyword">pragma</span> section("RTMSymTab$f",read)</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RTM_EXPORT(symbol)                                            \
 __declspec(allocate("RTMSymTab$f"))const char __rtmsym_##symbol##_name[] = "__vs_rtm_"#symbol;</span>
-<span class="token macro property">#<span class="token directive keyword">pragma</span> comment(linker, "/merge:RTMSymTab=mytext")</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="2-MINGW32"><a href="#2-MINGW32" class="headerlink" title="2. __MINGW32_"></a>2. __MINGW32_</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">elif</span> defined(__MINGW32__)</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> RTM_EXPORT(symbol)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> comment(linker, "/merge:RTMSymTab=mytext")</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-MINGW32"><a href="#2-MINGW32" class="headerlink" title="2. _MINGW32"></a>2. <em>_MINGW32</em></h3><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">elif</span> defined(__MINGW32__)</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> RTM_EXPORT(symbol)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="3-else"><a href="#3-else" class="headerlink" title="3. else"></a>3. else</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">else</span></span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RTM_EXPORT(symbol)                                            \
 const char __rtmsym_##symbol##_name[] SECTION(".rodata.name") = #symbol;     \
@@ -571,8 +568,7 @@ const struct rt_module_symtab __rtmsym_##symbol SECTION("RTMSymTab")= \
     (void *)&amp;symbol,                                                  \
     __rtmsym_##symbol##_name                                          \
 };</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>##</code> 為連字符<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[C/C++ 的預處理定義 : # , #@ , ##](https://blog.xuite.net/jesonchung/scienceview/93554778-C%2FC%2B%2B+的預處理定義+%3A+%23+%2C++%23%40+%2C+%23%23)">[1]</span></a></sup>，作用是將指定文字帶到變數名稱裡；如：當傳進來的 <code>symbol</code> 值是 <code>rt_enter_critical</code> 時，此字串的變數名會被宣告成 <code>__rtmsym_rt_enter_critical_name</code></li>
 <li><code>SECTION</code> 為 <code>__attribute__((section))</code> 的巨集寫法</li>
@@ -586,14 +582,12 @@ const struct rt_module_symtab __rtmsym_##symbol SECTION("RTMSymTab")= \
 <span class="token punctuation">{</span>                                                                     
     <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>rt_enter_critical<span class="token punctuation">,</span>                                                  
     __rtmsym_rt_enter_critical_name                                          
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> rt_module_symtab
 <span class="token punctuation">{</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>addr<span class="token punctuation">;</span>
     <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="用意"><a href="#用意" class="headerlink" title="用意"></a>用意</h2><ul>
 <li>linux 系統中，有 <code>EXPORT_SYMBOL</code>，其中的用意是為了在撰寫程式時能夠方便呼叫這些副程式<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[EXPORT_SYMBOL解析](http://www.cnblogs.com/dyllove98/p/3186967.html)">[2]</span></a></sup>，即<strong>模組化</strong></li>

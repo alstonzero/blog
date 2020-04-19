@@ -539,8 +539,7 @@ struct sample {
     <span class="token keyword">int</span>  memberA<span class="token punctuation">;</span>
     <span class="token keyword">char</span> memberB<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span>  memberC<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果我們手算此結構的大小的話，會是：</p>
 <ul>
 <li>A: 4 bytes;</li>
@@ -554,15 +553,13 @@ struct sample {
     <span class="token keyword">char</span> memberB<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">char</span> padding<span class="token punctuation">;</span>
     <span class="token keyword">int</span>  memberC<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在嵌入式系統中，不可浪費太多記憶體，所以需要使用 packed 屬性來告訴 compiler 不要幫我們對齊，<code>sizeof</code> 出來的結果就會如我們預期。</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> sample <span class="token punctuation">{</span>
     <span class="token keyword">int</span>  memberA<span class="token punctuation">;</span>
     <span class="token keyword">char</span> memberB<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span>  memberC<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span>packed<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span>packed<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="aligned"><a href="#aligned" class="headerlink" title="aligned"></a>aligned</h3><p>相反的，<code>aligned</code> 屬性就是告訴 compiler 幫我們對齊資料，可以指定對其的大小，如：</p>
 <ul>
@@ -574,8 +571,7 @@ struct sample {
     <span class="token keyword">int</span>  memberA<span class="token punctuation">;</span>
     <span class="token keyword">char</span> memberB<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span>  memberC<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">aligned</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">aligned</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此時 <code>sizeof(struct sample) = 16</code><br>也就是 A+B=7 bytes，沒有超過我們給定的 8，但加上 C 就會超過了，所以在 B 跟 C 中間塞個 1 byte 來對齊；然後在 C 的後面塞 4 bytes；也就是：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> sample <span class="token punctuation">{</span>
     <span class="token keyword">int</span>  memberA<span class="token punctuation">;</span>
@@ -583,8 +579,7 @@ struct sample {
     <span class="token keyword">char</span> padding1<span class="token punctuation">;</span>
     <span class="token keyword">int</span>  memberC<span class="token punctuation">;</span>
     <span class="token keyword">int</span>  padding2<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">aligned</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">aligned</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果沒有加數字，compiler 會進行最佳化的對齊。<br>以此例子將以 4 對齊。</p>
 <h2 id="對資料的"><a href="#對資料的" class="headerlink" title="對資料的"></a>對資料的</h2><ul>
 <li><code>__attribute__((aligned))</code></li>
@@ -600,23 +595,20 @@ struct sample {
 
 <span class="token keyword">int</span> <span class="token function">sample</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> a<span class="token operator">==</span><span class="token number">0</span> <span class="token operator">?</span> a <span class="token punctuation">:</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但這是無效的操作，所以需要加上 <code>__attribute__((noreturn))</code></p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span>noreturn<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">int</span> <span class="token function">sample</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> a<span class="token operator">==</span><span class="token number">0</span><span class="token operator">?</span> a <span class="token punctuation">:</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h2><h3 id="section"><a href="#section" class="headerlink" title="section"></a>section</h3><p>如果需要將特定的變數、結構或是副程式放到指定的記憶體位置，即可使用此屬性，用法如下：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> sample<span class="token punctuation">{</span>
     <span class="token keyword">int</span>  some<span class="token punctuation">;</span>
     <span class="token keyword">char</span> members<span class="token punctuation">;</span>
     <span class="token keyword">int</span>  here<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上述例子我們指定將 sample 結構放置於指定的記憶體區塊，名為 <code>"name"</code>。<br><br>而 <code>"name"</code> 這個記憶體區塊則在 <em>linker script</em> 中命名。</p>
 <pre><code>SECTION
 {
@@ -624,16 +616,14 @@ struct sample {
     .name : {
         AT(0x100000);
     }
-}
-</code></pre><p>對變數、副程式我們可以一樣指定連結的位址：</p>
+}</code></pre><p>對變數、副程式我們可以一樣指定連結的位址：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span> link_sample <span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">void</span> <span class="token function">sample_fun</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token function">__attribute__</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">section</span><span class="token punctuation">(</span><span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">void</span> <span class="token function">sample_fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> do_nothing <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> do_nothing<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -788,10 +778,9 @@ command:
 
 sudo blkid
 
-
 result:
 
-/dev/sda1: UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2
+/dev/sda1: UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b
                         
                     </div>
                     <div class="publish-info">
@@ -852,7 +841,6 @@ result:
 
 
 
-
 i
 游標位置進入編輯模式（insert mode）[1]
 
@@ -870,7 +858,7 @@ o
 
 
 O
-向下新增一行，進入編輯
+向下新增一行，進入編輯模
                         
                     </div>
                     <div class="publish-info">

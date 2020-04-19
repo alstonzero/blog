@@ -572,12 +572,18 @@ Monolithic kernel：整個 OS 都位於 kernel 中，如此一來所有 system c
 <h2 id="Code-第一個-address-space"><a href="#Code-第一個-address-space" class="headerlink" title="Code: 第一個 address space"></a>Code: 第一個 address space</h2><ul>
 <li><p>XV6 為 kernel 建立第一個 address space 的流程：</p>
 <ol>
-<li>開機</li>
-<li>初始化自己</li>
-<li>從硬碟中讀取 boot loader 至記憶體中執行。</li>
-<li>Boot loader 從硬碟讀取 kernel 並從 <em>entry.s</em> 開始執行。</li>
-<li>Boot loader 會把 XV6 的 kernel 載入實體位址 0x100000。</li>
-<li>為了讓剩下的 kernel 能夠執行，設置一個 page table，將虛擬位址 0x80000000（KERNBASE）映射到實體位址 0x0。將兩個虛擬位址映射到同一個實體位址是 page 的常見手法。</li>
+<li><p>開機</p>
+</li>
+<li><p>初始化自己</p>
+</li>
+<li><p>從硬碟中讀取 boot loader 至記憶體中執行。</p>
+</li>
+<li><p>Boot loader 從硬碟讀取 kernel 並從 <em>entry.s</em> 開始執行。</p>
+</li>
+<li><p>Boot loader 會把 XV6 的 kernel 載入實體位址 0x100000。</p>
+</li>
+<li><p>為了讓剩下的 kernel 能夠執行，設置一個 page table，將虛擬位址 0x80000000（KERNBASE）映射到實體位址 0x0。將兩個虛擬位址映射到同一個實體位址是 page 的常見手法。</p>
+</li>
 <li><p>跳到 kernel 的 c code，並在高位址上執行：</p>
 <ul>
 <li><code>%esp</code> 指向高位址的 stack 記憶體。</li>
@@ -618,8 +624,7 @@ entry:
     mov $main, %eax
     jmp *%eax
 
-.comm stack, KSTACKSIZE
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+.comm stack, KSTACKSIZE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-建立第一個-process"><a href="#Code-建立第一個-process" class="headerlink" title="Code: 建立第一個 process"></a>Code: 建立第一個 process</h2><blockquote>
 <p>File: proc.c</p>
@@ -637,13 +642,11 @@ entry:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立一個 process</td>
 <td>process 結構</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Look in the process table for an UNUSED proc.</span>
 <span class="token comment" spellcheck="true">// If found, change state to EMBRYO and initialize</span>
 <span class="token comment" spellcheck="true">// state required to run in the kernel.</span>
@@ -664,8 +667,7 @@ entry:
 found<span class="token punctuation">:</span>
   p<span class="token operator">-></span>state <span class="token operator">=</span> EMBRYO<span class="token punctuation">;</span>
   p<span class="token operator">-></span>pid <span class="token operator">=</span> nextpid<span class="token operator">++</span><span class="token punctuation">;</span>
-  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著嘗試請求分配一個 kernel stack，如果失敗，把 <code>p-&gt;state</code> 改回 <code>UNUSED</code>。</li>
 </ul>
@@ -678,8 +680,7 @@ found<span class="token punctuation">:</span>
 
   <span class="token comment" spellcheck="true">// Leave room for trap frame.</span>
   sp <span class="token operator">-</span><span class="token operator">=</span> <span class="token keyword">sizeof</span> <span class="token operator">*</span>p<span class="token operator">-></span>tf<span class="token punctuation">;</span>
-  p<span class="token operator">-></span>tf <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> trapframe<span class="token operator">*</span><span class="token punctuation">)</span>sp<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  p<span class="token operator">-></span>tf <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> trapframe<span class="token operator">*</span><span class="token punctuation">)</span>sp<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://i.imgur.com/Q2wSVQX.png" alt="kstack" title="A new kernel stack."></p>
 <ul>
 <li>Allocproc 通過設定返回程式計數器的值來導致新 process 的 kernel thread 會先在 forkret 中執行，再回到 trapret。</li>
@@ -696,8 +697,7 @@ found<span class="token punctuation">:</span>
   p<span class="token operator">-></span>context<span class="token operator">-></span>eip <span class="token operator">=</span> <span class="token punctuation">(</span>uint<span class="token punctuation">)</span>forkret<span class="token punctuation">;</span>
 
   <span class="token keyword">return</span> p<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>Forkret</code> return 堆疊（<code>p-&gt;context-&gt;eip</code>）底。</li>
 <li><code>Allocate</code> 將 <code>trapret</code> 放在 <code>eip</code> 的上方，即 <code>forkret</code> return 的位置。</li>
@@ -718,13 +718,11 @@ found<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立系統的初始 process</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="userinit"><a href="#userinit" class="headerlink" title="userinit"></a>userinit</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">userinit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -734,13 +732,11 @@ found<span class="token punctuation">:</span>
   p <span class="token operator">=</span> <span class="token function">allocproc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   initproc <span class="token operator">=</span> p<span class="token punctuation">;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>p<span class="token operator">-></span>pgdir <span class="token operator">=</span> <span class="token function">setupkvm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"userinit: out of memory?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"userinit: out of memory?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>inituvm</code> 請求一個 page 大小的實體記憶體，將虛擬記憶體 0 映射到此記憶體，並將 <code>_binary_initcode_start_</code> 及 <code>_binary_initcode_size_</code> 拷貝到 page。</li>
 </ul>
-<pre class="line-numbers language-c"><code class="language-c">  <span class="token function">inituvm</span><span class="token punctuation">(</span>p<span class="token operator">-></span>pgdir<span class="token punctuation">,</span> _binary_initcode_start<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>_binary_initcode_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c">  <span class="token function">inituvm</span><span class="token punctuation">(</span>p<span class="token operator">-></span>pgdir<span class="token punctuation">,</span> _binary_initcode_start<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>_binary_initcode_size<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>把 trap frame 設定為初始使用者模式。</li>
 </ul>
@@ -752,23 +748,20 @@ found<span class="token punctuation">:</span>
   p<span class="token operator">-></span>tf<span class="token operator">-></span>ss <span class="token operator">=</span> p<span class="token operator">-></span>tf<span class="token operator">-></span>ds<span class="token punctuation">;</span>
   p<span class="token operator">-></span>tf<span class="token operator">-></span>eflags <span class="token operator">=</span> FL_IF<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//allow hardware interrupt</span>
   p<span class="token operator">-></span>tf<span class="token operator">-></span>esp <span class="token operator">=</span> PGSIZE<span class="token punctuation">;</span>
-  p<span class="token operator">-></span>tf<span class="token operator">-></span>eip <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// beginning of initcode.S</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  p<span class="token operator">-></span>tf<span class="token operator">-></span>eip <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// beginning of initcode.S</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>p-&gt;name</code> 設為 <code>"initcode"</code> 是為了 debug，<code>p-&gt;cwd</code> 設在 process 的現在目錄。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token function">safestrcpy</span><span class="token punctuation">(</span>p<span class="token operator">-></span>name<span class="token punctuation">,</span> <span class="token string">"initcode"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>p<span class="token operator">-></span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  p<span class="token operator">-></span>cwd <span class="token operator">=</span> <span class="token function">namei</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+  p<span class="token operator">-></span>cwd <span class="token operator">=</span> <span class="token function">namei</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 <code>p-&gt;state</code> 為 <code>RUNNABLE</code>。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  p<span class="token operator">-></span>state <span class="token operator">=</span> RUNNABLE<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-執行第一個-process"><a href="#Code-執行第一個-process" class="headerlink" title="Code: 執行第一個 process"></a>Code: 執行第一個 process</h2><ul>
-<li>當 <em>main</em> 呼叫完 <em>userinit</em> 後，呼叫 <em>mpmain</em>，<em>mpmain</em> 接著呼叫 <em>scheduler</em> 開始運行 process。<br><i class="fa fa-code"></i> Code: <code>mpmain</code></li>
+<li>當 <em>main</em> 呼叫完 <em>userinit</em> 後，呼叫 <em>mpmain<em>，</em>mpmain</em> 接著呼叫 <em>scheduler</em> 開始運行 process。<br><i class="fa fa-code"></i> Code: <code>mpmain</code></li>
 </ul>
 <table>
 <thead>
@@ -777,13 +770,11 @@ found<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>完成多核心開機程序</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Common CPU setup code.</span>
 <span class="token keyword">static</span> <span class="token keyword">void</span>
 <span class="token function">mpmain</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
@@ -792,8 +783,7 @@ found<span class="token punctuation">:</span>
   <span class="token function">idtinit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// load idt register</span>
   <span class="token function">xchg</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cpu<span class="token operator">-></span>started<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// tell startothers() we're up</span>
   <span class="token function">scheduler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// start running processes</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>scheduler</code></p>
 <table>
@@ -803,13 +793,11 @@ found<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>執行調度，指定執行的 process</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">//PAGEBREAK: 42</span>
 <span class="token comment" spellcheck="true">// Per-CPU process scheduler.</span>
 <span class="token comment" spellcheck="true">// Each CPU calls scheduler() after setting itself up.</span>
@@ -821,15 +809,13 @@ found<span class="token punctuation">:</span>
 <span class="token keyword">void</span>
 <span class="token function">scheduler</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token keyword">struct</span> proc <span class="token operator">*</span>p<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>第一行指令：<code>sti</code>，啟動處理器中斷；開機的時候在 <em>bootasm.S</em> 中將中斷禁止(<code>cli</code>)，在 XV6 準備完成後重新開啟。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// Enable interrupts on this processor.</span>
-    <span class="token function">sti</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">sti</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><em>Scheduler</em> 找到一個<code>p-&gt;state</code>為<code>RUNNABLE</code>的 process，此時是唯一的：<code>initproc</code>。</li>
 </ul>
@@ -837,8 +823,7 @@ found<span class="token punctuation">:</span>
     <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
       <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">!=</span> RUNNABLE<span class="token punctuation">)</span>
-        <span class="token keyword">continue</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">continue</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著把 pre-cpu 的變量 <code>proc</code> 設為此 process。</li>
 <li>呼叫 <code>switchuvm</code> 通知硬體開始使用目標 process 的  page table。</li>
@@ -847,8 +832,7 @@ found<span class="token punctuation">:</span>
       <span class="token comment" spellcheck="true">// to release ptable.lock and then reacquire it</span>
       <span class="token comment" spellcheck="true">// before jumping back to us.</span>
       proc <span class="token operator">=</span> p<span class="token punctuation">;</span>
-      <span class="token function">switchuvm</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      <span class="token function">switchuvm</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著把 <code>p-&gt;state</code> 設為 <code>RUNNING</code>。</li>
 <li>呼叫 <code>swtch</code>，context switch 到目標程序的 kernel thread。</li>
@@ -863,8 +847,7 @@ found<span class="token punctuation">:</span>
     <span class="token punctuation">}</span>
     <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="File-swtch-S"><a href="#File-swtch-S" class="headerlink" title="File: swtch.S"></a>File: swtch.S</h3><pre class="line-numbers language-x86asm"><code class="language-x86asm"># Context switch
 #
 #   void swtch(struct context **old, struct context *new);
@@ -892,8 +875,7 @@ swtch:
      popl %esi
      popl %ebx
      popl %ebp
-     ret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+     ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>ret</code> 指令從 stack pop 目標程序的 <code>%eip</code>，結束 context switch。</li>
 <li>現在處理器在程序 p 的 kernel stack 上執行。</li>
@@ -909,13 +891,11 @@ swtch:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// A fork child's very first scheduling by scheduler()</span>
 <span class="token comment" spellcheck="true">// will swtch here.  "Return" to user space.</span>
 <span class="token keyword">void</span>
@@ -934,8 +914,7 @@ swtch:
   <span class="token punctuation">}</span>
 
   <span class="token comment" spellcheck="true">// Return to "caller", actually trapret (see allocproc).</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著位於 p-&gt;context 的是 <code>trapret</code>。</li>
 <li><code>%esp</code> 保存著 <code>p-&gt;tf</code>。</li>
@@ -954,8 +933,7 @@ trapret:
   popl %es
   popl %ds
   addl $0x8, %esp  # trapno and errcode
-  iret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  iret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>iret</code>：interrupt return，程序返回中斷前的位址。</p>
 <ul>
 <li>處理器從 <code>%eip</code> 的值繼續執行，對於 <code>initproc</code> 即為虛擬地址 0，也就是 <em>initcode.S</em> 的第一條指令。</li>
@@ -1000,8 +978,7 @@ init:
 .p2align 2
 argv:
   .long init
-  .long 0
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  .long 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

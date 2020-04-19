@@ -538,8 +538,7 @@
 <span class="token macro property">#<span class="token directive keyword">define</span> _RTGUI_EVENT_WIN_ELEMENTS \
     struct rtgui_event parent; \
     struct rtgui_win *wid;</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>rtgui_event</code> 即為事件的基本結構：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> rtgui_event
 <span class="token punctuation">{</span>
@@ -554,8 +553,7 @@
     <span class="token comment" spellcheck="true">/* mailbox to acknowledge request */</span>
     rt_mailbox_t ack<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_event rtgui_event_t<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_event rtgui_event_t<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="基本結構設定"><a href="#基本結構設定" class="headerlink" title="基本結構設定"></a>基本結構設定</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> RTGUI_EVENT_INIT(e, t)  do      \
 {                                       \
@@ -563,15 +561,13 @@
     (e)->user = 0;                      \
     (e)->sender = rtgui_app_self();     \
     (e)->ack = RT_NULL;                 \
-} while (0)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+} while (0)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="啟動-server"><a href="#啟動-server" class="headerlink" title="啟動 server"></a>啟動 server</h2><blockquote>
 <p>File: server.c</p>
 </blockquote>
 <p>首先，定義一個 app 名叫 server :</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">struct</span> rtgui_app <span class="token operator">*</span>rtgui_server_app <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">struct</span> rtgui_app <span class="token operator">*</span>rtgui_server_app <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>接著透過 <code>rtgui_server_entry</code> 啟動 app，也就是 server:<br><br><i class="fa fa-code"></i> Code: <code>rtgui_server_entry</code></p>
 <table>
 <thead>
@@ -580,25 +576,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>啟動 server</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*parameter</code></th>
+<th align="center"><code>*parameter</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">未使用</td>
+<tbody><tr>
+<td align="center">未使用</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * rtgui server thread's entry
  */</span>
@@ -630,8 +622,7 @@
 
     <span class="token function">rtgui_app_destroy</span><span class="token punctuation">(</span>rtgui_server_app<span class="token punctuation">)</span><span class="token punctuation">;</span>
     rtgui_server_app <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最後會進入 <code>rtgui_app_run</code> 並正式開始執行 server，也就是進入所屬的 event handler</p>
 <hr>
 <h2 id="Event-Handler"><a href="#Event-Handler" class="headerlink" title="Event Handler"></a>Event Handler</h2><p>Event handler 也就是 server 的進入點</p>

@@ -535,13 +535,11 @@ Code">
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>啟動其他 CPU</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span>
 <span class="token function">startothers</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -554,8 +552,7 @@ Code">
   <span class="token comment" spellcheck="true">// The linker has placed the image of entryother.S in</span>
   <span class="token comment" spellcheck="true">// _binary_entryother_start.</span>
   code <span class="token operator">=</span> <span class="token function">p2v</span><span class="token punctuation">(</span><span class="token number">0x7000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">memmove</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> _binary_entryother_start<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint<span class="token punctuation">)</span>_binary_entryother_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">memmove</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> _binary_entryother_start<span class="token punctuation">,</span> <span class="token punctuation">(</span>uint<span class="token punctuation">)</span>_binary_entryother_size<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>entryother.S 的入口被 linked 到 <code>0x7000</code>，這裡將 code 指向 <code>0x7000</code> 作為 entryother.S 的進入點。</li>
 </ul>
@@ -569,13 +566,11 @@ Code">
     stack <span class="token operator">=</span> <span class="token function">kalloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>code<span class="token number">-4</span><span class="token punctuation">)</span> <span class="token operator">=</span> stack <span class="token operator">+</span> KSTACKSIZE<span class="token punctuation">;</span>
     <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>code<span class="token number">-8</span><span class="token punctuation">)</span> <span class="token operator">=</span> mpenter<span class="token punctuation">;</span>
-    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>code<span class="token number">-12</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">v2p</span><span class="token punctuation">(</span>entrypgdir<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>code<span class="token number">-12</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">v2p</span><span class="token punctuation">(</span>entrypgdir<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>為待會的 entryother 建立一個堆疊 …</li>
 </ul>
-<pre class="line-numbers language-c"><code class="language-c">    <span class="token function">lapicstartap</span><span class="token punctuation">(</span>c<span class="token operator">-></span>id<span class="token punctuation">,</span> <span class="token function">v2p</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c">    <span class="token function">lapicstartap</span><span class="token punctuation">(</span>c<span class="token operator">-></span>id<span class="token punctuation">,</span> <span class="token function">v2p</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>正式的啟動 CPU <code>c</code>，即進入 entryother.S</li>
 <li>entryother.S 做完設定後會呼叫 <code>mpenter()</code>，<code>mpmenter</code> 最後會呼叫 <code>mpmain()</code>。</li>
@@ -584,8 +579,7 @@ Code">
     <span class="token keyword">while</span><span class="token punctuation">(</span>c<span class="token operator">-></span>started <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
       <span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>在 <code>mpmain()</code> 會將 <code>cpu-&gt;started</code> 設為 <code>1</code>，CPU0 在 <code>while</code> 迴圈等待 CPU <code>c</code> 啟動完畢，才繼續啟動下一個 CPU。</li>
 </ul>
@@ -596,13 +590,11 @@ Code">
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>啟動 lapic</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -610,13 +602,11 @@ Code">
 <th><code>addr</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲啟動的 lapic</td>
 <td>填入的值</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">lapicstartap</span><span class="token punctuation">(</span>uchar apicid<span class="token punctuation">,</span> uint addr<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -650,8 +640,7 @@ Code">
     <span class="token function">lapicw</span><span class="token punctuation">(</span>ICRLO<span class="token punctuation">,</span> STARTUP <span class="token operator">|</span> <span class="token punctuation">(</span>addr<span class="token operator">>></span><span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">microdelay</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>mpenter</code></p>
 <table>
@@ -661,13 +650,11 @@ Code">
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>完成多核心啟動流程</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span>
 <span class="token function">mpenter</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -675,8 +662,7 @@ Code">
   <span class="token function">seginit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">lapicinit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">mpmain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>mpmain</code></p>
 <table>
@@ -686,13 +672,11 @@ Code">
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>執行多核心任務</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span>
 <span class="token function">mpmain</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -700,8 +684,7 @@ Code">
   <span class="token function">idtinit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">// load idt register</span>
   <span class="token function">xchg</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cpu<span class="token operator">-></span>started<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// tell startothers() we're up</span>
   <span class="token function">scheduler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">// start running processes</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Main-解析"><a href="#Main-解析" class="headerlink" title="Main 解析"></a>Main 解析</h2><h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
@@ -729,8 +712,7 @@ Code">
   <span class="token function">userinit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// first user process</span>
   <span class="token comment" spellcheck="true">// Finish setting up this processor in mpmain.</span>
   <span class="token function">mpmain</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>kinit1()</code> <a href="/xv6-2-mem/#kinit">In ch2</a></li>
 <li><code>kvmalloc()</code> <a href="/xv6-2-mem/#kvmalloc">In Ch2</a></li>
@@ -897,7 +879,6 @@ Code">
 
 
 
-
 i
 游標位置進入編輯模式（insert mode）[1]
 
@@ -915,7 +896,7 @@ o
 
 
 O
-向下新增一行，進入編輯
+向下新增一行，進入編輯模
                         
                     </div>
                     <div class="publish-info">

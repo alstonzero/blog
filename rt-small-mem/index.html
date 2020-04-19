@@ -547,8 +547,7 @@
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_MEMTRACE</span>
     rt_uint8_t thread<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">/* thread name */</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>此結構即為一個記憶體塊的 header</li>
 <li>包含了<ul>
@@ -568,13 +567,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 heap</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -582,13 +579,11 @@
 <th><code>*end_addr</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>記憶體起始位址</td>
 <td>結束位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @ingroup SystemInit
  *
@@ -603,8 +598,7 @@
     rt_uint32_t begin_align <span class="token operator">=</span> <span class="token function">RT_ALIGN</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>begin_addr<span class="token punctuation">,</span> RT_ALIGN_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
     rt_uint32_t end_align <span class="token operator">=</span> <span class="token function">RT_ALIGN_DOWN</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>end_addr<span class="token punctuation">,</span> RT_ALIGN_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    RT_DEBUG_NOT_IN_INTERRUPT<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>向上對齊起始位址與向下對齊結束位址</li>
 </ul>
@@ -621,8 +615,7 @@
                    <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>begin_addr<span class="token punctuation">,</span> <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>end_addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著檢查起始與結束位址是否合法</li>
 <li>如果合法，給定 <code>mem_size</code> 為結束位址 - 起始位址 - 2 倍的 <code>struct mem</code> 大小</li>
@@ -639,8 +632,7 @@
     mem<span class="token operator">-></span>magic <span class="token operator">=</span> HEAP_MAGIC<span class="token punctuation">;</span>
     mem<span class="token operator">-></span>next  <span class="token operator">=</span> mem_size_aligned <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">;</span>
     mem<span class="token operator">-></span>prev  <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    mem<span class="token operator">-></span>used  <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mem<span class="token operator">-></span>used  <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設定前面的 header：<ul>
 <li>設定 magic 碼</li>
@@ -662,8 +654,7 @@
     heap_end<span class="token operator">-></span>prev  <span class="token operator">=</span> mem_size_aligned <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_MEMTRACE</span>
     <span class="token function">rt_mem_setname</span><span class="token punctuation">(</span>heap_end<span class="token punctuation">,</span> <span class="token string">"INIT"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設定結尾的 header<ul>
 <li>magic 碼</li>
@@ -676,8 +667,7 @@
 
     <span class="token comment" spellcheck="true">/* initialize the lowest-free pointer to the start of the heap */</span>
     lfree <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span>heap_ptr<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後初始化 semaphore</li>
 <li>把這一塊掛上 <code>lfree</code></li>
@@ -690,25 +680,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求記憶體</td>
 <td>記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * Allocate a block of memory with a minimum of 'size' bytes.
  *
@@ -722,8 +708,7 @@
     <span class="token keyword">struct</span> heap_mem <span class="token operator">*</span>mem<span class="token punctuation">,</span> <span class="token operator">*</span>mem2<span class="token punctuation">;</span>
 
     <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 <code>size</code> 為 0，回傳 NULL</li>
 </ul>
@@ -743,21 +728,18 @@
         <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_MEM<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"no memory\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>向上對齊 <code>size</code>，如果超過可用大小，回傳 NULL</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* every data block must be at least MIN_SIZE_ALIGNED long */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">&lt;</span> MIN_SIZE_ALIGNED<span class="token punctuation">)</span>
-        size <span class="token operator">=</span> MIN_SIZE_ALIGNED<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+        size <span class="token operator">=</span> MIN_SIZE_ALIGNED<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果小於 min size，設為 min size</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* take memory semaphore */</span>
-    <span class="token function">rt_sem_take</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> RT_WAITING_FOREVER<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    <span class="token function">rt_sem_take</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> RT_WAITING_FOREVER<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>取得 semaphore</li>
 </ul>
@@ -765,23 +747,20 @@
          ptr <span class="token operator">&lt;</span> mem_size_aligned <span class="token operator">-</span> size<span class="token punctuation">;</span>
          ptr <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>ptr<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-></span>next<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        mem <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>ptr<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        mem <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>ptr<span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>這裡特別的說明一下 for 迴圈：<br>首先起點是 <code>lfree</code> - <code>heap_ptr</code>，這裡代表最左邊的 free block 與 heap 起點的距離。 我們把 <code>heap_ptr</code> 看成是一個 <code>rt_uint8_t</code> 的陣列，也就是一格一個 byte 的陣列。 再來把 <code>lfree</code> - <code>heap_ptr</code> 看成是差量 (offset)，單位是 byte。 如此一來，<code>&amp;heap_ptr[ptr]</code> 就會是 <code>lfree</code> 的起始位置了。</p>
 <p>再來我們看 <code>next</code>，在初始化的時候，<code>next</code> 是指向 0，這個意思是下一顆在陣列的第 0 個，也就是自己；所以 <code>next</code> 存放的是下一顆的 index，而不是起始位置。</p>
 <p>最後來看上界，理論上我們需要從 lfree 找到最後一顆，實際上如果最後幾顆不夠大的話是不需要檢查的，所以這裡上界設在 <code>mem_size_aligned</code> - <code>size</code> 的意思就是說如果最後幾顆的大小總和不夠大，我們可以略過。</p>
 <pre class="line-numbers language-c"><code class="language-c">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">!</span>mem<span class="token operator">-></span>used<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>mem<span class="token operator">-></span>next <span class="token operator">-</span> <span class="token punctuation">(</span>ptr <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">>=</span> size<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             <span class="token comment" spellcheck="true">/* mem is not used and at least perfect fit is possible:
-             * mem->next - (ptr + SIZEOF_STRUCT_MEM) gives us the 'user data size' of mem */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+             * mem->next - (ptr + SIZEOF_STRUCT_MEM) gives us the 'user data size' of mem */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>first fit，如果找到第一顆可用的就進去</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">            <span class="token keyword">if</span> <span class="token punctuation">(</span>mem<span class="token operator">-></span>next <span class="token operator">-</span> <span class="token punctuation">(</span>ptr <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">)</span> <span class="token operator">>=</span>
                 <span class="token punctuation">(</span>size <span class="token operator">+</span> SIZEOF_STRUCT_MEM <span class="token operator">+</span> MIN_SIZE_ALIGNED<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">{</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>又，如果這顆夠大到可以切割的話</li>
 </ul>
@@ -805,8 +784,7 @@
                 mem2<span class="token operator">-></span>prev <span class="token operator">=</span> ptr<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_MEMTRACE</span>
                 <span class="token function">rt_mem_setname</span><span class="token punctuation">(</span>mem2<span class="token punctuation">,</span> <span class="token string">"    "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定下一顆的資料，同時把 <code>next</code> 與 <code>prev</code> 接到正確位置</li>
 </ul>
@@ -817,8 +795,7 @@
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>mem2<span class="token operator">-></span>next <span class="token operator">!=</span> mem_size_aligned <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">)</span>
                 <span class="token punctuation">{</span>
                     <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>mem2<span class="token operator">-></span>next<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-></span>prev <span class="token operator">=</span> ptr2<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著把原本那塊的 <code>next</code> 指向新的那塊，設為使用中</li>
 <li>如果新的那塊 <code>next</code> 不是最後一塊，設定 <code>prev</code></li>
@@ -828,8 +805,7 @@
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>max_mem <span class="token operator">&lt;</span> used_mem<span class="token punctuation">)</span>
                     max_mem <span class="token operator">=</span> used_mem<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後更新 <code>used_mem</code> 與 <code>max_mem</code></li>
 </ul>
@@ -848,8 +824,7 @@
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>max_mem <span class="token operator">&lt;</span> used_mem<span class="token punctuation">)</span>
                     max_mem <span class="token operator">=</span> used_mem<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果不可切割，只需設定使用中即可</li>
 </ul>
@@ -869,8 +844,7 @@
                     lfree <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>lfree<span class="token operator">-></span>next<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
                 <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>lfree <span class="token operator">==</span> heap_end<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token operator">!</span>lfree<span class="token operator">-></span>used<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>視情況更新 <code>lfree</code></li>
 </ul>
@@ -890,8 +864,7 @@
             <span class="token comment" spellcheck="true">/* return the memory data except mem struct */</span>
             <span class="token keyword">return</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>mem <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>還鎖，並回傳找到的記憶體位址</li>
 </ul>
@@ -899,8 +872,7 @@
 
     <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_malloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_malloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>沒找到一樣還鎖，並回傳 NULL</li>
 </ul>
@@ -912,13 +884,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>增長/縮減記憶體</td>
 <td>記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -926,13 +896,11 @@
 <th><code>newsize</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲增長/縮減的記憶體位址</td>
 <td>新的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will change the previously allocated memory block.
  *
@@ -962,8 +930,7 @@
     <span class="token punctuation">{</span>
         <span class="token function">rt_free</span><span class="token punctuation">(</span>rmem<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>向上對齊 size，如果：<ul>
 <li>大於可用大小，回傳 NULL</li>
@@ -973,8 +940,7 @@
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* allocate a new memory block */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>rmem <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> <span class="token function">rt_malloc</span><span class="token punctuation">(</span>newsize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> <span class="token function">rt_malloc</span><span class="token punctuation">(</span>newsize<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如原來的記憶體為空，直接 <code>malloc</code>，並回傳</li>
 </ul>
@@ -987,8 +953,7 @@
         <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> rmem<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著取得鎖，檢查傳入的記憶體是否合法</li>
 </ul>
@@ -1002,8 +967,7 @@
         <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> rmem<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>找到記憶體塊的起始位址，算出 size，如果記憶體大小不需要變動，不做事，回傳原本的記憶體位址</li>
 </ul>
@@ -1027,8 +991,7 @@
         <span class="token keyword">if</span> <span class="token punctuation">(</span>mem2<span class="token operator">-></span>next <span class="token operator">!=</span> mem_size_aligned <span class="token operator">+</span> SIZEOF_STRUCT_MEM<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
             <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>mem2<span class="token operator">-></span>next<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-></span>prev <span class="token operator">=</span> ptr2<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果可以切割，與上面的動作相同</li>
 </ul>
@@ -1037,8 +1000,7 @@
         <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> rmem<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>-使用 <code>plug_holes</code> 來合併 free block</p>
 <ul>
 <li>還鎖，回傳更新後的記憶體位置</li>
@@ -1055,8 +1017,7 @@
 
     <span class="token keyword">return</span> nmem<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_realloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_realloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果不可切割，或是需要增長，直接要一塊 new size，釋放原本的記憶體</li>
 <li>最後回傳新的記憶體位址</li>
@@ -1070,25 +1031,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>合併 free block</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*mem</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲合併的記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">plug_holes</span><span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span>mem<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> heap_mem <span class="token operator">*</span>nmem<span class="token punctuation">;</span>
@@ -1113,8 +1070,7 @@
         <span class="token punctuation">}</span>
         mem<span class="token operator">-></span>next <span class="token operator">=</span> nmem<span class="token operator">-></span>next<span class="token punctuation">;</span>
         <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>nmem<span class="token operator">-></span>next<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>mem <span class="token operator">-</span> heap_ptr<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果可以與下一顆合併</li>
 <li>檢查是否需要更新 <code>lfree</code></li>
@@ -1132,8 +1088,7 @@
         pmem<span class="token operator">-></span>next <span class="token operator">=</span> mem<span class="token operator">-></span>next<span class="token punctuation">;</span>
         <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>heap_ptr<span class="token punctuation">[</span>mem<span class="token operator">-></span>next<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>pmem <span class="token operator">-</span> heap_ptr<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果可以與上一顆合併，動作一樣</li>
 </ul>
@@ -1145,13 +1100,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求一段連續的記憶體</td>
 <td>記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1159,13 +1112,11 @@
 <th><code>size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的數量</td>
 <td>一塊的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will contiguously allocate enough space for count objects
  * that are size bytes of memory each and returns a pointer to the allocated
@@ -1191,8 +1142,7 @@
 
     <span class="token keyword">return</span> p<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_calloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_calloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與 memheap 相同，一次要一塊 count 乘 size 的記憶體</li>
 <li>清 0 並回傳起始位址</li>
@@ -1206,25 +1156,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放記憶體</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*rmem</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲釋放的記憶體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will release the previously allocated memory block by
  * rt_malloc. The released memory block is taken back to system heap.
@@ -1236,8 +1182,7 @@
     <span class="token keyword">struct</span> heap_mem <span class="token operator">*</span>mem<span class="token punctuation">;</span>
 
     <span class="token keyword">if</span> <span class="token punctuation">(</span>rmem <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果需要釋放得記憶體為空，不做事</li>
 </ul>
@@ -1258,8 +1203,7 @@
     <span class="token punctuation">}</span>
 
     <span class="token comment" spellcheck="true">/* Get the corresponding struct heap_mem ... */</span>
-    mem <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>rmem <span class="token operator">-</span> SIZEOF_STRUCT_MEM<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mem <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> heap_mem <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>rmem <span class="token operator">-</span> SIZEOF_STRUCT_MEM<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>檢查記憶體位址是否合法，並找到真正的記憶體區塊位址</li>
 </ul>
@@ -1279,8 +1223,7 @@
         <span class="token function">rt_kprintf</span><span class="token punctuation">(</span><span class="token string">"mem: 0x%08x, used flag: %d, magic code: 0x%04x\n"</span><span class="token punctuation">,</span> mem<span class="token punctuation">,</span> mem<span class="token operator">-></span>used<span class="token punctuation">,</span> mem<span class="token operator">-></span>magic<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mem<span class="token operator">-></span>used<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mem<span class="token operator">-></span>magic <span class="token operator">==</span> HEAP_MAGIC<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>mem<span class="token operator">-></span>magic <span class="token operator">==</span> HEAP_MAGIC<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>要鎖，檢查是否是使用中的區塊，及是否屬於 heap</li>
 </ul>
@@ -1295,8 +1238,7 @@
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* the newly freed struct is now the lowest */</span>
         lfree <span class="token operator">=</span> mem<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設為可使用，及更新 <code>lfree</code></li>
 </ul>
@@ -1308,8 +1250,7 @@
     <span class="token function">plug_holes</span><span class="token punctuation">(</span>mem<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_free<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_free<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後合併記憶體塊，並還鎖</li>
 </ul>

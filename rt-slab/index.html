@@ -560,16 +560,14 @@
     rt_int32_t  z_chunksize<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* chunk size for validation */</span>
     rt_int32_t  z_zoneindex<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">/* zone index */</span>
     slab_chunk  <span class="token operator">*</span>z_freechunk<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">/* free chunk list */</span>
-<span class="token punctuation">}</span> slab_zone<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span> slab_zone<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Chunk structure for free elements
  */</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> slab_chunk
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> slab_chunk <span class="token operator">*</span>c_next<span class="token punctuation">;</span>
-<span class="token punctuation">}</span> slab_chunk<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span> slab_chunk<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="Page-Allocator"><a href="#Page-Allocator" class="headerlink" title="Page Allocator"></a>Page Allocator</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* page allocator */</span>
 <span class="token keyword">struct</span> rt_page_head
@@ -578,8 +576,7 @@
     rt_size_t page<span class="token punctuation">;</span>                 <span class="token comment" spellcheck="true">/* number of page  */</span>
     <span class="token comment" spellcheck="true">/* dummy */</span>
     <span class="token keyword">char</span> dummy<span class="token punctuation">[</span>RT_MM_PAGE_SIZE <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>rt_size_t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="Descriptor"><a href="#Descriptor" class="headerlink" title="Descriptor"></a>Descriptor</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Array of descriptors that describe the contents of each page
@@ -591,8 +588,7 @@
 <span class="token punctuation">{</span>
     rt_uint32_t type<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">/* page type */</span>
     rt_uint32_t size<span class="token punctuation">:</span> <span class="token number">30</span><span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">/* pages allocated or offset from zone */</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="初始化-heap"><a href="#初始化-heap" class="headerlink" title="初始化 heap"></a>初始化 heap</h2><p><i class="fa fa-code"></i> Code: <code>rt_system_heap_init</code></p>
 <table>
@@ -602,13 +598,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 heap</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -616,13 +610,11 @@
 <th><code>*end_addr</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>記憶體起始位址</td>
 <td>結束位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @ingroup SystemInit
  *
@@ -647,15 +639,13 @@
                    <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>begin_addr<span class="token punctuation">,</span> <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>end_addr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>向上對齊起始位址，向下對其結束位址</li>
 <li>檢查是否合法</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    limsize <span class="token operator">=</span> heap_end <span class="token operator">-</span> heap_start<span class="token punctuation">;</span>
-    npages  <span class="token operator">=</span> limsize <span class="token operator">/</span> RT_MM_PAGE_SIZE<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    npages  <span class="token operator">=</span> limsize <span class="token operator">/</span> RT_MM_PAGE_SIZE<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>計算最大的 size，設定頁數量</li>
 </ul>
@@ -663,14 +653,12 @@
     <span class="token function">rt_sem_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">,</span> <span class="token string">"heap"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> RT_IPC_FLAG_FIFO<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"heap[0x%x - 0x%x], size 0x%x, 0x%x pages\n"</span><span class="token punctuation">,</span>
-                                 heap_start<span class="token punctuation">,</span> heap_end<span class="token punctuation">,</span> limsize<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                                 heap_start<span class="token punctuation">,</span> heap_end<span class="token punctuation">,</span> limsize<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>初始化 semaphore，值為 1</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* init pages */</span>
-    <span class="token function">rt_page_init</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>heap_start<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    <span class="token function">rt_page_init</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>heap_start<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>初始化 page</li>
 </ul>
@@ -683,8 +671,7 @@
     <span class="token keyword">if</span> <span class="token punctuation">(</span>zone_limit <span class="token operator">></span> ZALLOC_ZONE_LIMIT<span class="token punctuation">)</span>
         zone_limit <span class="token operator">=</span> ZALLOC_ZONE_LIMIT<span class="token punctuation">;</span>
 
-    zone_page_cnt <span class="token operator">=</span> zone_size <span class="token operator">/</span> RT_MM_PAGE_SIZE<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    zone_page_cnt <span class="token operator">=</span> zone_size <span class="token operator">/</span> RT_MM_PAGE_SIZE<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>計算 zone 的大小、對象大小的上限及總頁數</li>
 </ul>
@@ -698,8 +685,7 @@
 
     <span class="token function">RT_DEBUG_LOG</span><span class="token punctuation">(</span>RT_DEBUG_SLAB<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">"memusage 0x%x, size 0x%x\n"</span><span class="token punctuation">,</span>
                                  <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>memusage<span class="token punctuation">,</span> limsize<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後建立一個陣列紀錄頁的資訊</li>
 </ul>
@@ -711,13 +697,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化頁分配器</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -725,13 +709,11 @@
 <th><code>npages</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>存放頁的記憶體位址</td>
 <td>頁的總數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Initialize the page allocator
  */</span>
@@ -742,8 +724,7 @@
 
     rt_page_list <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
     <span class="token function">rt_page_free</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> npages<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>將 page list 設為空，釋放所有的 page</li>
 </ul>
@@ -755,25 +736,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求記憶體</td>
 <td>記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will allocate a block from system heap memory.
  * - If the nbytes is less than zero,
@@ -794,8 +771,7 @@
 
     <span class="token comment" spellcheck="true">/* zero size, return RT_NULL */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 size = 0，回傳 NULL</li>
 </ul>
@@ -809,8 +785,7 @@
 
         chunk <span class="token operator">=</span> <span class="token function">rt_page_alloc</span><span class="token punctuation">(</span>size <span class="token operator">>></span> RT_MM_PAGE_BITS<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>chunk <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 size 超過一個 chunk 的上限，則透過頁分配器來分配</li>
 <li>且如果失敗了，直接回傳 NULL</li>
@@ -818,8 +793,7 @@
 <pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* set kup */</span>
         kup <span class="token operator">=</span> <span class="token function">btokup</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span><span class="token punctuation">;</span>
         kup<span class="token operator">-></span>type <span class="token operator">=</span> PAGE_TYPE_LARGE<span class="token punctuation">;</span>
-        kup<span class="token operator">-></span>size <span class="token operator">=</span> size <span class="token operator">>></span> RT_MM_PAGE_BITS<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+        kup<span class="token operator">-></span>size <span class="token operator">=</span> size <span class="token operator">>></span> RT_MM_PAGE_BITS<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定頁的資訊：<ul>
 <li>type：<code>PAGE_TYPE_LARGE</code></li>
@@ -846,8 +820,7 @@
             max_mem <span class="token operator">=</span> used_mem<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
         <span class="token keyword">goto</span> done<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>要鎖，更新使用大小，跳到 <code>__done</code></li>
 </ul>
@@ -863,8 +836,7 @@
      * Note: zoneindex() will panic of size is too large.
      */</span>
     zi <span class="token operator">=</span> <span class="token function">zoneindex</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>zi <span class="token operator">&lt;</span> NZONES<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>zi <span class="token operator">&lt;</span> NZONES<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 size 小於一個 chunk 的上限，尋找此大小對應的 zone</li>
 </ul>
@@ -879,8 +851,7 @@
         <span class="token punctuation">{</span>
             zone_array<span class="token punctuation">[</span>zi<span class="token punctuation">]</span> <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span>
             z<span class="token operator">-></span>z_next <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果該 zone 不為空，且此 zone 剩最後一顆可用時，將此 zone 刪除</li>
 </ul>
@@ -911,8 +882,7 @@
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
 
         <span class="token keyword">goto</span> done<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>取得一塊，跳至 done<ul>
 <li>從 <code>uindex</code> 找，這種方式取得的屬於此 zone 最初的 chunk</li>
@@ -936,8 +906,7 @@
             <span class="token comment" spellcheck="true">/* remove zone from free zone list */</span>
             zone_free <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span>
             <span class="token operator">--</span> zone_free_cnt<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果找到的 zone 為空，且 zone_free 不為空：代表有可用的空 zone 可以使用</li>
 </ul>
@@ -952,8 +921,7 @@
             <span class="token punctuation">{</span>
                 chunk <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
                 <span class="token keyword">goto</span> __exit<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>否則需要重新與頁分配器要一個 zone</li>
 </ul>
@@ -971,14 +939,12 @@
 
                 kup <span class="token operator">++</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設定每一頁的資訊</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* clear to zero */</span>
-        <span class="token function">rt_memset</span><span class="token punctuation">(</span>z<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>slab_zone<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+        <span class="token function">rt_memset</span><span class="token punctuation">(</span>z<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>slab_zone<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>清空整個 zone</li>
 </ul>
@@ -992,8 +958,7 @@
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>size <span class="token operator">|</span> <span class="token punctuation">(</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">==</span> <span class="token punctuation">(</span>size <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
             off <span class="token operator">=</span> <span class="token punctuation">(</span>off <span class="token operator">+</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span><span class="token punctuation">(</span>size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">else</span>
-            off <span class="token operator">=</span> <span class="token punctuation">(</span>off <span class="token operator">+</span> MIN_CHUNK_MASK<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span>MIN_CHUNK_MASK<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            off <span class="token operator">=</span> <span class="token punctuation">(</span>off <span class="token operator">+</span> MIN_CHUNK_MASK<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token operator">~</span>MIN_CHUNK_MASK<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>計算我們要用的對齊法：<ul>
 <li>如果 size 是二的次方，將 off (zone 的頭) 與 size 向上對齊</li>
@@ -1007,8 +972,7 @@
         z<span class="token operator">-></span>z_nfree     <span class="token operator">=</span> z<span class="token operator">-></span>z_nmax <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_baseptr   <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>z <span class="token operator">+</span> off<span class="token punctuation">;</span>
         z<span class="token operator">-></span>z_uindex    <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        z<span class="token operator">-></span>z_chunksize <span class="token operator">=</span> size<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        z<span class="token operator">-></span>z_chunksize <span class="token operator">=</span> size<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 magic、對應 <code>zone_array</code> 的 index<ul>
 <li>最大數量為 <code>zone_size</code> - off 再除以一個 chunk 的大小</li>
@@ -1029,8 +993,7 @@
         <span class="token keyword">if</span> <span class="token punctuation">(</span>used_mem <span class="token operator">></span> max_mem<span class="token punctuation">)</span>
             max_mem <span class="token operator">=</span> used_mem<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>拿走第一塊，並將這個 zone 插上對應的 zone array entry</li>
 </ul>
@@ -1041,8 +1004,7 @@
 __exit<span class="token punctuation">:</span>
     <span class="token keyword">return</span> chunk<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_malloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_malloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後回傳找到的 chunk</li>
 </ul>
@@ -1055,25 +1017,21 @@ __exit<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>尋找傳入的 size 對應 zone array 的 index</td>
 <td>index</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*bytes</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>傳入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * Calculate the zone index for the allocation request size and set the
  * allocation request size to that particular zone's chunk size.
@@ -1136,8 +1094,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token function">rt_kprintf</span><span class="token punctuation">(</span><span class="token string">"Unexpected byte count %d"</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>根據不同的 range，將傳入的大小對齊，並平均分配每個 range 有 16 個 zone index</p>
 <hr>
 <h4 id="rt-page-alloc"><a href="#rt-page-alloc" class="headerlink" title="rt_page_alloc"></a>rt_page_alloc</h4><table>
@@ -1147,25 +1104,21 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求頁記憶體</td>
 <td>頁</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>npages</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的頁數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">rt_page_alloc</span><span class="token punctuation">(</span>rt_size_t npages<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span>b<span class="token punctuation">,</span> <span class="token operator">*</span>n<span class="token punctuation">;</span>
@@ -1186,8 +1139,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
             n<span class="token operator">-></span>page <span class="token operator">=</span> b<span class="token operator">-></span>page <span class="token operator">-</span> npages<span class="token punctuation">;</span>
             <span class="token operator">*</span>prev   <span class="token operator">=</span> n<span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果找到一個頁數大於需求的，選擇此頁，並分割</li>
 </ul>
@@ -1203,8 +1155,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> b<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有一個剛剛好，選擇此頁</li>
 <li>最後回傳選擇的頁</li>
@@ -1217,13 +1168,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>增長/縮減記憶體</td>
 <td>記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1231,13 +1180,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th><code>newsize</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲增長/縮減的記憶體位址</td>
 <td>新的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will change the size of previously allocated memory block.
  *
@@ -1259,8 +1206,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token function">rt_free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果傳入的 ptr 為空，malloc(size)</li>
 <li>如果傳入的 size 為 0，free(ptr)</li>
@@ -1281,8 +1227,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token function">rt_free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> nptr<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著檢查此 ptr 所在的頁資訊，如果是 LARGE，代表原來的 ptr 是由頁分配器所分配的</li>
 <li>新 malloc(size)，並還原資料，釋放舊的記憶體</li>
@@ -1295,8 +1240,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
         <span class="token function">zoneindex</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>size<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>z<span class="token operator">-></span>z_chunksize <span class="token operator">==</span> size<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* same chunk */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* same chunk */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果是 SMALL，首先找到歸屬得 zone：<ul>
 <li>透過減掉頁資訊上的 size 乘以頁的大小，即可找到zone的初始位址</li>
@@ -1321,8 +1265,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
     <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_realloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_realloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果不同，malloc(size)，並還原資料，釋放舊的記憶體</li>
 </ul>
@@ -1334,13 +1277,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求一段連續的記憶體</td>
 <td>記憶體位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1348,13 +1289,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th><code>size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的數量</td>
 <td>一塊的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will contiguously allocate enough space for count objects
  * that are size bytes of memory each and returns a pointer to the allocated
@@ -1377,8 +1316,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token function">rt_memset</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> count <span class="token operator">*</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> p<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_calloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_calloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與 memheap 相同，一次要一塊 count 乘 size 的記憶體</li>
 <li>清 0 並回傳起始位址</li>
@@ -1392,25 +1330,21 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放記憶體</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*ptr</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲釋放的記憶體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will release the previous allocated memory block by rt_malloc.
  * The released memory block is taken back to system heap.
@@ -1466,8 +1400,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token function">rt_page_free</span><span class="token punctuation">(</span>ptr<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果要釋放的記憶體是由頁分配器分配的，根據頁資訊中的 size 來釋放，並清 0</li>
 <li>實際呼叫 <code>rt_page_free(ptr, size)</code> 來完成</li>
@@ -1486,8 +1419,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_MEM_STATS</span>
     used_mem <span class="token operator">-</span><span class="token operator">=</span> z<span class="token operator">-></span>z_chunksize<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果是由 zone 分配，找到歸屬的 zone，並將需要釋放的 chunk 插到 free list 上</li>
 </ul>
@@ -1499,8 +1431,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token punctuation">{</span>
         z<span class="token operator">-></span>z_next <span class="token operator">=</span> zone_array<span class="token punctuation">[</span>z<span class="token operator">-></span>z_zoneindex<span class="token punctuation">]</span><span class="token punctuation">;</span>
         zone_array<span class="token punctuation">[</span>z<span class="token operator">-></span>z_zoneindex<span class="token punctuation">]</span> <span class="token operator">=</span> z<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>更新 <code>nfree</code>，如果本來為 0 ，則需要將此 zone 插回 zone array</li>
 </ul>
@@ -1521,8 +1452,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         <span class="token comment" spellcheck="true">/* remove zone from zone array list */</span>
         <span class="token keyword">for</span> <span class="token punctuation">(</span>pz <span class="token operator">=</span> <span class="token operator">&amp;</span>zone_array<span class="token punctuation">[</span>z<span class="token operator">-></span>z_zoneindex<span class="token punctuation">]</span><span class="token punctuation">;</span> z <span class="token operator">!=</span> <span class="token operator">*</span>pz<span class="token punctuation">;</span> pz <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">*</span>pz<span class="token punctuation">)</span><span class="token operator">-></span>z_next<span class="token punctuation">)</span>
             <span class="token punctuation">;</span>
-        <span class="token operator">*</span>pz <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token operator">*</span>pz <span class="token operator">=</span> z<span class="token operator">-></span>z_next<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果釋放完這個 chunk 後整個 zone 都釋放完了，我們需要釋放整個 zone</li>
 <li>這裡還同時確保在同一個 zone array entry 中還有其他的 zone 可以分配</li>
@@ -1535,8 +1465,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
         z<span class="token operator">-></span>z_next <span class="token operator">=</span> zone_free<span class="token punctuation">;</span>
         zone_free <span class="token operator">=</span> z<span class="token punctuation">;</span>
 
-        <span class="token operator">++</span> zone_free_cnt<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token operator">++</span> zone_free_cnt<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>重設 magic，將這個 zone 插上 free zone，free count 加一</li>
 </ul>
@@ -1569,8 +1498,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
     <span class="token comment" spellcheck="true">/* unlock heap */</span>
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_free<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_free<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果已經有 <code>ZONE_RELEASE_THRESH</code> (2) 個以上的 free zone，完全釋放一個 zone 給頁分配器<ul>
 <li>從 free zone 中移除，free count 減一</li>
@@ -1587,13 +1515,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放頁記憶體</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1601,13 +1527,11 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 <th><code>pages</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲釋放的頁</td>
 <td>欲釋放的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rt_page_free</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> rt_size_t npages<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_page_head <span class="token operator">*</span>b<span class="token punctuation">,</span> <span class="token operator">*</span>n<span class="token punctuation">;</span>
@@ -1647,8 +1571,7 @@ rt_inline <span class="token keyword">int</span> <span class="token function">zo
 _return<span class="token punctuation">:</span>
     <span class="token comment" spellcheck="true">/* unlock heap */</span>
     <span class="token function">rt_sem_release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>heap_sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

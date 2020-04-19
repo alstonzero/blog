@@ -561,8 +561,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
   <span class="token keyword">struct</span> file <span class="token operator">*</span>ofile<span class="token punctuation">[</span>NOFILE<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// Open files</span>
   <span class="token keyword">struct</span> inode <span class="token operator">*</span>cwd<span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">// Current directory</span>
   <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">;</span>               <span class="token comment" spellcheck="true">// Process name (debugging)</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> file <span class="token punctuation">{</span>
   <span class="token keyword">enum</span> <span class="token punctuation">{</span> FD_NONE<span class="token punctuation">,</span> FD_PIPE<span class="token punctuation">,</span> FD_INODE <span class="token punctuation">}</span> type<span class="token punctuation">;</span>
   <span class="token keyword">int</span> ref<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// reference count</span>
@@ -571,16 +570,14 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
   <span class="token keyword">struct</span> pipe <span class="token operator">*</span>pipe<span class="token punctuation">;</span>
   <span class="token keyword">struct</span> inode <span class="token operator">*</span>ip<span class="token punctuation">;</span>
   uint off<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>所有的 open files 皆被存放在 <code>ftable</code> 中：</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> <span class="token punctuation">{</span>
   <span class="token keyword">struct</span> spinlock lock<span class="token punctuation">;</span>
   <span class="token keyword">struct</span> file file<span class="token punctuation">[</span>NFILE<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> ftable<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span> ftable<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="Code-filealloc、dup-and-close"><a href="#Code-filealloc、dup-and-close" class="headerlink" title="Code: filealloc、dup and close"></a>Code: filealloc、dup and close</h3><p><i class="fa fa-code"></i> Code: <code>filealloc</code></p>
 <table>
 <thead>
@@ -589,13 +586,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立一個檔案</td>
 <td>檔案結構</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Allocate a file structure.</span>
 <span class="token keyword">struct</span> file<span class="token operator">*</span>
 <span class="token function">filealloc</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
@@ -612,8 +607,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
   <span class="token punctuation">}</span>
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ftable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>filealloc</code> 在 <code>ftable</code> 找到一個 <code>f-&gt;ref</code> 為零的，並返回。</li>
 </ul>
@@ -626,25 +620,21 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>再次一個檔案</td>
 <td>開啟的檔案結構</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*f</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲開啟的檔案</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Increment ref count for file f.</span>
 <span class="token keyword">struct</span> file<span class="token operator">*</span>
 <span class="token function">filedup</span><span class="token punctuation">(</span><span class="token keyword">struct</span> file <span class="token operator">*</span>f<span class="token punctuation">)</span>
@@ -655,8 +645,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
   f<span class="token operator">-></span>ref<span class="token operator">++</span><span class="token punctuation">;</span>
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ftable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> f<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>filedup</code> 增加引用次數。</li>
 </ul>
@@ -669,25 +658,21 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>關閉檔案</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*f</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲關閉的檔案</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Close file f.  (Decrement ref count, close when reaches 0.)</span>
 <span class="token keyword">void</span>
 <span class="token function">fileclose</span><span class="token punctuation">(</span><span class="token keyword">struct</span> file <span class="token operator">*</span>f<span class="token punctuation">)</span>
@@ -700,8 +685,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">--</span>f<span class="token operator">-></span>ref <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ftable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>fileclose</code> 減少引用次數。</li>
 </ul>
@@ -717,8 +701,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <span class="token function">iput</span><span class="token punctuation">(</span>ff<span class="token punctuation">.</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">commit_trans</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若引用次數降為 0 時，則依據類型的不同釋放當前的 pipe 或是 inode。</li>
 </ul>
@@ -730,13 +713,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀取檔案狀態</td>
 <td>0 (ok) / -1 (err)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -744,13 +725,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th><code>*st</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲讀取的檔案</td>
 <td>寫入狀態的結構</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Get metadata about file f.</span>
 <span class="token keyword">int</span>
 <span class="token function">filestat</span><span class="token punctuation">(</span><span class="token keyword">struct</span> file <span class="token operator">*</span>f<span class="token punctuation">,</span> <span class="token keyword">struct</span> stat <span class="token operator">*</span>st<span class="token punctuation">)</span>
@@ -762,8 +741,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>須為 <code>inode</code> 才可使用 <code>filestat</code>，通過呼叫 <code>stati</code> 來實現操作。</li>
 </ul>
@@ -776,13 +754,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>寫入檔案狀態</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -790,13 +766,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th><code>*st</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲讀取的檔案</td>
 <td>寫入狀態的結構</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Copy stat information from inode.</span>
 <span class="token keyword">void</span>
 <span class="token function">stati</span><span class="token punctuation">(</span><span class="token keyword">struct</span> inode <span class="token operator">*</span>ip<span class="token punctuation">,</span> <span class="token keyword">struct</span> stat <span class="token operator">*</span>st<span class="token punctuation">)</span>
@@ -806,8 +780,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
   st<span class="token operator">-></span>type <span class="token operator">=</span> ip<span class="token operator">-></span>type<span class="token punctuation">;</span>
   st<span class="token operator">-></span>nlink <span class="token operator">=</span> ip<span class="token operator">-></span>nlink<span class="token punctuation">;</span>
   st<span class="token operator">-></span>size <span class="token operator">=</span> ip<span class="token operator">-></span>size<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>fileread</code></p>
 <table>
@@ -817,13 +790,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀取檔案</td>
 <td>讀取大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -832,14 +803,12 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th><code>n</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲讀取的檔案</td>
 <td>欲寫入資料的記憶體</td>
 <td>欲寫入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Read from file f.</span>
 <span class="token keyword">int</span>
 <span class="token function">fileread</span><span class="token punctuation">(</span><span class="token keyword">struct</span> file <span class="token operator">*</span>f<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
@@ -858,8 +827,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <span class="token keyword">return</span> r<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"fileread"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>fileread</code> 針對不同類型有不同的操作：<ul>
 <li>pipe：呼叫 <code>piperead</code>，於 <a href="https://omuskywalker.github.io/2018/08/14/ch5/#piperead" target="_blank" rel="noopener">ch5</a> 介紹過。</li>
@@ -876,13 +844,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>寫入檔案</td>
 <td>寫入大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -891,14 +857,12 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th><code>n</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲寫入的檔案</td>
 <td>欲寫入的資料</td>
 <td>欲寫入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">//PAGEBREAK!</span>
 <span class="token comment" spellcheck="true">// Write to file f.</span>
 <span class="token keyword">int</span>
@@ -940,8 +904,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <span class="token keyword">return</span> i <span class="token operator">==</span> n <span class="token operator">?</span> n <span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"filewrite"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>filewrite</code> 針對不同類型有不同的操作：<ul>
 <li>pipe：呼叫 <code>pipewrite</code>，於 <a href="https://omuskywalker.github.io/2018/08/14/ch5/#pipewrite" target="_blank" rel="noopener">ch5</a> 介紹過。</li>
@@ -961,13 +924,11 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>從路徑尋找檔案</td>
 <td>inode 結構</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -976,14 +937,12 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <th><code>*name</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>路徑名</td>
 <td>-</td>
 <td>-</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Look up and return the inode for a path name.</span>
 <span class="token comment" spellcheck="true">// If parent != 0, return the inode for the parent and copy the final</span>
 <span class="token comment" spellcheck="true">// path element into name, which must have room for DIRSIZ bytes.</span>
@@ -1020,8 +979,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> ip<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-目錄"><a href="#Code-目錄" class="headerlink" title="Code: 目錄"></a>Code: 目錄</h2><ul>
 <li>目錄的 inode type 為 <code>T_DIR</code>，存在 <code>struct dirent</code> 中。</li>
@@ -1029,8 +987,7 @@ UNIX 大部分的資源都是一個文件，而此統一性由檔案描述符實
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> dirent <span class="token punctuation">{</span>
   ushort inum<span class="token punctuation">;</span>
   <span class="token keyword">char</span> name<span class="token punctuation">[</span>DIRSIZ<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>inum</code> 為 inode 編號，為 0 的代表可用。</li>
 </ul>
@@ -1192,7 +1149,6 @@ Function
 
 
 
-
 %eax
 Accumulator 累加器
 
@@ -1210,7 +1166,7 @@ Data 數據暫存器
 
 
 %edi
-Destinatio
+Destination
                         
                     </div>
                     <div class="publish-info">

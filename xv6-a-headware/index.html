@@ -13,7 +13,6 @@ Function
 
 
 
-
 %eax
 Accumulator 累加器
 
@@ -31,7 +30,7 @@ Data 數據暫存器
 
 
 %edi
-Destinatio">
+Destination">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -532,7 +531,7 @@ Destinatio">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    457
+                    481
                 </div>
                 
 
@@ -557,8 +556,7 @@ Destinatio">
 <th>Function</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>%eax</code></td>
 <td>Accumulator 累加器</td>
 </tr>
@@ -590,8 +588,7 @@ Destinatio">
 <td><code>%esp</code></td>
 <td>Stack 堆疊指針暫存器</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li><strong>程式計數器</strong> <code>%eip</code>：Instruction Pointer 指令指針暫存器 </li>
 </ul>
@@ -605,8 +602,7 @@ Destinatio">
 <th>Function</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>%cr0</code></td>
 <td>包含了兩個標誌：</td>
 </tr>
@@ -630,8 +626,7 @@ Destinatio">
 <td><code>%cr3</code></td>
 <td>保存頁目錄表的物理地址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><img src="https://i.imgur.com/LjEa8lY.png" alt="cr" title="Layout of CR."></p>
 <hr>
 <h2 id="段暫存器"><a href="#段暫存器" class="headerlink" title="段暫存器"></a>段暫存器</h2><table>
@@ -643,8 +638,7 @@ Destinatio">
 <th>Function</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>%cs</code></td>
 <td>Code Segment</td>
 <td><code>%es</code></td>
@@ -662,11 +656,11 @@ Destinatio">
 <td><code>%gs</code></td>
 <td>extra Segment</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><code>%gdtr</code> 全域段描述符表、<code>%ldtr</code> 區域段描述符表<br>（參考<a href="/xv6-b-bootloader/#gdt">Appendix B</a>)</li>
+<li><p><code>%gdtr</code> 全域段描述符表、<code>%ldtr</code> 區域段描述符表<br>（參考<a href="/xv6-b-bootloader/#gdt">Appendix B</a>)</p>
+</li>
 <li><p><code>%eflags</code> <strong>標誌暫存器</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)
 ">[1]</span></a></sup></p>
 <p>  <img src="https://i.imgur.com/tfPZm5w.png" alt="eflags" title="Layout of eflags."></p>
@@ -684,8 +678,7 @@ Destinatio">
 <th>Function</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>CF</td>
 <td>Carry Flag</td>
 <td>IOPL</td>
@@ -736,10 +729,11 @@ Destinatio">
 <tr>
 <td>OF</td>
 <td>Overflow Flag</td>
+<td></td>
+<td></td>
 </tr>
-</tbody>
-</table>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR" target="_blank" rel="noopener">X86 彙編/X86 架構</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/jn1158359135/article/details/7761011" target="_blank" rel="noopener">x86—EFLAGS寄存器详解</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+</tbody></table>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/jn1158359135/article/details/7761011" target="_blank" rel="noopener">x86—EFLAGS寄存器详解</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }

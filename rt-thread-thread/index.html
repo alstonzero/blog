@@ -548,14 +548,12 @@ struct rt_thread
 
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> RT_USING_MODULE</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>module_id<span class="token punctuation">;</span>                              <span class="token comment" spellcheck="true">/**&lt; id of application module */</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一些基本資料，如名字等</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    rt_list_t   list<span class="token punctuation">;</span>                                   <span class="token comment" spellcheck="true">/**&lt; the object list */</span>
-    rt_list_t   tlist<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; the thread list */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    rt_list_t   tlist<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; the thread list */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>兩條鏈：thread list、object list</li>
 </ul>
@@ -564,16 +562,14 @@ struct rt_thread
     <span class="token keyword">void</span>       <span class="token operator">*</span>entry<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; entry */</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>parameter<span class="token punctuation">;</span>                              <span class="token comment" spellcheck="true">/**&lt; parameter */</span>
     <span class="token keyword">void</span>       <span class="token operator">*</span>stack_addr<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; stack address */</span>
-    rt_uint32_t stack_size<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; stack size */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    rt_uint32_t stack_size<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; stack size */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>stack 相關的</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* error code */</span>
     rt_err_t    error<span class="token punctuation">;</span>                                  <span class="token comment" spellcheck="true">/**&lt; error code */</span>
 
-    rt_uint8_t  stat<span class="token punctuation">;</span>                                   <span class="token comment" spellcheck="true">/**&lt; thread status */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+    rt_uint8_t  stat<span class="token punctuation">;</span>                                   <span class="token comment" spellcheck="true">/**&lt; thread status */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>狀態，下面會列出來所有可能</li>
 </ul>
@@ -584,8 +580,7 @@ struct rt_thread
     rt_uint8_t  number<span class="token punctuation">;</span>
     rt_uint8_t  high_mask<span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
-    rt_uint32_t number_mask<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    rt_uint32_t number_mask<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與權限相關的</li>
 </ul>
@@ -607,8 +602,7 @@ struct rt_thread
     rt_ubase_t  init_tick<span class="token punctuation">;</span>                              <span class="token comment" spellcheck="true">/**&lt; thread's initialized tick */</span>
     rt_ubase_t  remaining_tick<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; remaining tick */</span>
 
-    <span class="token keyword">struct</span> rt_timer thread_timer<span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">/**&lt; built-in thread timer */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">struct</span> rt_timer thread_timer<span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">/**&lt; built-in thread timer */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>event、sig、tick</li>
 </ul>
@@ -621,8 +615,7 @@ struct rt_thread
 
     rt_uint32_t user_data<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">/**&lt; private user data beyond this thread */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>rt_thread_t<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>rt_thread_t<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>cleanup</code> 函數及 <code>user_data</code></li>
 </ul>
@@ -636,8 +629,7 @@ struct rt_thread
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_RUNNING               0x03                </span><span class="token comment" spellcheck="true">/**&lt; Running status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_BLOCK                 RT_THREAD_SUSPEND   </span><span class="token comment" spellcheck="true">/**&lt; Blocked status */</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_CLOSE                 0x04                </span><span class="token comment" spellcheck="true">/**&lt; Closed status */</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_STAT_MASK             0x0f</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_THREAD_STAT_MASK             0x0f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <blockquote>
 <p>File: thread.h</p>
@@ -654,13 +646,11 @@ struct rt_thread
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -670,15 +660,13 @@ struct rt_thread
 <th><code>*parameter</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>thread 本體</td>
 <td>名字</td>
 <td>要執行的副程式</td>
 <td>副程式參數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -688,15 +676,13 @@ struct rt_thread
 <th><code>tick</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>thread 堆疊起點</td>
 <td>thread 堆疊大小</td>
 <td>優先級</td>
 <td>可執行的 tick 數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a thread, normally it's used to initialize a
  * static thread object.
@@ -737,8 +723,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
                            priority<span class="token punctuation">,</span>
                            tick<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>透過 <code>_rt_thread_init</code> 完成初始化</li>
 </ul>
@@ -751,13 +736,11 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 thread</td>
 <td>RT_EOK</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -767,15 +750,13 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <th><code>*parameter</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>thread 本體</td>
 <td>名字</td>
 <td>要執行的副程式</td>
 <td>副程式參數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -785,15 +766,13 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <th><code>tick</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>thread 堆疊起點</td>
 <td>thread 堆疊大小</td>
 <td>優先級</td>
 <td>可執行的 tick 數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> rt_err_t <span class="token function">_rt_thread_init</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">,</span>
                                 <span class="token keyword">const</span> <span class="token keyword">char</span>       <span class="token operator">*</span>name<span class="token punctuation">,</span>
                                 <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>entry<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>parameter<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -811,8 +790,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 
     <span class="token comment" spellcheck="true">/* stack init */</span>
     thread<span class="token operator">-></span>stack_addr <span class="token operator">=</span> stack_start<span class="token punctuation">;</span>
-    thread<span class="token operator">-></span>stack_size <span class="token operator">=</span> stack_size<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    thread<span class="token operator">-></span>stack_size <span class="token operator">=</span> stack_size<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將傳入的資料填入結構</li>
 </ul>
@@ -820,8 +798,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
     <span class="token function">rt_memset</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>stack_addr<span class="token punctuation">,</span> <span class="token string">'#'</span><span class="token punctuation">,</span> thread<span class="token operator">-></span>stack_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
     thread<span class="token operator">-></span>sp <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">rt_hw_stack_init</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>entry<span class="token punctuation">,</span> thread<span class="token operator">-></span>parameter<span class="token punctuation">,</span>
                                           <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span>thread<span class="token operator">-></span>stack_addr <span class="token operator">+</span> thread<span class="token operator">-></span>stack_size <span class="token operator">-</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-                                          <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>rt_thread_exit<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                                          <span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>rt_thread_exit<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著設定堆疊，使用 <code>rt_hw_stack_init</code> 來完成（根據不同 cpu 有不同的方式，<code>rt_hw_stack_init</code> 在 /libcpu 中針對不同的 cpu 有不同的函式宣告）</li>
 </ul>
@@ -834,8 +811,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <span class="token macro property">#<span class="token directive keyword">if</span> RT_THREAD_PRIORITY_MAX > 32</span>
     thread<span class="token operator">-></span>number <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     thread<span class="token operator">-></span>high_mask <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 priority 及 mask</li>
 </ul>
@@ -876,8 +852,7 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
     <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_thread_inited_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後依序完成 tick、sig、hook 等的初始化</li>
 </ul>
@@ -890,13 +865,11 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 thread</td>
 <td>thread</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -905,14 +878,12 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <th><code>*parameter</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>要執行的副程式</td>
 <td>副程式參數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -922,15 +893,13 @@ rt_err_t <span class="token function">rt_thread_init</span><span class="token pu
 <th><code>tick</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>thread 堆疊起點</td>
 <td>thread 堆疊大小</td>
 <td>優先級</td>
 <td>可執行的 tick 數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a thread object and allocate thread object memory
  * and stack.
@@ -979,8 +948,7 @@ rt_thread_t <span class="token function">rt_thread_create</span><span class="tok
 
     <span class="token keyword">return</span> thread<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先 allocate 一塊給 thread，一塊給堆疊</li>
 <li>再呼叫 <code>_rt_thread_init</code> 完成初始化</li>
@@ -994,25 +962,21 @@ rt_thread_t <span class="token function">rt_thread_create</span><span class="tok
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>啟動 thread</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>thread</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲啟動的 thread</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will start a thread and put it to system ready queue
  *
@@ -1028,8 +992,7 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_get_type</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_object_t<span class="token punctuation">)</span>thread<span class="token punctuation">)</span> <span class="token operator">==</span> RT_Object_Class_Thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* set current priority to init priority */</span>
-    thread<span class="token operator">-></span>current_priority <span class="token operator">=</span> thread<span class="token operator">-></span>init_priority<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    thread<span class="token operator">-></span>current_priority <span class="token operator">=</span> thread<span class="token operator">-></span>init_priority<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定 priority</li>
 </ul>
@@ -1040,8 +1003,7 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
     thread<span class="token operator">-></span>high_mask   <span class="token operator">=</span> <span class="token number">1L</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>current_priority <span class="token operator">&amp;</span> <span class="token number">0x07</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">/* 3bit */</span>
 <span class="token macro property">#<span class="token directive keyword">else</span></span>
     thread<span class="token operator">-></span>number_mask <span class="token operator">=</span> <span class="token number">1L</span> <span class="token operator">&lt;&lt;</span> thread<span class="token operator">-></span>current_priority<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這些參數是用來計算權限的，<code>scheudler</code> 會用到</li>
 </ul>
@@ -1059,8 +1021,7 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_startup<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_startup<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後將 stat 設為 <code>RT_THREAD_SUSPEND</code>，再透過 <code>rt_thread_resume</code> 來完成啟動</li>
 <li>啟動完成後呼叫 <code>rt_scheduler()</code> 來執行一次調度</li>
@@ -1074,25 +1035,21 @@ rt_err_t <span class="token function">rt_thread_startup</span><span class="token
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>暫停 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*thread</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲暫停的 thread</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will suspend the specified thread.
  *
@@ -1137,8 +1094,7 @@ rt_err_t <span class="token function">rt_thread_suspend</span><span class="token
     <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_thread_suspend_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_suspend<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_suspend<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將狀態修改為 <code>RT_THREAD_SUSPEND</code>，接著將 thread 從 tlist 移除，結束 timer</li>
 </ul>
@@ -1151,25 +1107,21 @@ rt_err_t <span class="token function">rt_thread_suspend</span><span class="token
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>延遲 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>tick</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲延遲的時間</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will let current thread delay for some ticks.
  *
@@ -1181,8 +1133,7 @@ rt_err_t <span class="token function">rt_thread_delay</span><span class="token p
 <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">rt_thread_sleep</span><span class="token punctuation">(</span>tick<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_delay<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_delay<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>透過 <code>rt_thread_sleep</code> 實作</li>
 </ul>
@@ -1195,25 +1146,21 @@ rt_err_t <span class="token function">rt_thread_delay</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>使 thread 休眠</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>tick</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲睡眠的時間</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will let current thread sleep for some ticks.
  *
@@ -1250,8 +1197,7 @@ rt_err_t <span class="token function">rt_thread_sleep</span><span class="token p
         thread<span class="token operator">-></span>error <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="復原-thread"><a href="#復原-thread" class="headerlink" title="復原 thread"></a>復原 thread</h3><p><i class="fa fa-code"></i> Code: <code>rt_thread_resume</code></p>
 <table>
@@ -1261,25 +1207,21 @@ rt_err_t <span class="token function">rt_thread_sleep</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>復原 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*thread</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲復原的 thread</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will resume a thread and put it to system ready queue.
  *
@@ -1322,8 +1264,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
     <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_thread_resume_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_resume<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_resume<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先從 suspend list 移除，停止 timer，掛回去 ready list</li>
 <li><code>rt_schedule_insert_thread</code> 會將狀態修改成 <code>RT_THREAD_READY</code></li>
@@ -1337,13 +1278,11 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>暫停 thread</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rt_thread_exit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rt_thread <span class="token operator">*</span>thread<span class="token punctuation">;</span>
@@ -1361,8 +1300,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
     thread<span class="token operator">-></span>stat <span class="token operator">=</span> RT_THREAD_CLOSE<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* remove it from timer list */</span>
-    <span class="token function">rt_timer_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_timer_detach</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先從 ready list 中移除，修改狀態為 <code>RT_THREAD_CLOSE</code>，從 timer list 中移除</li>
 </ul>
@@ -1383,8 +1321,7 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
     <span class="token comment" spellcheck="true">/* switch to next task */</span>
     <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果為系統的 thread，且 <code>cleanup</code> 函式沒有被定義時，呼叫 <code>rt_object_detach</code> 來完成移除的動作</li>
 <li>否則，將 thread 插入至 <code>rt_thread_defunct</code>，此鏈上面的 thread 會由 idle 清除。</li>
@@ -1398,25 +1335,21 @@ rt_err_t <span class="token function">rt_thread_resume</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*thread</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 thread</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a thread. The thread object will be removed from
  * thread queue and deleted from system object management in the idle thread.
@@ -1438,8 +1371,7 @@ rt_err_t <span class="token function">rt_thread_delete</span><span class="token 
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* remove from schedule */</span>
         <span class="token function">rt_schedule_remove_thread</span><span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果此 thread 已經啟動過了，將此 thread 從 ready list 移除</li>
 </ul>
@@ -1460,8 +1392,7 @@ rt_err_t <span class="token function">rt_thread_delete</span><span class="token 
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著將 timer 還回去，修改狀態為 <code>RT_THREAD_CLOSE</code>，插入至 <code>rt_thread_defunct</code></li>
 </ul>
@@ -1474,25 +1405,21 @@ rt_err_t <span class="token function">rt_thread_delete</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*thread</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 thread</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a thread. The thread object will be removed from
  * thread queue and detached/deleted from system object management.
@@ -1539,8 +1466,7 @@ rt_err_t <span class="token function">rt_thread_detach</span><span class="token 
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與 delete 不同的差在第32行</li>
 </ul>
@@ -1552,13 +1478,11 @@ rt_err_t <span class="token function">rt_thread_detach</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>控制 thread</td>
 <td><code>RT-EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1567,14 +1491,12 @@ rt_err_t <span class="token function">rt_thread_detach</span><span class="token 
 <th><code>*argv</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲控制的 thread</td>
 <td>需執行的動作</td>
 <td>伴隨動作的參數</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will control thread behaviors according to control command.
  *
@@ -1654,8 +1576,7 @@ rt_err_t <span class="token function">rt_thread_control</span><span class="token
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_control<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_thread_control<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

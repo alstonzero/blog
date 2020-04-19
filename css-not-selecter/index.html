@@ -533,8 +533,7 @@ HTML:
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>CSS</p>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.ex-box</span> </span><span class="token punctuation">{</span>
@@ -545,8 +544,7 @@ HTML:
   <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#f00</span><span class="token punctuation">;</span>
   <span class="token property">font-style</span><span class="token punctuation">:</span> italic<span class="token punctuation">;</span>
   <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <style>
@@ -561,7 +559,11 @@ HTML:
 }
 </style>
 
-<div class="ex-box"><span class="ex">1</span><br>    <span class="ex">2</span><br>    <span class="ex">3</span><br>    <span class="ex">4</span><br></div>
+<div class="ex-box"><span class="ex">1</span>
+    <span class="ex">2</span>
+    <span class="ex">3</span>
+    <span class="ex">4</span>
+</div>
 
 <blockquote>
 <p>可以看到上面：1~4 都有<em>斜體</em>跟<strong>粗體</strong>，為了方便觀察，這裡讓文字變為紅色</p>
@@ -573,8 +575,7 @@ HTML:
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>not-ex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>not-ex<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>not-ex-ignored<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>not-ex<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>接著將 3 號加上 <code>not-ex-ignored</code> 的 id。</p>
@@ -587,8 +588,7 @@ HTML:
   <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#f00</span><span class="token punctuation">;</span>
   <span class="token property">font-style</span><span class="token punctuation">:</span> italic<span class="token punctuation">;</span>
   <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>並將此 id 略過（使用 <code>:not</code> 選擇器）</p>
@@ -604,7 +604,11 @@ HTML:
 }
 </style>
 
-<div class="not-ex-box"><span class="not-ex">1</span><br>    <span class="not-ex">2</span><br>    <span class="not-ex" id="not-ex-ignored">3</span><br>    <span class="not-ex">4</span><br></div>
+<div class="not-ex-box"><span class="not-ex">1</span>
+    <span class="not-ex">2</span>
+    <span class="not-ex" id="not-ex-ignored">3</span>
+    <span class="not-ex">4</span>
+</div>
 
 <blockquote>
 <p>如此一來，就只有三號沒有套用到屬性。</p>

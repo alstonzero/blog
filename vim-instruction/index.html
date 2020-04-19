@@ -13,7 +13,6 @@
 
 
 
-
 i
 游標位置進入編輯模式（insert mode）[1]
 
@@ -31,7 +30,7 @@ o
 
 
 O
-向下新增一行，進入編輯">
+向下新增一行，進入編輯模">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -549,323 +548,307 @@ O
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="編輯"><a href="#編輯" class="headerlink" title="編輯"></a>編輯</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">i</td>
-<td style="text-align:left">游標位置進入編輯模式（insert mode）<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[vi 與 vim 的指令整理](http://www.vixual.net/blog/archives/234)">[1]</span></a></sup></td>
+<tbody><tr>
+<td align="center">i</td>
+<td align="left">游標位置進入編輯模式（insert mode）<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[vi 與 vim 的指令整理](http://www.vixual.net/blog/archives/234)">[1]</span></a></sup></td>
 </tr>
 <tr>
-<td style="text-align:center">I</td>
-<td style="text-align:left">在游標行的第一個非空字元進入編輯模式</td>
+<td align="center">I</td>
+<td align="left">在游標行的第一個非空字元進入編輯模式</td>
 </tr>
 <tr>
-<td style="text-align:center">A</td>
-<td style="text-align:left">在游標行的最後一位進入編輯模式</td>
+<td align="center">A</td>
+<td align="left">在游標行的最後一位進入編輯模式</td>
 </tr>
 <tr>
-<td style="text-align:center">o</td>
-<td style="text-align:left">向下新增一行，進入編輯模式</td>
+<td align="center">o</td>
+<td align="left">向下新增一行，進入編輯模式</td>
 </tr>
 <tr>
-<td style="text-align:center">O</td>
-<td style="text-align:left">向下新增一行，進入編輯模式</td>
+<td align="center">O</td>
+<td align="left">向下新增一行，進入編輯模式</td>
 </tr>
 <tr>
-<td style="text-align:center">cc</td>
-<td style="text-align:left">刪除此行，並進入編輯模式</td>
+<td align="center">cc</td>
+<td align="left">刪除此行，並進入編輯模式</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>ESC</code></td>
-<td style="text-align:left">退出編輯模式</td>
+<td align="center"><code>ESC</code></td>
+<td align="left">退出編輯模式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="刪除"><a href="#刪除" class="headerlink" title="刪除"></a>刪除</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">dd</td>
-<td style="text-align:left">刪除此行</td>
+<tbody><tr>
+<td align="center">dd</td>
+<td align="left">刪除此行</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>n</code> dd</td>
-<td style="text-align:left">刪除第 <code>n</code> 行</td>
+<td align="center"><code>n</code> dd</td>
+<td align="left">刪除第 <code>n</code> 行</td>
 </tr>
 <tr>
-<td style="text-align:center">dG</td>
-<td style="text-align:left">從游標行刪除至最後一行</td>
+<td align="center">dG</td>
+<td align="left">從游標行刪除至最後一行</td>
 </tr>
 <tr>
-<td style="text-align:center">d1G</td>
-<td style="text-align:left">從游標行刪除至第一行</td>
+<td align="center">d1G</td>
+<td align="left">從游標行刪除至第一行</td>
 </tr>
 <tr>
-<td style="text-align:center">d$</td>
-<td style="text-align:left">從游標處刪除至最後一個字元</td>
+<td align="center">d$</td>
+<td align="left">從游標處刪除至最後一個字元</td>
 </tr>
 <tr>
-<td style="text-align:center">d0</td>
-<td style="text-align:left">從游標處刪除至第一個字元</td>
+<td align="center">d0</td>
+<td align="left">從游標處刪除至第一個字元</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="游標移動"><a href="#游標移動" class="headerlink" title="游標移動"></a>游標移動</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">gg</td>
-<td style="text-align:left">移至第一行</td>
+<tbody><tr>
+<td align="center">gg</td>
+<td align="left">移至第一行</td>
 </tr>
 <tr>
-<td style="text-align:center">G</td>
-<td style="text-align:left">移至最後一行</td>
+<td align="center">G</td>
+<td align="left">移至最後一行</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>n</code> G</td>
-<td style="text-align:left">移至第 <code>n</code> 行</td>
+<td align="center"><code>n</code> G</td>
+<td align="left">移至第 <code>n</code> 行</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:left">移至該行的最前</td>
+<td align="center">0</td>
+<td align="left">移至該行的最前</td>
 </tr>
 <tr>
-<td style="text-align:center">$</td>
-<td style="text-align:left">移至該行的最後</td>
+<td align="center">$</td>
+<td align="left">移至該行的最後</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>n</code> <code>Space</code></td>
-<td style="text-align:left">向右移 <code>n</code> 個字元</td>
+<td align="center"><code>n</code> <code>Space</code></td>
+<td align="left">向右移 <code>n</code> 個字元</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>n</code> <code>Enter</code></td>
-<td style="text-align:left">向下移 <code>n</code> 行</td>
+<td align="center"><code>n</code> <code>Enter</code></td>
+<td align="left">向下移 <code>n</code> 行</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="標記、複製"><a href="#標記、複製" class="headerlink" title="標記、複製"></a>標記、複製</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">v</td>
-<td style="text-align:left">開始文字標記</td>
+<tbody><tr>
+<td align="center">v</td>
+<td align="left">開始文字標記</td>
 </tr>
 <tr>
-<td style="text-align:center">V</td>
-<td style="text-align:left">開始行標記</td>
+<td align="center">V</td>
+<td align="left">開始行標記</td>
 </tr>
 <tr>
-<td style="text-align:center">v <code>Ctrl</code> v</td>
-<td style="text-align:left">開始區塊標記</td>
+<td align="center">v <code>Ctrl</code> v</td>
+<td align="left">開始區塊標記</td>
 </tr>
 <tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left">刪除標記內容</td>
+<td align="center">d</td>
+<td align="left">刪除標記內容</td>
 </tr>
 <tr>
-<td style="text-align:center">y</td>
-<td style="text-align:left">複製標記內容</td>
+<td align="center">y</td>
+<td align="left">複製標記內容</td>
 </tr>
 <tr>
-<td style="text-align:center">yy</td>
-<td style="text-align:left">複製游標行</td>
+<td align="center">yy</td>
+<td align="left">複製游標行</td>
 </tr>
 <tr>
-<td style="text-align:center">yG</td>
-<td style="text-align:left">從游標行複製到最後一行</td>
+<td align="center">yG</td>
+<td align="left">從游標行複製到最後一行</td>
 </tr>
 <tr>
-<td style="text-align:center">y1G</td>
-<td style="text-align:left">從游標行複製到第一行</td>
+<td align="center">y1G</td>
+<td align="left">從游標行複製到第一行</td>
 </tr>
 <tr>
-<td style="text-align:center">y$</td>
-<td style="text-align:left">複製游標處至最後</td>
+<td align="center">y$</td>
+<td align="left">複製游標處至最後</td>
 </tr>
 <tr>
-<td style="text-align:center">y0</td>
-<td style="text-align:left">複製游標處至最前</td>
+<td align="center">y0</td>
+<td align="left">複製游標處至最前</td>
 </tr>
 <tr>
-<td style="text-align:center">p</td>
-<td style="text-align:left">在下一行貼上複製或刪除的內容</td>
+<td align="center">p</td>
+<td align="left">在下一行貼上複製或刪除的內容</td>
 </tr>
 <tr>
-<td style="text-align:center">P</td>
-<td style="text-align:left">在上一行貼上複製或刪除的內容</td>
+<td align="center">P</td>
+<td align="left">在上一行貼上複製或刪除的內容</td>
 </tr>
 <tr>
-<td style="text-align:center"><code>Ctrl</code> R 0</td>
-<td style="text-align:left">於編輯模式中，在下一行貼上複製或刪除的內容</td>
+<td align="center"><code>Ctrl</code> R 0</td>
+<td align="left">於編輯模式中，在下一行貼上複製或刪除的內容</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="搜尋與取代"><a href="#搜尋與取代" class="headerlink" title="搜尋與取代"></a>搜尋與取代</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">/</td>
-<td style="text-align:left">搜尋</td>
+<tbody><tr>
+<td align="center">/</td>
+<td align="left">搜尋</td>
 </tr>
 <tr>
-<td style="text-align:center">/\c</td>
-<td style="text-align:left">不分大小寫搜尋</td>
+<td align="center">/\c</td>
+<td align="left">不分大小寫搜尋</td>
 </tr>
 <tr>
-<td style="text-align:center">*</td>
-<td style="text-align:left">選取字串，按 * 也可以搜尋</td>
+<td align="center">*</td>
+<td align="left">選取字串，按 * 也可以搜尋</td>
 </tr>
 <tr>
-<td style="text-align:center">?</td>
-<td style="text-align:left">向上搜尋</td>
+<td align="center">?</td>
+<td align="left">向上搜尋</td>
 </tr>
 <tr>
-<td style="text-align:center">?\c</td>
-<td style="text-align:left">不分大小寫向上搜尋</td>
+<td align="center">?\c</td>
+<td align="left">不分大小寫向上搜尋</td>
 </tr>
 <tr>
-<td style="text-align:center">n</td>
-<td style="text-align:left">下一個搜尋結果</td>
+<td align="center">n</td>
+<td align="left">下一個搜尋結果</td>
 </tr>
 <tr>
-<td style="text-align:center">N</td>
-<td style="text-align:left">上一個搜尋結果</td>
+<td align="center">N</td>
+<td align="left">上一個搜尋結果</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">:w</td>
-<td style="text-align:left">存檔</td>
+<tbody><tr>
+<td align="center">:w</td>
+<td align="left">存檔</td>
 </tr>
 <tr>
-<td style="text-align:center">:w <code>file_name</code></td>
-<td style="text-align:left">另存新檔</td>
+<td align="center">:w <code>file_name</code></td>
+<td align="left">另存新檔</td>
 </tr>
 <tr>
-<td style="text-align:center">:q</td>
-<td style="text-align:left">退出</td>
+<td align="center">:q</td>
+<td align="left">退出</td>
 </tr>
 <tr>
-<td style="text-align:center">:wq</td>
-<td style="text-align:left">存檔並退出</td>
+<td align="center">:wq</td>
+<td align="left">存檔並退出</td>
 </tr>
 <tr>
-<td style="text-align:center">:x</td>
-<td style="text-align:left">存檔並退出</td>
+<td align="center">:x</td>
+<td align="left">存檔並退出</td>
 </tr>
 <tr>
-<td style="text-align:center">:e <code>file_name</code></td>
-<td style="text-align:left">編輯其他檔案</td>
+<td align="center">:e <code>file_name</code></td>
+<td align="left">編輯其他檔案</td>
 </tr>
 <tr>
-<td style="text-align:center">:e!</td>
-<td style="text-align:left">還原至檔案修改前的狀態</td>
+<td align="center">:e!</td>
+<td align="left">還原至檔案修改前的狀態</td>
 </tr>
 <tr>
-<td style="text-align:center">:files</td>
-<td style="text-align:left">列出所有開啟的檔案</td>
+<td align="center">:files</td>
+<td align="left">列出所有開啟的檔案</td>
 </tr>
 <tr>
-<td style="text-align:center">:n</td>
-<td style="text-align:left">切到下一個開啟的檔案</td>
+<td align="center">:n</td>
+<td align="left">切到下一個開啟的檔案</td>
 </tr>
 <tr>
-<td style="text-align:center">:N</td>
-<td style="text-align:left">切到上一個開啟的檔案</td>
+<td align="center">:N</td>
+<td align="left">切到上一個開啟的檔案</td>
 </tr>
 <tr>
-<td style="text-align:center">:Ex</td>
-<td style="text-align:left">開啟檔案瀏覽器</td>
+<td align="center">:Ex</td>
+<td align="left">開啟檔案瀏覽器</td>
 </tr>
 <tr>
-<td style="text-align:center">:Ex <code>url</code></td>
-<td style="text-align:left">在指定路徑開啟檔案瀏覽器</td>
+<td align="center">:Ex <code>url</code></td>
+<td align="left">在指定路徑開啟檔案瀏覽器</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="檔案瀏覽器相關"><a href="#檔案瀏覽器相關" class="headerlink" title="檔案瀏覽器相關"></a>檔案瀏覽器相關</h3><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:left">同指令 <code>..</code></td>
+<tbody><tr>
+<td align="center">-</td>
+<td align="left">同指令 <code>..</code></td>
 </tr>
 <tr>
-<td style="text-align:center">d</td>
-<td style="text-align:left"><code>mkdir</code></td>
+<td align="center">d</td>
+<td align="left"><code>mkdir</code></td>
 </tr>
 <tr>
-<td style="text-align:center">D</td>
-<td style="text-align:left"><code>rmdir</code></td>
+<td align="center">D</td>
+<td align="left"><code>rmdir</code></td>
 </tr>
 <tr>
-<td style="text-align:center">R</td>
-<td style="text-align:left">重新命名</td>
+<td align="center">R</td>
+<td align="left">重新命名</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">指令</th>
-<th style="text-align:left">功能</th>
+<th align="center">指令</th>
+<th align="left">功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:left">重覆上一個指令</td>
+<tbody><tr>
+<td align="center">.</td>
+<td align="left">重覆上一個指令</td>
 </tr>
 <tr>
-<td style="text-align:center">! <code>shell</code></td>
-<td style="text-align:left">執行 <code>shell</code> 指令，並顯示執行結果</td>
+<td align="center">! <code>shell</code></td>
+<td align="left">執行 <code>shell</code> 指令，並顯示執行結果</td>
 </tr>
 <tr>
-<td style="text-align:center">u</td>
-<td style="text-align:left">還原指令</td>
+<td align="center">u</td>
+<td align="left">還原指令</td>
 </tr>
 <tr>
-<td style="text-align:center">J</td>
-<td style="text-align:left">將游標行與下一行合併</td>
+<td align="center">J</td>
+<td align="left">將游標行與下一行合併</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h2 id="特殊指令"><a href="#特殊指令" class="headerlink" title="特殊指令"></a>特殊指令</h2><ul>
 <li><code>:w !sudo tee %</code>：當要存檔的時候需要權限，可以用此指令來提升。</li>
@@ -873,12 +856,12 @@ O
 </ul>
 <blockquote>
 <p>vim 在複製、刪除時，會把資料放在預設暫存器中，有 0-9A-Za-z+” 這些暫存器可選擇，其中：</p>
+</blockquote>
 <ul>
 <li>0-9：vim 會用到 0-9，0 存放最近一次的資料</li>
 <li>“：預設暫存器</li>
 <li>+：剪貼簿暫存器</li>
 </ul>
-</blockquote>
 <p>因此將資料放進 + 暫存器等同於將資料放進剪貼簿。</p>
 <hr>
 <h2 id="vim-rc-設定檔"><a href="#vim-rc-設定檔" class="headerlink" title="vim.rc 設定檔"></a>vim.rc 設定檔</h2><p>記錄我目前的設定檔。</p>
@@ -891,8 +874,7 @@ inoremap <span class="token punctuation">(</span> <span class="token punctuation
 inoremap <span class="token punctuation">[</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&lt;</span>Esc<span class="token operator">></span>i
 inoremap <span class="token string">' '</span>'<span class="token operator">&lt;</span>Esc<span class="token operator">></span>i
 inoremap <span class="token string">" "</span><span class="token comment" spellcheck="true">"&lt;Esc>i</span>
-inoremap <span class="token punctuation">{</span><span class="token operator">&lt;</span>CR<span class="token operator">></span> <span class="token punctuation">{</span><span class="token operator">&lt;</span>CR<span class="token operator">></span><span class="token punctuation">}</span><span class="token operator">&lt;</span>Esc<span class="token operator">></span>ko
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+inoremap <span class="token punctuation">{</span><span class="token operator">&lt;</span>CR<span class="token operator">></span> <span class="token punctuation">{</span><span class="token operator">&lt;</span>CR<span class="token operator">></span><span class="token punctuation">}</span><span class="token operator">&lt;</span>Esc<span class="token operator">></span>ko<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>set nu</code></li>
 </ul>

@@ -569,8 +569,7 @@
     rt_size_t        suspend_thread_count<span class="token punctuation">;</span>              <span class="token comment" spellcheck="true">/**&lt; numbers of thread pended on this resource */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_mempool <span class="token operator">*</span>rt_mp_t<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我們從文本的圖來解釋結構：<br><img src="https://i.imgur.com/9KWhnUY.png" alt="memory pool example" title="memory pool example"></p>
 <ul>
 <li><code>start_address</code> 為每個 mempool 的起始位置，此圖為例則為<em>mempool 1</em> 的起始位置</li>
@@ -595,13 +594,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 mempool（使用 heap）</td>
 <td>mempool</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -610,14 +607,12 @@
 <th><code>block_size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>要切割的總塊數</td>
 <td>一塊 free block 的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a mempool object and allocate the memory pool from
  * heap.
@@ -642,8 +637,7 @@ rt_mp_t <span class="token function">rt_mp_create</span><span class="token punct
     mp <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rt_mempool <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">rt_object_allocate</span><span class="token punctuation">(</span>RT_Object_Class_MemPool<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* allocate object failed */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mp <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先一樣先從 heap 取一塊記憶體作為 mempool 使用</li>
 </ul>
@@ -661,8 +655,7 @@ rt_mp_t <span class="token function">rt_mp_create</span><span class="token punct
         <span class="token function">rt_object_delete</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mp<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著對齊 <code>block_size</code> 後填入結構中，一併計算 mempool 的大小</li>
 <li>並從 heap 中取出一塊待會做成 free list</li>
@@ -672,8 +665,7 @@ rt_mp_t <span class="token function">rt_mp_create</span><span class="token punct
 
     <span class="token comment" spellcheck="true">/* initialize suspended thread list */</span>
     <span class="token function">rt_list_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mp<span class="token operator">-></span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    mp<span class="token operator">-></span>suspend_thread_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mp<span class="token operator">-></span>suspend_thread_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>填入總數，建立等待鏈</li>
 </ul>
@@ -692,8 +684,7 @@ rt_mp_t <span class="token function">rt_mp_create</span><span class="token punct
 
     <span class="token keyword">return</span> mp<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後製作 free list：<ul>
 <li>一個 free block 分成兩部分：前 8-bit (rt_uint8_t *）與一個 block_size</li>
@@ -713,33 +704,12 @@ rt_mp_t <span class="token function">rt_mp_create</span><span class="token punct
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 mempool</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th><code>*mp</code></th>
-<th><code>*name</code></th>
-<th><code>*start</code></th>
-<th><code>size</code></th>
-<th><code>block_size</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>結構位址</td>
-<td>名字</td>
-<td>所要使用的記憶體位址</td>
-<td>mempool 大小</td>
-<td>一塊 free block 的大小</td>
-</tr>
-</tbody>
-</table>
+</tbody></table>
+<p>| <code>*mp</code> | <code>*name</code> | <code>*start</code> | <code>size</code> | <code>block_size</code> |<br>| ——- | ————- | ———– |<br>| 結構位址 | 名字 | 所要使用的記憶體位址 | mempool 大小 | 一塊 free block 的大小 |</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a memory pool object, normally which is used
  * for static object.
@@ -773,8 +743,7 @@ rt_err_t <span class="token function">rt_mp_init</span><span class="token punctu
 
     <span class="token comment" spellcheck="true">/* align the block size */</span>
     block_size <span class="token operator">=</span> <span class="token function">RT_ALIGN</span><span class="token punctuation">(</span>block_size<span class="token punctuation">,</span> RT_ALIGN_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    mp<span class="token operator">-></span>block_size <span class="token operator">=</span> block_size<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mp<span class="token operator">-></span>block_size <span class="token operator">=</span> block_size<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>可直接用 <code>rt_object_init</code> 初始化物件</li>
 <li>同時用 <code>RT_ALIGN_DOWN</code> 對齊 size </li>
@@ -788,8 +757,7 @@ rt_err_t <span class="token function">rt_mp_init</span><span class="token punctu
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* align to align size byte */</span>
     mp<span class="token operator">-></span>block_total_count <span class="token operator">=</span> mp<span class="token operator">-></span>size <span class="token operator">/</span> <span class="token punctuation">(</span>mp<span class="token operator">-></span>block_size <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    mp<span class="token operator">-></span>block_free_count  <span class="token operator">=</span> mp<span class="token operator">-></span>block_total_count<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    mp<span class="token operator">-></span>block_free_count  <span class="token operator">=</span> mp<span class="token operator">-></span>block_total_count<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著手動算出 block 的總數</li>
 </ul>
@@ -812,8 +780,7 @@ rt_err_t <span class="token function">rt_mp_init</span><span class="token punctu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其他的動作皆相同</li>
 </ul>
@@ -826,25 +793,21 @@ rt_err_t <span class="token function">rt_mp_init</span><span class="token punctu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 mempool（使用 heap）</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mp</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 mempool</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a memory pool and release the object memory.
  *
@@ -873,8 +836,7 @@ rt_err_t <span class="token function">rt_mp_delete</span><span class="token punc
         <span class="token comment" spellcheck="true">/* get next suspend thread */</span>
         thread <span class="token operator">=</span> <span class="token function">rt_list_entry</span><span class="token punctuation">(</span>mp<span class="token operator">-></span>suspend_thread<span class="token punctuation">.</span>next<span class="token punctuation">,</span> <span class="token keyword">struct</span> rt_thread<span class="token punctuation">,</span> tlist<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">/* set error code to RT_ERROR */</span>
-        thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>當要把 mempool 刪除前，先將正在等待分配記憶體的 thread 一個一個叫醒</li>
 <li>叫醒前，先將錯誤碼改成 <code>ERROR</code></li>
@@ -884,8 +846,7 @@ rt_err_t <span class="token function">rt_mp_delete</span><span class="token punc
          * In rt_thread_resume function, it will remove current thread from
          * suspend list
          */</span>
-        <span class="token function">rt_thread_resume</span><span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token function">rt_thread_resume</span><span class="token punctuation">(</span>thread<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著透過 <code>rt_thread_resume</code> 叫醒 thread</li>
 </ul>
@@ -895,8 +856,7 @@ rt_err_t <span class="token function">rt_mp_delete</span><span class="token punc
 
         <span class="token comment" spellcheck="true">/* enable interrupt */</span>
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後更新 <code>suspend_thread_count</code></li>
 </ul>
@@ -908,8 +868,7 @@ rt_err_t <span class="token function">rt_mp_delete</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>叫醒完，free 掉建立 mempool 時所要的記憶體</li>
 <li>再透過 <code>rt_object_delete</code> 刪除</li>
@@ -923,25 +882,21 @@ rt_err_t <span class="token function">rt_mp_delete</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 mempool</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*mp</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 mempool</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a memory pool from system object management.
  *
@@ -989,8 +944,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果是靜態的，就不需要 free</li>
 </ul>
@@ -1002,13 +956,11 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>分配記憶體</td>
 <td>一塊 free block</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1016,13 +968,11 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 <th><code>time</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>mempool</td>
 <td>等待時間</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will allocate a block from memory pool
  *
@@ -1055,8 +1005,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
             <span class="token function">rt_set_errno</span><span class="token punctuation">(</span><span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
             <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果目前無法取得記憶體，且等待時間為 0，回傳 NULL，並設置錯誤碼為 TIMEOUT</li>
 </ul>
@@ -1079,8 +1028,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
                              RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                              <span class="token operator">&amp;</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果需要等待，啟動一個 timer</li>
 </ul>
@@ -1088,8 +1036,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* do a schedule */</span>
-        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>並做一次調度</li>
 </ul>
@@ -1104,34 +1051,29 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
         <span class="token punctuation">}</span>
         <span class="token comment" spellcheck="true">/* disable interrupt */</span>
         level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後更新 time 值</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* memory block is available. decrease the free block counter */</span>
-    mp<span class="token operator">-></span>block_free_count<span class="token operator">--</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    mp<span class="token operator">-></span>block_free_count<span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>如果可以要記憶體，更新 <code>block_free_count</code></li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* get block from block list */</span>
     block_ptr <span class="token operator">=</span> mp<span class="token operator">-></span>block_list<span class="token punctuation">;</span>
-    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>block_ptr <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>block_ptr <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>取得第一顆</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* Setup the next free node. */</span>
-    mp<span class="token operator">-></span>block_list <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>block_ptr<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    mp<span class="token operator">-></span>block_list <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>block_ptr<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>並將 free list 往後一顆</li>
 <li><code>block_list</code> 是使用間接定址，前 8-bit 是下一顆的位置</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* point to memory pool */</span>
-    <span class="token operator">*</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>block_ptr <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>mp<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    <span class="token operator">*</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>block_ptr <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>mp<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>接著將前 8-bit 指向原來的 mempool</li>
 </ul>
@@ -1143,14 +1085,14 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 
     <span class="token keyword">return</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>block_ptr <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_alloc<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_alloc<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><p>最後回傳取得的 free block</p>
 </li>
 <li><p>注意這裡回傳的是 <code>block_ptr + 8</code>，也就是真正可以使用的位址</p>
 </li>
-<li>如果要尋找這個 block 所屬的 mempool 則需要 -8。</li>
+<li><p>如果要尋找這個 block 所屬的 mempool 則需要 -8。</p>
+</li>
 </ul>
 <hr>
 <h2 id="Code-free"><a href="#Code-free" class="headerlink" title="Code: free"></a>Code: free</h2><table>
@@ -1160,25 +1102,21 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放記憶體</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*block</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>所要釋放的記憶體塊</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will release a memory block
  *
@@ -1193,8 +1131,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 
     <span class="token comment" spellcheck="true">/* get the control block of pool which the block belongs to */</span>
     block_ptr <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>block <span class="token operator">-</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    mp        <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rt_mempool <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">*</span>block_ptr<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mp        <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> rt_mempool <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">*</span>block_ptr<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先取得所屬的 mempool（-8）</li>
 </ul>
@@ -1208,8 +1145,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
 
     <span class="token comment" spellcheck="true">/* link the block into the block list */</span>
     <span class="token operator">*</span>block_ptr <span class="token operator">=</span> mp<span class="token operator">-></span>block_list<span class="token punctuation">;</span>
-    mp<span class="token operator">-></span>block_list <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>block_ptr<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mp<span class="token operator">-></span>block_list <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint8_t <span class="token operator">*</span><span class="token punctuation">)</span>block_ptr<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>更新 <code>block_free_count</code></li>
 <li>接著定址到 free list，重新指定 block list</li>
@@ -1243,8 +1179,7 @@ rt_err_t <span class="token function">rt_mp_detach</span><span class="token punc
     <span class="token comment" spellcheck="true">/* enable interrupt */</span>
     <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_free<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mp_free<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有人在等資源，叫醒他，並做一次調度</li>
 </ul>

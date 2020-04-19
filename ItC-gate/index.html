@@ -5,9 +5,9 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="計概：閘與電路, LuSW">
-    <meta name="description" content="電腦與電學電子訊號有某個電壓準位，一般而言電壓準位在 0~2 伏特時屬於「低」，代表二進制的 0，而位於 2~5 伏特時則為「高」，代表二進制的 1。
+    <meta name="description" content="電腦與電學電子訊號有某個電壓準位，一般而言電壓準位在 02 伏特時屬於「低」，代表二進制的 0，而位於 25 伏特時則為「高」，代表二進制的 1。
 
-閘 gate：是完成電子訊號基本運算的裝置。閘接受一至多個輸入訊號，產生單一輸出訊號；">
+閘 gate：是完成電子訊號基本運算的裝置。閘接受一至多個輸入訊號，產生單一輸出訊號；有數">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -530,7 +530,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦與電學"><a href="#電腦與電學" class="headerlink" title="電腦與電學"></a>電腦與電學</h2><p>電子訊號有某個電壓準位，一般而言電壓準位在 0~2 伏特時屬於「低」，代表二進制的 0，而位於 2~5 伏特時則為「高」，代表二進制的 1。</p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦與電學"><a href="#電腦與電學" class="headerlink" title="電腦與電學"></a>電腦與電學</h2><p>電子訊號有某個電壓準位，一般而言電壓準位在 0<del>2 伏特時屬於「低」，代表二進制的 0，而位於 2</del>5 伏特時則為「高」，代表二進制的 1。</p>
 <ul>
 <li>閘 gate：是完成電子訊號基本運算的裝置。閘接受一至多個輸入訊號，產生單一輸出訊號；有數種特定裝置的閘，以下討論六種基本的閘。</li>
 <li>電路 circuits：閘可組成電路，完成更複雜的工作。有三種可以描述電路的表示法：<ul>
@@ -552,8 +552,7 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>1</td>
 </tr>
@@ -561,8 +560,7 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h3 id="2-AND閘"><a href="#2-AND閘" class="headerlink" title="2. AND閘"></a>2. AND閘</h3><p>AND閘接受多個訊號，產生一個輸出。</p>
 <h4 id="DEF-1"><a href="#DEF-1" class="headerlink" title="DEF"></a>DEF</h4><p>若輸入全為1，則輸出1，反之，則為0。</p>
@@ -576,8 +574,7 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -597,8 +594,7 @@
 <td>1</td>
 <td>1</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h3 id="3-OR閘"><a href="#3-OR閘" class="headerlink" title="3.OR閘"></a>3.OR閘</h3><p>OR閘接受兩個輸入，產生一個輸出。</p>
 <h4 id="DEF-2"><a href="#DEF-2" class="headerlink" title="DEF"></a>DEF</h4><p>如兩個輸入全為0，則輸出0，反之，輸出1。</p>
@@ -612,8 +608,7 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -633,8 +628,7 @@
 <td>1</td>
 <td>1</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h3 id="4-XOR閘"><a href="#4-XOR閘" class="headerlink" title="4.XOR閘"></a>4.XOR閘</h3><p>XOR閘，又稱互斥閘。</p>
 <h4 id="DEF-3"><a href="#DEF-3" class="headerlink" title="DEF"></a>DEF</h4><p>若輸出相同，則輸出0，反之，輸出1。</p>
@@ -648,8 +642,7 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -669,8 +662,7 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h3 id="5-NAND-與-NOR閘"><a href="#5-NAND-與-NOR閘" class="headerlink" title="5.NAND 與 NOR閘"></a>5.NAND 與 NOR閘</h3><p>分別為AND與OR閘的相反</p>
 <h4 id="NAND閘"><a href="#NAND閘" class="headerlink" title="NAND閘"></a>NAND閘</h4><h5 id="布林運算式-4"><a href="#布林運算式-4" class="headerlink" title="布林運算式"></a>布林運算式</h5><p>$X = ( A \cdot B ) ‘$</p>
@@ -683,8 +675,7 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
 <td>1</td>
@@ -704,8 +695,7 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h4 id="NOR閘"><a href="#NOR閘" class="headerlink" title="NOR閘"></a>NOR閘</h4><h5 id="布林運算式-5"><a href="#布林運算式-5" class="headerlink" title="布林運算式"></a>布林運算式</h5><p>$X = ( A + B ) ‘$</p>
 <h5 id="邏輯圖-5"><a href="#邏輯圖-5" class="headerlink" title="邏輯圖"></a>邏輯圖</h5><p><img src="https://i.imgur.com/76wkbGw.png" alt="NOR閘" title="NOR閘"></p>
@@ -717,8 +707,7 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
 <td>1</td>
@@ -738,8 +727,7 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <hr>
 <h2 id="閘的建構"><a href="#閘的建構" class="headerlink" title="閘的建構"></a>閘的建構</h2><ul>
 <li>電晶體 transistor：是以半導體所製成，依據電壓準位來決定要當導線還是電阻的裝置。<br><img src="https://i.imgur.com/I6OFGJq.png" alt="transistor" title="電晶體"></li>
@@ -773,37 +761,35 @@
 <tr>
 <th>A</th>
 <th>B</th>
-<th style="text-align:center">總和</th>
-<th style="text-align:center">進位</th>
+<th align="center">總和</th>
+<th align="center">進位</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>可看出來，總和為 $A \oplus B$，進位為 $AB$。<br></p>
 <ul>
 <li>一個半加器並未將可能的進位值併入計算，也就是說，一個半加器在兩個單一數元的相加是沒問題的，但在多重數元時會產生問題。</li>
@@ -814,70 +800,68 @@
 <tr>
 <th>A</th>
 <th>B</th>
-<th style="text-align:center">進位輸入</th>
-<th style="text-align:center">總和</th>
-<th style="text-align:center">進位輸出 </th>
+<th align="center">進位輸入</th>
+<th align="center">總和</th>
+<th align="center">進位輸出</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
 </tr>
 <tr>
 <td>1</td>
 <td>0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><img src="https://i.imgur.com/Y6PH0oI.png" alt="加法器" title="全加器"></p>
 <ul>
 <li>多工器 multiplexer<br><br>為一種產生單一輸出的電路，輸出等於電路中數個輸入的其中一個。依據一些原始輸入以外的輸入訊號（選擇訊號、選擇控制線）來決定哪條輸入將被輸出。<br>如：選擇訊號為 S0、S1、S2，輸入為D0~D7，則有以下真值表。</li>
@@ -891,8 +875,7 @@
 <th>F</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>0</td>
 <td>0</td>
 <td>1</td>
@@ -940,8 +923,7 @@
 <td>0</td>
 <td>D7</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>上述多工器可化成此方塊圖。<br><br><img src="https://i.imgur.com/zrGhNVm.png" alt="多工器" title="多工器"></p>
 <hr>
 <h2 id="作為記憶體的電路"><a href="#作為記憶體的電路" class="headerlink" title="作為記憶體的電路"></a>作為記憶體的電路</h2><p>數位電路也可以儲存資訊，這些電路形成一個循序電路，電路的輸出可以當成電路的輸入，也就是說，某些電路的存在狀態有些被用來決定此電路的下個狀態；一些記憶體設計如：S-R閂。</p>

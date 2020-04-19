@@ -545,8 +545,7 @@
     <span class="token keyword">enum</span> rtgui_object_flag flag<span class="token punctuation">;</span>
 
     rt_uint32_t id<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* rtgui type structure */</span>
 <span class="token keyword">struct</span> rtgui_type
 <span class="token punctuation">{</span>
@@ -562,8 +561,7 @@
 
     <span class="token comment" spellcheck="true">/* size of type */</span>
     <span class="token keyword">int</span> size<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="定義物件類型"><a href="#定義物件類型" class="headerlink" title="定義物件類型"></a>定義物件類型</h2><p>RTGUI 設計了一個巨集函數來定義不同的物件，如下：</p>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> DEFINE_CLASS_TYPE(type, name, parent, constructor, destructor, size) \
@@ -574,8 +572,7 @@
     RTGUI_DESTRUCTOR(destructor), \
     size }; \
     const rtgui_type_t *_rtgui_##type##_get_type(void) { return &amp;_rtgui_##type; } \
-    RTM_EXPORT(_rtgui_##type##_get_type)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    RTM_EXPORT(_rtgui_##type##_get_type)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>##</code> 為連字符，在<a href="/rt-thread-RTM-EXPORT">RT-Thread 理解 RTM_EXPORT</a>裡有提過了，基本上就是填入值進去結構體</p>
 <hr>
 <h2 id="建立物件"><a href="#建立物件" class="headerlink" title="建立物件"></a>建立物件</h2><blockquote>
@@ -589,25 +586,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立物件</td>
 <td>物件指標</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*object_type</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要建立的物件種類</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @brief Creates a new object: it calls the corresponding constructors
  * (from the constructor of the base class to the constructor of the more
@@ -639,8 +632,7 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 
     <span class="token keyword">return</span> new_object<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_object_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_object_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>建立物件相當簡單，透過欲建立的物件類型所定意義的 <code>construct</code> 函數來建立，其中 <code>rtgui_type_object_construct</code> 會呼叫正確的建立函式來初始化資料。</p>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>rtgui_type_object_construct</code></p>
@@ -651,13 +643,11 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>呼叫正確的 <code>construct</code> 函式來初始化物件</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -665,13 +655,11 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th><code>*object</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲初始化的物件類型</td>
 <td>物件本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_type_object_construct</span><span class="token punctuation">(</span><span class="token keyword">const</span> rtgui_type_t <span class="token operator">*</span>type<span class="token punctuation">,</span> rtgui_object_t <span class="token operator">*</span>object<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">/* construct from parent to children */</span>
@@ -680,8 +668,7 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 
     <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token operator">-></span>constructor<span class="token punctuation">)</span>
         type<span class="token operator">-></span><span class="token function">constructor</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果欲建立的物件類型在某一個物件類型的底下，如 window 之於 widget，則先呼叫在上層的 <code>construct</code>；接著呼叫自己的 <code>construct</code> 來完成建立的動作。</p>
 <hr>
 <p>再仔細的看一下 “object” 的 <code>construct</code> 函式，其動作為：填入 vaild 的旗標，並將 id 填入 object 的記憶體指標；以上動作在 <code>_rtgui_object_constructor</code> 完成</p>
@@ -693,25 +680,21 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>“object” 建立函式</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*object</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要建立的物件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">_rtgui_object_constructor</span><span class="token punctuation">(</span>rtgui_object_t <span class="token operator">*</span>object<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>object<span class="token punctuation">)</span>
@@ -719,8 +702,7 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 
     object<span class="token operator">-></span>flag <span class="token operator">=</span> RTGUI_OBJECT_FLAG_VALID<span class="token punctuation">;</span>
     object<span class="token operator">-></span>id   <span class="token operator">=</span> <span class="token punctuation">(</span>rt_uint32_t<span class="token punctuation">)</span>object<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="刪除物件"><a href="#刪除物件" class="headerlink" title="刪除物件"></a>刪除物件</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_object_destroy</code></p>
 <table>
@@ -730,25 +712,21 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除物件</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*object</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要刪除的物件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @brief Destroys the object.
  *
@@ -773,8 +751,7 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
     <span class="token comment" spellcheck="true">/* release object */</span>
     <span class="token function">rtgui_free</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_object_destroy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_object_destroy<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>這裡一樣透過 <code>rtgui_type_destructors_call</code> 來呼叫正確的 <code>destruct</code> 函式，<code>destruct</code> 負責釋放該釋放的記憶體；最後透過 <code>rtgui_free</code> 釋放整個物件。<code>regui_free</code> 則簡單的呼叫 <code>rt_free</code> 釋放記憶體，我們在前幾篇文章有討論過了（<a href="/rt-mem#Code-free">mempool</a>、<a href="/rt-memheap#釋放記憶體">memheap</a>、<a href="/rt-small-mem#釋放記憶體">small mem</a>、<a href="/rt-slab#釋放記憶體">slab</a>）</p>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>rtgui_type_destructors_call</code></p>
@@ -785,13 +762,11 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>呼叫正確的 <code>destructor</code> 函式來清除物件</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -799,13 +774,11 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th><code>*object</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲清除的物件類型</td>
 <td>物件本體</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_type_destructors_call</span><span class="token punctuation">(</span><span class="token keyword">const</span> rtgui_type_t <span class="token operator">*</span>type<span class="token punctuation">,</span> rtgui_object_t <span class="token operator">*</span>object<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">/* destruct from children to parent */</span>
@@ -814,8 +787,7 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 
     <span class="token keyword">if</span> <span class="token punctuation">(</span>type<span class="token operator">-></span>parent<span class="token punctuation">)</span>
         <span class="token function">rtgui_type_destructors_call</span><span class="token punctuation">(</span>type<span class="token operator">-></span>parent<span class="token punctuation">,</span> object<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>同樣的如果此物件類型是在某個物件類型的底下，先呼叫上層的 <code>destruct</code>；接著呼叫自己的 <code>desturct</code> 完成清除的動作。</p>
 <hr>
 <p>最後來看一下 “object” 的刪除函式：填入 none 的旗標，並將物件種類設為 NULL；動作在 <code>_rtgui_object_destructor</code> 完成</p>
@@ -827,25 +799,21 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>“object” 的刪除函式</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*object</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲清除的物件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/* Destroys the object */</span>
 <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">_rtgui_object_destructor</span><span class="token punctuation">(</span>rtgui_object_t <span class="token operator">*</span>object<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -854,8 +822,7 @@ rtgui_object_t <span class="token operator">*</span><span class="token function"
      * object and thus the flag will become valid. */</span>
     object<span class="token operator">-></span>flag <span class="token operator">=</span> RTGUI_OBJECT_FLAG_NONE<span class="token punctuation">;</span>
     object<span class="token operator">-></span>type <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/xuzhenglim/article/details/11883351" target="_blank" rel="noopener">RTGUI粗讲（个人见解篇之三、RTGUI WIDGET （2））</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

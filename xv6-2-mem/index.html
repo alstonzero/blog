@@ -565,63 +565,61 @@ x86的頁表：$2^{20}$ 條 PTE。
 <h3 id="flags"><a href="#flags" class="headerlink" title="flags"></a>flags</h3><table>
 <thead>
 <tr>
-<th style="text-align:center">flags</th>
+<th align="center">flags</th>
 <th>name</th>
 <th>為 1 時</th>
-<th>為 0 時 </th>
+<th>為 0 時</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">P</td>
+<tbody><tr>
+<td align="center">P</td>
 <td>Present</td>
 <td>表示頁存在</td>
 <td>不存在</td>
 </tr>
 <tr>
-<td style="text-align:center">W</td>
+<td align="center">W</td>
 <td>Writable</td>
 <td>可以寫入</td>
 <td>只能讀/取</td>
 </tr>
 <tr>
-<td style="text-align:center">U</td>
+<td align="center">U</td>
 <td>User</td>
 <td>user 能使用此頁</td>
 <td>只有 kernel 能使用</td>
 </tr>
 <tr>
-<td style="text-align:center">WT</td>
+<td align="center">WT</td>
 <td>-</td>
 <td>Write-through</td>
 <td>Write-back</td>
 </tr>
 <tr>
-<td style="text-align:center">CD</td>
+<td align="center">CD</td>
 <td>Cache Disable</td>
 <td>不會對此頁進行 cache</td>
 <td>進行 cache</td>
 </tr>
 <tr>
-<td style="text-align:center">A</td>
+<td align="center">A</td>
 <td>Accessed</td>
 <td>為 0 時被存取， 處理器會將此位設為 1</td>
 <td>-</td>
 </tr>
 <tr>
-<td style="text-align:center">D</td>
+<td align="center">D</td>
 <td>Dirty</td>
 <td>為 0 時寫入此頁， 處理器會將此位設為 1</td>
 <td>-</td>
 </tr>
 <tr>
-<td style="text-align:center">AVL</td>
+<td align="center">AVL</td>
 <td>Available for system use</td>
 <td>-</td>
 <td>-</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><strong>註：</strong>只有軟體可以將 A、D 清 0。<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[記憶體管理／分頁架構](https://www.csie.ntu.edu.tw/~wcchen/asm98/asm/proj/b85506061/chap2/paging.html)">[1]</span></a></sup></p>
 <h3 id="名詞解釋"><a href="#名詞解釋" class="headerlink" title="名詞解釋"></a>名詞解釋</h3><ul>
 <li>物理記憶體：DRAM</li>
@@ -653,13 +651,11 @@ x86的頁表：$2^{20}$ 條 PTE。
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 kernel page</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Allocate one page table for the machine for the kernel address</span>
 <span class="token comment" spellcheck="true">// space for scheduler processes.</span>
 <span class="token keyword">void</span>
@@ -667,8 +663,7 @@ x86的頁表：$2^{20}$ 條 PTE。
 <span class="token punctuation">{</span>
   kpgdir <span class="token operator">=</span> <span class="token function">setupkvm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">switchkvm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>建立頁表的工作由 <code>setupkvm</code> 完成</li>
 </ul>
@@ -679,13 +674,11 @@ x86的頁表：$2^{20}$ 條 PTE。
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 kernel page</td>
 <td>PDE</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Set up kernel part of a page table.</span>
 pde_t<span class="token operator">*</span>
 <span class="token function">setupkvm</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
@@ -694,8 +687,7 @@ pde_t<span class="token operator">*</span>
   <span class="token keyword">struct</span> kmap <span class="token operator">*</span>k<span class="token punctuation">;</span>
 
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>pgdir <span class="token operator">=</span> <span class="token punctuation">(</span>pde_t<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">kalloc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先分配一頁來存放目錄</li>
 </ul>
@@ -707,8 +699,7 @@ pde_t<span class="token operator">*</span>
                 <span class="token punctuation">(</span>uint<span class="token punctuation">)</span>k<span class="token operator">-></span>phys_start<span class="token punctuation">,</span> k<span class="token operator">-></span>perm<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
       <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> pgdir<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著呼叫 <code>mappages</code> 來建立 kernel 所需的映射。</li>
 <li>映射存放在 kmap 裡</li>
@@ -726,8 +717,7 @@ pde_t<span class="token operator">*</span>
  <span class="token punctuation">{</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>KERNLINK<span class="token punctuation">,</span> <span class="token function">V2P</span><span class="token punctuation">(</span>KERNLINK<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">V2P</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>     <span class="token comment" spellcheck="true">// kern text+rodata</span>
  <span class="token punctuation">{</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>data<span class="token punctuation">,</span>     <span class="token function">V2P</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>     PHYSTOP<span class="token punctuation">,</span>   PTE_W<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// kern data+memory</span>
  <span class="token punctuation">{</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>DEVSPACE<span class="token punctuation">,</span> DEVSPACE<span class="token punctuation">,</span>      <span class="token number">0</span><span class="token punctuation">,</span>         PTE_W<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">// more devices</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>kmap 包含 kernel 的資料及指令、<code>PHYTOP</code>以下的物理記憶體、及 I/O 設備的記憶體。</li>
 <li>這裡不會建立有關 user 的映射</li>
@@ -739,13 +729,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 PTE</td>
 <td>0 (ok) / -1 (err)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Create PTEs for virtual addresses starting at va that refer to</span>
 <span class="token comment" spellcheck="true">// physical addresses starting at pa. va and size might not</span>
 <span class="token comment" spellcheck="true">// be page-aligned.</span>
@@ -759,14 +747,12 @@ pde_t<span class="token operator">*</span>
   last <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">PGROUNDDOWN</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uint<span class="token punctuation">)</span>va<span class="token punctuation">)</span> <span class="token operator">+</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>pte <span class="token operator">=</span> <span class="token function">walkpgdir</span><span class="token punctuation">(</span>pgdir<span class="token punctuation">,</span> a<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先呼叫 <code>walkpgdir</code> 來找到對應的 PTE</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">*</span>pte <span class="token operator">&amp;</span> PTE_P<span class="token punctuation">)</span>
-      <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"remap"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+      <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"remap"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>接著確認 PTE_P flags</li>
 </ul>
@@ -777,8 +763,7 @@ pde_t<span class="token operator">*</span>
     pa <span class="token operator">+</span><span class="token operator">=</span> PGSIZE<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後初始化 PTE。</li>
 <li>問題：如何初始化</li>
@@ -792,13 +777,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>從目錄尋找對應的 PTE</td>
 <td>PTE</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -807,14 +790,12 @@ pde_t<span class="token operator">*</span>
 <th><code>alloc</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>目標目錄</td>
 <td>目標虛擬地址</td>
 <td>是否有 alloc</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Return the address of the PTE in page table pgdir</span>
 <span class="token comment" spellcheck="true">// that corresponds to virtual address va.  If alloc!=0,</span>
 <span class="token comment" spellcheck="true">// create any required page table pages.</span>
@@ -838,14 +819,12 @@ pde_t<span class="token operator">*</span>
     <span class="token operator">*</span>pde <span class="token operator">=</span> <span class="token function">v2p</span><span class="token punctuation">(</span>pgtab<span class="token punctuation">)</span> <span class="token operator">|</span> PTE_P <span class="token operator">|</span> PTE_W <span class="token operator">|</span> PTE_U<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token operator">&amp;</span>pgtab<span class="token punctuation">[</span><span class="token function">PTX</span><span class="token punctuation">(</span>va<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">switchkvm</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token function">lcr3</span><span class="token punctuation">(</span><span class="token function">v2p</span><span class="token punctuation">(</span>kpgdir<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// switch to the kernel page table</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="分配物理記憶體"><a href="#分配物理記憶體" class="headerlink" title="分配物理記憶體"></a>分配物理記憶體</h2><p>kernel 在運行時須為以下物件分配物理記憶體：</p>
 <ul>
@@ -871,13 +850,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化物理記憶體分配器</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -885,21 +862,18 @@ pde_t<span class="token operator">*</span>
 <th><code>*vend</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>起始位址</td>
 <td>結束位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">kinit1</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>vstart<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>vend<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token function">initlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmem<span class="token punctuation">.</span>lock<span class="token punctuation">,</span> <span class="token string">"kmem"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   kmem<span class="token punctuation">.</span>use_lock <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token function">freerange</span><span class="token punctuation">(</span>vstart<span class="token punctuation">,</span> vend<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>kinit2</code></p>
 <table>
@@ -909,13 +883,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化物理記憶體分配器</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -923,20 +895,17 @@ pde_t<span class="token operator">*</span>
 <th><code>*vend</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>起始位址</td>
 <td>結束位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">kinit2</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>vstart<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>vend<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token function">freerange</span><span class="token punctuation">(</span>vstart<span class="token punctuation">,</span> vend<span class="token punctuation">)</span><span class="token punctuation">;</span>
   kmem<span class="token punctuation">.</span>use_lock <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>kinit1 / 2</code> 呼叫 <code>freerange</code> 將記憶體加入 free list</li>
 </ul>
@@ -947,13 +916,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放一段記憶體</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -961,13 +928,11 @@ pde_t<span class="token operator">*</span>
 <th><code>*vend</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>起始位址</td>
 <td>結束位址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">freerange</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>vstart<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>vend<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -975,8 +940,7 @@ pde_t<span class="token operator">*</span>
   p <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">PGROUNDUP</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uint<span class="token punctuation">)</span>vstart<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span> p <span class="token operator">+</span> PGSIZE <span class="token operator">&lt;=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>vend<span class="token punctuation">;</span> p <span class="token operator">+</span><span class="token operator">=</span> PGSIZE<span class="token punctuation">)</span>
     <span class="token function">kfree</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>freerange</code> 呼叫 <code>kfree</code> 來完成工作</li>
 </ul>
@@ -987,25 +951,21 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放記憶體</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*v</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲 free 的虛擬地址</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">//PAGEBREAK: 21</span>
 <span class="token comment" spellcheck="true">// Free the page of physical memory pointed at by v,</span>
 <span class="token comment" spellcheck="true">// which normally should have been returned by a</span>
@@ -1020,8 +980,7 @@ pde_t<span class="token operator">*</span>
     <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"kfree"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token comment" spellcheck="true">// Fill with junk to catch dangling refs.</span>
-  <span class="token function">memset</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> PGSIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">memset</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> PGSIZE<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將每個字節設為 1</li>
 </ul>
@@ -1032,8 +991,7 @@ pde_t<span class="token operator">*</span>
   kmem<span class="token punctuation">.</span>freelist <span class="token operator">=</span> r<span class="token punctuation">;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>kmem<span class="token punctuation">.</span>use_lock<span class="token punctuation">)</span>
     <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmem<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著把 v 轉為 <code>struct run</code> 的指標，插在 free list 的第一顆。</li>
 </ul>
@@ -1046,13 +1004,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>增長/收縮 process 的記憶體</td>
 <td>記憶體大小（結果）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">sys_sbrk</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1065,8 +1021,7 @@ pde_t<span class="token operator">*</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">growproc</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> addr<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>sbrk</code> 透過呼叫 <code>growproc</code> 來完成工作。</li>
 </ul>
@@ -1079,25 +1034,21 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>增長/收縮 process 的記憶體</td>
 <td>0 (ok) / -1 (err)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>n</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>增長/收縮大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Grow current process's memory by n bytes.</span>
 <span class="token comment" spellcheck="true">// Return 0 on success, -1 on failure.</span>
 <span class="token keyword">int</span>
@@ -1116,8 +1067,7 @@ pde_t<span class="token operator">*</span>
   proc<span class="token operator">-></span>sz <span class="token operator">=</span> sz<span class="token punctuation">;</span>
   <span class="token function">switchuvm</span><span class="token punctuation">(</span>proc<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 n&gt;0：<code>allocuvm</code></li>
 <li>如果 n&lt;0：<code>deallocuvm</code></li>
@@ -1131,13 +1081,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>增長記憶體</td>
 <td>記憶體大小（結果）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1146,14 +1094,12 @@ pde_t<span class="token operator">*</span>
 <th><code>newsz</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>從該目錄尋找可用記憶體</td>
 <td>舊的大小</td>
 <td>新的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Allocate page tables and physical memory to grow process from oldsz to</span>
 <span class="token comment" spellcheck="true">// newsz, which need not be page aligned.  Returns new size or 0 on error.</span>
 <span class="token keyword">int</span>
@@ -1166,8 +1112,7 @@ pde_t<span class="token operator">*</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>newsz <span class="token operator">&lt;</span> oldsz<span class="token punctuation">)</span>
     <span class="token keyword">return</span> oldsz<span class="token punctuation">;</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先檢查是否有要超過大小，及動作是否合法。</li>
 </ul>
@@ -1183,8 +1128,7 @@ pde_t<span class="token operator">*</span>
     <span class="token function">mappages</span><span class="token punctuation">(</span>pgdir<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>a<span class="token punctuation">,</span> PGSIZE<span class="token punctuation">,</span> <span class="token function">v2p</span><span class="token punctuation">(</span>mem<span class="token punctuation">)</span><span class="token punctuation">,</span> PTE_W<span class="token operator">|</span>PTE_U<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> newsz<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著透過 <code>kalloc()</code> 來要記憶體，並將要到的記憶體清空</li>
 <li>最後回傳 process 目前總共的大小</li>
@@ -1198,13 +1142,11 @@ pde_t<span class="token operator">*</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>縮減記憶體</td>
 <td>記憶體大小（結果）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1213,14 +1155,12 @@ pde_t<span class="token operator">*</span>
 <th><code>newsz</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>從該目錄釋放記憶體</td>
 <td>舊的大小</td>
 <td>新的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Deallocate user pages to bring the process size from oldsz to</span>
 <span class="token comment" spellcheck="true">// newsz.  oldsz and newsz need not be page-aligned, nor does newsz</span>
 <span class="token comment" spellcheck="true">// need to be less than oldsz.  oldsz can be larger than the actual</span>
@@ -1233,8 +1173,7 @@ pde_t<span class="token operator">*</span>
 
   <span class="token keyword">if</span><span class="token punctuation">(</span>newsz <span class="token operator">>=</span> oldsz<span class="token punctuation">)</span>
     <span class="token keyword">return</span> oldsz<span class="token punctuation">;</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一樣先檢查動作是否合法</li>
 </ul>
@@ -1253,8 +1192,7 @@ pde_t<span class="token operator">*</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> newsz<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著一個一個 pte free，先將 flags 歸0，再透過 <code>kfree</code> 完成工作。</li>
 </ul>
@@ -1280,8 +1218,7 @@ pde_t<span class="token operator">*</span>
   ushort shentsize<span class="token punctuation">;</span>
   ushort shnum<span class="token punctuation">;</span>
   ushort shstrndx<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一個 ELF 文件包含一個 elfhdr、program setion hdr(struct proghdr)</li>
 </ul>
@@ -1295,8 +1232,7 @@ pde_t<span class="token operator">*</span>
   uint memsz<span class="token punctuation">;</span>
   uint flags<span class="token punctuation">;</span>
   uint align<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一個 proghdr 描述了須載入至記憶體的 program section</li>
 </ul>
@@ -1324,8 +1260,7 @@ pde_t<span class="token operator">*</span>
   pde_t <span class="token operator">*</span>pgdir<span class="token punctuation">,</span> <span class="token operator">*</span>oldpgdir<span class="token punctuation">;</span>
 
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ip <span class="token operator">=</span> <span class="token function">namei</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>用 <code>namei</code> 打開二進制文件（ch6 會說明）</li>
 </ul>
@@ -1336,8 +1271,7 @@ pde_t<span class="token operator">*</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">readi</span><span class="token punctuation">(</span>ip<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>elf<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>elf<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>elf<span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token keyword">goto</span> bad<span class="token punctuation">;</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>elf<span class="token punctuation">.</span>magic <span class="token operator">!=</span> ELF_MAGIC<span class="token punctuation">)</span>
-    <span class="token keyword">goto</span> bad<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">goto</span> bad<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著確認 ELF 是否正確（藉由 ELF_magic）</li>
 </ul>
@@ -1359,20 +1293,19 @@ pde_t<span class="token operator">*</span>
       <span class="token keyword">goto</span> bad<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token function">iunlockput</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  ip <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  ip <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li><code>setupkvm</code> 分配一個沒有 user part 的頁</li>
 <li><code>allocuvm</code> 分配給每個 ELF 的 program section 記憶體。</li>
 <li><code>loaduvm</code> 將 section 載入至記憶體</li>
 </ol>
-<p><code>`</code>c<br>  // Allocate two pages at the next page boundary.<br>  // Make the first inaccessible.  Use the second as the user stack.<br>  sz = PGROUNDUP(sz);<br>  if((sz = allocuvm(pgdir, sz, sz + 2<em>PGSIZE)) == 0)<br>    goto bad;<br>  clearpteu(pgdir, (char</em>)(sz - 2*PGSIZE));<br>  sp = sz;</p>
+<p>```c<br>  // Allocate two pages at the next page boundary.<br>  // Make the first inaccessible.  Use the second as the user stack.<br>  sz = PGROUNDUP(sz);<br>  if((sz = allocuvm(pgdir, sz, sz + 2<em>PGSIZE)) == 0)<br>    goto bad;<br>  clearpteu(pgdir, (char</em>)(sz - 2*PGSIZE));<br>  sp = sz;</p>
 <p>  // Push argument strings, prepare rest of stack in ustack.<br>  for(argc = 0; argv[argc]; argc++) {<br>    if(argc &gt;= MAXARG)<br>      goto bad;<br>    sp = (sp - (strlen(argv[argc]) + 1)) &amp; ~3;<br>    if(copyout(pgdir, sp, argv[argc], strlen(argv[argc]) + 1) &lt; 0)<br>      goto bad;<br>    ustack[3+argc] = sp;<br>  }<br>  ustack[3+argc] = 0;</p>
 <p>  ustack[0] = 0xffffffff;  // fake return PC<br>  ustack[1] = argc;<br>  ustack[2] = sp - (argc+1)*4;  // argv pointer</p>
-<p>  sp -= (3+argc+1) <em> 4;<br>  if(copyout(pgdir, sp, ustack, (3+argc+1)</em>4) &lt; 0)<br>    goto bad;</p>
+<p>  sp -= (3+argc+1) * 4;<br>  if(copyout(pgdir, sp, ustack, (3+argc+1)*4) &lt; 0)<br>    goto bad;</p>
 <p>  // Save program name for debugging.<br>  for(last=s=path; <em>s; s++)<br>    if(</em>s == ‘/‘)<br>      last = s+1;<br>  safestrcpy(proc-&gt;name, last, sizeof(proc-&gt;name));</p>
 <p>  // Commit to the user image.<br>  oldpgdir = proc-&gt;pgdir;<br>  proc-&gt;pgdir = pgdir;<br>  proc-&gt;sz = sz;<br>  proc-&gt;tf-&gt;eip = elf.entry;  // main<br>  proc-&gt;tf-&gt;esp = sp;<br>  switchuvm(proc);<br>  freevm(oldpgdir);<br>  return 0;</p>
-<p> bad:<br>  if(pgdir)<br>    freevm(pgdir);<br>  if(ip)<br>    iunlockput(ip);<br>  return -1;<br>}<br><code>`</code></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.csie.ntu.edu.tw/~wcchen/asm98/asm/proj/b85506061/chap2/paging.html" target="_blank" rel="noopener">記憶體管理／分頁架構</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
+<p> bad:<br>  if(pgdir)<br>    freevm(pgdir);<br>  if(ip)<br>    iunlockput(ip);<br>  return -1;<br>}<br>```</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.csie.ntu.edu.tw/~wcchen/asm98/asm/proj/b85506061/chap2/paging.html" target="_blank" rel="noopener">記憶體管理／分頁架構</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

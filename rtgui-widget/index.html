@@ -578,8 +578,7 @@
     <span class="token comment" spellcheck="true">/* user private data */</span>
     rt_uint32_t user_data<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_widget rtgui_widget_t<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_widget rtgui_widget_t<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>記錄包含他的 widget、所在的 window、一些屬性等</p>
 <h3 id="四方形結構體"><a href="#四方形結構體" class="headerlink" title="四方形結構體"></a>四方形結構體</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * Rectangle structure
@@ -588,8 +587,7 @@
 <span class="token punctuation">{</span>
     rt_int16_t x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_rect rtgui_rect_t<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_rect rtgui_rect_t<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>對角線 (x1,y1)、(x2,y2)</p>
 <hr>
 <h3 id="定義物件類型"><a href="#定義物件類型" class="headerlink" title="定義物件類型"></a>定義物件類型</h3><blockquote>
@@ -600,8 +598,7 @@
                   _rtgui_widget_constructor<span class="token punctuation">,</span>
                   _rtgui_widget_destructor<span class="token punctuation">,</span>
                   <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_widget<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>_rtgui_widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>_rtgui_widget<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="建立-widget"><a href="#建立-widget" class="headerlink" title="建立 widget"></a>建立 widget</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_create</code></p>
 <table>
@@ -611,25 +608,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 widget</td>
 <td>widget 指標</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*widget_type</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲建立的 widget 種類</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_widget_t <span class="token operator">*</span><span class="token function">rtgui_widget_create</span><span class="token punctuation">(</span><span class="token keyword">const</span> rtgui_type_t <span class="token operator">*</span>widget_type<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_widget <span class="token operator">*</span>widget<span class="token punctuation">;</span>
@@ -638,8 +631,7 @@
 
     <span class="token keyword">return</span> widget<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>呼叫 <code>rtgui_object_create</code>，型態為 widget 完成，並透過 <code>RTGUI_WIDGET</code> 檢查正確性</p>
 <hr>
 <h2 id="刪除-widget"><a href="#刪除-widget" class="headerlink" title="刪除 widget"></a>刪除 widget</h2><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_destroy</code></p>
@@ -650,31 +642,26 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 widget</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_destroy</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">rtgui_object_destroy</span><span class="token punctuation">(</span><span class="token function">RTGUI_OBJECT</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_destroy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_destroy<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>一樣透過 <code>rtgui_object_destroy</code> 來完成</p>
 <hr>
 <h2 id="設定-widget"><a href="#設定-widget" class="headerlink" title="設定 widget"></a>設定 widget</h2><p>RTT GUI 提供一些 API 給使用者去設定 widget 的樣式與行為</p>
@@ -686,13 +673,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的大小</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -703,16 +688,14 @@
 <th><code>height</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>起始座標 x</td>
 <td>y</td>
 <td>寬度</td>
 <td>高度</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_rectangle</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> <span class="token keyword">int</span> width<span class="token punctuation">,</span> <span class="token keyword">int</span> height<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rtgui_rect_t rect<span class="token punctuation">;</span>
@@ -724,8 +707,7 @@
 
     <span class="token function">rtgui_widget_set_rect</span><span class="token punctuation">(</span>widget<span class="token punctuation">,</span> <span class="token operator">&amp;</span>rect<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_rectangle<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_rectangle<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>填入正確的 (x1,y1)、(x2,y2)</p>
 <hr>
 <h3 id="Parent"><a href="#Parent" class="headerlink" title="Parent"></a>Parent</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_parent</code></p>
@@ -736,13 +718,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的上層元素</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -750,20 +730,17 @@
 <th><code>parent</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>上層元素 (widget)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_parent</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_widget_t <span class="token operator">*</span>parent<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">/* set parent and toplevel widget */</span>
     widget<span class="token operator">-></span>parent <span class="token operator">=</span> parent<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_parent<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="大小下界"><a href="#大小下界" class="headerlink" title="大小下界"></a>大小下界</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_minsize</code></p>
 <table>
@@ -773,13 +750,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的大小下界</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -788,22 +763,19 @@
 <th><code>height</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>寬度</td>
 <td>高度</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_minsize</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> <span class="token keyword">int</span> width<span class="token punctuation">,</span> <span class="token keyword">int</span> height<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
     widget<span class="token operator">-></span>min_width <span class="token operator">=</span> width<span class="token punctuation">;</span>
     widget<span class="token operator">-></span>min_height <span class="token operator">=</span> height<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_minsize<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_minsize<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="寬度下界"><a href="#寬度下界" class="headerlink" title="寬度下界"></a>寬度下界</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_minwidth</code></p>
 <table>
@@ -813,13 +785,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的寬度下界</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -827,21 +797,18 @@
 <th><code>width</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>寬度</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_minwidth</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> <span class="token keyword">int</span> width<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     widget<span class="token operator">-></span>min_width <span class="token operator">=</span> width<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_minwidth<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_minwidth<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="高度下界"><a href="#高度下界" class="headerlink" title="高度下界"></a>高度下界</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_minheight</code></p>
 <table>
@@ -851,13 +818,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的高度下界</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -865,21 +830,18 @@
 <th><code>height</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>高度</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_minheight</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> <span class="token keyword">int</span> height<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     widget<span class="token operator">-></span>min_height <span class="token operator">=</span> height<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_minheight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_minheight<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="邊框風格"><a href="#邊框風格" class="headerlink" title="邊框風格"></a>邊框風格</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_border</code></p>
 <table>
@@ -889,13 +851,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的邊框風格</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -903,13 +863,11 @@
 <th><code>style</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>風格</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * set widget draw style
  */</span>
@@ -940,8 +898,7 @@
         <span class="token keyword">break</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_border<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_border<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="Focus-函式"><a href="#Focus-函式" class="headerlink" title="Focus 函式"></a>Focus 函式</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_onfocus</code></p>
 <table>
@@ -951,13 +908,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的 focus func</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -965,21 +920,18 @@
 <th><code>handler</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>focus func</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_onfocus</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_event_handler_ptr handler<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     widget<span class="token operator">-></span>on_focus_in <span class="token operator">=</span> handler<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_onfocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_onfocus<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="Unfocus-函式"><a href="#Unfocus-函式" class="headerlink" title="Unfocus 函式"></a>Unfocus 函式</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_set_onunfocus</code></p>
 <table>
@@ -989,13 +941,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>設定 widget 的 unfocus func</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1003,21 +953,18 @@
 <th><code>handler</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲設定的 widget</td>
 <td>focus func</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_set_onunfocus</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_event_handler_ptr handler<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     widget<span class="token operator">-></span>on_focus_out <span class="token operator">=</span> handler<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_onunfocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_set_onunfocus<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>這裡是用<strong>指標函數</strong>的方式將行為函式填入結構中，要使用時可直接呼叫結構中的元素使用。</p>
 </blockquote>
@@ -1031,29 +978,25 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>移動 widget 到相對位置</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
-<th style="text-align:center"><code>dx</code></th>
-<th style="text-align:center"><code>dy</code></th>
+<th align="center"><code>*widget</code></th>
+<th align="center"><code>dx</code></th>
+<th align="center"><code>dy</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">欲移動的 widget</td>
-<td style="text-align:center">位移量 x</td>
-<td style="text-align:center">y</td>
+<tbody><tr>
+<td align="center">欲移動的 widget</td>
+<td align="center">位移量 x</td>
+<td align="center">y</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * This function moves widget and its children to a logic point
  */</span>
@@ -1090,8 +1033,7 @@
     <span class="token comment" spellcheck="true">/* update this widget */</span>
     <span class="token function">rtgui_widget_update_clip</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_move_to_logic<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_move_to_logic<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h4 id="移動-widget"><a href="#移動-widget" class="headerlink" title="移動 widget"></a>移動 widget</h4><p><i class="fa fa-code"></i> Code: <code>_widget_move</code></p>
 <table>
@@ -1101,29 +1043,25 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>移動 widget</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
-<th style="text-align:center"><code>dx</code></th>
-<th style="text-align:center"><code>dy</code></th>
+<th align="center"><code>*widget</code></th>
+<th align="center"><code>dx</code></th>
+<th align="center"><code>dy</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">欲移動的 widget</td>
-<td style="text-align:center">位移量 x</td>
-<td style="text-align:center">y</td>
+<tbody><tr>
+<td align="center">欲移動的 widget</td>
+<td align="center">位移量 x</td>
+<td align="center">y</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">_widget_move</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_widget<span class="token operator">*</span> widget<span class="token punctuation">,</span> <span class="token keyword">int</span> dx<span class="token punctuation">,</span> <span class="token keyword">int</span> dy<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_list_node <span class="token operator">*</span>node<span class="token punctuation">;</span>
@@ -1152,8 +1090,7 @@
             <span class="token function">_widget_move</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> dx<span class="token punctuation">,</span> dy<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="Focus-widget"><a href="#Focus-widget" class="headerlink" title="Focus widget"></a>Focus widget</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_focus</code></p>
 <table>
@@ -1163,25 +1100,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>focus widget</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">欲 focus 的 widget</td>
+<tbody><tr>
+<td align="center">欲 focus 的 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @brief Focuses the widget. The focused widget is the widget which can receive the keyboard events
  * @param widget a widget
@@ -1213,8 +1146,7 @@
     <span class="token keyword">if</span> <span class="token punctuation">(</span>widget<span class="token operator">-></span>on_focus_in <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span>
         widget<span class="token operator">-></span><span class="token function">on_focus_in</span><span class="token punctuation">(</span><span class="token function">RTGUI_OBJECT</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">,</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_focus<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_focus<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="Unfocus-widget"><a href="#Unfocus-widget" class="headerlink" title="Unfocus widget"></a>Unfocus widget</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_unfocus</code></p>
 <table>
@@ -1224,25 +1156,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>focus widget</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">欲 unfocus 的 widget</td>
+<tbody><tr>
+<td align="center">欲 unfocus 的 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * @brief Unfocused the widget
  * @param widget a widget
@@ -1274,8 +1202,7 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_unfocus<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_unfocus<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="位移-widget"><a href="#位移-widget" class="headerlink" title="位移 widget"></a>位移 widget</h3><h4 id="點向上位移"><a href="#點向上位移" class="headerlink" title="點向上位移"></a>點向上位移</h4><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_point_to_device</code></p>
 <table>
@@ -1285,27 +1212,23 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>點向上位移</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
-<th style="text-align:center"><code>*point</code></th>
+<th align="center"><code>*widget</code></th>
+<th align="center"><code>*point</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
-<td style="text-align:center">目標點</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
+<td align="center">目標點</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_point_to_device</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_point_t <span class="token operator">*</span>point<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1316,8 +1239,7 @@
         point<span class="token operator">-></span>y <span class="token operator">+</span><span class="token operator">=</span> widget<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_point_to_device<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_point_to_device<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="點向下位移"><a href="#點向下位移" class="headerlink" title="點向下位移"></a>點向下位移</h4><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_point_to_logic</code></p>
 <table>
 <thead>
@@ -1326,27 +1248,23 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>點向上位移</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
-<th style="text-align:center"><code>*point</code></th>
+<th align="center"><code>*widget</code></th>
+<th align="center"><code>*point</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
-<td style="text-align:center">目標點</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
+<td align="center">目標點</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_point_to_logic</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_point_t <span class="token operator">*</span>point<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1357,8 +1275,7 @@
         point<span class="token operator">-></span>y <span class="token operator">-</span><span class="token operator">=</span> widget<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_point_to_logic<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_point_to_logic<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="矩形向上位移"><a href="#矩形向上位移" class="headerlink" title="矩形向上位移"></a>矩形向上位移</h4><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_rect_to_device</code></p>
 <table>
 <thead>
@@ -1367,27 +1284,23 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>點向上位移</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
-<th style="text-align:center"><code>*rect</code></th>
+<th align="center"><code>*widget</code></th>
+<th align="center"><code>*rect</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
-<td style="text-align:center">目標矩形</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
+<td align="center">目標矩形</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_rect_to_device</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1401,8 +1314,7 @@
         rect<span class="token operator">-></span>y2 <span class="token operator">+</span><span class="token operator">=</span> widget<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_rect_to_device<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_rect_to_device<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="矩形向下位移"><a href="#矩形向下位移" class="headerlink" title="矩形向下位移"></a>矩形向下位移</h4><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_rect_to_logic</code></p>
 <table>
 <thead>
@@ -1411,27 +1323,23 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>點向上位移</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
-<th style="text-align:center"><code>*rect</code></th>
+<th align="center"><code>*widget</code></th>
+<th align="center"><code>*rect</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
-<td style="text-align:center">目標矩形</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
+<td align="center">目標矩形</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_rect_to_logic</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">,</span> rtgui_rect_t <span class="token operator">*</span>rect<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span>widget <span class="token operator">!=</span> RT_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1445,8 +1353,7 @@
         rect<span class="token operator">-></span>y2 <span class="token operator">-</span><span class="token operator">=</span> widget<span class="token operator">-></span>extent<span class="token punctuation">.</span>y1<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_rect_to_logic<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_rect_to_logic<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="更新重疊區域"><a href="#更新重疊區域" class="headerlink" title="更新重疊區域"></a>更新重疊區域</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_update_clip</code></p>
 <table>
@@ -1456,25 +1363,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>更新重疊區域</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
  * This function updates the clip info of widget
  */</span>
@@ -1532,8 +1435,7 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_update_clip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_update_clip<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="顯示-widget"><a href="#顯示-widget" class="headerlink" title="顯示 widget"></a>顯示 widget</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_show</code></p>
 <table>
@@ -1543,25 +1445,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>顯示 widget</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_show</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_widget <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_event_show eshow<span class="token punctuation">;</span>
@@ -1583,8 +1481,7 @@
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_show<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_show<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="隱藏-widget"><a href="#隱藏-widget" class="headerlink" title="隱藏 widget"></a>隱藏 widget</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_hide</code></p>
 <table>
@@ -1594,25 +1491,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>隱藏 widget</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">rtgui_widget_hide</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rtgui_widget <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_event_hide ehide<span class="token punctuation">;</span>
@@ -1634,8 +1527,7 @@
 
     <span class="token function">RTGUI_WIDGET_HIDE</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_hide<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_hide<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="取得-widget-資訊"><a href="#取得-widget-資訊" class="headerlink" title="取得 widget 資訊"></a>取得 widget 資訊</h2><p>最後整理一些取得 widget 資訊的 API</p>
 <h3 id="Top-Level"><a href="#Top-Level" class="headerlink" title="Top Level"></a>Top Level</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_get_toplevel</code></p>
@@ -1646,25 +1538,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>取得 top level</td>
 <td>所在 window</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> rtgui_win <span class="token operator">*</span><span class="token function">rtgui_widget_get_toplevel</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rtgui_widget_t <span class="token operator">*</span>r<span class="token punctuation">;</span>
@@ -1685,8 +1573,7 @@
 
     <span class="token keyword">return</span> <span class="token function">RTGUI_WIN</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_toplevel<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_toplevel<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="上層前景"><a href="#上層前景" class="headerlink" title="上層前景"></a>上層前景</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_get_parent_foreground</code></p>
 <table>
@@ -1696,25 +1583,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>取得上層前景</td>
 <td>顏色</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_color_t <span class="token function">rtgui_widget_get_parent_foreground</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rtgui_widget_t <span class="token operator">*</span>parent<span class="token punctuation">;</span>
@@ -1730,8 +1613,7 @@
     <span class="token comment" spellcheck="true">/* get parent's color */</span>
     <span class="token keyword">return</span> <span class="token function">RTGUI_WIDGET_FOREGROUND</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_parent_foreground<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_parent_foreground<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="上層背景"><a href="#上層背景" class="headerlink" title="上層背景"></a>上層背景</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_get_parent_background</code></p>
 <table>
@@ -1741,25 +1623,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>取得上層背景</td>
 <td>顏色</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_color_t <span class="token function">rtgui_widget_get_parent_background</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rtgui_widget_t <span class="token operator">*</span>parent<span class="token punctuation">;</span>
@@ -1775,8 +1653,7 @@
     <span class="token comment" spellcheck="true">/* get parent's color */</span>
     <span class="token keyword">return</span> <span class="token function">RTGUI_WIDGET_BACKGROUND</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_parent_background<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_parent_background<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="下一個兄弟"><a href="#下一個兄弟" class="headerlink" title="下一個兄弟"></a>下一個兄弟</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_get_next_sibling</code></p>
 <table>
@@ -1786,25 +1663,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>取得下一個兄弟</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_widget_t <span class="token operator">*</span><span class="token function">rtgui_widget_get_next_sibling</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     rtgui_widget_t <span class="token operator">*</span>sibling <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
@@ -1816,8 +1689,7 @@
 
     <span class="token keyword">return</span> sibling<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_next_sibling<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rtgui_widget_get_next_sibling<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="上一個兄弟"><a href="#上一個兄弟" class="headerlink" title="上一個兄弟"></a>上一個兄弟</h3><p><i class="fa fa-code"></i> Code: <code>rtgui_widget_get_prev_sibling</code></p>
 <table>
@@ -1827,25 +1699,21 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>取得上一個兄弟</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><code>*widget</code></th>
+<th align="center"><code>*widget</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">目標 widget</td>
+<tbody><tr>
+<td align="center">目標 widget</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c">rtgui_widget_t <span class="token operator">*</span><span class="token function">rtgui_widget_get_prev_sibling</span><span class="token punctuation">(</span>rtgui_widget_t <span class="token operator">*</span>widget<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">struct</span> rtgui_list_node <span class="token operator">*</span>node<span class="token punctuation">;</span>
@@ -1867,8 +1735,7 @@
         sibling <span class="token operator">=</span> <span class="token function">rtgui_list_entry</span><span class="token punctuation">(</span>node<span class="token punctuation">,</span> rtgui_widget_t<span class="token punctuation">,</span> sibling<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token keyword">return</span> sibling<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

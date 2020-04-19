@@ -552,8 +552,7 @@
   uint ebx<span class="token punctuation">;</span>
   uint ebp<span class="token punctuation">;</span>
   uint eip<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>trap 有可能會呼叫 <code>yield</code>，<code>yield</code> 會呼叫 <code>sched</code>，最後 <code>sched</code> 呼叫 <code>swtch(&amp;proc-&gt;context, cpu-&gt;scheduler);</code>。</li>
 </ul>
@@ -570,8 +569,7 @@
 .globl swtch
 swtch:
   movl 4(%esp), %eax
-  movl 8(%esp), %edx
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  movl 8(%esp), %edx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>將 <code>%eax</code> 指向 <code>struct context ** old</code>，<code>%ebx</code> 指向 <code>struct context * new</code>。</li>
 </ul>
@@ -580,16 +578,14 @@ swtch:
   pushl %ebp
   pushl %ebx
   pushl %esi
-  pushl %edi
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  pushl %edi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>依序將 context push 進堆疊</li>
 </ul>
 <p><img src="https://i.imgur.com/CXUNIYY.png" alt="swtch" title="Context switch step. 2"> </p>
 <pre class="line-numbers language-x86asm"><code class="language-x86asm">  # Switch stacks
   movl %esp, (%eax)
-  movl %edx, %esp
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+  movl %edx, %esp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>將 <code>struct context ** old</code>（<code>%eax</code>） 指向 <code>%esp</code>（當前堆疊的 <strong>top</strong>）</li>
 <li>將 <code>%esp</code> 指向 <code>struct context * new</code>（<code>%ebx</code>）</li>
@@ -600,8 +596,7 @@ swtch:
   popl %esi
   popl %ebx
   popl %ebp
-  ret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>恢復保存的暫存器，用<code>ret</code> 指令跳回</li>
 </ul>
@@ -621,13 +616,11 @@ swtch:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>檢查並跳至 swtch.h</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">sched</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -644,8 +637,7 @@ swtch:
   intena <span class="token operator">=</span> cpu<span class="token operator">-></span>intena<span class="token punctuation">;</span>
   <span class="token function">swtch</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>proc<span class="token operator">-></span>context<span class="token punctuation">,</span> cpu<span class="token operator">-></span>scheduler<span class="token punctuation">)</span><span class="token punctuation">;</span>
   cpu<span class="token operator">-></span>intena <span class="token operator">=</span> intena<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>swtch</code> 會 return 回 scheduler 的堆疊上，scheduler 繼續執行迴圈：找到一個 process 運行，<code>swtch</code> 到該 process，repeat。</li>
 </ul>
@@ -657,13 +649,11 @@ swtch:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>執行調度，指定執行的 process</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">scheduler</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -695,8 +685,7 @@ swtch:
     <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>scheduler</code> 找到一個 <code>RUNNABLE</code> 的 process，將 per-cpu 設為此 process，呼叫 <code>switchuvm</code> 切換到該 process 的頁表，更新狀態為<code>RUNNING</code>，<code>swtch</code> 到該 process 中運行。</li>
 </ul>
@@ -713,13 +702,11 @@ swtch:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>找到目前所在的 CPU</td>
 <td>CPU 結構指標</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> cpu<span class="token operator">*</span>
 <span class="token function">mycpu</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -736,8 +723,7 @@ swtch:
       <span class="token keyword">return</span> <span class="token operator">&amp;</span>cpus<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
   <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"unknown apicid\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>myproc</code> 呼叫 <code>mycpu</code>，從正確的 CPU 上尋找當前的 process。<br><i class="fa fa-code"></i> Code: <code>myproc</code></li>
 </ul>
@@ -748,13 +734,11 @@ swtch:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>找到當前的 process</td>
 <td>proc 結構指標</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> proc<span class="token operator">*</span>
 <span class="token function">myproc</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">struct</span> cpu <span class="token operator">*</span>c<span class="token punctuation">;</span>
@@ -764,8 +748,7 @@ swtch:
   p <span class="token operator">=</span> c<span class="token operator">-></span>proc<span class="token punctuation">;</span>
   <span class="token function">popcli</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> p<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="睡眠與喚醒（例子）"><a href="#睡眠與喚醒（例子）" class="headerlink" title="睡眠與喚醒（例子）"></a>睡眠與喚醒（例子）</h2><pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> q <span class="token punctuation">{</span>
     <span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">;</span>
@@ -787,8 +770,7 @@ swtch:
         <span class="token punctuation">;</span>
     q<span class="token operator">-></span>ptr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> p<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>send</code> 直到隊伍 <code>q</code> 為空時，將要傳送的資料 <code>p</code> 放入隊中，<code>recv</code> 直到 <code>q</code> 有東西時將資料取出，把 <code>q</code> 再次設為 <code>0</code></li>
 <li>這允許不同的 process 交換資料，但是很耗資源。</li>
@@ -813,18 +795,17 @@ recv(struct q *q)
 <span class="token inserted">+        sleep(q);</span>
     q->ptr = 0;
     return p;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如此一來 <code>recv</code> 能讓出 CPU，直到有人（<code>send</code>）將它喚醒。</li>
 </ul>
 <blockquote>
 <p><strong>問題</strong>：遺失的喚醒：<br><img src="https://i.imgur.com/aPcvuOZ.png" alt="遺失的喚醒" title="Example lost wakeup problem"></p>
+</blockquote>
 <ul>
 <li>假設 <code>recv</code> 在 215 行查看隊伍，發現需要睡眠，就在要呼叫 <code>sleep</code> 之前發生中斷，<code>send</code> 在其他的 CPU 將資料放進隊伍中，呼叫 <code>wakeup</code>，發現沒有正在休眠的 process，於是不做事；接著 <code>recv</code> 終於呼叫 <code>sleep</code> 進入睡眠。</li>
 <li>此時，<code>revc</code> 正在等待 <code>send</code> 將它喚醒，但是 <code>send</code> 正在等待隊伍清空，清空的動作須由 <code>recv</code> 完成（休眠中），於是就產生了 <strong>deadlock</strong>。</li>
 </ul>
-</blockquote>
 <h3 id="方案-2"><a href="#方案-2" class="headerlink" title="方案 2"></a>方案 2</h3><ul>
 <li>讓 <code>send</code> 及 <code>recv</code> 在睡眠及喚醒前都持有鎖。</li>
 </ul>
@@ -854,8 +835,7 @@ recv(struct q *q)
     q->ptr = 0;
 <span class="token inserted">+    release(&amp;q->lock);</span>
     return p;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>但這一樣有問題：<code>recv</code> 帶著鎖進入睡眠，<code>send</code> 也同時需要鎖來喚醒，於是就產生了 <strong>deadlock</strong>。</li>
 </ul>
@@ -888,8 +868,7 @@ recv(struct q *q)
     q->ptr = 0;
     release(&amp;q->lock);
     return p;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-睡眠與喚醒"><a href="#Code-睡眠與喚醒" class="headerlink" title="Code: 睡眠與喚醒"></a>Code: 睡眠與喚醒</h2><table>
 <thead>
@@ -898,8 +877,7 @@ recv(struct q *q)
 <th>目標</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><code>sleep</code></td>
 <td>將狀態改成 <code>SLEEPING</code>，呼叫 <code>sched</code> 釋放 CPU</td>
 </tr>
@@ -907,8 +885,7 @@ recv(struct q *q)
 <td><code>wakeup</code></td>
 <td>尋找狀態為 <code>SLEEPING</code> 的 process，改成 <code>RUNNABLE</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h3 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h3><table>
 <thead>
 <tr>
@@ -916,13 +893,11 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讓 process 睡眠</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -930,13 +905,11 @@ recv(struct q *q)
 <th><code>*lk</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲睡眠的頻道</td>
 <td>持有的鎖</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>chan<span class="token punctuation">,</span> <span class="token keyword">struct</span> spinlock <span class="token operator">*</span>lk<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -946,16 +919,14 @@ recv(struct q *q)
     <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sleep"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token keyword">if</span><span class="token punctuation">(</span>lk <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sleep without lk"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sleep without lk"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先確保 process 存在，及持有鎖。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token keyword">if</span><span class="token punctuation">(</span>lk <span class="token operator">!=</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//DOC: sleeplock0</span>
     <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: sleeplock1</span>
     <span class="token function">release</span><span class="token punctuation">(</span>lk<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著檢查是否持有 <code>ptable-&gt;lock</code>，如果沒有則要求一個，把 <code>lk</code> 釋出。</li>
 </ul>
@@ -963,8 +934,7 @@ recv(struct q *q)
   p<span class="token operator">-></span>chan <span class="token operator">=</span> chan<span class="token punctuation">;</span>
   p<span class="token operator">-></span>state <span class="token operator">=</span> SLEEPING<span class="token punctuation">;</span>
 
-  <span class="token function">sched</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">sched</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>睡眠，並呼叫 <code>sched</code></li>
 </ul>
@@ -976,8 +946,7 @@ recv(struct q *q)
     <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">acquire</span><span class="token punctuation">(</span>lk<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="wakeup1"><a href="#wakeup1" class="headerlink" title="wakeup1"></a>wakeup1</h3><table>
 <thead>
@@ -986,25 +955,21 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>叫醒頻道上的 process</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*chan</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>頻道</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// </span>
 <span class="token keyword">static</span> <span class="token keyword">void</span>
 <span class="token function">wakeup1</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>chan<span class="token punctuation">)</span>
@@ -1014,8 +979,7 @@ recv(struct q *q)
   <span class="token keyword">for</span><span class="token punctuation">(</span>p <span class="token operator">=</span> ptable<span class="token punctuation">.</span>proc<span class="token punctuation">;</span> p <span class="token operator">&lt;</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>proc<span class="token punctuation">[</span>NPROC<span class="token punctuation">]</span><span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token operator">-></span>state <span class="token operator">==</span> SLEEPING <span class="token operator">&amp;&amp;</span> p<span class="token operator">-></span>chan <span class="token operator">==</span> chan<span class="token punctuation">)</span>
       p<span class="token operator">-></span>state <span class="token operator">=</span> RUNNABLE<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="wakeup"><a href="#wakeup" class="headerlink" title="wakeup"></a>wakeup</h3><table>
 <thead>
@@ -1024,33 +988,28 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>叫醒頻道上的 process</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*chan</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>頻道</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>chan<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">wakeup1</span><span class="token punctuation">(</span>chan<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>wakeup</code> 找到 <code>chan</code> 上在睡眠的 process，並喚醒。</li>
 </ul>
@@ -1070,8 +1029,7 @@ recv(struct q *q)
   uint nwrite<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// number of bytes written</span>
   <span class="token keyword">int</span> readopen<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// read fd is still open</span>
   <span class="token keyword">int</span> writeopen<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// write fd is still open</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="pipewrite"><a href="#pipewrite" class="headerlink" title="pipewrite"></a>pipewrite</h3><table>
 <thead>
@@ -1080,13 +1038,11 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>寫入 pipe</td>
 <td>寫入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1095,14 +1051,12 @@ recv(struct q *q)
 <th><code>n</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲寫入的 pipe</td>
 <td>欲寫入的值</td>
 <td>欲寫入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">pipewrite</span><span class="token punctuation">(</span><span class="token keyword">struct</span> pipe <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1123,8 +1077,7 @@ recv(struct q *q)
   <span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nread<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: pipewrite-wakeup1</span>
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> n<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先須取得鎖。</li>
 <li><code>pipewrite</code> 從 0 開始將資料讀入 <code>buf</code>，更新 <code>nwrite</code> 計數器，當 <code>buf</code> 滿了，則喚醒 <code>piperead</code> 並睡眠；或是讀入完畢，一樣喚醒 <code>pipiread</code>。</li>
@@ -1137,13 +1090,11 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀取 pipe</td>
 <td>讀入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1152,14 +1103,12 @@ recv(struct q *q)
 <th><code>n</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲讀取的 pipe</td>
 <td>讀取資料存放區</td>
 <td>欲讀入的大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">piperead</span><span class="token punctuation">(</span><span class="token keyword">struct</span> pipe <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>addr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1181,8 +1130,7 @@ recv(struct q *q)
   <span class="token function">wakeup</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>nwrite<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: piperead-wakeup</span>
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先須取得鎖。</li>
 <li><code>piperead</code> 確認 pipe 是否為空，為空則進入睡眠。</li>
@@ -1197,13 +1145,11 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>等待子 process 結束</td>
 <td>pid (ok) / -1 (err)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1244,8 +1190,7 @@ recv(struct q *q)
     <span class="token comment" spellcheck="true">// Wait for children to exit.  (See wakeup1 call in proc_exit.)</span>
     <span class="token function">sleep</span><span class="token punctuation">(</span>curproc<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//DOC: wait-sleep</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先須取得鎖。</li>
 <li>接著尋找是否有子 process，如果有，並且還沒退出，則睡眠，等待子 process 退出。</li>
@@ -1259,13 +1204,11 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>自行結束 process</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">exit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1307,8 +1250,7 @@ recv(struct q *q)
   curproc<span class="token operator">-></span>state <span class="token operator">=</span> ZOMBIE<span class="token punctuation">;</span>
   <span class="token function">sched</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"zombie exit"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先須取得鎖。</li>
 <li>喚醒父 process，將子 process 交給 <em>initproc</em>，修改狀態，呼叫 <code>sched</code> switch 至 scheduler。</li>
@@ -1321,25 +1263,21 @@ recv(struct q *q)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>使 process 終止</td>
 <td>0 (ok) / -1 (err)</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>pid</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲終止的 process id</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">int</span>
 <span class="token function">kill</span><span class="token punctuation">(</span><span class="token keyword">int</span> pid<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1358,8 +1296,7 @@ recv(struct q *q)
   <span class="token punctuation">}</span>
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ptable<span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>kill</code> 將 <code>p-&gt;killed</code> 設為 1 ，當此 process 發生中斷或是 system call 進入 kernel，離開時 <code>trap</code> 會檢查 <code>p-&gt;killed</code>，如果被設置了，則呼叫 <code>exit</code>。</li>
 <li>當要被 kill 的 process 處於睡眠狀態，則喚醒它。 </li>

@@ -569,8 +569,7 @@ Process：執行中的程式，擁有記憶體存放指令、資料、及堆疊�
 <span class="token function">read</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// write something from "buf" to file descriptor</span>
 <span class="token function">write</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// both read and write will return n of how much its read/write</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment" spellcheck="true">// both read and write will return n of how much its read/write</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Pipes"><a href="#Pipes" class="headerlink" title="Pipes"></a>Pipes</h2><ul>
 <li>如同一條水管，pipes 的兩端連接不同的 process，其中一端寫入資料，其中一端讀取其資料。也就是說，pipes 提供使兩個不同的 process 互相溝通的方法。</li>
@@ -578,8 +577,7 @@ Process：執行中的程式，擁有記憶體存放指令、資料、及堆疊�
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># sample of pipes</span>
 <span class="token keyword">echo</span> hello world <span class="token operator">|</span> <span class="token function">wc</span>
 <span class="token comment" spellcheck="true"># another way call "temporary files"</span>
-<span class="token keyword">echo</span> hello world <span class="token operator">></span>/tmp/xyz<span class="token punctuation">;</span> <span class="token function">wc</span> <span class="token operator">&lt;</span>/tmp/xyz
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">echo</span> hello world <span class="token operator">></span>/tmp/xyz<span class="token punctuation">;</span> <span class="token function">wc</span> <span class="token operator">&lt;</span>/tmp/xyz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>比較<ol>
 <li>Pipes 會自我清理。</li>
@@ -598,8 +596,7 @@ Process：執行中的程式，擁有記憶體存放指令、資料、及堆疊�
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># create a new director</span>
 mkdir<span class="token punctuation">(</span><span class="token string">"/dir"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true"># open with 0_CREATE flag create a new file</span>
-open<span class="token punctuation">(</span><span class="token string">"/dir/file"</span>,0_CREARTE<span class="token operator">|</span>0_WRONLY<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+open<span class="token punctuation">(</span><span class="token string">"/dir/file"</span>,0_CREARTE<span class="token operator">|</span>0_WRONLY<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>inode<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[理解inode](http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu)">[1]</span></a></sup>：儲存一個檔案的基本訊息，如檔案的權限、擁有者等等。</li>
 <li>每個 inode 有一組唯一的號碼，檔案系統用此號碼來識別文件。</li>

@@ -522,8 +522,7 @@
             <div id="articleContent">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="新增中斷"><a href="#新增中斷" class="headerlink" title="新增中斷"></a>新增中斷</h2><pre class="line-numbers language-c"><code class="language-c"><span class="token function">attachInterrupt</span><span class="token punctuation">(</span><span class="token function">digitalPinToInterrupt</span><span class="token punctuation">(</span>pin<span class="token punctuation">)</span><span class="token punctuation">,</span> ISR<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">attachInterrupt</span><span class="token punctuation">(</span>interrupt<span class="token punctuation">,</span> ISR<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">attachInterrupt</span><span class="token punctuation">(</span>pin<span class="token punctuation">,</span> ISR<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">attachInterrupt</span><span class="token punctuation">(</span>pin<span class="token punctuation">,</span> ISR<span class="token punctuation">,</span> mode<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>有三種可選：<ul>
 <li>第一個參數代表幾號中斷或是幾號 pin，通常用第一種寫法最保險</li>
@@ -541,14 +540,12 @@
 </ul>
 <h2 id="移除中斷"><a href="#移除中斷" class="headerlink" title="移除中斷"></a>移除中斷</h2><pre class="line-numbers language-c"><code class="language-c"><span class="token function">detachInterrupt</span><span class="token punctuation">(</span><span class="token function">digitalPinToInterrupt</span><span class="token punctuation">(</span>pin<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">detachInterrupt</span><span class="token punctuation">(</span>interrupt<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">detachInterrupt</span><span class="token punctuation">(</span>pin<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">detachInterrupt</span><span class="token punctuation">(</span>pin<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一樣有三個寫法，與新增中斷的第一個參數相同。</li>
 </ul>
 <h2 id="關閉-開啟中斷"><a href="#關閉-開啟中斷" class="headerlink" title="關閉/開啟中斷"></a>關閉/開啟中斷</h2><pre class="line-numbers language-c"><code class="language-c"><span class="token function">noInterrupts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">interrupts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token function">interrupts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p><code>noInterrupts</code> 不會將 <code>reset</code> 中斷關閉。</p>
 </blockquote>

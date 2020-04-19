@@ -535,8 +535,7 @@
     <span class="token comment" spellcheck="true">/**
      *  critical region 
      */</span>
-<span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>此方式是最強大的一種，但此 critical region 不可以佔用太多時間</li>
 </ul>
@@ -545,8 +544,7 @@
     <span class="token comment" spellcheck="true">/**
     *  critical region 
     */</span>
-<span class="token function">rt_exit_critical</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">rt_exit_critical</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>使用此方式可確保當前 thread 不會被 scheduler 踢出，但還是有可能會被中斷影響。</li>
 </ul>
@@ -559,13 +557,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>進入 scheuler 鎖</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will lock the thread scheduler.
  */</span>
@@ -585,8 +581,7 @@
     <span class="token comment" spellcheck="true">/* enable interrupt */</span>
     <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_enter_critical<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_enter_critical<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>即，將 <code>rt_scheduler_lock_nest</code> 加一</li>
 </ul>
@@ -599,13 +594,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>離開 scheuler 鎖</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will unlock the thread scheduler.
  */</span>
@@ -616,8 +609,7 @@
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
     level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    rt_scheduler_lock_nest <span class="token operator">--</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    rt_scheduler_lock_nest <span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>即，將 <code>rt_scheduler_lock_nest</code> 減一</li>
 </ul>
@@ -634,8 +626,7 @@
         <span class="token comment" spellcheck="true">/* enable interrupt */</span>
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 <code>rt_scheduler_lock_nest</code> 被減至 0 或以下，進行一次調度</li>
 </ul>
@@ -648,13 +639,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>回傳 scheuler 鎖的值</td>
 <td>scheuler 鎖的值</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * Get the scheduler lock level
  *
@@ -664,8 +653,7 @@ rt_uint16_t <span class="token function">rt_critical_level</span><span class="to
 <span class="token punctuation">{</span>
     <span class="token keyword">return</span> rt_scheduler_lock_nest<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_critical_level<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_critical_level<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>即，回傳 <code>rt_scheduler_lock_nest</code> 值</li>
 </ul>
@@ -689,8 +677,7 @@ rt_uint16_t <span class="token function">rt_critical_level</span><span class="to
     rt_uint16_t          value<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; value of semaphore. */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_semaphore <span class="token operator">*</span>rt_sem_t<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="建立-semaphore"><a href="#建立-semaphore" class="headerlink" title="建立 semaphore"></a>建立 semaphore</h3><h4 id="動態記憶體管理"><a href="#動態記憶體管理" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_create</code></p>
 <table>
@@ -700,13 +687,11 @@ rt_uint16_t <span class="token function">rt_critical_level</span><span class="to
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 semaphore</td>
 <td>semaphore</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -715,14 +700,12 @@ rt_uint16_t <span class="token function">rt_critical_level</span><span class="to
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>semaphore 值，即最大可同時使用人數</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a semaphore from system resource
  *
@@ -756,8 +739,7 @@ rt_sem_t <span class="token function">rt_sem_create</span><span class="token pun
 
     <span class="token keyword">return</span> sem<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先需要一塊 semaphore 的大小，初始化 ipc 物件，再依序寫入初始值及 flag</li>
 </ul>
@@ -770,13 +752,11 @@ rt_sem_t <span class="token function">rt_sem_create</span><span class="token pun
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 semaphore</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -786,15 +766,13 @@ rt_sem_t <span class="token function">rt_sem_create</span><span class="token pun
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>semaphore 本體</td>
 <td>名字</td>
 <td>semaphore 值，即最大可同時使用人數</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a semaphore and put it under control of
  * resource management.
@@ -827,8 +805,7 @@ rt_err_t <span class="token function">rt_sem_init</span><span class="token punct
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>由於使用靜態記憶體，這裡就不需要再 allocate。</li>
 </ul>
@@ -843,8 +820,7 @@ rt_err_t <span class="token function">rt_sem_init</span><span class="token punct
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_IPC_CMD_RESET                0x01            </span><span class="token comment" spellcheck="true">/**&lt; reset IPC object */</span>
 
 <span class="token macro property">#<span class="token directive keyword">define</span> RT_WAITING_FOREVER              -1              </span><span class="token comment" spellcheck="true">/**&lt; Block forever until get resource. */</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> RT_WAITING_NO                   0               </span><span class="token comment" spellcheck="true">/**&lt; Non-block. */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">define</span> RT_WAITING_NO                   0               </span><span class="token comment" spellcheck="true">/**&lt; Non-block. */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="刪除-semaphore"><a href="#刪除-semaphore" class="headerlink" title="刪除 semaphore"></a>刪除 semaphore</h3><h4 id="動態記憶體管理-1"><a href="#動態記憶體管理-1" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_delete</code></p>
 <table>
@@ -854,25 +830,21 @@ rt_err_t <span class="token function">rt_sem_init</span><span class="token punct
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 semaphore</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>sem</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 semaphore</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a semaphore object and release the memory
  *
@@ -899,8 +871,7 @@ rt_err_t <span class="token function">rt_sem_delete</span><span class="token pun
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先需把所有正在等待此 semaphore 的 thread 叫醒</li>
 <li>接著呼叫 <code>rt_object_delete</code> 清除此物件（semaphore）</li>
@@ -914,25 +885,21 @@ rt_err_t <span class="token function">rt_sem_delete</span><span class="token pun
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 semaphore</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>sem</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 semaphore</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a semaphore from resource management
  *
@@ -957,8 +924,7 @@ rt_err_t <span class="token function">rt_sem_detach</span><span class="token pun
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡則透過 <code>rt_object_detach</code> 清除</li>
 </ul>
@@ -974,13 +940,11 @@ rt_err_t <span class="token function">rt_sem_detach</span><span class="token pun
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求 semaphore</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -988,13 +952,11 @@ rt_err_t <span class="token function">rt_sem_detach</span><span class="token pun
 <th><code>time</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的 semaphore</td>
 <td>等待時間（如果需要）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will take a semaphore, if the semaphore is unavailable, the
  * thread shall wait for a specified time.
@@ -1016,8 +978,7 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
     <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_trytake_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
-    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>由於待會會修改 semaphore 的值，這裡先將中斷關閉</li>
 </ul>
@@ -1033,8 +994,7 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
 
         <span class="token comment" spellcheck="true">/* enable interrupt */</span>
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如過 <code>sem-&gt;value</code> 值大於 0 代表可用，接著減一，並開啟中斷</li>
 </ul>
@@ -1046,8 +1006,7 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
             <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
             <span class="token keyword">return</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 semaphore 不可用時：</li>
 <li>且 time 為 0，表示不等待，直接開啟中斷並 return</li>
@@ -1070,8 +1029,7 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
             <span class="token comment" spellcheck="true">/* suspend thread */</span>
             <span class="token function">rt_ipc_list_suspend</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">,</span>
                                 thread<span class="token punctuation">,</span>
-                                sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                                sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果要等待，則將 thread 插入 suspend list</li>
 </ul>
@@ -1086,8 +1044,7 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
                                  RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                                  <span class="token operator">&amp;</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>且如果等待時間大於 0，則啟動一個 timeout 為 time 的 timer</li>
 </ul>
@@ -1108,8 +1065,7 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_take<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_take<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後開啟中斷，做一次調度</li>
 </ul>
@@ -1126,25 +1082,21 @@ rt_err_t <span class="token function">rt_sem_take</span><span class="token punct
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求 semaphore（不等待）</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>sem</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的 semaphore</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will try to take a semaphore and immediately return
  *
@@ -1156,8 +1108,7 @@ rt_err_t <span class="token function">rt_sem_trytake</span><span class="token pu
 <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">rt_sem_take</span><span class="token punctuation">(</span>sem<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_trytake<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_trytake<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <ul>
 <li>還 semaphore 則使用 <code>rt_sem_release</code></li>
@@ -1170,25 +1121,21 @@ rt_err_t <span class="token function">rt_sem_trytake</span><span class="token pu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放 semaphore</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>sem</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的 semaphore</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will release a semaphore, if there are threads suspended on
  * semaphore, it will be waked up.
@@ -1211,8 +1158,7 @@ rt_err_t <span class="token function">rt_sem_release</span><span class="token pu
     need_schedule <span class="token operator">=</span> RT_FALSE<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
-    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將待會會遇到的 flag（<code>need_schedule</code>）設為 false</li>
 <li>因為待會也會修改 semaphore 的值，這裡需要關閉中斷</li>
@@ -1227,14 +1173,12 @@ rt_err_t <span class="token function">rt_sem_release</span><span class="token pu
         <span class="token comment" spellcheck="true">/* resume the suspended thread */</span>
         <span class="token function">rt_ipc_list_resume</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>sem<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         need_schedule <span class="token operator">=</span> RT_TRUE<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有人在等此 semaphore，先恢復他，並修改 <code>need_schedule</code> 為 true</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token keyword">else</span>
-        sem<span class="token operator">-></span>value <span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* increase value */</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+        sem<span class="token operator">-></span>value <span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* increase value */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>如果沒有人在等待，則加一</li>
 </ul>
@@ -1247,8 +1191,7 @@ rt_err_t <span class="token function">rt_sem_release</span><span class="token pu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_release<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_sem_release<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後開啟中斷，並根據 <code>need_schedule</code> 來決定需不需要執行一次調度</li>
 </ul>
@@ -1272,8 +1215,7 @@ rt_err_t <span class="token function">rt_sem_release</span><span class="token pu
     <span class="token keyword">struct</span> rt_thread    <span class="token operator">*</span>owner<span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">/**&lt; current owner of mutex */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_mutex <span class="token operator">*</span>rt_mutex_t<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>為了防止優先權翻轉，在持有鎖的過程中可能會被提升優先權，在結構中就需要紀錄原本的優先級。</li>
 </ul>
@@ -1286,13 +1228,11 @@ rt_err_t <span class="token function">rt_sem_release</span><span class="token pu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 mutex</td>
 <td>mutex</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1300,13 +1240,11 @@ rt_err_t <span class="token function">rt_sem_release</span><span class="token pu
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a mutex from system resource
  *
@@ -1326,8 +1264,7 @@ rt_mutex_t <span class="token function">rt_mutex_create</span><span class="token
     <span class="token comment" spellcheck="true">/* allocate object */</span>
     mutex <span class="token operator">=</span> <span class="token punctuation">(</span>rt_mutex_t<span class="token punctuation">)</span><span class="token function">rt_object_allocate</span><span class="token punctuation">(</span>RT_Object_Class_Mutex<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mutex <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> mutex<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> mutex<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先 allocate 一個物件，初始化</li>
 </ul>
@@ -1337,8 +1274,7 @@ rt_mutex_t <span class="token function">rt_mutex_create</span><span class="token
     mutex<span class="token operator">-></span>value              <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
     mutex<span class="token operator">-></span>owner              <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
     mutex<span class="token operator">-></span>original_priority  <span class="token operator">=</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
-    mutex<span class="token operator">-></span>hold               <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mutex<span class="token operator">-></span>hold               <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>value 設為 1，擁有者為 NULL，原始權限最低（255），持有次數為 0</li>
 </ul>
@@ -1347,8 +1283,7 @@ rt_mutex_t <span class="token function">rt_mutex_create</span><span class="token
 
     <span class="token keyword">return</span> mutex<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>同時填入 flag</li>
 </ul>
@@ -1361,13 +1296,11 @@ rt_mutex_t <span class="token function">rt_mutex_create</span><span class="token
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 mutex</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1376,14 +1309,12 @@ rt_mutex_t <span class="token function">rt_mutex_create</span><span class="token
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>mutex 本體</td>
 <td>名字</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a mutex and put it under control of resource
  * management.
@@ -1415,8 +1346,7 @@ rt_err_t <span class="token function">rt_mutex_init</span><span class="token pun
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡不需要 allocate，只需要初始化物件</li>
 </ul>
@@ -1429,25 +1359,21 @@ rt_err_t <span class="token function">rt_mutex_init</span><span class="token pun
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 mutex</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mutex</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 mutex</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a mutex object and release the memory
  *
@@ -1474,8 +1400,7 @@ rt_err_t <span class="token function">rt_mutex_delete</span><span class="token p
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>與 semaphore 類似，先將正在等待此鎖的所有 thread 叫醒，接著透過 <code>rt_object_delete</code> 刪除 mutex</li>
 </ul>
@@ -1488,25 +1413,21 @@ rt_err_t <span class="token function">rt_mutex_delete</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 mutex</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mutex</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 mutex</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a mutex from resource management
  *
@@ -1531,8 +1452,7 @@ rt_err_t <span class="token function">rt_mutex_detach</span><span class="token p
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡則運用 <code>rt_object_detach</code> 刪除</li>
 </ul>
@@ -1548,13 +1468,11 @@ rt_err_t <span class="token function">rt_mutex_detach</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求 mutex</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1562,13 +1480,11 @@ rt_err_t <span class="token function">rt_mutex_detach</span><span class="token p
 <th><code>time</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的 mutex</td>
 <td>等待時間（如果需要）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will take a mutex, if the mutex is unavailable, the
  * thread shall wait for a specified time.
@@ -1594,8 +1510,7 @@ rt_err_t <span class="token function">rt_mutex_take</span><span class="token pun
     thread <span class="token operator">=</span> <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
-    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>下面將會修改 mutex 的一些資料，這裡先將中斷關閉</li>
 </ul>
@@ -1612,8 +1527,7 @@ rt_err_t <span class="token function">rt_mutex_take</span><span class="token pun
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* it's the same thread */</span>
         mutex<span class="token operator">-></span>hold <span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若此 mutex 的擁有者與要求著相同，持有數加 1</li>
 </ul>
@@ -1632,8 +1546,7 @@ __again<span class="token punctuation">:</span>
             mutex<span class="token operator">-></span>owner             <span class="token operator">=</span> thread<span class="token punctuation">;</span>
             mutex<span class="token operator">-></span>original_priority <span class="token operator">=</span> thread<span class="token operator">-></span>current_priority<span class="token punctuation">;</span>
             mutex<span class="token operator">-></span>hold <span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果不同，且 mutex 可用，先將 value –</li>
 <li>設定所有者，紀錄當前權限，持有數加 1</li>
@@ -1650,8 +1563,7 @@ __again<span class="token punctuation">:</span>
                 <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                 <span class="token keyword">return</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果不可用，且不等待，則啟用中斷，<code>return -RT_ETIMEOUT</code></li>
 </ul>
@@ -1668,8 +1580,7 @@ __again<span class="token punctuation">:</span>
                     <span class="token function">rt_thread_control</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>owner<span class="token punctuation">,</span>
                                       RT_THREAD_CTRL_CHANGE_PRIORITY<span class="token punctuation">,</span>
                                       <span class="token operator">&amp;</span>thread<span class="token operator">-></span>current_priority<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若需要等待：</li>
 <li>為了避免優先權翻轉的情形發生，如需等待的 thread 的優先級大於持有 mutex 的優先級，提升持有者的</li>
@@ -1691,8 +1602,7 @@ __again<span class="token punctuation">:</span>
                                      RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                                      <span class="token operator">&amp;</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
                     <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>插入 suspend list，並啟動一個 timeout 為 time 的 timer</li>
 </ul>
@@ -1700,8 +1610,7 @@ __again<span class="token punctuation">:</span>
                 <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                 <span class="token comment" spellcheck="true">/* do schedule */</span>
-                <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>開啟中斷，並做一次調度</li>
 </ul>
@@ -1712,8 +1621,7 @@ __again<span class="token punctuation">:</span>
 
                     <span class="token comment" spellcheck="true">/* return error */</span>
                     <span class="token keyword">return</span> thread<span class="token operator">-></span>error<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果因為中斷再次回到此 thread，重新要一次 mutex</li>
 </ul>
@@ -1733,8 +1641,7 @@ __again<span class="token punctuation">:</span>
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_take<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_take<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <ul>
 <li>還鎖則使用 <code>rt_mutex_release</code></li>
@@ -1747,25 +1654,21 @@ __again<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>釋放 mutex</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mutex</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲釋放的 mutex</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will release a mutex, if there are threads suspended on mutex,
  * it will be waked up.
@@ -1793,8 +1696,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
     thread <span class="token operator">=</span> <span class="token function">rt_thread_self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
-    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    temp <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>下面將會修改 mutex 的一些資料，這裡先將中斷關閉</li>
 </ul>
@@ -1813,14 +1715,12 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> <span class="token operator">-</span>RT_ERROR<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>檢查歸還者是否為擁有者</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* decrease hold */</span>
-    mutex<span class="token operator">-></span>hold <span class="token operator">--</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    mutex<span class="token operator">-></span>hold <span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>持有數減 1</li>
 </ul>
@@ -1833,8 +1733,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
             <span class="token function">rt_thread_control</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>owner<span class="token punctuation">,</span>
                               RT_THREAD_CTRL_CHANGE_PRIORITY<span class="token punctuation">,</span>
                               <span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>original_priority<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若已不再擁有此 mutex，且優先權有被更改過，調整回來</li>
 </ul>
@@ -1858,8 +1757,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
             <span class="token function">rt_ipc_list_resume</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mutex<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
             need_schedule <span class="token operator">=</span> RT_TRUE<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若有人在等待此 mutex，將 mutex 傳遞給第一個正在等待的 thread</li>
 </ul>
@@ -1872,8 +1770,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
             mutex<span class="token operator">-></span>owner             <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
             mutex<span class="token operator">-></span>original_priority <span class="token operator">=</span> <span class="token number">0xff</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果沒有人在等，value 加 1，將資料初始化</li>
 </ul>
@@ -1886,8 +1783,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_release<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mutex_release<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>開啟中斷，並視情況做一次調度</li>
 </ul>
@@ -1903,8 +1799,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
     <span class="token comment" spellcheck="true">/* thread event */</span>
     rt_uint32_t event_set<span class="token punctuation">;</span>
     rt_uint8_t  event_info<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>標記的每一位代表一個事件，資訊包含 AND、OR 及 CLEAR</li>
 <li>當事件標記的第 2、4 位為 1，其餘為 0，代表此 thread 設置第 2、4 個事件<ul>
@@ -1932,8 +1827,7 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
     rt_uint32_t          set<span class="token punctuation">;</span>                           <span class="token comment" spellcheck="true">/**&lt; event set */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_event <span class="token operator">*</span>rt_event_t<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="建立事件"><a href="#建立事件" class="headerlink" title="建立事件"></a>建立事件</h3><h4 id="動態記憶體管理-4"><a href="#動態記憶體管理-4" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_create</code></p>
 <table>
@@ -1943,13 +1837,11 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立事件</td>
 <td>事件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1957,13 +1849,11 @@ rt_err_t <span class="token function">rt_mutex_release</span><span class="token 
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create an event object from system resource
  *
@@ -1994,8 +1884,7 @@ rt_event_t <span class="token function">rt_event_create</span><span class="token
 
     <span class="token keyword">return</span> event<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一樣 allocate 記憶體，填入 flag，初始化，最後設定值為 0</li>
 </ul>
@@ -2008,13 +1897,11 @@ rt_event_t <span class="token function">rt_event_create</span><span class="token
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化事件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -2023,14 +1910,12 @@ rt_event_t <span class="token function">rt_event_create</span><span class="token
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>事件本體</td>
 <td>名字</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize an event and put it under control of resource
  * management.
@@ -2060,8 +1945,7 @@ rt_err_t <span class="token function">rt_event_init</span><span class="token pun
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡則不需要 allocate</li>
 </ul>
@@ -2074,25 +1958,21 @@ rt_err_t <span class="token function">rt_event_init</span><span class="token pun
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除事件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>event</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的事件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete an event object and release the memory
  *
@@ -2117,8 +1997,7 @@ rt_err_t <span class="token function">rt_event_delete</span><span class="token p
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>相同的，需要先將正在等待此事件的 thread 叫醒，再刪除</li>
 </ul>
@@ -2131,25 +2010,21 @@ rt_err_t <span class="token function">rt_event_delete</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除事件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>event</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的事件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach an event object from resource management
  *
@@ -2172,8 +2047,7 @@ rt_err_t <span class="token function">rt_event_detach</span><span class="token p
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡則用 <code>rt_object_detach</code></li>
 </ul>
@@ -2186,13 +2060,11 @@ rt_err_t <span class="token function">rt_event_detach</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>傳遞事件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -2200,13 +2072,11 @@ rt_err_t <span class="token function">rt_event_detach</span><span class="token p
 <th><code>set</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲傳遞的事件</td>
 <td>事件編號</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will send an event to the event object, if there are threads
  * suspended on event object, it will be waked up.
@@ -2234,14 +2104,12 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
     need_schedule <span class="token operator">=</span> RT_FALSE<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
-    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>下面會修改事件的資料，這裡先將中斷關閉</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* set event */</span>
-    event<span class="token operator">-></span>set <span class="token operator">|</span><span class="token operator">=</span> set<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    event<span class="token operator">-></span>set <span class="token operator">|</span><span class="token operator">=</span> set<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>設定事件編號</li>
 </ul>
@@ -2264,8 +2132,7 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
                     <span class="token comment" spellcheck="true">/* received an AND event */</span>
                     status <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有人在等待此事件，且滿足條件時，設定為 OK</li>
 <li>這裡為 AND，即事件編號應與 thread 所設定的一致</li>
@@ -2280,14 +2147,12 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
                     <span class="token comment" spellcheck="true">/* received an OR event */</span>
                     status <span class="token operator">=</span> RT_EOK<span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若為 OR，則只需有一位相同即可</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">            <span class="token comment" spellcheck="true">/* move node to the next */</span>
-            n <span class="token operator">=</span> n<span class="token operator">-></span>next<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+            n <span class="token operator">=</span> n<span class="token operator">-></span>next<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>接著走向下一顆</li>
 </ul>
@@ -2296,8 +2161,7 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
             <span class="token punctuation">{</span>
                 <span class="token comment" spellcheck="true">/* clear event */</span>
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>thread<span class="token operator">-></span>event_info <span class="token operator">&amp;</span> RT_EVENT_FLAG_CLEAR<span class="token punctuation">)</span>
-                    event<span class="token operator">-></span>set <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>thread<span class="token operator">-></span>event_set<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                    event<span class="token operator">-></span>set <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>thread<span class="token operator">-></span>event_set<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如有人滿足條件，且被設定 CLEAR，清除其標記位</li>
 </ul>
@@ -2308,8 +2172,7 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
                 need_schedule <span class="token operator">=</span> RT_TRUE<span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>並恢復此 thread，設定待會需要調度</li>
 </ul>
@@ -2322,8 +2185,7 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_send<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_send<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後開啟中斷，視情況做一次調度</li>
 </ul>
@@ -2336,13 +2198,11 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>接收事件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -2353,16 +2213,14 @@ rt_err_t <span class="token function">rt_event_send</span><span class="token pun
 <th><code>*recved</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲接收的事件</td>
 <td>事件編號</td>
 <td>AND /OR</td>
 <td>等待時間（如果需要）</td>
 <td>傳遞成功的事件號碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will receive an event from event object, if the event is
  * unavailable, the thread shall wait for a specified time.
@@ -2405,8 +2263,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
     <span class="token function">RT_OBJECT_HOOK_CALL</span><span class="token punctuation">(</span>rt_object_trytake_hook<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* disable interrupt */</span>
-    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    level <span class="token operator">=</span> <span class="token function">rt_hw_interrupt_disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>下面會修改事件的資料，這裡先將中斷關閉</li>
 </ul>
@@ -2425,8 +2282,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* either RT_EVENT_FLAG_AND or RT_EVENT_FLAG_OR should be set */</span>
         <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果滿足條件，表示已接收到事件，設定為 OK</li>
 </ul>
@@ -2439,8 +2295,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
         <span class="token comment" spellcheck="true">/* received event */</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>option <span class="token operator">&amp;</span> RT_EVENT_FLAG_CLEAR<span class="token punctuation">)</span>
             event<span class="token operator">-></span>set <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>set<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果已接收到事件，設定 recved 參數</li>
 <li>視情況看需不需要清除標記</li>
@@ -2449,8 +2304,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* no waiting */</span>
         thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若需等待事件，但 timeout 為 0</li>
 <li>即不等待，將錯誤碼設為 TIMEOUT</li>
@@ -2459,16 +2313,14 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* fill thread event info */</span>
         thread<span class="token operator">-></span>event_set  <span class="token operator">=</span> set<span class="token punctuation">;</span>
-        thread<span class="token operator">-></span>event_info <span class="token operator">=</span> option<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        thread<span class="token operator">-></span>event_info <span class="token operator">=</span> option<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如欲等待，將資訊掛在 thread 的結構上</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* put thread to suspended thread list */</span>
         <span class="token function">rt_ipc_list_suspend</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>event<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">,</span>
                             thread<span class="token punctuation">,</span>
-                            event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                            event<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>並插入等待的鏈上</li>
 </ul>
@@ -2480,8 +2332,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
                              RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                              <span class="token operator">&amp;</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>啟動一個 timer</li>
 </ul>
@@ -2489,8 +2340,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* do a schedule */</span>
-        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後開啟中斷，並做一次調度</li>
 </ul>
@@ -2515,8 +2365,7 @@ rt_err_t <span class="token function">rt_event_recv</span><span class="token pun
 
     <span class="token keyword">return</span> thread<span class="token operator">-></span>error<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_recv<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_event_recv<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最終接收到事件，一樣設定 recved 參數，回傳錯誤碼</li>
 </ul>

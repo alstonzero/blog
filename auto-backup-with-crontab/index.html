@@ -523,8 +523,7 @@
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="shell-script"><a href="#shell-script" class="headerlink" title="shell script"></a>shell script</h2><p>透過 git 備份時，一定是使用下列指令</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> add <span class="token keyword">.</span>
 <span class="token function">git</span> commit -m <span class="token string">'log'</span>
-<span class="token function">git</span> push
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">git</span> push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>而使用 shell script 可以讓我們一次執行一大串指令，因此我們來寫一個 shell script</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#!/bin/zsh</span>
 nowTime<span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +'%Y-%m-%d %H:%M:%S'<span class="token variable">)</span></span>"</span>
@@ -553,8 +552,7 @@ result<span class="token operator">=</span><span class="token variable"><span cl
         <span class="token punctuation">;</span><span class="token punctuation">;</span>
 esac
 <span class="token keyword">echo</span> <span class="token variable">${result}</span>
-<span class="token keyword">echo</span> <span class="token string">"Backup complete."</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">echo</span> <span class="token string">"Backup complete."</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中我們為了方便整理，在提交的紀錄上增加了時間；並且在 push 完根據結果有不同的通知</p>
 <blockquote>
 <p>此通知是基於 mac 上的 applescript 所寫的，在 linux 上會產生錯誤</p>
@@ -562,11 +560,9 @@ esac
 <h2 id="建立-crontab"><a href="#建立-crontab" class="headerlink" title="建立 crontab"></a>建立 crontab</h2><p>寫好 script shell 後，再來就是要定時的執行它。使用 crontab 可以在指定的時間，或是固定的區間內執行。</p>
 <p>使用方式，輸入指令 <code>crontab -e</code>，接著會跳進 vim，寫入</p>
 <pre class="line-numbers language-vim"><code class="language-vim">@hourly chmod <span class="token operator">+</span><span class="token keyword">x</span> <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span><span class="token keyword">sh</span>
-@hourly <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span><span class="token keyword">sh</span> PATH_TO_YOUR_SOURCE <span class="token operator">></span><span class="token operator">></span> <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span>log <span class="token number">2</span><span class="token operator">></span>&amp;<span class="token number">1</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+@hourly <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span><span class="token keyword">sh</span> PATH_TO_YOUR_SOURCE <span class="token operator">></span><span class="token operator">></span> <span class="token operator">/</span>Users<span class="token operator">/</span>PATH_TO_YOUR<span class="token operator">.</span>log <span class="token number">2</span><span class="token operator">></span>&amp;<span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>這裡首先提升一次權限，並設定每一次整點都備份一次 <code>@hourly</code>，並將結果寫入 log 中。我們需要先建立一個 .log 檔：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">touch</span> /Users/PATH_TO_YOUR.log
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">touch</span> /Users/PATH_TO_YOUR.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>當然這裡的所有路徑因人而異，檔名也無所謂，最後 <code>:wq</code> 存檔退出，安裝完畢</p>
 <p><img src="https://i.imgur.com/w3qGjus.png" alt="" title="大功告成"></p>
 <script>

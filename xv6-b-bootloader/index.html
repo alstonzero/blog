@@ -539,8 +539,7 @@ Boot sector 包含">
 # Start the first CPU: switch to 32-bit protected mode, jump into C.
 # The BIOS loads this code from the first sector of the hard disk into
 # memory at physical address 0x7c00 and starts executing in real mode
-# with %cs=0 %ip=7c00.
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# with %cs=0 %ip=7c00.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>第一行指令：<code>cli</code>，禁止處理器中斷。</li>
 <li>硬體可以透過中斷觸發中斷處理，進而操作系統的功能。BIOS 為了初始化硬體，可能設置了自己的中斷處理。但控制權已經給 boot loader 了，所以現在處理中斷是不安全的；當 XV6 準備完成後會重新允許中斷。</li>
@@ -548,8 +547,7 @@ Boot sector 包含">
 <pre class="line-numbers language-x86asm"><code class="language-x86asm">.code16                       # Assemble for 16-bit mode
 .globl start
 start:
-  cli                         # BIOS enabled interrupts; disable
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  cli                         # BIOS enabled interrupts; disable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>處理器在模擬 Intel 8088 的 <strong>real mode</strong> 狀態下，有 8 個 16 位元的通用暫存器，但處理器傳送的是20位元的地址給記憶體；因此多出來的四個位元由段暫存器(<code>%cs</code>, <code>%ds</code>, <code>%es</code>, <code>%ss</code>)提供。</li>
 <li><code>%cs</code> 取指令用</li>
@@ -561,8 +559,7 @@ start:
   xorw    %ax,%ax             # Set %ax to zero
   movw    %ax,%ds             # -> Data Segment
   movw    %ax,%es             # -> Extra Segment
-  movw    %ax,%ss             # -> Stack Segment
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  movw    %ax,%ss             # -> Stack Segment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>XV6 假設 x86 的指令是使用虛擬地址，但實際上使用的是邏輯地址。</li>
 <li>一個邏輯地址包含一個段選擇器及一個差值，有時表示為 segment:offset。</li>
@@ -591,8 +588,7 @@ seta20.2:
   jnz     seta20.2
 
   movb    $0xdf,%al               # 0xdf -> port 0x60
-  outb    %al,$0x60
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  outb    %al,$0x60<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>由於 real mode 只有 16-bit 的暫存器，導致一個程式如果要使用超過 65536 bytes 的記憶體會很困難，也不可能使用超過 1MB 的記憶體。</li>
 <li>x86 從 80286 開始有 <strong>protected mode</strong>，允許物理位置能擁有更多 bits，從 80386 後有 32-bit 模式。</li>
@@ -623,21 +619,18 @@ gdt:
      SEG_ASM(STA_W, 0x0, 0xffffffff)         # data seg
 gdtdesc:
      .word   (gdtdesc - gdt - 1)             # sizeof(gdt) - 1
-     .long   gdt                             # address gdt
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+     .long   gdt                             # address gdt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-x86asm"><code class="language-x86asm">  # Switch from real to protected mode.  Use a bootstrap GDT that makes
   # virtual addresses map directly to physical addresses so that the
   # effective memory map doesn't change during the transition.
-  lgdt    gdtdesc
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  lgdt    gdtdesc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>Boot loader 將 <code>%cr0</code> 中的 <code>CRO_PE</code> 設為 1，來啟用 protected mode。</li>
 <li>啟用 protceted mode 不會立即改變處理器轉譯邏輯地址的過程；只有當段暫存器載入了新的值，處理器讀取 GDT 改變其內部的斷設定。</li>
 </ul>
 <pre class="line-numbers language-x86asm"><code class="language-x86asm">  movl    %cr0, %eax
   orl     $CR0_PE, %eax
-  movl    %eax, %cr0
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+  movl    %eax, %cr0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>ljmp</code> 指令語法：<code>ljmp segment offset</code>，此時段暫存器為 <code>SEG_KCODE&lt;&lt;3</code>，即 8 (<code>SEG_KCODE == 1</code>，定義於<code>mmu.h</code>)</li>
 <li><code>ljmp</code> 指令跳至 start32 執行。</li>
@@ -646,8 +639,7 @@ gdtdesc:
   # Complete transition to 32-bit protected mode by using long jmp
   # to reload %cs and %eip.  The segment descriptors are set up with no
   # translation, so that the mapping is still the identity mapping.
-  ljmp    $(SEG_KCODE<<3), $start32
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  ljmp    $(SEG_KCODE<<3), $start32<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>進入 32 位元後的第一個動作：用<code>SEG_KDATA</code>初始化數據段暫存器</li>
 </ul>
@@ -660,8 +652,7 @@ start32:
   movw    %ax, %ss                # -> SS: Stack Segment
   movw    $0, %ax                 # Zero segments not ready for use
   movw    %ax, %fs                # -> FS
-  movw    %ax, %gs                # -> GS
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  movw    %ax, %gs                # -> GS<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後建立一個 stack，跳至 <em>bootmain.c</em>。</li>
 <li>記憶體 0xa0000 至 0x100000 為設備區，XV6 kernel 放在 0x100000。</li>
@@ -669,8 +660,7 @@ start32:
 </ul>
 <pre class="line-numbers language-x86asm"><code class="language-x86asm">  # Set up the stack pointer and call into C.
   movl    $start, %esp
-  call    bootmain
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+  call    bootmain<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果出錯了，會向 0x8a00 端輸出一些字。</li>
 <li>實際上沒有設備連接到 0x8a00。</li>
@@ -685,14 +675,12 @@ start32:
   movw    %ax, %dx
   outw    %ax, %dx
   movw    $0x8ae0, %ax            # 0x8ae0 -> port 0x8a00
-  outw    %ax, %dx
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  outw    %ax, %dx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著進入無限迴圈</li>
 </ul>
 <pre class="line-numbers language-x86asm"><code class="language-x86asm">spin:
-  jmp     spin
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+  jmp     spin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-C-bootstrap"><a href="#Code-C-bootstrap" class="headerlink" title="Code: C bootstrap"></a>Code: C bootstrap</h2><h3 id="File-bootmain-c"><a href="#File-bootmain-c" class="headerlink" title="File: bootmain.c"></a>File: bootmain.c</h3><ul>
 <li><em>bootmain</em> 的工作：載入並執行 kernel。</li>
@@ -706,13 +694,11 @@ start32:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>開機程序（執行 kernel)</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Boot loader.</span>
 <span class="token comment" spellcheck="true">// </span>
 <span class="token comment" spellcheck="true">// Part of the boot sector, along with bootasm.S, which calls bootmain().</span>
@@ -735,16 +721,14 @@ start32:
   <span class="token keyword">struct</span> elfhdr <span class="token operator">*</span>elf<span class="token punctuation">;</span>
   <span class="token keyword">struct</span> proghdr <span class="token operator">*</span>ph<span class="token punctuation">,</span> <span class="token operator">*</span>eph<span class="token punctuation">;</span>
   <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>entry<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  uchar<span class="token operator">*</span> pa<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  uchar<span class="token operator">*</span> pa<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>為了存取 ELF 開頭，<em>bootmain</em> 載入 ELF 文件的前 4096 bytes，並拷貝到 010000 中。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  elf <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> elfhdr<span class="token operator">*</span><span class="token punctuation">)</span><span class="token number">0x10000</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// scratch space</span>
 
   <span class="token comment" spellcheck="true">// Read 1st page off disk</span>
-  <span class="token function">readseg</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uchar<span class="token operator">*</span><span class="token punctuation">)</span>elf<span class="token punctuation">,</span> <span class="token number">4096</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">readseg</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uchar<span class="token operator">*</span><span class="token punctuation">)</span>elf<span class="token punctuation">,</span> <span class="token number">4096</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著確認是否為 ELF 文件。</li>
 </ul>
@@ -753,8 +737,7 @@ start32:
 </blockquote>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token comment" spellcheck="true">// Is this an ELF executable?</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>elf<span class="token operator">-></span>magic <span class="token operator">!=</span> ELF_MAGIC<span class="token punctuation">)</span>
-    <span class="token keyword">return</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// let bootasm.S handle error</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// let bootasm.S handle error</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><em>bootmain</em> 從 ELF 開頭之後的 off bytes 讀取內容，並存入 paddr 中(呼叫<code>readseg</code>)。</li>
 <li>呼叫<code>stosb</code>將段的剩餘部分設 0</li>
@@ -767,8 +750,7 @@ start32:
     <span class="token function">readseg</span><span class="token punctuation">(</span>pa<span class="token punctuation">,</span> ph<span class="token operator">-></span>filesz<span class="token punctuation">,</span> ph<span class="token operator">-></span>off<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span>ph<span class="token operator">-></span>memsz <span class="token operator">></span> ph<span class="token operator">-></span>filesz<span class="token punctuation">)</span>
       <span class="token function">stosb</span><span class="token punctuation">(</span>pa <span class="token operator">+</span> ph<span class="token operator">-></span>filesz<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> ph<span class="token operator">-></span>memsz <span class="token operator">-</span> ph<span class="token operator">-></span>filesz<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>Boot loader 最後一項工作：呼叫 kernel 的進入指令，即 kernel 第一條執行指令的地址(0x10000c)。</li>
 <li><em>entry.S</em> 中定義的<code>_start</code>即為 ELF 入口。</li>
@@ -778,8 +760,7 @@ start32:
   <span class="token comment" spellcheck="true">// Does not return!</span>
   entry <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span>elf<span class="token operator">-></span>entry<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">entry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>函數指標</strong>的補充<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[指標函數和函數指標有什麼區別](http://bluelove1968.pixnet.net/blog/post/222285883-%E6%8C%87%E6%A8%99%E5%87%BD%E6%95%B8%E5%92%8C%E5%87%BD%E6%95%B8%E6%8C%87%E6%A8%99%E6%9C%89%E4%BB%80%E9%BA%BC%E5%8D%80%E5%88%A5)">[1]</span></a></sup>：<br><br>上述用一個 <code>void (*entry)(void)</code> 指標即為一個函數指標，此指標指向一個函數，於上述 42 行將此指標指向 <code>elf-&gt;entry</code>，此動作將 <code>entry</code> 指標指向一個函數的進入點位置（<code>elf-&gt;entry</code>）。<br>此時呼叫 <code>entry()</code> 會進入此指標位置，並當作一個副函式執行；因此執行完上述程式碼會進入 <em>entry.S</em>，並執行其中的程式碼。</p>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>waitdisk</code></p>
@@ -790,21 +771,18 @@ start32:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>等待磁碟</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">waitdisk</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
   <span class="token comment" spellcheck="true">// Wait for disk ready.</span>
   <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">inb</span><span class="token punctuation">(</span><span class="token number">0x1F7</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xC0</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0x40</span><span class="token punctuation">)</span>
     <span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>readsect</code></p>
 <table>
@@ -814,13 +792,11 @@ start32:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀取一個磁碟區</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -828,13 +804,11 @@ start32:
 <th><code>offset</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>目標磁碟</td>
 <td>目標磁碟區</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Read a single sector at offset into dst.</span>
 <span class="token keyword">void</span>
 <span class="token function">readsect</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>dst<span class="token punctuation">,</span> uint offset<span class="token punctuation">)</span>
@@ -851,8 +825,7 @@ start32:
   <span class="token comment" spellcheck="true">// Read data.</span>
   <span class="token function">waitdisk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">insl</span><span class="token punctuation">(</span><span class="token number">0x1F0</span><span class="token punctuation">,</span> dst<span class="token punctuation">,</span> SECTSIZE<span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>readseg</code></p>
 <table>
@@ -862,13 +835,11 @@ start32:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀取一段磁碟資料</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -877,19 +848,17 @@ start32:
 <th><code>offset</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>目標位址</td>
 <td>數量</td>
 <td>目標磁碟區</td>
 </tr>
-</tbody>
-</table>
-<p><code>`</code>c<br>// Read ‘count’ bytes at ‘offset’ from kernel into physical address ‘pa’.<br>// Might copy more than asked.<br>void<br>readseg(uchar<em> pa, uint count, uint offset)<br>{<br>  uchar</em> epa;</p>
+</tbody></table>
+<p>```c<br>// Read ‘count’ bytes at ‘offset’ from kernel into physical address ‘pa’.<br>// Might copy more than asked.<br>void<br>readseg(uchar* pa, uint count, uint offset)<br>{<br>  uchar* epa;</p>
 <p>  epa = pa + count;</p>
 <p>  // Round down to sector boundary.<br>  pa -= offset % SECTSIZE;</p>
 <p>  // Translate from bytes to sectors; kernel starts at sector 1.<br>  offset = (offset / SECTSIZE) + 1;</p>
-<p>  // If this is too slow, we could read lots of sectors at a time.<br>  // We’d write more to memory than asked, but it doesn’t matter –<br>  // we load in increasing order.<br>  for(; pa &lt; epa; pa += SECTSIZE, offset++)<br>    readsect(pa, offset);<br>}<br><code>`</code></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://bluelove1968.pixnet.net/blog/post/222285883-%E6%8C%87%E6%A8%99%E5%87%BD%E6%95%B8%E5%92%8C%E5%87%BD%E6%95%B8%E6%8C%87%E6%A8%99%E6%9C%89%E4%BB%80%E9%BA%BC%E5%8D%80%E5%88%A5" target="_blank" rel="noopener">指標函數和函數指標有什麼區別</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
+<p>  // If this is too slow, we could read lots of sectors at a time.<br>  // We’d write more to memory than asked, but it doesn’t matter –<br>  // we load in increasing order.<br>  for(; pa &lt; epa; pa += SECTSIZE, offset++)<br>    readsect(pa, offset);<br>}<br>```</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://bluelove1968.pixnet.net/blog/post/222285883-%E6%8C%87%E6%A8%99%E5%87%BD%E6%95%B8%E5%92%8C%E5%87%BD%E6%95%B8%E6%8C%87%E6%A8%99%E6%9C%89%E4%BB%80%E9%BA%BC%E5%8D%80%E5%88%A5" target="_blank" rel="noopener">指標函數和函數指標有什麼區別</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1100,7 +1069,6 @@ Function
 
 
 
-
 %eax
 Accumulator 累加器
 
@@ -1118,7 +1086,7 @@ Data 數據暫存器
 
 
 %edi
-Destinatio
+Destination
                         
                     </div>
                     <div class="publish-info">

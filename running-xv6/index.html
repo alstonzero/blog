@@ -566,8 +566,7 @@ AS <span class="token operator">=</span> <span class="token variable">$</span><s
 LD <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>TOOLPREFIX<span class="token punctuation">)</span>ld
 OBJCOPY <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>TOOLPREFIX<span class="token punctuation">)</span>objcopy
 OBJDUMP <span class="token operator">=</span> <span class="token variable">$</span><span class="token punctuation">(</span>TOOLPREFIX<span class="token punctuation">)</span>objdump
-CFLAGS <span class="token operator">=</span> -fno-builtin -O2 -Wall -MD -ggdb -m32
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+CFLAGS <span class="token operator">=</span> -fno-builtin -O2 -Wall -MD -ggdb -m32<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>-fno-builtin</code>：不使用 C 中的內建函數。</li>
 <li><code>-O2</code>：<code>-O</code> 表示最佳化的程度，數字越大越好，但會增加編譯時間。</li>
@@ -582,13 +581,11 @@ CFLAGS <span class="token operator">=</span> -fno-builtin -O2 -Wall -MD -ggdb -m
 <pre class="line-numbers language-makefile"><code class="language-makefile">CFLAGS <span class="token operator">+=</span> <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> -fno-stack-protector -E -x c /dev/null >/dev/null 2>&amp;1 &amp;&amp; echo -fno-stack-protector<span class="token punctuation">)</span>
 ASFLAGS <span class="token operator">=</span> -m32
 <span class="token comment" spellcheck="true"># FreeBSD ld wants ``elf_i386_fbsd''</span>
-LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> -V <span class="token operator">|</span> grep elf_i386 2>/dev/null<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$</span><span class="token punctuation">(</span><span class="token keyword">shell</span> <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> -V <span class="token operator">|</span> grep elf_i386 2>/dev/null<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-makefile"><code class="language-makefile"><span class="token symbol">XV6.img</span><span class="token punctuation">:</span> bootblock kernel fs.img
     dd if<span class="token operator">=</span>/dev/zero of<span class="token operator">=</span>XV6.img count<span class="token operator">=</span>10000
     dd if<span class="token operator">=</span>bootblock of<span class="token operator">=</span>XV6.img conv<span class="token operator">=</span>notrunc
-    dd if<span class="token operator">=</span>kernel of<span class="token operator">=</span>XV6.img seek<span class="token operator">=</span>1 conv<span class="token operator">=</span>notrunc
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+    dd if<span class="token operator">=</span>kernel of<span class="token operator">=</span>XV6.img seek<span class="token operator">=</span>1 conv<span class="token operator">=</span>notrunc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>產生 XV6.img</li>
 <li><code>dd</code> 指令將 <code>if</code>(input file) 複製到 <code>of</code>(output file)</li>
@@ -603,8 +600,7 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0x7C00 -o bootblock.o bootasm.o bootmain.o
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootblock.o > bootblock.asm
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary bootblock.o bootblock
-    ./sign.pl bootblock
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    ./sign.pl bootblock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>建立 bootblock</li>
 </ul>
@@ -619,14 +615,12 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <th><code>-c</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>不要從根目錄開始搜尋檔案，要從 <code>-I</code> 指定的目錄開始</td>
 <td>指定現在的資料夾</td>
 <td>對後面的檔案編譯（或組譯），但不做連接</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>LD</li>
 </ul>
@@ -639,15 +633,13 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <th><code>-o</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>使用後面的名稱（start）作為入口</td>
 <td>使用後面的名稱（start）作為入口</td>
 <td>將後面的位置作為輸出文件的起始位置（須為 16 進位）</td>
 <td>用來指定 ld 生成的名稱</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>OBJDUMP</li>
 </ul>
@@ -657,12 +649,10 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <th><code>-S</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>反組譯目標文件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>OBJCOPY</li>
 </ul>
@@ -673,20 +663,17 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <th><code>-O binary</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>去除所有符號資訊</td>
 <td>輸出為二進位的文件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>反組譯的用意是為了 debug</p>
 <pre class="line-numbers language-makefile"><code class="language-makefile"><span class="token symbol">bootother</span><span class="token punctuation">:</span> bootother.S
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -nostdinc -I. -c bootother.S
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0x7000 -o bootother.out bootother.o
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary bootother.out bootother
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootother.o > bootother.asm
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S bootother.o > bootother.asm<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>啟動其他的 CPU</li>
 </ul>
@@ -694,16 +681,14 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
     <span class="token variable">$</span><span class="token punctuation">(</span>CC<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>CFLAGS<span class="token punctuation">)</span> -nostdinc -I. -c initcode.S
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e start -Ttext 0 -o initcode.out initcode.o
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJCOPY<span class="token punctuation">)</span> -S -O binary initcode.out initcode
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S initcode.o > initcode.asm
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S initcode.o > initcode.asm<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>建立 initcode</li>
 </ul>
 <pre class="line-numbers language-makefile"><code class="language-makefile"><span class="token symbol">kernel</span><span class="token punctuation">:</span> <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> bootother initcode
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -Ttext 0x100000 -e main -o kernel <span class="token variable">$</span><span class="token punctuation">(</span>OBJS<span class="token punctuation">)</span> -b binary initcode bootother
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S kernel > kernel.asm
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernel <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > kernel.sym
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t kernel <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > kernel.sym<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>建立 kernel</li>
 </ul>
@@ -711,8 +696,7 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
     etags *.S *.c
 
 <span class="token symbol">vectors.S</span><span class="token punctuation">:</span> vectors.pl
-    perl vectors.pl > vectors.S
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    perl vectors.pl > vectors.S<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>使用 vectors.pl 生成 vectors.S</li>
 </ul>
@@ -721,8 +705,7 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <span class="token symbol">_%</span><span class="token punctuation">:</span> %.o <span class="token variable">$</span><span class="token punctuation">(</span>ULIB<span class="token punctuation">)</span>
     <span class="token variable">$</span><span class="token punctuation">(</span>LD<span class="token punctuation">)</span> <span class="token variable">$</span><span class="token punctuation">(</span>LDFLAGS<span class="token punctuation">)</span> -N -e main -Ttext 0 -o <span class="token variable">$@</span> <span class="token variable">$^</span>
     <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -S <span class="token variable">$@</span> > <span class="token variable">$*.asm</span>
-    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t <span class="token variable">$@</span> <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > <span class="token variable">$*.sym</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token variable">$</span><span class="token punctuation">(</span>OBJDUMP<span class="token punctuation">)</span> -t <span class="token variable">$@</span> <span class="token operator">|</span> sed <span class="token string">'1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d'</span> > <span class="token variable">$*.sym</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <table>
 <thead>
 <tr>
@@ -730,8 +713,7 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <th></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>%</td>
 <td>萬用字元，如 <code>_a</code> 需對應 <code>a.o</code></td>
 </tr>
@@ -747,8 +729,7 @@ LDFLAGS <span class="token operator">+=</span> -m <span class="token variable">$
 <td>$*</td>
 <td>代表第一個必要條件，但不包含副檔名</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-makefile"><code class="language-makefile"><span class="token symbol">_forktest</span><span class="token punctuation">:</span> forktest.o <span class="token variable">$</span><span class="token punctuation">(</span>ULIB<span class="token punctuation">)</span>
     <span class="token comment" spellcheck="true"># forktest has less library code linked in - needs to be small</span>
     <span class="token comment" spellcheck="true"># in order to be able to max out the proc table.</span>
@@ -775,8 +756,7 @@ UPROGS<span class="token operator">=</span>\
     _zombie\
 
 <span class="token symbol">fs.img</span><span class="token punctuation">:</span> mkfs README <span class="token variable">$</span><span class="token punctuation">(</span>UPROGS<span class="token punctuation">)</span>
-    ./mkfs fs.img README <span class="token variable">$</span><span class="token punctuation">(</span>UPROGS<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    ./mkfs fs.img README <span class="token variable">$</span><span class="token punctuation">(</span>UPROGS<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>fs 指的是 file system</li>
 </ul>
@@ -848,8 +828,7 @@ EXTRA<span class="token operator">=</span>\
     rm -rf /tmp/XV6
     mkdir -p /tmp/XV6
     cp dist/* /tmp/XV6
-    <span class="token punctuation">(</span>cd /tmp<span class="token punctuation">;</span> tar cf - XV6<span class="token punctuation">)</span> <span class="token operator">|</span> gzip >XV6-rev2.tar.gz
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">(</span>cd /tmp<span class="token punctuation">;</span> tar cf - XV6<span class="token punctuation">)</span> <span class="token operator">|</span> gzip >XV6-rev2.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Make"><a href="#Make" class="headerlink" title="Make"></a>Make</h2><p>我本來是打算在 MacOX 的環境下 make XV6 的，但是如果要 make 的話需要有 <code>i386-jos-elf</code> 的相關工具，需另外安裝（<a href="https://pdos.csail.mit.edu/6.828/2016/tools.html" target="_blank" rel="noopener">安裝方法</a>）。由於我一直沒辦法安裝，最後只好裝 ubuntu 來 make。</p>
 <ul>
@@ -860,8 +839,7 @@ EXTRA<span class="token operator">=</span>\
 <h2 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h2><ul>
 <li>輸入以下代碼<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[【學習 XV6 】在 Mac OSX 下運行 XV6](http://leenjewel.github.io/blog/2014/07/24/%5B%28xue-xi-xv6-%29%5D-zai-mac-osx-xia-yun-xing-xv6/)">[2]</span></a></sup></li>
 </ul>
-<pre class="line-numbers language-shell"><code class="language-shell">qemu-system-i386 -serial mon:stdio -hdb fs.img XV6.img -smp 1 -m 512
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">qemu-system-i386 -serial mon:stdio -hdb fs.img XV6.img -smp 1 -m 512<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="https://i.imgur.com/Fz4WKO1.png" alt="QEMU" title="Running XV6 in QEMU"></p>
 <p>註：make 好了以後，在 MacOS 的環境下使用 QEMU 模擬器即可運行。</p>
 <hr>
@@ -876,13 +854,12 @@ SECTIONS
 {
     /* Link the kernel at this address: "." means the current address */
         /* Must be equal to KERNLINK */
-    . = 0x80100000;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    . = 0x80100000;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定記憶體位置到 <code>0x8010000</code>（虛擬地址，分頁硬體會映射至實體位置 <code>0x0010000</code>）</li>
 <li><em>bootmain.c</em> 將 ELF 指標指向 <code>0x100000</code> 接著將 kernel 讀入。</li>
 </ul>
-<p><code>`</code>armasm<br>    .text : AT(0x100000) {<br>        <em>(.text .stub .text.</em> .gnu.linkonce.t.*)<br>    }</p>
+<p>```armasm<br>    .text : AT(0x100000) {<br>        <em>(.text .stub .text.</em> .gnu.linkonce.t.*)<br>    }</p>
 <pre><code>PROVIDE(etext = .);    /* Define the 'etext' symbol to this value */
 
 .rodata : {
@@ -932,8 +909,7 @@ PROVIDE(end = .);
 
 /DISCARD/ : {
     *(.eh_frame .note.GNU-stack)
-}
-</code></pre><p>}<br><code>`</code></p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/QQ1452008/article/details/50855810" target="_blank" rel="noopener">Linux Makefile 生成 .d 依赖文件及 gcc -M -MF -MP 等相关选项说明</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://leenjewel.github.io/blog/2014/07/24/%5B%28xue-xi-xv6-%29%5D-zai-mac-osx-xia-yun-xing-xv6/" target="_blank" rel="noopener">【學習 XV6 】在 Mac OSX 下運行 XV6</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
+}</code></pre><p>}<br>```</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/QQ1452008/article/details/50855810" target="_blank" rel="noopener">Linux Makefile 生成 .d 依赖文件及 gcc -M -MF -MP 等相关选项说明</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://leenjewel.github.io/blog/2014/07/24/%5B%28xue-xi-xv6-%29%5D-zai-mac-osx-xia-yun-xing-xv6/" target="_blank" rel="noopener">【學習 XV6 】在 Mac OSX 下運行 XV6</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><p></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

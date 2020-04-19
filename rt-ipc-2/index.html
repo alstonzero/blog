@@ -558,8 +558,7 @@
     rt_list_t            suspend_sender_thread<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">/**&lt; sender thread suspended on this mailbox */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_mailbox <span class="token operator">*</span>rt_mailbox_t<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>msg_pool</code> 指向郵件堆的起點，<code>entry</code> 紀錄總郵件的數量</li>
 </ul>
@@ -572,13 +571,11 @@
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 mail box</td>
 <td>mail box</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -587,14 +584,12 @@
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>mail box 大小</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a mailbox object from system resource
  *
@@ -613,8 +608,7 @@ rt_mailbox_t <span class="token function">rt_mb_create</span><span class="token 
     <span class="token comment" spellcheck="true">/* allocate object */</span>
     mb <span class="token operator">=</span> <span class="token punctuation">(</span>rt_mailbox_t<span class="token punctuation">)</span><span class="token function">rt_object_allocate</span><span class="token punctuation">(</span>RT_Object_Class_MailBox<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mb <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> mb<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">return</span> mb<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先 allocate 一塊給 mailbox</li>
 </ul>
@@ -622,8 +616,7 @@ rt_mailbox_t <span class="token function">rt_mb_create</span><span class="token 
     mb<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* init ipc object */</span>
-    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>填入 flag 及初始化</li>
 </ul>
@@ -636,8 +629,7 @@ rt_mailbox_t <span class="token function">rt_mb_create</span><span class="token 
         <span class="token function">rt_object_delete</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>因使用動態記憶體的緣故，需 allocate 一塊給郵件堆</li>
 <li>大小為一封一件的大小 * size</li>
@@ -651,8 +643,7 @@ rt_mailbox_t <span class="token function">rt_mb_create</span><span class="token 
 
     <span class="token keyword">return</span> mb<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後初始化值及等待鏈</li>
 </ul>
@@ -665,13 +656,11 @@ rt_mailbox_t <span class="token function">rt_mb_create</span><span class="token 
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 mail box</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -682,16 +671,14 @@ rt_mailbox_t <span class="token function">rt_mb_create</span><span class="token 
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>mail box 本體</td>
 <td>名字</td>
 <td>存放郵件的地方</td>
 <td>mail box 大小</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a mailbox and put it under control of resource
  * management.
@@ -719,8 +706,7 @@ rt_err_t <span class="token function">rt_mb_init</span><span class="token punctu
     mb<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* init ipc object */</span>
-    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡就不需要 allocate，可直接初始化來使用</li>
 </ul>
@@ -736,8 +722,7 @@ rt_err_t <span class="token function">rt_mb_init</span><span class="token punctu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>一樣，郵件堆可直接拿來用，初始化值及等待鏈</li>
 </ul>
@@ -750,25 +735,21 @@ rt_err_t <span class="token function">rt_mb_init</span><span class="token punctu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 mail box</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mb</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 mail box</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a mailbox object and release the memory
  *
@@ -789,8 +770,7 @@ rt_err_t <span class="token function">rt_mb_delete</span><span class="token punc
     <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* also resume all mailbox private suspended thread */</span>
-    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>suspend_sender_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>suspend_sender_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將正在等待郵件的，與正在等待傳送的 thread 叫醒</li>
 </ul>
@@ -802,8 +782,7 @@ rt_err_t <span class="token function">rt_mb_delete</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>歸還郵件堆，最後刪除 mail box</li>
 </ul>
@@ -816,25 +795,21 @@ rt_err_t <span class="token function">rt_mb_delete</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 mail box</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mb</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 mail box</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a mailbox from resource management
  *
@@ -852,8 +827,7 @@ rt_err_t <span class="token function">rt_mb_detach</span><span class="token punc
     <span class="token comment" spellcheck="true">/* resume all suspended thread */</span>
     <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* also resume all mailbox private suspended thread */</span>
-    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>suspend_sender_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mb<span class="token operator">-></span>suspend_sender_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先將正在等待郵件的，與正在等待傳送的 thread 叫醒</li>
 </ul>
@@ -862,8 +836,7 @@ rt_err_t <span class="token function">rt_mb_detach</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後刪除 mail box（使用 <code>detach</code>）</li>
 </ul>
@@ -876,13 +849,11 @@ rt_err_t <span class="token function">rt_mb_detach</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>傳送郵件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -891,14 +862,12 @@ rt_err_t <span class="token function">rt_mb_detach</span><span class="token punc
 <th><code>timeout</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲傳送的 mailbox</td>
 <td>郵件內容</td>
 <td>等待時間（如果需要）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will send a mail to mailbox object. If the mailbox is full,
  * current thread will be suspended until timeout.
@@ -952,8 +921,7 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
             <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
             <span class="token keyword">return</span> <span class="token operator">-</span>RT_EFULL<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 mail box 滿了，且不等待 (<code>timeout==0</code>)，回傳 <code>FULL</code></li>
 </ul>
@@ -977,8 +945,7 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
                              RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                              <span class="token operator">&amp;</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若要等待，將 thread 掛上等待鏈，啟動一個 timer</li>
 </ul>
@@ -986,8 +953,7 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* re-schedule */</span>
-        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>再做一次調度</li>
 </ul>
@@ -1009,8 +975,7 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
             <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
                 timeout <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如跳回來，重新計算 <code>timeout</code></li>
 </ul>
@@ -1021,8 +986,7 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mb<span class="token operator">-></span>in_offset <span class="token operator">>=</span> mb<span class="token operator">-></span>size<span class="token punctuation">)</span>
         mb<span class="token operator">-></span>in_offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* increase message entry */</span>
-    mb<span class="token operator">-></span>entry <span class="token operator">++</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mb<span class="token operator">-></span>entry <span class="token operator">++</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若可以寫入，將資料寫入，同時更新 <code>offset</code> 及 <code>entry</code></li>
 </ul>
@@ -1044,8 +1008,7 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_send_wait<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_send_wait<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有人在等待寄信，叫醒他，做一次調度</li>
 </ul>
@@ -1061,13 +1024,11 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>傳送郵件（不等待）</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1075,13 +1036,11 @@ rt_err_t <span class="token function">rt_mb_send_wait</span><span class="token p
 <th><code>value</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲傳送的 mailbox</td>
 <td>郵件內容</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will send a mail to mailbox object, if there are threads
  * suspended on mailbox object, it will be waked up. This function will return
@@ -1096,8 +1055,7 @@ rt_err_t <span class="token function">rt_mb_send</span><span class="token punctu
 <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">rt_mb_send_wait</span><span class="token punctuation">(</span>mb<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_send<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_send<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>即 <code>timeout == 0</code></li>
 </ul>
@@ -1110,13 +1068,11 @@ rt_err_t <span class="token function">rt_mb_send</span><span class="token punctu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>接受郵件</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1125,14 +1081,12 @@ rt_err_t <span class="token function">rt_mb_send</span><span class="token punctu
 <th><code>timeout</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲收信的 mailbox</td>
 <td>郵件內容</td>
 <td>等待時間（如果需要）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will receive a mail from mailbox object, if there is no mail
  * in mailbox object, the thread shall wait for a specified time.
@@ -1186,8 +1140,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
             thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
 
             <span class="token keyword">return</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 mail box 沒東西，且不等待，回傳 <code>TIMEOUT</code></li>
 </ul>
@@ -1211,8 +1164,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
                              RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                              <span class="token operator">&amp;</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若要等待，將 thread 掛上等待鏈，啟動一個 timer</li>
 </ul>
@@ -1220,8 +1172,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* re-schedule */</span>
-        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>再做一次調度</li>
 </ul>
@@ -1243,8 +1194,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
             <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
                 timeout <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如跳回來，重新計算 <code>timeout</code></li>
 </ul>
@@ -1256,8 +1206,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mb<span class="token operator">-></span>out_offset <span class="token operator">>=</span> mb<span class="token operator">-></span>size<span class="token punctuation">)</span>
         mb<span class="token operator">-></span>out_offset <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* decrease message entry */</span>
-    mb<span class="token operator">-></span>entry <span class="token operator">--</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mb<span class="token operator">-></span>entry <span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>若可以讀取，將資料寫入，同時更新 <code>offset</code> 及 <code>entry</code></li>
 </ul>
@@ -1283,8 +1232,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_recv<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mb_recv<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有人在等待收信，叫醒他，做一次調度</li>
 </ul>
@@ -1312,8 +1260,7 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
     <span class="token keyword">void</span>                <span class="token operator">*</span>msg_queue_free<span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">/**&lt; pointer indicated the free node of queue */</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">struct</span> rt_messagequeue <span class="token operator">*</span>rt_mq_t<span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h3 id="建立-message-queue"><a href="#建立-message-queue" class="headerlink" title="建立 message queue"></a>建立 message queue</h3><h4 id="動態記憶體管理-2"><a href="#動態記憶體管理-2" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mq_create</code></p>
 <table>
@@ -1323,13 +1270,11 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>建立 message queue</td>
 <td>message queue</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1339,15 +1284,13 @@ rt_err_t <span class="token function">rt_mb_recv</span><span class="token punctu
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>名字</td>
 <td>一封訊息的大小</td>
 <td>訊息數上限</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will create a message queue object from system resource
  *
@@ -1378,8 +1321,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
     mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* init ipc object */</span>
-    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先要一塊物件給 message queue，並同時填入 flag 及初始化</li>
 </ul>
@@ -1387,8 +1329,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
 
     <span class="token comment" spellcheck="true">/* get correct message size */</span>
     mq<span class="token operator">-></span>msg_size <span class="token operator">=</span> <span class="token function">RT_ALIGN</span><span class="token punctuation">(</span>msg_size<span class="token punctuation">,</span> RT_ALIGN_SIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    mq<span class="token operator">-></span>max_msgs <span class="token operator">=</span> max_msgs<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mq<span class="token operator">-></span>max_msgs <span class="token operator">=</span> max_msgs<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定訊息的大小，與訊息數量的上限</li>
 </ul>
@@ -1405,8 +1346,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
         <span class="token function">rt_mq_delete</span><span class="token punctuation">(</span>mq<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> RT_NULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著需 allocate 適當的記憶體存放訊息</li>
 </ul>
@@ -1422,8 +1362,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
                                         temp <span class="token operator">*</span> <span class="token punctuation">(</span>mq<span class="token operator">-></span>msg_size <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_mq_message<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         head<span class="token operator">-></span>next <span class="token operator">=</span> mq<span class="token operator">-></span>msg_queue_free<span class="token punctuation">;</span>
         mq<span class="token operator">-></span>msg_queue_free <span class="token operator">=</span> head<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>先將頭尾設為空，再一塊一塊的將 <code>msg_pool</code> 插在 free list 的第一顆</li>
 </ul>
@@ -1432,8 +1371,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
 
     <span class="token keyword">return</span> mq<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_create<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_create<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後設定 <code>entry</code> 為 0</li>
 </ul>
@@ -1446,13 +1384,11 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 message queue</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1464,8 +1400,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
 <th><code>flag</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>message queue 本體</td>
 <td>名字</td>
 <td>存放訊息的位址</td>
@@ -1473,8 +1408,7 @@ rt_mq_t <span class="token function">rt_mq_create</span><span class="token punct
 <td>存放訊息的大小</td>
 <td>FIFO / PRIO</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will initialize a message queue and put it under control of
  * resource management.
@@ -1508,8 +1442,7 @@ rt_err_t <span class="token function">rt_mq_init</span><span class="token punctu
     mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* init ipc object */</span>
-    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_object_init</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡就不需要去要一塊物件，直接拿來用即可</li>
 </ul>
@@ -1539,8 +1472,7 @@ rt_err_t <span class="token function">rt_mq_init</span><span class="token punctu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_init<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_init<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其餘的動作皆與上面相同</li>
 </ul>
@@ -1553,25 +1485,21 @@ rt_err_t <span class="token function">rt_mq_init</span><span class="token punctu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 message queue</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mq</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 message queue</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will delete a message queue object and release the memory
  *
@@ -1589,8 +1517,7 @@ rt_err_t <span class="token function">rt_mq_delete</span><span class="token punc
     <span class="token function">RT_ASSERT</span><span class="token punctuation">(</span><span class="token function">rt_object_is_systemobject</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">)</span> <span class="token operator">==</span> RT_FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* resume all suspended thread */</span>
-    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_ipc_list_resume_all</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>先把正在等待收訊息的 thread 叫醒</li>
 </ul>
@@ -1602,8 +1529,7 @@ rt_err_t <span class="token function">rt_mq_delete</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_delete<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_delete<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著 free <code>msg_pool</code>，並刪除物件</li>
 </ul>
@@ -1616,25 +1542,21 @@ rt_err_t <span class="token function">rt_mq_delete</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>刪除 message queue</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>mq</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲刪除的 message queue</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will detach a message queue object from resource management
  *
@@ -1657,8 +1579,7 @@ rt_err_t <span class="token function">rt_mq_detach</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_detach<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_detach<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡的 <code>msg_pool</code> 就不需要 free</li>
 </ul>
@@ -1671,13 +1592,11 @@ rt_err_t <span class="token function">rt_mq_detach</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>傳送訊息</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1686,14 +1605,12 @@ rt_err_t <span class="token function">rt_mq_detach</span><span class="token punc
 <th><code>size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲傳送的 message queue</td>
 <td>訊息資料</td>
 <td>訊息大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will send a message to message queue object, if there are
  * threads suspended on message queue object, it will be waked up.
@@ -1733,15 +1650,13 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token keyword">return</span> <span class="token operator">-</span>RT_EFULL<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>首先確定 message queue 沒滿（即 free list 不為空）</li>
 <li>如果滿了，回傳 <code>FULL</code></li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* move free list pointer */</span>
-    mq<span class="token operator">-></span>msg_queue_free <span class="token operator">=</span> msg<span class="token operator">-></span>next<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    mq<span class="token operator">-></span>msg_queue_free <span class="token operator">=</span> msg<span class="token operator">-></span>next<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>接著 free list 往下一顆走</li>
 </ul>
@@ -1751,8 +1666,7 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
     <span class="token comment" spellcheck="true">/* the msg is the new tailer of list, the next shall be NULL */</span>
     msg<span class="token operator">-></span>next <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* copy buffer */</span>
-    <span class="token function">rt_memcpy</span><span class="token punctuation">(</span>msg <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_memcpy</span><span class="token punctuation">(</span>msg <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>將訊息填入從 free list 拿的一顆（<code>msg</code>），這顆待會是新的尾巴（設定 <code>next = NULL</code>）</li>
 </ul>
@@ -1763,8 +1677,7 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
     <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">/* if the tail exists, */</span>
         <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> rt_mq_message <span class="token operator">*</span><span class="token punctuation">)</span>mq<span class="token operator">-></span>msg_queue_tail<span class="token punctuation">)</span><span class="token operator">-></span>next <span class="token operator">=</span> msg<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果尾巴不為空（也就是 message queue 有東西），將原本的尾巴指向 <code>msg</code></li>
 </ul>
@@ -1772,15 +1685,13 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
     mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">=</span> msg<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* if the head is empty, set head */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mq<span class="token operator">-></span>msg_queue_head <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        mq<span class="token operator">-></span>msg_queue_head <span class="token operator">=</span> msg<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        mq<span class="token operator">-></span>msg_queue_head <span class="token operator">=</span> msg<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設定新的尾巴</li>
 <li>如果頭為空（也就是 message queue 為空），設定新的頭</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* increase message entry */</span>
-    mq<span class="token operator">-></span>entry <span class="token operator">++</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    mq<span class="token operator">-></span>entry <span class="token operator">++</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>最後更新 <code>entry</code> </li>
 </ul>
@@ -1802,8 +1713,7 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_send<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_send<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果有人在等待接收訊息，叫醒他</li>
 </ul>
@@ -1819,13 +1729,11 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>傳送緊急訊息</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1834,14 +1742,12 @@ rt_err_t <span class="token function">rt_mq_send</span><span class="token punctu
 <th><code>size</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲傳送的 message queue</td>
 <td>訊息資料</td>
 <td>訊息大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will send an urgent message to message queue object, which
  * means the message will be inserted to the head of message queue. If there
@@ -1890,8 +1796,7 @@ rt_err_t <span class="token function">rt_mq_urgent</span><span class="token punc
     <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* copy buffer */</span>
-    <span class="token function">rt_memcpy</span><span class="token punctuation">(</span>msg <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_memcpy</span><span class="token punctuation">(</span>msg <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>因為要插在第一顆，<code>next</code> 就不用設定為空了</li>
 </ul>
@@ -1900,15 +1805,13 @@ rt_err_t <span class="token function">rt_mq_urgent</span><span class="token punc
 
     <span class="token comment" spellcheck="true">/* link msg to the beginning of message queue */</span>
     msg<span class="token operator">-></span>next <span class="token operator">=</span> mq<span class="token operator">-></span>msg_queue_head<span class="token punctuation">;</span>
-    mq<span class="token operator">-></span>msg_queue_head <span class="token operator">=</span> msg<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    mq<span class="token operator">-></span>msg_queue_head <span class="token operator">=</span> msg<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>這裡就將新訊息插在第一顆</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* if there is no tail */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-        mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">=</span> msg<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+        mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">=</span> msg<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果原本的 message queue 為空，設定新的尾巴</li>
 </ul>
@@ -1933,8 +1836,7 @@ rt_err_t <span class="token function">rt_mq_urgent</span><span class="token punc
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_urgent<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_urgent<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其他的動作皆相同</li>
 </ul>
@@ -1947,13 +1849,11 @@ rt_err_t <span class="token function">rt_mq_urgent</span><span class="token punc
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>接收訊息</td>
 <td><code>RT_EOK</code></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1963,15 +1863,13 @@ rt_err_t <span class="token function">rt_mq_urgent</span><span class="token punc
 <th><code>timeout</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲訊息 message queue</td>
 <td>訊息存放處</td>
 <td>訊息存放處大小</td>
 <td>等待時間（如果需要）</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
  * This function will receive a message from message queue object, if there is
  * no message in message queue object, the thread shall wait for a specified
@@ -2034,16 +1932,14 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
             thread<span class="token operator">-></span>error <span class="token operator">=</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
 
             <span class="token keyword">return</span> <span class="token operator">-</span>RT_ETIMEOUT<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 message queue 為空，且不等待，回傳 <code>TIMEOUT</code></li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">        <span class="token comment" spellcheck="true">/* suspend current thread */</span>
         <span class="token function">rt_ipc_list_suspend</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>suspend_thread<span class="token punctuation">)</span><span class="token punctuation">,</span>
                             thread<span class="token punctuation">,</span>
-                            mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                            mq<span class="token operator">-></span>parent<span class="token punctuation">.</span>parent<span class="token punctuation">.</span>flag<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如要等待，將 thread 掛在等待鏈上</li>
 </ul>
@@ -2061,8 +1957,7 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
                              RT_TIMER_CTRL_SET_TIME<span class="token punctuation">,</span>
                              <span class="token operator">&amp;</span>timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">rt_timer_start</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>thread<span class="token operator">-></span>thread_timer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>並啟動一個 timer</li>
 </ul>
@@ -2070,8 +1965,7 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
         <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
         <span class="token comment" spellcheck="true">/* re-schedule */</span>
-        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token function">rt_schedule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>開始等待，做一次調度</li>
 </ul>
@@ -2093,8 +1987,7 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
             <span class="token keyword">if</span> <span class="token punctuation">(</span>timeout <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
                 timeout <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如跳回來，重新計算 <code>timeout</code></li>
 </ul>
@@ -2105,14 +1998,12 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
     mq<span class="token operator">-></span>msg_queue_head <span class="token operator">=</span> msg<span class="token operator">-></span>next<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* reach queue tail, set to NULL */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">==</span> msg<span class="token punctuation">)</span>
-        mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        mq<span class="token operator">-></span>msg_queue_tail <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果 message queue 有資料，拿第一顆，同時更新 head（tail，如果需要）</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">    <span class="token comment" spellcheck="true">/* decrease message entry */</span>
-    mq<span class="token operator">-></span>entry <span class="token operator">--</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    mq<span class="token operator">-></span>entry <span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>更新 entry</li>
 </ul>
@@ -2120,8 +2011,7 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
     <span class="token function">rt_hw_interrupt_enable</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/* copy message */</span>
-    <span class="token function">rt_memcpy</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> msg <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> size <span class="token operator">></span> mq<span class="token operator">-></span>msg_size <span class="token operator">?</span> mq<span class="token operator">-></span>msg_size <span class="token punctuation">:</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">rt_memcpy</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> msg <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> size <span class="token operator">></span> mq<span class="token operator">-></span>msg_size <span class="token operator">?</span> mq<span class="token operator">-></span>msg_size <span class="token punctuation">:</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著複製找到的訊息</li>
 </ul>
@@ -2137,8 +2027,7 @@ rt_err_t <span class="token function">rt_mq_recv</span><span class="token punctu
 
     <span class="token keyword">return</span> RT_EOK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_recv<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">RTM_EXPORT</span><span class="token punctuation">(</span>rt_mq_recv<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後將 <code>msg</code> 插入 free list 的頭</li>
 </ul>

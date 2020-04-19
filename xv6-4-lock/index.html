@@ -549,8 +549,7 @@ insert(int data)
     l<span class="token operator">-></span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
     l<span class="token operator">-></span>next <span class="token operator">=</span> list<span class="token punctuation">;</span>
     list <span class="token operator">=</span> l<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://i.imgur.com/T6893f9.png" alt="" title="Example race"></p>
 <p>假設現在有兩個 process 同時在不同的 CPU 上執行上述程式碼，當兩個 process 都執行到 14 行，則兩條鏈結的 <code>next</code> 都設置為 <code>list</code>；接著，先執行的 process A 將 list 設定為自己的鏈結，後執行的 process B 也將 list 設為自己的鏈結。</p>
 <p><strong>問題</strong>：此時 list 上將會遺失原本 process A <code>insert</code> 的節點。</p>
@@ -576,8 +575,7 @@ insert(int data)
     l->next = list;
     list = l;
 <span class="token inserted">+    release(&amp;listlock);</span>
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-鎖"><a href="#Code-鎖" class="headerlink" title="Code: 鎖"></a>Code: 鎖</h2><ul>
 <li>XV6 使用 <code>struct spinlock</code>，其中以 locked 作為標記。<ul>
@@ -595,8 +593,7 @@ insert(int data)
   <span class="token keyword">struct</span> cpu <span class="token operator">*</span>cpu<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// The cpu holding the lock.</span>
   uint pcs<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// The call stack (an array of program counters)</span>
                      <span class="token comment" spellcheck="true">// that locked the lock.</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>邏輯上，<code>acquire</code> 應該長這樣：</li>
 </ul>
@@ -609,8 +606,7 @@ insert(int data)
             <span class="token keyword">break</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>但是我們發現，可能會有多個 CPU 執行至第五行，發現 <code>lk-&gt;locked</code> 為 <code>0</code>，接著都拿到了鎖，即違反了互斥</li>
 <li>XV6 使用 x86 的特殊指令 <code>xchg</code> 來完成動作。</li>
@@ -624,25 +620,21 @@ insert(int data)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>要求鎖</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*lk</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲要求的鎖</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Acquire the lock.</span>
 <span class="token comment" spellcheck="true">// Loops (spins) until the lock is acquired.</span>
 <span class="token comment" spellcheck="true">// Holding a lock for a long time may cause</span>
@@ -663,8 +655,7 @@ insert(int data)
   <span class="token comment" spellcheck="true">// Record info about lock acquisition for debugging.</span>
   lk<span class="token operator">-></span>cpu <span class="token operator">=</span> cpu<span class="token punctuation">;</span>
   <span class="token function">getcallerpcs</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lk<span class="token punctuation">,</span> lk<span class="token operator">-></span>pcs<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>release</code></p>
 <table>
@@ -674,25 +665,21 @@ insert(int data)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>還鎖</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*lk</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲還的鎖</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Release the lock.</span>
 <span class="token keyword">void</span>
 <span class="token function">release</span><span class="token punctuation">(</span><span class="token keyword">struct</span> spinlock <span class="token operator">*</span>lk<span class="token punctuation">)</span>
@@ -715,8 +702,7 @@ insert(int data)
   <span class="token function">xchg</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>lk<span class="token operator">-></span>locked<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token function">popcli</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>xchg</code></p>
 <table>
@@ -726,13 +712,11 @@ insert(int data)
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>交換值（x86特殊指令）</td>
 <td>結果</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -740,13 +724,11 @@ insert(int data)
 <th><code>newval</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲交換值得目標</td>
 <td>欲填的值</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">inline</span> uint
 <span class="token function">xchg</span><span class="token punctuation">(</span><span class="token keyword">volatile</span> uint <span class="token operator">*</span>addr<span class="token punctuation">,</span> uint newval<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -758,8 +740,7 @@ insert(int data)
                <span class="token string">"1"</span> <span class="token punctuation">(</span>newval<span class="token punctuation">)</span> <span class="token punctuation">:</span>
                <span class="token string">"cc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

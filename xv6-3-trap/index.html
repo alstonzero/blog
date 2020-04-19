@@ -591,8 +591,7 @@ start:
   pushl $init
   pushl $0  // where caller pc would be
   movl $SYS_exec, %eax
-  int $T_SYSCALL
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  int $T_SYSCALL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>Process 將<code>exec</code> 的參數 push 進堆疊，並將 system call number 放進 <code>%eax</code>。</li>
 <li><code>SYS_exec</code> 即為 system call number，對應到 syscalls 的陣列索引（syscall.c 中），一個函數指標陣列。</li>
@@ -619,8 +618,7 @@ start:
 <span class="token punctuation">[</span>SYS_link<span class="token punctuation">]</span>    sys_link<span class="token punctuation">,</span>
 <span class="token punctuation">[</span>SYS_mkdir<span class="token punctuation">]</span>   sys_mkdir<span class="token punctuation">,</span>
 <span class="token punctuation">[</span>SYS_close<span class="token punctuation">]</span>   sys_close<span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="Code-Assembly-trap-handler"><a href="#Code-Assembly-trap-handler" class="headerlink" title="Code: Assembly trap handler"></a>Code: Assembly trap handler</h2><ul>
 <li>x86 提供 256 種中斷，0-31 為軟體異常。</li>
@@ -638,24 +636,20 @@ start:
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 trap handler</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">tvinit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-  <span class="token keyword">int</span> i<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token keyword">int</span> i<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>Tvinit</code> 設置 <code>idt</code> 表的 256 項。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">256</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token function">SETGATE</span><span class="token punctuation">(</span>idt<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> SEG_KCODE<span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">,</span> vectors<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    <span class="token function">SETGATE</span><span class="token punctuation">(</span>idt<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> SEG_KCODE<span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">,</span> vectors<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>接著執行 <code>T_SYSCALL</code>，user 會呼叫 <code>trap</code>（將 <code>1</code> 傳入 <code>SETGATE</code> 的第二變數來指定為 trap gate）。</li>
 <li>Trap gate 不會清除 IF bit。</li>
@@ -664,8 +658,7 @@ start:
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token function">SETGATE</span><span class="token punctuation">(</span>idt<span class="token punctuation">[</span>T_SYSCALL<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> SEG_KCODE<span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">,</span> vectors<span class="token punctuation">[</span>T_SYSCALL<span class="token punctuation">]</span><span class="token punctuation">,</span> DPL_USER<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token function">initlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>tickslock<span class="token punctuation">,</span> <span class="token string">"time"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> SETGATE(gate, istrap, sel, off, d)                \
 {                                                         \
   (gate).off_15_0 = (uint)(off) &amp; 0xffff;                 \
@@ -677,11 +670,9 @@ start:
   (gate).dpl = (d);                                       \
   (gate).p = 1;                                           \
   (gate).off_31_16 = (uint)(off) >> 16;                   \
-}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> STS_IG32    0xE     </span><span class="token comment" spellcheck="true">// 32-bit Interrupt Gate</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> STS_TG32    0xF     </span><span class="token comment" spellcheck="true">// 32-bit Trap Gate</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">define</span> STS_TG32    0xF     </span><span class="token comment" spellcheck="true">// 32-bit Trap Gate</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="Trap-發生時"><a href="#Trap-發生時" class="headerlink" title="Trap 發生時"></a>Trap 發生時</h3><ul>
 <li>user mode：從 task segment descriptor 讀取 <code>%esp</code>、<code>%ss</code>， 接著 push 舊的 <code>%ss</code>、<code>%esp</code> 進新的堆疊。</li>
 <li>kernel mode：不用上述動作。</li>
@@ -714,8 +705,7 @@ print ".globl vectors\n";
 print "vectors:\n";
 for(my $i = 0; $i < 256; $i++){
     print "  .long vector$i\n";
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>XV6 用 Perl 腳本來生成 IDT 的進入點（<code>vector[]</code>）。</li>
 <li>如果處理器沒有 push 錯誤碼，則在其項 push。</li>
@@ -731,8 +721,7 @@ alltraps:
   pushl %es
   pushl %fs
   pushl %gs
-  pushal
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  pushal<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>接著繼續 push <code>%ds</code>、<code>%es</code>、<code>%fs</code>、<code>%gs</code> 及通用暫存器，現在 kernel stack 包含一個 <code>struct trapframe</code>。</li>
 </ul>
@@ -771,8 +760,7 @@ alltraps:
   uint esp<span class="token punctuation">;</span>
   ushort ss<span class="token punctuation">;</span>
   ushort padding6<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token macro property"># Set up data and per-cpu segments.</span>
   movw $<span class="token punctuation">(</span>SEG_KDATA<span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">%</span>ax
   movw <span class="token operator">%</span>ax<span class="token punctuation">,</span> <span class="token operator">%</span>ds
@@ -784,8 +772,7 @@ alltraps:
   <span class="token macro property"># Call trap(tf), where tf=%esp</span>
   pushl <span class="token operator">%</span>esp
   call trap
-  addl $<span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">%</span>esp
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  addl $<span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">%</span>esp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>push <code>%esp</code>（trap frame），呼叫 <em>trap</em>。</li>
 </ul>
@@ -798,8 +785,7 @@ trapret<span class="token punctuation">:</span>
   popl <span class="token operator">%</span>es
   popl <span class="token operator">%</span>ds
   addl $<span class="token number">0x8</span><span class="token punctuation">,</span> <span class="token operator">%</span>esp  # trapno and errcode
-  iret
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  iret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>trap return 後跳回 user space。</li>
 </ul>
@@ -811,25 +797,21 @@ trapret<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>執行 trap</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*tf</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>trapframe</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">trap</span><span class="token punctuation">(</span><span class="token keyword">struct</span> trapframe <span class="token operator">*</span>tf<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -841,8 +823,7 @@ trapret<span class="token punctuation">:</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span>proc<span class="token operator">-></span>killed<span class="token punctuation">)</span>
       <span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果是 <code>TY_SYSCALL</code>，呼叫 syscall()。</li>
 </ul>
@@ -876,8 +857,7 @@ trapret<span class="token punctuation">:</span>
     <span class="token function">cprintf</span><span class="token punctuation">(</span><span class="token string">"cpu%d: spurious interrupt at %x:%x\n"</span><span class="token punctuation">,</span>
             cpu<span class="token operator">-></span>id<span class="token punctuation">,</span> tf<span class="token operator">-></span>cs<span class="token punctuation">,</span> tf<span class="token operator">-></span>eip<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">lapiceoi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">break</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">break</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>檢查是否為硬體中斷</li>
 </ul>
@@ -911,8 +891,7 @@ trapret<span class="token punctuation">:</span>
   <span class="token comment" spellcheck="true">// Check if the process has been killed since we yielded</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>proc <span class="token operator">&amp;&amp;</span> proc<span class="token operator">-></span>killed <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>tf<span class="token operator">-></span>cs<span class="token operator">&amp;</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">==</span> DPL_USER<span class="token punctuation">)</span>
     <span class="token function">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果非 system call 或硬體中斷，trap 就認定為一個錯誤：<ul>
 <li>user：cp-&gt;killed (ch5)</li>
@@ -935,13 +914,11 @@ trapret<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>執行 system call</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">syscall</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -955,8 +932,7 @@ trapret<span class="token punctuation">:</span>
             proc<span class="token operator">-></span>pid<span class="token punctuation">,</span> proc<span class="token operator">-></span>name<span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">;</span>
     proc<span class="token operator">-></span>tf<span class="token operator">-></span>eax <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>syscalls<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
 <span class="token punctuation">[</span>SYS_fork<span class="token punctuation">]</span>    sys_fork<span class="token punctuation">,</span>
 <span class="token punctuation">[</span>SYS_exit<span class="token punctuation">]</span>    sys_exit<span class="token punctuation">,</span>
@@ -979,8 +955,7 @@ trapret<span class="token punctuation">:</span>
 <span class="token punctuation">[</span>SYS_link<span class="token punctuation">]</span>    sys_link<span class="token punctuation">,</span>
 <span class="token punctuation">[</span>SYS_mkdir<span class="token punctuation">]</span>   sys_mkdir<span class="token punctuation">,</span>
 <span class="token punctuation">[</span>SYS_close<span class="token punctuation">]</span>   sys_close<span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// System call numbers</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_fork    1</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_exit    2</span>
@@ -1002,8 +977,7 @@ trapret<span class="token punctuation">:</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_unlink 18</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_link   19</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> SYS_mkdir  20</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> SYS_close  21</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">define</span> SYS_close  21</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>取得 system call 參數：<ul>
 <li><code>argint</code>：整數</li>
@@ -1041,8 +1015,7 @@ trapret<span class="token punctuation">:</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> B_BUSY  0x1  </span><span class="token comment" spellcheck="true">// buffer is locked by some process</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> B_VALID 0x2  </span><span class="token comment" spellcheck="true">// buffer has been read from disk</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> B_DIRTY 0x4  </span><span class="token comment" spellcheck="true">// buffer needs to be written to disk</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token macro property">#<span class="token directive keyword">define</span> B_DIRTY 0x4  </span><span class="token comment" spellcheck="true">// buffer needs to be written to disk</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>flags</code> 紀錄記憶體與硬碟的關係：<ul>
 <li><code>B_VALID</code> 表示已被讀入</li>
@@ -1064,13 +1037,11 @@ trapret<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>初始化 IDE</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">ideinit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1078,14 +1049,12 @@ trapret<span class="token punctuation">:</span>
 
   <span class="token function">initlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>idelock<span class="token punctuation">,</span> <span class="token string">"ide"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">picenable</span><span class="token punctuation">(</span>IRQ_IDE<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">ioapicenable</span><span class="token punctuation">(</span>IRQ_IDE<span class="token punctuation">,</span> ncpu <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">ioapicenable</span><span class="token punctuation">(</span>IRQ_IDE<span class="token punctuation">,</span> ncpu <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>呼叫 <code>picenable</code> 打開單處理器的中斷</li>
 <li>呼叫 <code>ioapicenable</code> 打開多處理器的中斷（只打開最後一個 CPU）</li>
 </ul>
-<pre class="line-numbers language-c"><code class="language-c">  <span class="token function">idewait</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c">  <span class="token function">idewait</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li><code>idewait</code> 等待硬碟接受命令，直到 busy 位（<code>IDE_BUSY</code>）被清除，ready 位（<code>IDE_DRDY</code>）被設置。</li>
 </ul>
@@ -1100,8 +1069,7 @@ trapret<span class="token punctuation">:</span>
 
   <span class="token comment" spellcheck="true">// Switch back to disk 0.</span>
   <span class="token function">outb</span><span class="token punctuation">(</span><span class="token number">0x1f6</span><span class="token punctuation">,</span> <span class="token number">0xe0</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">&lt;&lt;</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設置完成後，只能通過 buffer cache 調用 <code>iderw</code>，<code>iderw</code> 根據 <code>flags</code> 值更新一個鎖著的 buf:<ul>
 <li>B_DIRTY：將 buf 寫回硬碟</li>
@@ -1118,25 +1086,21 @@ trapret<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>等待 IDE</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>checkerr</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>錯誤碼</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">// Wait for IDE disk to become ready.</span>
 <span class="token keyword">static</span> <span class="token keyword">int</span>
 <span class="token function">idewait</span><span class="token punctuation">(</span><span class="token keyword">int</span> checkerr<span class="token punctuation">)</span>
@@ -1148,8 +1112,7 @@ trapret<span class="token punctuation">:</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>checkerr <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>r <span class="token operator">&amp;</span> <span class="token punctuation">(</span>IDE_DF<span class="token operator">|</span>IDE_ERR<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>iderw</code></p>
 <table>
@@ -1159,25 +1122,21 @@ trapret<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀寫 IDE</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><code>*b</code></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>欲寫入或讀取的 buffer</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">iderw</span><span class="token punctuation">(</span><span class="token keyword">struct</span> buf <span class="token operator">*</span>b<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1196,15 +1155,13 @@ trapret<span class="token punctuation">:</span>
   b<span class="token operator">-></span>qnext <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token keyword">for</span><span class="token punctuation">(</span>pp<span class="token operator">=</span><span class="token operator">&amp;</span>idequeue<span class="token punctuation">;</span> <span class="token operator">*</span>pp<span class="token punctuation">;</span> pp<span class="token operator">=</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">*</span>pp<span class="token punctuation">)</span><span class="token operator">-></span>qnext<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//DOC:insert-queue</span>
     <span class="token punctuation">;</span>
-  <span class="token operator">*</span>pp <span class="token operator">=</span> b<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token operator">*</span>pp <span class="token operator">=</span> b<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>把 buf b 放置隊伍的末端</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token comment" spellcheck="true">// Start disk if necessary.</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span>idequeue <span class="token operator">==</span> b<span class="token punctuation">)</span>
-    <span class="token function">idestart</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">idestart</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>如果此 buf 在隊首，呼叫 <code>idestart</code> 將其送到硬碟。</li>
 <li>其他情況需等上一個處理完畢時才處理。</li>
@@ -1215,8 +1172,7 @@ trapret<span class="token punctuation">:</span>
   <span class="token punctuation">}</span>
 
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>idelock<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>iderw</code> 將請求加入的隊伍裡，並睡眠，等待 interrupt handler 處理完後更新其 flags。</li>
 <li>最後，硬碟完成其工作並觸發一個中斷，trap 呼叫 <code>ideintr</code> 來處理。</li>
@@ -1230,13 +1186,11 @@ trapret<span class="token punctuation">:</span>
 <th>回傳值</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>IDE trap</td>
 <td>void</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span>
 <span class="token function">ideintr</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
@@ -1253,16 +1207,14 @@ trapret<span class="token punctuation">:</span>
 
   <span class="token comment" spellcheck="true">// Read data if needed.</span>
   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>b<span class="token operator">-></span>flags <span class="token operator">&amp;</span> B_DIRTY<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">idewait</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token function">insl</span><span class="token punctuation">(</span><span class="token number">0x1f0</span><span class="token punctuation">,</span> b<span class="token operator">-></span>data<span class="token punctuation">,</span> <span class="token number">512</span><span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">insl</span><span class="token punctuation">(</span><span class="token number">0x1f0</span><span class="token punctuation">,</span> b<span class="token operator">-></span>data<span class="token punctuation">,</span> <span class="token number">512</span><span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>查詢隊首的 buf，如果正在被寫入，且 IDE 有資料在等待，呼叫 <code>insl</code> 將資料寫入。</li>
 </ul>
 <pre class="line-numbers language-c"><code class="language-c">  <span class="token comment" spellcheck="true">// Wake process waiting for this buf.</span>
   b<span class="token operator">-></span>flags <span class="token operator">|</span><span class="token operator">=</span> B_VALID<span class="token punctuation">;</span>
   b<span class="token operator">-></span>flags <span class="token operator">&amp;</span><span class="token operator">=</span> <span class="token operator">~</span>B_DIRTY<span class="token punctuation">;</span>
-  <span class="token function">wakeup</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token function">wakeup</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>設置 <code>B_VALID</code>，清除 <code>B_DIRTY</code>。</li>
 <li>喚醒 <code>b</code></li>
@@ -1272,8 +1224,7 @@ trapret<span class="token punctuation">:</span>
     <span class="token function">idestart</span><span class="token punctuation">(</span>idequeue<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>idelock<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>最後將下一個 buf 傳給硬碟。</li>
 </ul>
