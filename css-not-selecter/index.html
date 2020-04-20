@@ -30,6 +30,7 @@ HTML:
     <link rel="stylesheet" type="text/css" href="/css/my.css">
     
     <script src="/libs/jquery/jquery.min.js"></script>
+<link rel="alternate" href="/atom.xml" title="LuSW" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -127,7 +128,7 @@ HTML:
           
           <i class="fas fa-tags" style="margin-top: -20px;"></i>
           
-          <span>標籤雲</span>
+          <span>所有標籤</span>
         </a>
       </li>
       
@@ -145,7 +146,7 @@ HTML:
           
           <i class="fas fa-archive" style="margin-top: -20px;"></i>
           
-          <span>全部文章</span>
+          <span>所有文章</span>
         </a>
       </li>
       
@@ -154,7 +155,7 @@ HTML:
           
           <i class="fas fa-user-circle" style="margin-top: -20px;"></i>
           
-          <span>關於</span>
+          <span>關於作者</span>
         </a>
       </li>
       
@@ -263,7 +264,7 @@ HTML:
 				  
 				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
 			      
-		          <span>標籤雲</span>
+		          <span>所有標籤</span>
                   </a>
                 </li>
               
@@ -283,7 +284,7 @@ HTML:
 				  
 				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
 			      
-		          <span>全部文章</span>
+		          <span>所有文章</span>
                   </a>
                 </li>
               
@@ -293,7 +294,7 @@ HTML:
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
-		          <span>關於</span>
+		          <span>關於作者</span>
                   </a>
                 </li>
               
@@ -482,15 +483,6 @@ HTML:
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Note/" class="post-category">
-                                Note
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
@@ -633,59 +625,9 @@ HTML:
           });
       </script>
             </div>
-            <hr/>
+            <hr class="clearfix"/>
 
             
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">LuSkywalker</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        連結:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://blog.lusw.dev/css-not-selecter/">http://blog.lusw.dev/css-not-selecter/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        轉貼請註明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本網站所有文章除特別聲明外，均採用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    許可協議。轉貼請註明出處
-                    <a href="http://blog.lusw.dev" target="_blank">LuSkywalker</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
 
 
 
@@ -902,8 +844,6 @@ HTML:
 
 
 <!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->

@@ -108,20 +108,37 @@ footer .social-statis {
     color: #fff;
 }
 
+.prev-next .right-badge {
+    right: 12px;
+}
+
 /********************* For Code Block and Inline Code *********************/
 .code_lang {
     top: 0;
-    right: 30px;
+    right: 0;
     line-height: 1;
-    filter: unset;
+    -webkit-filter: unset;
+            filter: unset;
     padding: 5px 10px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+    border-radius: 0px 4px 0px 4px;
     min-width: 40px;
     text-align: center;
-    background-color: #424242;
-    color: #BDBDBD;
-    font-weight: normal;
+    background-color: #34495e;
+    color: #95a5a6;
+    font-weight: bold;
+}
+
+.code-area::after {
+    content: unset;
+}
+
+.line-numbers {
+    padding-top: 0 !important;
+    padding-bottom: 1.8rem !important;
+}
+
+.line-numbers-rows {
+    border-right: 3px solid #34495e !important;
 }
 
 code {
@@ -129,44 +146,34 @@ code {
     background-color: #f9f2f4;
 }
 
-.code-lang-c {
-    background: #293693;
-    color: #fff;
-}
-
-.code-lang-shell,
-.code-lang-bash {
-    background: #2A2E3A;
-    color: #fff;
-}
-
-.code-lang-vim {
-    background: #019833;
-    color: #ccc;
-}
-
-.code-lang-sql {
-    background: #03618B;
-    color: #E59001;
-}
-
-.code-lang-css {
-    background: #379AD6;
-    color: #fff;
-}
-
-.code-lang-html {
-    background: #F16524;
-    color: #fff;
-}
-
 :not(pre) > code[class*="language-"], pre[class*="language-"], pre, pre code  {
     background: #1d262f !important;
 }
 
-.line-numbers-rows > span:before {
+pre .line-numbers-rows > span:before {
     padding-bottom: 2px;
+    color: #34495e;
 }
+
+hr:not(.clearfix) {
+    border-color: transparent;
+    margin: 45px;
+}
+
+hr:not(.clearfix):after {
+    content: " ";
+    background: #ccc;
+    content: " ";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 0;
+    right: 0px;
+    box-shadow: -25px 25px #ccc, 25px -25px #ccc;
+    margin: auto;
+    transform: rotate(45deg);
+}
+
 
 /********************* Dark Mode *********************/
 .post-calendar-card-d {
@@ -211,6 +218,11 @@ code {
 
 .dark nav ul a:hover {
     background-color: rgba(255,255,255,0.1);
+}
+
+.dark code {
+    color: #EF6C00;
+    background: #424242;
 }
 
 /* Dark Bg Gray Level 1 */
@@ -274,6 +286,16 @@ code {
 .dark .mobile-menu-list a i, 
 .dark header .side-nav .menu-list a {
     color: #BDBDBD !important;
+}
+
+.dark hr:not(.clearfix):before,
+.dark hr:not(.clearfix):after {
+    background: #555;
+    box-shadow: -25px 25px #555, 25px -25px #555;
+}
+
+.dark hr.clearfix {
+    border-color: #555;
 }
 
 /* Dark Table */
@@ -351,47 +373,80 @@ td, th {
     animation: rainbow_dark 60s infinite;
 }
 
-@keyframes rainbow_dark {
+@-webkit-keyframes rainbow_dark {
     0%,
     100% {
         background: rgba(33, 33, 33, 0.75);
         background: linear-gradient(45deg, rgba(33, 33, 33, 0.75) 0%, rgba(33, 33, 33, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(33, 33, 33, 0.75) 0%, rgba(33, 33, 33, 0.65) 100%);
         background: -webkit-linear-gradient(135deg,rgba(33, 33, 33, 0.75) 0%, rgba(33, 33, 33, 0.65) 100%);
     }
 
     16% {
         background: rgba(66, 66, 66, 0.75);
         background: linear-gradient(45deg, rgba(66, 66, 66, 0.75) 0%, rgba(66, 66, 66, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(66, 66, 66, 0.75) 0%, rgba(66, 66, 66, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(66, 66, 66, 0.75) 0%, rgba(66, 66, 66, 0.65) 100%);
     }
 
     32% {
         background: rgba(97, 97, 97, 0.75);
         background: linear-gradient(45deg, rgba(97, 97, 97, 0.75) 0%, rgba(97, 97, 97, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(97, 97, 97, 0.75) 0%, rgba(97, 97, 97, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(97, 97, 97, 0.75) 0%, rgba(97, 97, 97, 0.65) 100%);
     }
 
     48% {
         background: rgba(69, 90, 100, 0.75);
         background: linear-gradient(45deg, rgba(69, 90, 100, 0.75) 0%, rgba(69, 90, 100, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(69, 90, 100, 0.75) 0%, rgba(69, 90, 100, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(69, 90, 100, 0.75) 0%, rgba(69, 90, 100, 0.65) 100%);
     }
 
     64% {
         background: rgba(55, 71, 79, 0.75);
         background: linear-gradient(45deg, rgba(55, 71, 79, 0.75) 0%, rgba(55, 71, 79, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(55, 71, 79, 0.75) 0%, rgba(55, 71, 79, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(55, 71, 79, 0.75) 0%, rgba(55, 71, 79, 0.65) 100%);
     }
 
     80% {
         background: rgba(38, 50, 56, 0.75);
         background: linear-gradient(45deg, rgba(38, 50, 56, 0.75) 0%, rgba(38, 50, 56, 0.65) 100%);
-        background: -moz-linear-gradient(135deg, rgba(38, 50, 56, 0.75) 0%, rgba(38, 50, 56, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(38, 50, 56, 0.75) 0%, rgba(38, 50, 56, 0.65) 100%);
+    }
+}
+
+@keyframes rainbow_dark {
+    0%,
+    100% {
+        background: rgba(33, 33, 33, 0.75);
+        background: linear-gradient(45deg, rgba(33, 33, 33, 0.75) 0%, rgba(33, 33, 33, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg,rgba(33, 33, 33, 0.75) 0%, rgba(33, 33, 33, 0.65) 100%);
+    }
+
+    16% {
+        background: rgba(66, 66, 66, 0.75);
+        background: linear-gradient(45deg, rgba(66, 66, 66, 0.75) 0%, rgba(66, 66, 66, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(66, 66, 66, 0.75) 0%, rgba(66, 66, 66, 0.65) 100%);
+    }
+
+    32% {
+        background: rgba(97, 97, 97, 0.75);
+        background: linear-gradient(45deg, rgba(97, 97, 97, 0.75) 0%, rgba(97, 97, 97, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(97, 97, 97, 0.75) 0%, rgba(97, 97, 97, 0.65) 100%);
+    }
+
+    48% {
+        background: rgba(69, 90, 100, 0.75);
+        background: linear-gradient(45deg, rgba(69, 90, 100, 0.75) 0%, rgba(69, 90, 100, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(69, 90, 100, 0.75) 0%, rgba(69, 90, 100, 0.65) 100%);
+    }
+
+    64% {
+        background: rgba(55, 71, 79, 0.75);
+        background: linear-gradient(45deg, rgba(55, 71, 79, 0.75) 0%, rgba(55, 71, 79, 0.65) 100%);
+        background: -webkit-linear-gradient(135deg, rgba(55, 71, 79, 0.75) 0%, rgba(55, 71, 79, 0.65) 100%);
+    }
+
+    80% {
+        background: rgba(38, 50, 56, 0.75);
+        background: linear-gradient(45deg, rgba(38, 50, 56, 0.75) 0%, rgba(38, 50, 56, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(38, 50, 56, 0.75) 0%, rgba(38, 50, 56, 0.65) 100%);
     }
 }
@@ -406,7 +461,52 @@ td, th {
     padding: 0;
 }
 .github-emoji:hover{
-    animation: emoji-face 5s infinite ease-in-out;
+    -webkit-animation: emoji-face 5s infinite ease-in-out;
+            animation: emoji-face 5s infinite ease-in-out;
+}
+@-webkit-keyframes emoji-face {
+    2% {
+        transform: translate(0, 1.5px) rotate(1.5deg);
+    }
+    4% {
+        transform: translate(0, -1.5px) rotate(-0.5deg);
+    }
+    6% {
+        transform: translate(0, 1.5px) rotate(-1.5deg);
+    }
+    8% {
+        transform: translate(0, -1.5px) rotate(-1.5deg);
+    }
+    10% {
+        transform: translate(0, 2.5px) rotate(1.5deg);
+    }
+    12% {
+        transform: translate(0, -0.5px) rotate(1.5deg);
+    }
+    14% {
+        transform: translate(0, -1.5px) rotate(1.5deg);
+    }
+    16% {
+        transform: translate(0, -0.5px) rotate(-1.5deg);
+    }
+    18% {
+        transform: translate(0, 0.5px) rotate(-1.5deg);
+    }
+    20% {
+        transform: translate(0, -1.5px) rotate(2.5deg);
+    }
+    22% {
+        transform: translate(0, 0.5px) rotate(-1.5deg);
+    }
+    24% {
+        transform: translate(0, 1.5px) rotate(1.5deg);
+    }
+    26% {
+        transform: translate(0, 0.5px) rotate(0.5deg);
+    }
+    28% {
+        transform: translate(0, 0.5px) rotate(1.5deg);
+    }
 }
 @keyframes emoji-face {
     2% {

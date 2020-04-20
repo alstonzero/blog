@@ -50,6 +50,7 @@ O
     <link rel="stylesheet" type="text/css" href="/css/my.css">
     
     <script src="/libs/jquery/jquery.min.js"></script>
+<link rel="alternate" href="/atom.xml" title="LuSW" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -147,7 +148,7 @@ O
           
           <i class="fas fa-tags" style="margin-top: -20px;"></i>
           
-          <span>標籤雲</span>
+          <span>所有標籤</span>
         </a>
       </li>
       
@@ -165,7 +166,7 @@ O
           
           <i class="fas fa-archive" style="margin-top: -20px;"></i>
           
-          <span>全部文章</span>
+          <span>所有文章</span>
         </a>
       </li>
       
@@ -174,7 +175,7 @@ O
           
           <i class="fas fa-user-circle" style="margin-top: -20px;"></i>
           
-          <span>關於</span>
+          <span>關於作者</span>
         </a>
       </li>
       
@@ -283,7 +284,7 @@ O
 				  
 				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
 			      
-		          <span>標籤雲</span>
+		          <span>所有標籤</span>
                   </a>
                 </li>
               
@@ -303,7 +304,7 @@ O
 				  
 				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
 			      
-		          <span>全部文章</span>
+		          <span>所有文章</span>
                   </a>
                 </li>
               
@@ -313,7 +314,7 @@ O
 				  
 				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
 			      
-		          <span>關於</span>
+		          <span>關於作者</span>
                   </a>
                 </li>
               
@@ -878,7 +879,7 @@ inoremap <span class="token punctuation">{</span><span class="token operator">&l
 <ul>
 <li><code>set nu</code></li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.vixual.net/blog/archives/234" target="_blank" rel="noopener">vi 與 vim 的指令整理</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.zhihu.com/question/19863631" target="_blank" rel="noopener">如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+<div id="footnotes"><hr class="clearfix"><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.vixual.net/blog/archives/234" target="_blank" rel="noopener">vi 與 vim 的指令整理</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.zhihu.com/question/19863631" target="_blank" rel="noopener">如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -898,59 +899,9 @@ inoremap <span class="token punctuation">{</span><span class="token operator">&l
           });
       </script>
             </div>
-            <hr/>
+            <hr class="clearfix"/>
 
             
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://blog.lusw.dev" rel="external nofollow noreferrer">LuSkywalker</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        連結:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="http://blog.lusw.dev/vim-instruction/">http://blog.lusw.dev/vim-instruction/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        轉貼請註明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本網站所有文章除特別聲明外，均採用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    許可協議。轉貼請註明出處
-                    <a href="http://blog.lusw.dev" target="_blank">LuSkywalker</a>
-                    !
-                </span>
-            </div>
-        
-    </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>複製成功，請遵循本文的轉貼規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
 
 
 
@@ -1173,8 +1124,6 @@ Code
 
 
 <!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
