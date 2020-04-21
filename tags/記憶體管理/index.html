@@ -1,1281 +1,358 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
-
+<!-- Head tag -->
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="標籤: 記憶體管理, LuSW">
-    <meta name="description" content="標籤: 記憶體管理 | LuSW">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>標籤: 記憶體管理 | LuSW</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <!--Description-->
+
     
-    <script src="/libs/jquery/jquery.min.js"></script>
-<link rel="alternate" href="/atom.xml" title="LuSW" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
-<script>
-    function detectColorScheme(){
-        var theme="light";    //default to light
+    
+        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
 
-        //local storage is used to override OS theme settings
-        if(localStorage.getItem("theme")){
-            if(localStorage.getItem("theme") == "dark"){
-                var theme = "dark";
-            }
-        } else if(!window.matchMedia) {
-            //matchMedia method not supported
-            return false;
-        } else if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            //OS theme setting detected as dark
-            var theme = "dark";
-        }
+    <!--Author-->
+    
+        <meta name="author" content="LuSkywalker">
+    
 
-        //dark theme preferred, set document with a `data-theme` attribute
-        $('html').addClass(theme);
-    }
-    detectColorScheme();    
-</script>
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="技術筆記">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="技術筆記">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://blog.lusw.devhttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="http://blog.lusw.devhttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>記憶體管理 - 技術筆記</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+
+<link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
 
 <body>
 
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="/favicon.png" class="logo-img hide" alt="LOGO">
-                    
-                    <span class="logo-span">LuSW</span>
-                </a>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">技術筆記</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/tags/Linux">
+                            
+                                Linux
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/RT-Thread">
+                            
+                                RT-Thread
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/XV6">
+                            
+                                XV6
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/Clang">
+                            
+                                C Lang
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/luswdev">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    
+
+<!-- Page Header -->
+<!-- Set your background image for this header in the theme's configuration: index_cover -->
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>#記憶體管理</h1>
+                </div>
             </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/Linux/" class="waves-effect waves-light">
-      
-      <span>Linux</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/Clang/" class="waves-effect waves-light">
-      
-      <span>C語言</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/XV6/" class="waves-effect waves-light">
-      
-      <span>XV6</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/RT-Thread/" class="waves-effect waves-light">
-      
-      <span>RT-Thread</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="./#!" class="waves-effect waves-light">
-
-      
-      <i class="fas fa-list"></i>
-      
-      <span>更多</span>
-      <i class="fas fa-chevron-down" aria-hidden="true"></i>
-    </a>
-    <ul class="sub-nav menus_item_child ">
-      
-      <li>
-        <a href="/tags">
-          
-          <i class="fas fa-tags" style="margin-top: -20px;"></i>
-          
-          <span>所有標籤</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/categories">
-          
-          <i class="fas fa-bookmark" style="margin-top: -20px;"></i>
-          
-          <span>所有分類</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/archives">
-          
-          <i class="fas fa-archive" style="margin-top: -20px;"></i>
-          
-          <span>所有文章</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/about">
-          
-          <i class="fas fa-user-circle" style="margin-top: -20px;"></i>
-          
-          <span>關於作者</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/friends">
-          
-          <i class="fas fa-address-book" style="margin-top: -20px;"></i>
-          
-          <span>友情贊助</span>
-        </a>
-      </li>
-      
-    </ul>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item" id="toggle-dark-item">
-      <a class="waves-effect waves-light">
-        <i id="toggle-dark-btn" class="far fa-lightbulb" style="margin-top: -20px;"></i>
-        <span>關燈</span>
-      </a>
-  </li>
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜尋"></i>
-    </a>
-  </li>
-</ul>
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/favicon.png" class="logo-img responsive-img">
-        
-        <div class="logo-name">LuSW</div>
-        <div class="logo-desc">
-            
-            單晶片、即時作業系統與韌體相關之技術筆記
-            
         </div>
     </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/Linux/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			Linux
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/Clang/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			C語言
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/XV6/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			XV6
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/RT-Thread/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			RT-Thread
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="javascript:;">
-			
-				<i class="fa-fw fas fa-list"></i>
-			
-			更多
-			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
-		</a>
-            <ul  style="background:  ;" >
-              
-                <li>   
-				
-                  <a href="/tags " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
-			      
-		          <span>所有標籤</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/categories " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
-			      
-		          <span>所有分類</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/archives " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
-			      
-		          <span>所有文章</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/about " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
-			      
-		          <span>關於作者</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/friends " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-address-book" style="position: absolute;left:50px" ></i>
-			      
-		          <span>友情贊助</span>
-                  </a>
-                </li>
-               
-            </ul>
-          
-        </li>
-        
-
-        <li class="m-nav-item" id="m-toggle-dark-item">
-            <a class="waves-effect waves-light">
-              <i id="m-toggle-dark-btn" class="fa-fw far fa-lightbulb"></i>
-              <span>關燈</span>
-            </a>
-        </li>
-
-        
-    </ul>
-</div>
-
-        </div>
-
-        
-    </nav>
-
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
+<!-- Main Content -->
+<div class="container">
     <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                技術筆記
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: ['單晶片、即時作業系統與韌體相關之技術筆記','Notes of single-chip microcompute, RTOS and Firmware.'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            
+                <div class="post-preview">
+    <a href="/rt-slab/">
+        <h1 class="post-title archive">
+            RT-Thread SLAB 動態管理
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        2018-12-05
+    </p>
 </div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
-</script>
-
-
-    </div>
+            
+                <div class="post-preview">
+    <a href="/rt-small-mem/">
+        <h1 class="post-title archive">
+            RT-Thread 小記憶體動態管理
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        2018-12-05
+    </p>
 </div>
-
-<main class="content">
-
+            
+                <div class="post-preview">
+    <a href="/rt-memheap/">
+        <h1 class="post-title archive">
+            RT-Thread Memory Heap
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        2018-12-05
+    </p>
+</div>
+            
+                <div class="post-preview">
+    <a href="/rt-mem/">
+        <h1 class="post-title archive">
+            RT-Thread Memory Pool
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        2018-11-29
+    </p>
+</div>
+            
+                <div class="post-preview">
+    <a href="/xv6-2-mem/">
+        <h1 class="post-title archive">
+            XV6 Ch2 Page tables
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        2018-07-23
+    </p>
+</div>
+            
+            <div class="archive-before-pagination"></div>
+            <ul class="pager">
     
-
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章標籤
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/計算機概論/" title="計算機概論: 13">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="計算機概論" <!--style="background-color: #F9EBEA;">計算機概論
-                        <span class="tag-length">13</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/數字表示/" title="數字表示: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="數字表示" <!--style="background-color: #F5EEF8;">數字表示
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/閘/" title="閘: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="閘" <!--style="background-color: #D5F5E3;">閘
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/邏輯圖/" title="邏輯圖: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="邏輯圖" <!--style="background-color: #E8F8F5;">邏輯圖
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/電路/" title="電路: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="電路" <!--style="background-color: #FEF9E7;">電路
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/電腦/" title="電腦: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="電腦" <!--style="background-color: #F8F9F9;">電腦
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/資料結構/" title="資料結構: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="資料結構" <!--style="background-color: #82E0AA;">資料結構
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/XV6/" title="XV6: 11">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="XV6" <!--style="background-color: #D7BDE2;">XV6
-                        <span class="tag-length">11</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/kernel/" title="kernel: 22">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="kernel" <!--style="background-color: #A3E4D7;">kernel
-                        <span class="tag-length">22</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/lock/" title="lock: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="lock" <!--style="background-color: #85C1E9;">lock
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/暫存器/" title="暫存器: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="暫存器" <!--style="background-color: #F8C471;">暫存器
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/x86/" title="x86: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="x86" <!--style="background-color: #F9E79F;">x86
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/vim/" title="vim: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="vim" <!--style="background-color: #85C1E9;">vim
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Linux/" title="Linux: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Linux" <!--style="background-color: #E8F8F5;">Linux
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/C/" title="C: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="C" <!--style="background-color: #D5F5E3;">C
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Clang/" title="Clang: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Clang" <!--style="background-color: #F8F9F9;">Clang
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/C語言/" title="C語言: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="C語言" <!--style="background-color: #F9E79F;">C語言
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/attribute/" title="attribute: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="attribute" <!--style="background-color: #A3E4D7;">attribute
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Ubuntu/" title="Ubuntu: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Ubuntu" <!--style="background-color: #FEF9E7;">Ubuntu
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/RT-Thread/" title="RT-Thread: 17">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="RT-Thread" <!--style="background-color: #F9EBEA;">RT-Thread
-                        <span class="tag-length">17</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/GUI/" title="GUI: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="GUI" <!--style="background-color: #F9E79F;">GUI
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/RTM-EXPORT/" title="RTM_EXPORT: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="RTM_EXPORT" <!--style="background-color: #F8F9F9;">RTM_EXPORT
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/clock/" title="clock: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="clock" <!--style="background-color: #F9E79F;">clock
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/hexo/" title="hexo: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="hexo" <!--style="background-color: #FFF;">hexo
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/github-page/" title="github-page: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="github-page" <!--style="background-color: #A3E4D7;">github-page
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/CNAME/" title="CNAME: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="CNAME" <!--style="background-color: #F5EEF8;">CNAME
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/crontab/" title="crontab: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="crontab" <!--style="background-color: #F9E79F;">crontab
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/OOP/" title="OOP: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="OOP" <!--style="background-color: #82E0AA;">OOP
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/server/" title="server: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="server" <!--style="background-color: #F9EBEA;">server
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Arduino/" title="Arduino: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Arduino" <!--style="background-color: #A3E4D7;">Arduino
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/interrupt/" title="interrupt: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="interrupt" <!--style="background-color: #A3E4D7;">interrupt
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/ASCII/" title="ASCII: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="ASCII" <!--style="background-color: #A3E4D7;">ASCII
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/ANSI/" title="ANSI: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="ANSI" <!--style="background-color: #D7BDE2;">ANSI
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/perl/" title="perl: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="perl" <!--style="background-color: #FEF9E7;">perl
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/selector/" title="selector: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="selector" <!--style="background-color: #F9EBEA;">selector
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/note/" title="note: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="note" <!--style="background-color: #D7BDE2;">note
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Xcode/" title="Xcode: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Xcode" <!--style="background-color: #F8F9F9;">Xcode
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/ios/" title="ios: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="ios" <!--style="background-color: #82E0AA;">ios
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/renew/" title="renew: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="renew" <!--style="background-color: #82E0AA;">renew
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/certificate/" title="certificate: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="certificate" <!--style="background-color: #82E0AA;">certificate
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/init/" title="init: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="init" <!--style="background-color: #82E0AA;">init
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/port/" title="port: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="port" <!--style="background-color: #D5F5E3;">port
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/lsof/" title="lsof: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="lsof" <!--style="background-color: #D5F5E3;">lsof
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/netstat/" title="netstat: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="netstat" <!--style="background-color: #82E0AA;">netstat
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/bit/" title="bit: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="bit" <!--style="background-color: #F8C471;">bit
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/union/" title="union: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="union" <!--style="background-color: #F8C471;">union
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/process/" title="process: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="process" <!--style="background-color: #A3E4D7;">process
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/分頁/" title="分頁: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="分頁" <!--style="background-color: #82E0AA;">分頁
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/記憶體管理/" title="記憶體管理: 5">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="記憶體管理" <!--style="background-color: #F8F9F9;">記憶體管理
-                        <span class="tag-length">5</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/scheduler/" title="scheduler: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="scheduler" <!--style="background-color: #F8C471;">scheduler
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/file-system/" title="file system: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="file system" <!--style="background-color: #FFF;">file system
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/makefile/" title="makefile: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="makefile" <!--style="background-color: #F8C471;">makefile
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/函數指標/" title="函數指標: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="函數指標" <!--style="background-color: #F9E79F;">函數指標
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/timer/" title="timer: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="timer" <!--style="background-color: #F8C471;">timer
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/dc/" title="dc: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="dc" <!--style="background-color: #F5EEF8;">dc
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/trap/" title="trap: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="trap" <!--style="background-color: #D7BDE2;">trap
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Memory-Pool/" title="Memory Pool: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Memory Pool" <!--style="background-color: #FEF9E7;">Memory Pool
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/widget/" title="widget: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="widget" <!--style="background-color: #82E0AA;">widget
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/thread/" title="thread: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="thread" <!--style="background-color: #85C1E9;">thread
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/SLAB/" title="SLAB: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="SLAB" <!--style="background-color: #FEF9E7;">SLAB
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/window/" title="window: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="window" <!--style="background-color: #F9EBEA;">window
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/event/" title="event: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="event" <!--style="background-color: #F9E79F;">event
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/message/" title="message: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="message" <!--style="background-color: #F5EEF8;">message
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/mailbox/" title="mailbox: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="mailbox" <!--style="background-color: #FFF;">mailbox
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Memory-Heap/" title="Memory Heap: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="Memory Heap" <!--style="background-color: #D7BDE2;">Memory Heap
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/semaphore/" title="semaphore: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="semaphore" <!--style="background-color: #82E0AA;">semaphore
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-            </div>
+    
+</ul>
         </div>
     </div>
 </div>
 
-    
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="kernel, RT-Thread, 記憶體管理, SLAB" data-aos="fade-up">
-                <div class="card">
-                    <a href="/rt-slab/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="RT-Thread SLAB 動態管理">
-                            
-                            <span class="card-title">RT-Thread SLAB 動態管理</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-05
-                            </span>
-                            <span class="publish-author">
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted footer-author">&copy; 2020 LuSkywalker</p>
+                <ul class="copyright text-muted footer-menu">
+                    
+                        <li>
+                            <a href="/">
                                 
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                    Home
                                 
-                                <a href="/categories/RT-Thread/" class="post-category">
-                                RT-Thread
-                                </a>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/archives">
                                 
+                                    Archives
                                 
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="kernel, RT-Thread, 記憶體管理" data-aos="fade-up">
-                <div class="card">
-                    <a href="/rt-small-mem/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="RT-Thread 小記憶體動態管理">
-                            
-                            <span class="card-title">RT-Thread 小記憶體動態管理</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/RT-Thread/" class="post-category">
-                                RT-Thread
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="kernel, RT-Thread, 記憶體管理, Memory Heap" data-aos="fade-up">
-                <div class="card">
-                    <a href="/rt-memheap/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="RT-Thread Memory Heap">
-                            
-                            <span class="card-title">RT-Thread Memory Heap</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/RT-Thread/" class="post-category">
-                                RT-Thread
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="kernel, RT-Thread, 記憶體管理, Memory Pool" data-aos="fade-up">
-                <div class="card">
-                    <a href="/rt-mem/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="RT-Thread Memory Pool">
-                            
-                            <span class="card-title">RT-Thread Memory Pool</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-11-29
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/RT-Thread/" class="post-category">
-                                RT-Thread
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="XV6, kernel, 分頁, 記憶體管理" data-aos="fade-up">
-                <div class="card">
-                    <a href="/xv6-2-mem/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="XV6 Ch2 Page tables">
-                            
-                            <span class="card-title">XV6 Ch2 Page tables</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-07-23
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/XV6/" class="post-category">
-                                XV6
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
         </div>
-    </article>
-</main>
-
-
-
-
-    <footer class="page-footer blue-grey-text text-lighten-1 blue-grey darken-4">
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            &copy;
-            <span id="year">2018-2020</span>&nbsp;
-            LuSkywalker
-            <br>
-            
-            
-            
-            
-            
-            
-            
-            <br>
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/luswdev" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:info@lusw.dev" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/" class="tooltipped" target="_blank" data-tooltip="访问我的 linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
-
-
-
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="访问我的 stackoverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
-
-</div>
     </div>
 </footer>
 
-<div class="progress-bar"></div>
 
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
-            <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script src="/js/search.js"></script>
-<script type="text/javascript">
-$(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
-});
-</script>
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-124928169-1');
-</script>
-
-
+    <!-- After footer scripts -->
     
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-    
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-    
 
-    
-    
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
 
 </body>
 

@@ -1,576 +1,233 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
-
+<!-- Head tag -->
 <head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="RT-Thread GUI Server, LuSW">
-    <meta name="description" content="server 掌管整個 GUI system 的所有事件 (event)，所有硬體的工作都需要他來完成溝通。">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>RT-Thread GUI Server | LuSW</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <!--Description-->
+
     
-    <script src="/libs/jquery/jquery.min.js"></script>
-<link rel="alternate" href="/atom.xml" title="LuSW" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
-<script>
-    function detectColorScheme(){
-        var theme="light";    //default to light
+    
+        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
 
-        //local storage is used to override OS theme settings
-        if(localStorage.getItem("theme")){
-            if(localStorage.getItem("theme") == "dark"){
-                var theme = "dark";
-            }
-        } else if(!window.matchMedia) {
-            //matchMedia method not supported
-            return false;
-        } else if(window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            //OS theme setting detected as dark
-            var theme = "dark";
-        }
+    <!--Author-->
+    
+        <meta name="author" content="LuSkywalker">
+    
 
-        //dark theme preferred, set document with a `data-theme` attribute
-        $('html').addClass(theme);
-    }
-    detectColorScheme();    
-</script>
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="RT-Thread GUI Server">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="技術筆記">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://blog.lusw.devhttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="http://blog.lusw.devhttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>RT-Thread GUI Server - 技術筆記</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+
+<link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
 
 <body>
 
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">技術筆記</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/tags/Linux">
+                            
+                                Linux
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/RT-Thread">
+                            
+                                RT-Thread
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/XV6">
+                            
+                                XV6
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/Clang">
+                            
+                                C Lang
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/luswdev">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>RT-Thread GUI Server</h1>
                     
-                    <img src="/favicon.png" class="logo-img hide" alt="LOGO">
-                    
-                    <span class="logo-span">LuSW</span>
-                </a>
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-02-23
+                        
+                    </span>
+                </div>
             </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/Linux/" class="waves-effect waves-light">
-      
-      <span>Linux</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/Clang/" class="waves-effect waves-light">
-      
-      <span>C語言</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/XV6/" class="waves-effect waves-light">
-      
-      <span>XV6</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags/RT-Thread/" class="waves-effect waves-light">
-      
-      <span>RT-Thread</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="./#!" class="waves-effect waves-light">
-
-      
-      <i class="fas fa-list"></i>
-      
-      <span>更多</span>
-      <i class="fas fa-chevron-down" aria-hidden="true"></i>
-    </a>
-    <ul class="sub-nav menus_item_child ">
-      
-      <li>
-        <a href="/tags">
-          
-          <i class="fas fa-tags" style="margin-top: -20px;"></i>
-          
-          <span>所有標籤</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/categories">
-          
-          <i class="fas fa-bookmark" style="margin-top: -20px;"></i>
-          
-          <span>所有分類</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/archives">
-          
-          <i class="fas fa-archive" style="margin-top: -20px;"></i>
-          
-          <span>所有文章</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/about">
-          
-          <i class="fas fa-user-circle" style="margin-top: -20px;"></i>
-          
-          <span>關於作者</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/friends">
-          
-          <i class="fas fa-address-book" style="margin-top: -20px;"></i>
-          
-          <span>友情贊助</span>
-        </a>
-      </li>
-      
-    </ul>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item" id="toggle-dark-item">
-      <a class="waves-effect waves-light">
-        <i id="toggle-dark-btn" class="far fa-lightbulb" style="margin-top: -20px;"></i>
-        <span>關燈</span>
-      </a>
-  </li>
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜尋"></i>
-    </a>
-  </li>
-</ul>
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="/favicon.png" class="logo-img responsive-img">
-        
-        <div class="logo-name">LuSW</div>
-        <div class="logo-desc">
-            
-            單晶片、即時作業系統與韌體相關之技術筆記
-            
         </div>
     </div>
-
-    
-
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/Linux/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			Linux
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/Clang/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			C語言
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/XV6/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			XV6
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags/RT-Thread/" class="waves-effect waves-light">
-			
-				<i class="fas fa-fw fa-link"></i>
-			
-			RT-Thread
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="javascript:;">
-			
-				<i class="fa-fw fas fa-list"></i>
-			
-			更多
-			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
-		</a>
-            <ul  style="background:  ;" >
-              
-                <li>   
-				
-                  <a href="/tags " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
-			      
-		          <span>所有標籤</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/categories " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-bookmark" style="position: absolute;left:50px" ></i>
-			      
-		          <span>所有分類</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/archives " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
-			      
-		          <span>所有文章</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/about " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-user-circle" style="position: absolute;left:50px" ></i>
-			      
-		          <span>關於作者</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/friends " style="margin-left:75px";>
-				  
-				   <i class="fa fas fa-address-book" style="position: absolute;left:50px" ></i>
-			      
-		          <span>友情贊助</span>
-                  </a>
-                </li>
-               
-            </ul>
-          
-        </li>
-        
-
-        <li class="m-nav-item" id="m-toggle-dark-item">
-            <a class="waves-effect waves-light">
-              <i id="m-toggle-dark-btn" class="fa-fw far fa-lightbulb"></i>
-              <span>關燈</span>
-            </a>
-        </li>
-
-        
-    </ul>
-</div>
-
-        </div>
-
-        
-    </nav>
-
 </header>
 
-    
-<script src="/libs/cryptojs/crypto-js.min.js"></script>
-<script>
-    (function() {
-        let pwd = '';
-        if (pwd && pwd.length > 0) {
-            if (pwd !== CryptoJS.SHA256(prompt('WARNING!! Please enter password.')).toString(CryptoJS.enc.Hex)) {
-                alert('Bad request. Back to home.');
-                location.href = '/';
-            }
-        }
-    })();
-</script>
-
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
+<!-- Post Content -->
+<article>
+    <div class="container">
         <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">RT-Thread GUI Server</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-
-
-
-<main class="post-container content">
-
-    
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-<style>
-    #articleContent h1::before,
-    #articleContent h2::before,
-    #articleContent h3::before,
-    #articleContent h4::before,
-    #articleContent h5::before,
-    #articleContent h6::before {
-        display: block;
-        content: " ";
-        height: 100px;
-        margin-top: -100px;
-        visibility: hidden;
-    }
-
-    #articleContent :focus {
-        outline: none;
-    }
-
-    .toc-fixed {
-        position: fixed;
-        top: 64px;
-    }
-
-    .toc-widget {
-        width: 345px;
-        padding-left: 20px;
-    }
-
-    .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
-        font-size: 1.5rem;
-        font-weight: bold;
-        line-height: 1.5rem;
-    }
-
-    .toc-widget ol {
-        padding: 0;
-        list-style: none;
-    }
-
-    #toc-content {
-        height: calc(100vh - 250px);
-        overflow: auto;
-    }
-
-    #toc-content ol {
-        padding-left: 10px;
-    }
-
-    #toc-content ol li {
-        padding-left: 10px;
-    }
-
-    #toc-content .toc-link:hover {
-        color: #42b983;
-        font-weight: 700;
-        text-decoration: underline;
-    }
-
-    #toc-content .toc-link::before {
-        background-color: transparent;
-        max-height: 25px;
-    }
-
-    #toc-content .is-active-link {
-        color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
-    }
-
-    #floating-toc-btn {
-        position: fixed;
-        right: 15px;
-        bottom: 76px;
-        padding-top: 15px;
-        margin-bottom: 0;
-        z-index: 998;
-    }
-
-    #floating-toc-btn .btn-floating {
-        width: 48px;
-        height: 48px;
-    }
-
-    #floating-toc-btn .btn-floating i {
-        line-height: 48px;
-        font-size: 1.4rem;
-    }
-</style>
-<div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
                     
-                    <div class="article-tag">
                         
-                            <a href="/tags/kernel/">
-                                <span class="chip bg-color">kernel</span>
-                            </a>
-                        
-                            <a href="/tags/RT-Thread/">
-                                <span class="chip bg-color">RT-Thread</span>
-                            </a>
-                        
-                            <a href="/tags/GUI/">
-                                <span class="chip bg-color">GUI</span>
-                            </a>
-                        
-                            <a href="/tags/server/">
-                                <span class="chip bg-color">server</span>
-                            </a>
-                        
-                    </div>
+
+<a href="/categories/RT-Thread-GUI/">RT-Thread GUI</a>
+
                     
                 </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/RT-Thread-GUI/" class="post-category">
-                                RT-Thread GUI
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
+            
 
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>發表日期:&nbsp;&nbsp;
-                    2019-02-23
-                </div>
-                
+            <!-- Gallery -->
+            
 
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>總文長:&nbsp;&nbsp;
-                    326
-                </div>
-                
-
-                
-                <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>閱讀時間:&nbsp;&nbsp;
-                    1 分
-                </div>
-                
-
-                
-            </div>
-
-        </div>
-        <hr class="clearfix">
-        <div class="card-content article-card-content">
-            <div id="articleContent">
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="基本事件結構"><a href="#基本事件結構" class="headerlink" title="基本事件結構"></a>基本事件結構</h2><p>server 掌管整個 GUI system 的所有事件 (event)，而根據不同的事件定義不同的結構；在每個不同的結構中都有基本的欄位 <code>_RTGUI_EVENT_WIN_ELEMENTS</code>：</p>
 <blockquote>
 <p>File: event.c</p>
 </blockquote>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
- * RTGUI Window Event
- */</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> _RTGUI_EVENT_WIN_ELEMENTS \
-    struct rtgui_event parent; \
-    struct rtgui_win *wid;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * RTGUI Window Event</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _RTGUI_EVENT_WIN_ELEMENTS \</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_event</span> <span class="title">parent</span>;</span> \</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_win</span> *<span class="title">wid</span>;</span></span><br></pre></td></tr></tbody></table></figure>
+
 <p><code>rtgui_event</code> 即為事件的基本結構：</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> rtgui_event
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">/* the event type */</span>
-    <span class="token keyword">enum</span> _rtgui_event_type type<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">/* user field of event */</span>
-    rt_uint16_t user<span class="token punctuation">;</span>
+<figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rtgui_event</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="comment">/* the event type */</span></span><br><span class="line">    <span class="keyword">enum</span> _rtgui_event_type type;</span><br><span class="line">    <span class="comment">/* user field of event */</span></span><br><span class="line">    <span class="keyword">rt_uint16_t</span> user;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* the event sender */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_app</span> *<span class="title">sender</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* mailbox to acknowledge request */</span></span><br><span class="line">    <span class="keyword">rt_mailbox_t</span> ack;</span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_event</span> <span class="title">rtgui_event_t</span>;</span></span><br></pre></td></tr></tbody></table></figure>
 
-    <span class="token comment" spellcheck="true">/* the event sender */</span>
-    <span class="token keyword">struct</span> rtgui_app <span class="token operator">*</span>sender<span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">/* mailbox to acknowledge request */</span>
-    rt_mailbox_t ack<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> rtgui_event rtgui_event_t<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h3 id="基本結構設定"><a href="#基本結構設定" class="headerlink" title="基本結構設定"></a>基本結構設定</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> RTGUI_EVENT_INIT(e, t)  do      \
-{                                       \
-    (e)->type = (t);                    \
-    (e)->user = 0;                      \
-    (e)->sender = rtgui_app_self();     \
-    (e)->ack = RT_NULL;                 \
-} while (0)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="基本結構設定"><a href="#基本結構設定" class="headerlink" title="基本結構設定"></a>基本結構設定</h3><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RTGUI_EVENT_INIT(e, t)  do      \</span></span><br><span class="line">{                                       \</span><br><span class="line">    (e)-&gt;type = (t);                    \</span><br><span class="line">    (e)-&gt;user = <span class="number">0</span>;                      \</span><br><span class="line">    (e)-&gt;sender = rtgui_app_self();     \</span><br><span class="line">    (e)-&gt;ack = RT_NULL;                 \</span><br><span class="line">} <span class="keyword">while</span> (<span class="number">0</span>)</span><br></pre></td></tr></tbody></table></figure>
+
 <hr>
 <h2 id="啟動-server"><a href="#啟動-server" class="headerlink" title="啟動 server"></a>啟動 server</h2><blockquote>
 <p>File: server.c</p>
 </blockquote>
 <p>首先，定義一個 app 名叫 server :</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">struct</span> rtgui_app <span class="token operator">*</span>rtgui_server_app <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_app</span> *<span class="title">rtgui_server_app</span> = <span class="title">RT_NULL</span>;</span></span><br></pre></td></tr></tbody></table></figure>
+
 <p>接著透過 <code>rtgui_server_entry</code> 啟動 app，也就是 server:<br><br><i class="fa fa-code"></i> Code: <code>rtgui_server_entry</code></p>
-<table>
+<div class="table-responsive">
+<table class="table">
 <thead>
 <tr>
 <th>功能</th>
@@ -582,7 +239,8 @@
 <td>void</td>
 </tr>
 </tbody></table>
-<table>
+</div><div class="table-responsive">
+<table class="table">
 <thead>
 <tr>
 <th align="center"><code>*parameter</code></th>
@@ -592,38 +250,8 @@
 <td align="center">未使用</td>
 </tr>
 </tbody></table>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token comment" spellcheck="true">/**
- * rtgui server thread's entry
- */</span>
-<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rtgui_server_entry</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>parameter<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> _WIN32_NATIVE</span>
-    <span class="token comment" spellcheck="true">/* set the server thread to highest */</span>
-    HANDLE hCurrentThread <span class="token operator">=</span> <span class="token function">GetCurrentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">SetThreadPriority</span><span class="token punctuation">(</span>hCurrentThread<span class="token punctuation">,</span> THREAD_PRIORITY_HIGHEST<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * rtgui server thread's entry</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rtgui_server_entry</span><span class="params">(<span class="keyword">void</span> *parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _WIN32_NATIVE</span></span><br><span class="line">    <span class="comment">/* set the server thread to highest */</span></span><br><span class="line">    HANDLE hCurrentThread = GetCurrentThread();</span><br><span class="line">    SetThreadPriority(hCurrentThread, THREAD_PRIORITY_HIGHEST);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* create rtgui server application */</span></span><br><span class="line">    rtgui_server_app = rtgui_app_create(<span class="string">"rtgui"</span>);</span><br><span class="line">    <span class="keyword">if</span> (rtgui_server_app == RT_NULL)</span><br><span class="line">    {</span><br><span class="line">        rt_kprintf(<span class="string">"Create GUI server failed.\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    rtgui_object_set_event_handler(RTGUI_OBJECT(rtgui_server_app),</span><br><span class="line">                                   rtgui_server_event_handler);</span><br><span class="line">    <span class="comment">/* init mouse and show */</span></span><br><span class="line">    rtgui_mouse_init();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RTGUI_USING_MOUSE_CURSOR</span></span><br><span class="line">    rtgui_mouse_show_cursor();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    rtgui_app_run(rtgui_server_app);</span><br><span class="line"></span><br><span class="line">    rtgui_app_destroy(rtgui_server_app);</span><br><span class="line">    rtgui_server_app = RT_NULL;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-    <span class="token comment" spellcheck="true">/* create rtgui server application */</span>
-    rtgui_server_app <span class="token operator">=</span> <span class="token function">rtgui_app_create</span><span class="token punctuation">(</span><span class="token string">"rtgui"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>rtgui_server_app <span class="token operator">==</span> RT_NULL<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">rt_kprintf</span><span class="token punctuation">(</span><span class="token string">"Create GUI server failed.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token function">rtgui_object_set_event_handler</span><span class="token punctuation">(</span><span class="token function">RTGUI_OBJECT</span><span class="token punctuation">(</span>rtgui_server_app<span class="token punctuation">)</span><span class="token punctuation">,</span>
-                                   rtgui_server_event_handler<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">/* init mouse and show */</span>
-    <span class="token function">rtgui_mouse_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">ifdef</span> RTGUI_USING_MOUSE_CURSOR</span>
-    <span class="token function">rtgui_mouse_show_cursor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token macro property">#<span class="token directive keyword">endif</span></span>
-
-    <span class="token function">rtgui_app_run</span><span class="token punctuation">(</span>rtgui_server_app<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">rtgui_app_destroy</span><span class="token punctuation">(</span>rtgui_server_app<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    rtgui_server_app <span class="token operator">=</span> RT_NULL<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最後會進入 <code>rtgui_app_run</code> 並正式開始執行 server，也就是進入所屬的 event handler</p>
 <hr>
 <h2 id="Event-Handler"><a href="#Event-Handler" class="headerlink" title="Event Handler"></a>Event Handler</h2><p>Event handler 也就是 server 的進入點</p>
@@ -646,480 +274,145 @@
             document.body.appendChild(img);
           });
       </script>
-            </div>
-            <hr class="clearfix"/>
 
+                
+            </div>
+            
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/kernel/">#kernel</a> <a href="/tags/RT-Thread/">#RT-Thread</a> <a href="/tags/GUI/">#GUI</a> <a href="/tags/server/">#server</a>
+
+
+                    
+                </div>
             
 
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/kernel/">
-                                    <span class="chip bg-color">kernel</span>
-                                </a>
-                            
-                                <a href="/tags/RT-Thread/">
-                                    <span class="chip bg-color">RT-Thread</span>
-                                </a>
-                            
-                                <a href="/tags/GUI/">
-                                    <span class="chip bg-color">GUI</span>
-                                </a>
-                            
-                                <a href="/tags/server/">
-                                    <span class="chip bg-color">server</span>
-                                </a>
-                            
-                        </div>
-                    
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="pager">
+                        
+                            <li class="previous"><a href="/rtgui-dc-hw/">&larr;  下一頁</a></li>
+                        
+                        
+                            <li class="next"><a href="/rtgui-window/">上一頁  &rarr;</a></li>
+                        
+                    </ul>
                 </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+            
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
 
-<div id="article-share">
-    
-    
-
-    
-
-</div>
 
                 </div>
-            </div>
             
         </div>
     </div>
+</article> 
 
-    
 
-    
 
-    
 
-    
+    <!-- Footer -->
+    <hr />
 
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/rtgui-dc-hw/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="RT-Thread GUI 繪圖引擎 - 硬體">
-                        
-                        <span class="card-title">RT-Thread GUI 繪圖引擎 - 硬體</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            GUI 最重要的繪圖核心，第一部分：硬體；說明 GUI 是如何透過硬體的驅動來畫上點線面。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-03-13
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/RT-Thread-GUI/" class="post-category">
-                                    RT-Thread GUI
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
                     
-                    <a href="/tags/kernel/">
-                        <span class="chip bg-color">kernel</span>
-                    </a>
+
                     
-                    <a href="/tags/RT-Thread/">
-                        <span class="chip bg-color">RT-Thread</span>
-                    </a>
+
                     
-                    <a href="/tags/GUI/">
-                        <span class="chip bg-color">GUI</span>
-                    </a>
+                        <li>
+                            <a href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                     
-                    <a href="/tags/dc/">
-                        <span class="chip bg-color">dc</span>
-                    </a>
+
                     
-                </div>
-                
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted footer-author">&copy; 2020 LuSkywalker</p>
+                <ul class="copyright text-muted footer-menu">
+                    
+                        <li>
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/rtgui-window/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="RT-Thread GUI Window">
-                        
-                        <span class="card-title">RT-Thread GUI Window</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            GUI 中的視窗元件，可以移動它、放大縮小、隱藏、著色等等
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/RT-Thread-GUI/" class="post-category">
-                                    RT-Thread GUI
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/kernel/">
-                        <span class="chip bg-color">kernel</span>
-                    </a>
-                    
-                    <a href="/tags/RT-Thread/">
-                        <span class="chip bg-color">RT-Thread</span>
-                    </a>
-                    
-                    <a href="/tags/GUI/">
-                        <span class="chip bg-color">GUI</span>
-                    </a>
-                    
-                    <a href="/tags/window/">
-                        <span class="chip bg-color">window</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '來源: LuSW<br />'
-            + '作者: LuSkywalker<br />'
-            + '連結: <a href="' + url + '">' + url + '</a><br />'
-            + '本文著作權歸作者所有，任何形式的轉載都須註明出處。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-
-<!-- 代码块收缩 -->
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // modify the toc link href to support Chinese.
-        let i = 0;
-        let tocHeading = 'toc-heading-';
-        $('#toc-content a').each(function () {
-            $(this).attr('href', '#' + tocHeading + (++i));
-        });
-
-        // modify the heading title id to support Chinese.
-        i = 0;
-        $('#articleContent').children('h2, h3, h4').each(function () {
-            $(this).attr('id', tocHeading + (++i));
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
-
-
-
-    <footer class="page-footer blue-grey-text text-lighten-1 blue-grey darken-4">
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            &copy;
-            <span id="year">2018-2020</span>&nbsp;
-            LuSkywalker
-            <br>
-            
-            
-            
-            
-            
-            
-            
-            <br>
-            
-            <br>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/luswdev" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:info@lusw.dev" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <a href="https://www.linkedin.com/in/callum-lu-0aa77066/" class="tooltipped" target="_blank" data-tooltip="访问我的 linkedin" data-position="top" data-delay="50">
-        <i class="fab fa-linkedin"></i>
-    </a>
-
-
-
-    <a href="https://stackoverflow.com/users/10298225/omu-skywalker" class="tooltipped" target="_blank" data-tooltip="访问我的 stackoverflow" data-position="top" data-delay="50">
-        <i class="fab fa-stack-overflow"></i>
-    </a>
-
-</div>
     </div>
 </footer>
 
-<div class="progress-bar"></div>
 
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜尋</span>
-            <input type="search" id="searchInput" name="s" placeholder="輸入關鍵字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script src="/js/search.js"></script>
-<script type="text/javascript">
-$(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
-});
-</script>
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124928169-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-124928169-1');
-</script>
-
-
+    <!-- After footer scripts -->
     
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-    
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-    
 
-    
-    
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
 
 </body>
 
