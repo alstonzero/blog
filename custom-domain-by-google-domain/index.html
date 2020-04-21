@@ -227,13 +227,13 @@
 <p>一個很重要的事情是，發布 hexo 的 github repo 須為 <strong>github.io</strong> 類型的，否則設定會有誤</p>
 </blockquote>
 <h2 id="設定-github-CNAME"><a href="#設定-github-CNAME" class="headerlink" title="設定 github CNAME"></a>設定 github CNAME</h2><p>Github 官方有提供 301 轉址功能，只要在網頁的 branch 下建立一個 <code>CNAME</code> 檔案，就會把舊網址轉址到新網址。你的 CNAME 應該要填以下內容：</p>
-<figure class="highlight stylus line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>其中 <code>subdomain</code> 與 <code>domain</code> 與自己的有關，像我的就是</p>
-<figure class="highlight stylus line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog<span class="selector-class">.omuskywalker</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">blog<span class="selector-class">.omuskywalker</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果你上面的 subdomain 設定為 www，而你的頂級網域（也就是你買的 domain 名字）沒有要給特別的網站用的話，也可以這樣寫：</p>
-<figure class="highlight stylus line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">domain.com</span><br><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">domain.com</span><br><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>這麼一來不管是上面哪兩種，都會連到你的 blog</p>
 <blockquote>
