@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-07-16
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/XV6/">XV6</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/XV6/">XV6</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -286,7 +284,7 @@
 <li><code>Allocproc</code> 掃描 proc tabel，找到 <code>p-&gt;state</code> 是 <code>UNUSED</code>，接著設定為 <code>EMBRYO</code> 來標示被使用，並給予一組唯一的 pid。</li>
 </ul>
 <h3 id="allocproc"><a href="#allocproc" class="headerlink" title="allocproc"></a>allocproc</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -326,7 +324,7 @@
 <li><i id="userinit" class="fa fa-code"></i> Code: <code>userinit</code></li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -365,7 +363,7 @@
 <li>當 <em>main</em> 呼叫完 <em>userinit</em> 後，呼叫 <em>mpmain<em>，</em>mpmain</em> 接著呼叫 <em>scheduler</em> 開始運行 process。<br><i class="fa fa-code"></i> Code: <code>mpmain</code></li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -382,7 +380,7 @@
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>scheduler</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -429,7 +427,7 @@
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>forkret</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>

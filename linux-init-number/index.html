@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2020-04-08
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/Linux/">Linux</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/Linux/">Linux</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -212,7 +210,7 @@
 </blockquote>
 <p>正常來說 init 應該被放在 <code>/sbin/init</code> 中，如果內核找不到，會試著在 <code>/bin/sh</code> 中尋找，若都失敗則將導致<strong>啟動失敗</strong>。</p>
 <h2 id="init-等級"><a href="#init-等級" class="headerlink" title="init 等級"></a>init 等級</h2><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>等級</th>

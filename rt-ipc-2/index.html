@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-11-28
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/RT-Thread/">RT-Thread</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/RT-Thread/">RT-Thread</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -221,7 +219,7 @@
 <hr>
 <h3 id="建立-mail-box"><a href="#建立-mail-box" class="headerlink" title="建立 mail box"></a>建立 mail box</h3><h4 id="動態記憶體管理"><a href="#動態記憶體管理" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mb_create</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -234,7 +232,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*name</code></th>
@@ -272,7 +270,7 @@
 <hr>
 <h4 id="靜態記憶體管理"><a href="#靜態記憶體管理" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mb_init</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -285,7 +283,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mb</code></th>
@@ -316,7 +314,7 @@
 <hr>
 <h3 id="刪除-mail-box"><a href="#刪除-mail-box" class="headerlink" title="刪除 mail box"></a>刪除 mail box</h3><h4 id="動態記憶體管理-1"><a href="#動態記憶體管理-1" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mb_delete</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -329,7 +327,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mb</code></th>
@@ -352,7 +350,7 @@
 <hr>
 <h4 id="靜態記憶體管理-1"><a href="#靜態記憶體管理-1" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mb_detach</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -365,7 +363,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mb</code></th>
@@ -388,7 +386,7 @@
 <hr>
 <h3 id="傳送郵件"><a href="#傳送郵件" class="headerlink" title="傳送郵件"></a>傳送郵件</h3><p><i class="fa fa-code"></i> Code: <code>rt_mb_send_wait</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -401,7 +399,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mb</code></th>
@@ -451,7 +449,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_mb_send</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -464,7 +462,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mb</code></th>
@@ -484,7 +482,7 @@
 <hr>
 <h3 id="接受郵件"><a href="#接受郵件" class="headerlink" title="接受郵件"></a>接受郵件</h3><p><i class="fa fa-code"></i> Code: <code>rt_mb_recv</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -497,7 +495,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mb</code></th>
@@ -550,7 +548,7 @@
 <hr>
 <h3 id="建立-message-queue"><a href="#建立-message-queue" class="headerlink" title="建立 message queue"></a>建立 message queue</h3><h4 id="動態記憶體管理-2"><a href="#動態記憶體管理-2" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mq_create</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -563,7 +561,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*name</code></th>
@@ -613,7 +611,7 @@
 <hr>
 <h4 id="靜態記憶體管理-2"><a href="#靜態記憶體管理-2" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mq_init</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -626,7 +624,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mq</code></th>
@@ -659,7 +657,7 @@
 <hr>
 <h3 id="刪除-message-queue"><a href="#刪除-message-queue" class="headerlink" title="刪除 message queue"></a>刪除 message queue</h3><h4 id="動態記憶體管理-3"><a href="#動態記憶體管理-3" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mq_delete</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -672,7 +670,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mq</code></th>
@@ -695,7 +693,7 @@
 <hr>
 <h4 id="靜態記憶體管理-3"><a href="#靜態記憶體管理-3" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mq_detach</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -708,7 +706,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mq</code></th>
@@ -726,7 +724,7 @@
 <hr>
 <h3 id="傳送訊息"><a href="#傳送訊息" class="headerlink" title="傳送訊息"></a>傳送訊息</h3><p><i class="fa fa-code"></i> Code: <code>rt_mq_send</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -739,7 +737,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mq</code></th>
@@ -796,7 +794,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_mq_urgent</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -809,7 +807,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mq</code></th>
@@ -846,7 +844,7 @@
 <hr>
 <h3 id="接收訊息"><a href="#接收訊息" class="headerlink" title="接收訊息"></a>接收訊息</h3><p><i class="fa fa-code"></i> Code: <code>rt_mq_recv</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -859,7 +857,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mq</code></th>

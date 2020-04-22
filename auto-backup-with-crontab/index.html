@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-12-26
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/Linux/">Linux</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -189,39 +199,26 @@
     <div class="container">
         <div class="row">
 
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/Linux/">Linux</a>
-
-                    
-                </div>
-            
-
             <!-- Gallery -->
             
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="shell-script"><a href="#shell-script" class="headerlink" title="shell script"></a>shell script</h2><p>透過 git 備份時，一定是使用下列指令</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">'log'</span></span><br><span class="line">git push</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add .</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">'log'</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>而使用 shell script 可以讓我們一次執行一大串指令，因此我們來寫一個 shell script</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/zsh</span></span><br><span class="line">nowTime=<span class="string">"<span class="variable">$(date +'%Y-%m-%d %H:%M:%S')</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# Using crontab with auto.sh"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# File in ~/Desktop/auto.sh"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# Log  in ~/Desktop/cront.log"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"#"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# Auto backup at <span class="variable">${nowTime}</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# --------------------------------------------------\n"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /Users/username</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Now at <span class="variable">$(pwd)</span>\n"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">log</span>=<span class="string">"auto backup at "</span><span class="variable">${nowTime}</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"<span class="variable">$log</span>"</span></span><br><span class="line">result=$(git push site hexo_source_new 2&gt;&amp;1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$result</span> <span class="keyword">in</span></span><br><span class="line">    <span class="string">"Everything up-to-date"</span>)</span><br><span class="line">        osascript -e <span class="string">'display notification "Everything up-to-date." with title "Automatically backup" sound name "basso"'</span></span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        osascript -e <span class="string">'display notification "Done!" with title "Automatically backup" sound name "hero"'</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">${result}</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Backup complete."</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/zsh</span></span><br><span class="line">nowTime="$(date +'%Y-%m-%d %H:%M:%S')"</span><br><span class="line">echo "# Using crontab with auto.sh"</span><br><span class="line">echo "# File in ~/Desktop/auto.sh"</span><br><span class="line">echo "# Log  in ~/Desktop/cront.log"</span><br><span class="line">echo "#"</span><br><span class="line">echo "# Auto backup at ${nowTime}"</span><br><span class="line">echo "# --------------------------------------------------\n"</span><br><span class="line"></span><br><span class="line">cd /Users/username</span><br><span class="line">cd $1</span><br><span class="line">echo "Now at $(pwd)\n"</span><br><span class="line"></span><br><span class="line">log="auto backup at "${nowTime}</span><br><span class="line">git add .</span><br><span class="line">git commit -m "$log"</span><br><span class="line">result=$(git push site hexo_source_new 2&gt;&amp;1)</span><br><span class="line"></span><br><span class="line">case $result in</span><br><span class="line">    "Everything up-to-date")</span><br><span class="line">        osascript -e 'display notification "Everything up-to-date." with title "Automatically backup" sound name "basso"'</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        osascript -e 'display notification "Done!" with title "Automatically backup" sound name "hero"'</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br><span class="line">echo ${result}</span><br><span class="line">echo "Backup complete."</span><br></pre></td></tr></tbody></table></figure>
 
 <p>其中我們為了方便整理，在提交的紀錄上增加了時間；並且在 push 完根據結果有不同的通知</p>
-<blockquote>
-<p>此通知是基於 mac 上的 applescript 所寫的，在 linux 上會產生錯誤</p>
-</blockquote>
+<div class="note danger"><p>此通知是基於 mac 上的 applescript 所寫的，在 linux 上會產生錯誤</p></div>
+
 <h2 id="建立-crontab"><a href="#建立-crontab" class="headerlink" title="建立 crontab"></a>建立 crontab</h2><p>寫好 script shell 後，再來就是要定時的執行它。使用 crontab 可以在指定的時間，或是固定的區間內執行。</p>
 <p>使用方式，輸入指令 <code>crontab -e</code>，接著會跳進 vim，寫入</p>
 <figure class="highlight vim"><table><tbody><tr><td class="code"><pre><span class="line">@hourly chmod +<span class="keyword">x</span> /Users/PATH_TO_YOUR.<span class="keyword">sh</span></span><br><span class="line">@hourly /Users/PATH_TO_YOUR.<span class="keyword">sh</span> PATH_TO_YOUR_SOURCE &gt;&gt; /Users/PATH_TO_YOUR.<span class="built_in">log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>這裡首先提升一次權限，並設定每一次整點都備份一次 <code>@hourly</code>，並將結果寫入 log 中。我們需要先建立一個 .log 檔：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">touch /Users/PATH_TO_YOUR.log</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch /Users/PATH_TO_YOUR.log</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>當然這裡的所有路徑因人而異，檔名也無所謂，最後 <code>:wq</code> 存檔退出，安裝完畢</p>
 <p><img src="https://i.imgur.com/w3qGjus.png" alt="" title="大功告成"></p>

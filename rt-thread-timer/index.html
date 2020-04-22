@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-11-20
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/RT-Thread/">RT-Thread</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/RT-Thread/">RT-Thread</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -233,7 +231,7 @@
 </ul>
 <h3 id="靜態記憶體管理"><a href="#靜態記憶體管理" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h3><p><i class="fa fa-code"></i> Code: <code>rt_timer_init</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -246,7 +244,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>timer</code></th>
@@ -267,7 +265,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*parameter</code></th>
@@ -294,7 +292,7 @@
 <hr>
 <h3 id="動態記憶體管理"><a href="#動態記憶體管理" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h3><p><i class="fa fa-code"></i> Code: <code>rt_timer_create</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -307,7 +305,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*name</code></th>
@@ -333,7 +331,7 @@
 <hr>
 <h2 id="刪除-timer"><a href="#刪除-timer" class="headerlink" title="刪除 timer"></a>刪除 timer</h2><h3 id="動態記憶體管理-1"><a href="#動態記憶體管理-1" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h3><p><i class="fa fa-code"></i> Code: <code>rt_timer_delete</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -346,7 +344,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>timer</code></th>
@@ -365,7 +363,7 @@
 <hr>
 <h3 id="靜態記憶體管理-1"><a href="#靜態記憶體管理-1" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h3><p><i class="fa fa-code"></i> Code: <code>rt_timer_detach</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -378,7 +376,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>timer</code></th>
@@ -396,7 +394,7 @@
 </ul>
 <hr>
 <h2 id="啟動、停止-timer"><a href="#啟動、停止-timer" class="headerlink" title="啟動、停止 timer"></a>啟動、停止 timer</h2><h3 id="Code-rt-timer-start"><a href="#Code-rt-timer-start" class="headerlink" title="Code: rt_timer_start"></a>Code: rt_timer_start</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -409,7 +407,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>timer</code></th>
@@ -444,7 +442,7 @@
 </ul>
 <hr>
 <h3 id="Code-rt-timer-stop"><a href="#Code-rt-timer-stop" class="headerlink" title="Code: rt_timer_stop"></a>Code: rt_timer_stop</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -457,7 +455,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>timer</code></th>
@@ -475,7 +473,7 @@
 <hr>
 <h2 id="控制-timer"><a href="#控制-timer" class="headerlink" title="控制 timer"></a>控制 timer</h2><p><i class="fa fa-code"></i> Code: <code>rt_timer_control</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -488,7 +486,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>timer</code></th>
@@ -525,7 +523,7 @@
 <hr>
 <h2 id="檢查-timer"><a href="#檢查-timer" class="headerlink" title="檢查 timer"></a>檢查 timer</h2><p><i class="fa fa-code"></i> Code: <code>rt_timer_check</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>

@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-08-14
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/XV6/">XV6</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/XV6/">XV6</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -267,7 +265,7 @@
 </ul>
 <h3 id="sched"><a href="#sched" class="headerlink" title="sched"></a>sched</h3><p><i class="fa fa-code"></i> Code: <code>sched</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -286,7 +284,7 @@
 </ul>
 <h3 id="scheduler"><a href="#scheduler" class="headerlink" title="scheduler"></a>scheduler</h3><p><i class="fa fa-code"></i> Code: <code>scheduler</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -310,7 +308,7 @@
 </ul>
 <h3 id="mycpu"><a href="#mycpu" class="headerlink" title="mycpu"></a>mycpu</h3><p><i class="fa fa-code"></i> Code: <code>mycpu</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -328,7 +326,7 @@
 <li><code>myproc</code> 呼叫 <code>mycpu</code>，從正確的 CPU 上尋找當前的 process。<br><i class="fa fa-code"></i> Code: <code>myproc</code></li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -379,7 +377,7 @@
 
 <hr>
 <h2 id="Code-睡眠與喚醒"><a href="#Code-睡眠與喚醒" class="headerlink" title="Code: 睡眠與喚醒"></a>Code: 睡眠與喚醒</h2><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>副程式</th>
@@ -396,7 +394,7 @@
 </tr>
 </tbody></table>
 </div><h3 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -409,7 +407,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*chan</code></th>
@@ -440,7 +438,7 @@
 
 <hr>
 <h3 id="wakeup1"><a href="#wakeup1" class="headerlink" title="wakeup1"></a>wakeup1</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -453,7 +451,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*chan</code></th>
@@ -467,7 +465,7 @@
 
 <hr>
 <h3 id="wakeup"><a href="#wakeup" class="headerlink" title="wakeup"></a>wakeup</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -480,7 +478,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*chan</code></th>
@@ -508,7 +506,7 @@
 
 <hr>
 <h3 id="pipewrite"><a href="#pipewrite" class="headerlink" title="pipewrite"></a>pipewrite</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -521,7 +519,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*p</code></th>
@@ -543,7 +541,7 @@
 </ul>
 <hr>
 <h3 id="piperead"><a href="#piperead" class="headerlink" title="piperead"></a>piperead</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -556,7 +554,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*p</code></th>
@@ -580,7 +578,7 @@
 </ul>
 <hr>
 <h2 id="Code-Wait-exit-and-kill"><a href="#Code-Wait-exit-and-kill" class="headerlink" title="Code: Wait, exit and kill"></a>Code: Wait, exit and kill</h2><h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -601,7 +599,7 @@
 </ul>
 <hr>
 <h3 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -621,7 +619,7 @@
 </ul>
 <hr>
 <h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -634,7 +632,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>pid</code></th>

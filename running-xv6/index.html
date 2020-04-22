@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-08-27
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/XV6/">XV6</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/XV6/">XV6</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -240,7 +238,7 @@
 <li>GCC</li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>-nostdinc</code></th>
@@ -258,7 +256,7 @@
 <li>LD</li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>-N</code></th>
@@ -278,7 +276,7 @@
 <li>OBJDUMP</li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>-S</code></th>
@@ -292,7 +290,7 @@
 <li>OBJCOPY</li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>-S</code></th>
@@ -328,7 +326,7 @@
 <figure class="highlight makefile"><table><tbody><tr><td class="code"><pre><span class="line">ULIB = ulib.o usys.o printf.o umalloc.o</span><br><span class="line"></span><br><span class="line"><span class="section">_%: %.o <span class="variable">$(ULIB)</span></span></span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LDFLAGS)</span> -N -e main -Ttext 0 -o <span class="variable">$@</span> <span class="variable">$^</span></span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -S <span class="variable">$@</span> &gt; <span class="variable">$*</span>.asm</span><br><span class="line">	<span class="variable">$(OBJDUMP)</span> -t <span class="variable">$@</span> | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' &gt; <span class="variable">$*</span>.sym</span><br></pre></td></tr></tbody></table></figure>
 
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>特殊符號</th>

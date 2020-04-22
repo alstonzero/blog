@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-08-27
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/XV6/">XV6</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/XV6/">XV6</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -216,7 +214,7 @@
 <li>在 main 初始化一些設備後，會先呼叫 startothers，再呼叫 mpmain 來完成 cpu 的設定及呼叫 scheduler。</li>
 </ul>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -250,7 +248,7 @@
 <li>在 <code>mpmain()</code> 會將 <code>cpu-&gt;started</code> 設為 <code>1</code>，CPU0 在 <code>while</code> 迴圈等待 CPU <code>c</code> 啟動完畢，才繼續啟動下一個 CPU。</li>
 </ul>
 <h3 id="lapicstartup"><a href="#lapicstartup" class="headerlink" title="lapicstartup"></a>lapicstartup</h3><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -263,7 +261,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>apicid</code></th>
@@ -280,7 +278,7 @@
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>mpenter</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -297,7 +295,7 @@
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>mpmain</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>

@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2020-04-10
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/C語言/">C語言</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/C語言/">C語言</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -232,7 +230,7 @@
 <li>因此，元素 1 的大小就被我們縮至 1 位，依此類推</li>
 </ol>
 <hr>
-<p>有了上述的<em>工具</em>，就可以建立一個好用而且好理解的位元操作方法！</p>
+<p>有了上述的<span class="label info">工具</span>就可以建立一個好用而且好理解的位元操作方法！</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5to7 : <span class="number">3</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>建立好上面這個 union 後，如果要將某一個整數的第 3 到 4 位 的值改掉，可以這樣寫</p>
@@ -246,14 +244,11 @@
 <h4 id="更小"><a href="#更小" class="headerlink" title="更小"></a>更小</h4><p>如果 <code>bits</code> 結構今天小於 8 位，這麼做完全不會有任何問題，但習慣上，我們會把它補齊，像是我們在 <a href="/c-attribute">attribute</a> 篇裡提到的 padding。</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5and6 : <span class="number">2</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>沒有定義第 7 位</p>
-</blockquote>
+<div class="note info"><p>沒有定義第 7 位</p></div>
+
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5and6 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> notused : <span class="number">1</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>隨便取名，只要有定義就好</p>
-</blockquote>
+<div class="note info"><p>隨便取名，只要有定義就好</p></div>
 <div id="footnotes"><hr class="clearfix"><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://michaelchen.tech/c-programming/union/" target="_blank" rel="noopener">[C 語言] 程式設計教學：如何使用聯合 (Union)</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%AE%B5" target="_blank" rel="noopener">位元欄</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

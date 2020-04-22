@@ -88,6 +88,8 @@
     <link rel="icon" href="/img/favicon.png">
     
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
@@ -178,6 +180,14 @@
                             2018-11-26
                         
                     </span>
+                    <span class="meta meta-right">
+                        
+                            
+
+<a href="/categories/RT-Thread/">RT-Thread</a>
+
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -188,18 +198,6 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-categories">
-                    
-                        
-
-<a href="/categories/RT-Thread/">RT-Thread</a>
-
-                    
-                </div>
-            
 
             <!-- Gallery -->
             
@@ -227,7 +225,7 @@
 <hr>
 <h3 id="進入-scheuler-鎖"><a href="#進入-scheuler-鎖" class="headerlink" title="進入 scheuler 鎖"></a>進入 scheuler 鎖</h3><p><i class="fa fa-code"></i> Code: <code>rt_enter_critical</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -247,7 +245,7 @@
 <hr>
 <h3 id="離開-scheduler-鎖"><a href="#離開-scheduler-鎖" class="headerlink" title="離開 scheduler 鎖"></a>離開 scheduler 鎖</h3><p><i class="fa fa-code"></i> Code: <code>rt_exit_critical</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -272,7 +270,7 @@
 <hr>
 <p><i class="fa fa-code"></i> Code: <code>rt_critical_level</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -303,7 +301,7 @@
 <hr>
 <h3 id="建立-semaphore"><a href="#建立-semaphore" class="headerlink" title="建立 semaphore"></a>建立 semaphore</h3><h4 id="動態記憶體管理"><a href="#動態記憶體管理" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_create</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -316,7 +314,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*name</code></th>
@@ -338,7 +336,7 @@
 <hr>
 <h4 id="靜態記憶體管理"><a href="#靜態記憶體管理" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_init</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -351,7 +349,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>sem</code></th>
@@ -378,7 +376,7 @@
 <hr>
 <h3 id="刪除-semaphore"><a href="#刪除-semaphore" class="headerlink" title="刪除 semaphore"></a>刪除 semaphore</h3><h4 id="動態記憶體管理-1"><a href="#動態記憶體管理-1" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_delete</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -391,7 +389,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>sem</code></th>
@@ -410,7 +408,7 @@
 <hr>
 <h4 id="靜態記憶體管理-1"><a href="#靜態記憶體管理-1" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_sem_detach</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -423,7 +421,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>sem</code></th>
@@ -444,7 +442,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_sem_take</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -457,7 +455,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>sem</code></th>
@@ -507,7 +505,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_sem_trytake</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -520,7 +518,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>sem</code></th>
@@ -538,7 +536,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_sem_release</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -551,7 +549,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>sem</code></th>
@@ -594,7 +592,7 @@
 <hr>
 <h3 id="建立-mutex"><a href="#建立-mutex" class="headerlink" title="建立 mutex"></a>建立 mutex</h3><h4 id="動態記憶體管理-2"><a href="#動態記憶體管理-2" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_create</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -607,7 +605,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*name</code></th>
@@ -637,7 +635,7 @@
 <hr>
 <h4 id="靜態記憶體管理-2"><a href="#靜態記憶體管理-2" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_init</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -650,7 +648,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mutex</code></th>
@@ -672,7 +670,7 @@
 <hr>
 <h3 id="刪除-mutex"><a href="#刪除-mutex" class="headerlink" title="刪除 mutex"></a>刪除 mutex</h3><h4 id="動態記憶體管理-3"><a href="#動態記憶體管理-3" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_delete</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -685,7 +683,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mutex</code></th>
@@ -703,7 +701,7 @@
 <hr>
 <h4 id="靜態記憶體管理-3"><a href="#靜態記憶體管理-3" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_mutex_detach</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -716,7 +714,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mutex</code></th>
@@ -737,7 +735,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_mutex_take</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -750,7 +748,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mutex</code></th>
@@ -812,7 +810,7 @@
 </ul>
 <p><i class="fa fa-code"></i> Code: <code>rt_mutex_release</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -825,7 +823,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>mutex</code></th>
@@ -894,7 +892,7 @@
 <hr>
 <h3 id="建立事件"><a href="#建立事件" class="headerlink" title="建立事件"></a>建立事件</h3><h4 id="動態記憶體管理-4"><a href="#動態記憶體管理-4" class="headerlink" title="動態記憶體管理"></a>動態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_create</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -907,7 +905,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>*name</code></th>
@@ -927,7 +925,7 @@
 <hr>
 <h4 id="靜態記憶體管理-4"><a href="#靜態記憶體管理-4" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_init</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -940,7 +938,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>event</code></th>
@@ -962,7 +960,7 @@
 <hr>
 <h3 id="刪除事件"><a href="#刪除事件" class="headerlink" title="刪除事件"></a>刪除事件</h3><h4 id="靜態記憶體管理-5"><a href="#靜態記憶體管理-5" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_delete</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -975,7 +973,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>event</code></th>
@@ -993,7 +991,7 @@
 <hr>
 <h4 id="靜態記憶體管理-6"><a href="#靜態記憶體管理-6" class="headerlink" title="靜態記憶體管理"></a>靜態記憶體管理</h4><p><i class="fa fa-code"></i> Code: <code>rt_event_detach</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -1006,7 +1004,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>event</code></th>
@@ -1024,7 +1022,7 @@
 <hr>
 <h3 id="傳遞事件"><a href="#傳遞事件" class="headerlink" title="傳遞事件"></a>傳遞事件</h3><p><i class="fa fa-code"></i> Code: <code>rt_event_send</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -1037,7 +1035,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>event</code></th>
@@ -1093,7 +1091,7 @@
 <hr>
 <h3 id="接收事件"><a href="#接收事件" class="headerlink" title="接收事件"></a>接收事件</h3><p><i class="fa fa-code"></i> Code: <code>rt_event_recv</code></p>
 <div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
@@ -1106,7 +1104,7 @@
 </tr>
 </tbody></table>
 </div><div class="table-responsive">
-<table class="table">
+<table class="table table-bordered">
 <thead>
 <tr>
 <th><code>event</code></th>

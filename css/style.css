@@ -530,6 +530,7 @@ figure.highlight table .line {
 figure.highlight table .line.marked {
   background: #d6d6d6;
 }
+pre .meta,
 pre .comment,
 pre .template_comment,
 pre .diff .header,
@@ -598,6 +599,133 @@ pre .clojure .title {
 pre .deletion {
   color: #dc322f;
 }
+.note {
+  position: relative;
+  padding: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: initial;
+  border-left: 3px solid #eee;
+  background-color: #f9f9f9;
+  border-radius: 3px;
+}
+.note h2,
+.note h3,
+.note h4,
+.note h5,
+.note h6 {
+  margin-bottom: 0;
+  border-bottom: initial;
+  padding-top: 0 !important;
+}
+.note p:first-child,
+.note ul:first-child,
+.note ol:first-child,
+.note table:first-child,
+.note pre:first-child,
+.note blockquote:first-child {
+  margin-top: 0;
+}
+.note p:last-child,
+.note ul:last-child,
+.note ol:last-child,
+.note table:last-child,
+.note pre:last-child,
+.note blockquote:last-child {
+  margin-bottom: 0;
+}
+.note.default {
+  background-color: #f7f7f7;
+  border-left-color: #777;
+}
+.note.default h2,
+.note.default h3,
+.note.default h4,
+.note.default h5,
+.note.default h6 {
+  color: #777;
+}
+.note.primary {
+  background-color: #f5f0fa;
+  border-left-color: #6f42c1;
+}
+.note.primary h2,
+.note.primary h3,
+.note.primary h4,
+.note.primary h5,
+.note.primary h6 {
+  color: #6f42c1;
+}
+.note.info {
+  background-color: #eef7fa;
+  border-left-color: #428bca;
+}
+.note.info h2,
+.note.info h3,
+.note.info h4,
+.note.info h5,
+.note.info h6 {
+  color: #428bca;
+}
+.note.success {
+  background-color: #eff8f0;
+  border-left-color: #5cb85c;
+}
+.note.success h2,
+.note.success h3,
+.note.success h4,
+.note.success h5,
+.note.success h6 {
+  color: #5cb85c;
+}
+.note.warning {
+  background-color: #fdf8ea;
+  border-left-color: #f0ad4e;
+}
+.note.warning h2,
+.note.warning h3,
+.note.warning h4,
+.note.warning h5,
+.note.warning h6 {
+  color: #f0ad4e;
+}
+.note.danger {
+  background-color: #fcf1f2;
+  border-left-color: #d9534f;
+}
+.note.danger h2,
+.note.danger h3,
+.note.danger h4,
+.note.danger h5,
+.note.danger h6 {
+  color: #d9534f;
+}
+.label {
+  display: inline;
+  padding: 0 5px;
+  white-space: nowrap;
+  font-size: 100%;
+  color: inherit;
+  font-weight: normal;
+}
+.label.default {
+  background-color: #f0f0f0;
+}
+.label.primary {
+  background-color: #efe6f7;
+}
+.label.info {
+  background-color: #e5f2f8;
+}
+.label.success {
+  background-color: #e7f4e9;
+}
+.label.warning {
+  background-color: #fcf6e1;
+}
+.label.danger {
+  background-color: #fae8eb;
+}
 article .container .row blockquote {
   font-size: 1em;
   padding-bottom: 0px;
@@ -606,8 +734,20 @@ article .container .row blockquote {
 .table-responsive {
   margin-top: 15px;
 }
+.table-responsive table.table {
+  width: unset;
+}
+code {
+  font-size: 85%;
+}
 figure.highlight {
+  padding: 16px;
   margin-bottom: 15px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  border: 0;
+  overflow-x: auto;
+  position: unset;
 }
 figure.highlight figcaption {
   font-weight: 800;
@@ -616,8 +756,18 @@ figure.highlight figcaption {
 figure.highlight table {
   width: unset;
 }
+figure.highlight table .gutter {
+  padding-right: 8px;
+  border-right: 3px solid #6ce26c !important;
+}
+figure.highlight table .gutter .line {
+  color: #afafaf !important;
+}
 figure.highlight.line_number .code {
   padding-left: 15px;
+}
+figure.highlight pre {
+  font-size: 85%;
 }
 .navbar-custom {
   background: transparent;
@@ -654,10 +804,72 @@ figure.highlight.line_number .code {
 .tag-category-item a {
   margin: 0.5rem;
 }
-article h2:before,
-article h3:before,
-article h4:before,
-article h5:before {
+article h2 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3em;
+}
+article hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e7e7e7;
+  border: 0;
+  border-radius: 0.25em;
+}
+h2:before,
+h3:before,
+h4:before,
+h5:before {
   content: '# ';
   color: #ddd;
+}
+.intro-header .post-heading .meta {
+  display: inline;
+}
+.meta-right {
+  float: right;
+}
+article .container .row blockquote {
+  position: relative;
+  padding: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border: initial;
+  border-left: 3px solid #eee;
+  background-color: #f9f9f9;
+  border-radius: 3px;
+  background-color: #f7f7f7;
+  border-left-color: #777;
+}
+article .container .row blockquote h2,
+article .container .row blockquote h3,
+article .container .row blockquote h4,
+article .container .row blockquote h5,
+article .container .row blockquote h6 {
+  margin-bottom: 0;
+  border-bottom: initial;
+  padding-top: 0 !important;
+}
+article .container .row blockquote p:first-child,
+article .container .row blockquote ul:first-child,
+article .container .row blockquote ol:first-child,
+article .container .row blockquote table:first-child,
+article .container .row blockquote pre:first-child,
+article .container .row blockquote blockquote:first-child {
+  margin-top: 0;
+}
+article .container .row blockquote p:last-child,
+article .container .row blockquote ul:last-child,
+article .container .row blockquote ol:last-child,
+article .container .row blockquote table:last-child,
+article .container .row blockquote pre:last-child,
+article .container .row blockquote blockquote:last-child {
+  margin-bottom: 0;
+}
+article .container .row blockquote h2,
+article .container .row blockquote h3,
+article .container .row blockquote h4,
+article .container .row blockquote h5,
+article .container .row blockquote h6 {
+  color: #777;
 }
