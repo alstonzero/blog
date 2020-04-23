@@ -98,7 +98,7 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -237,7 +237,7 @@
 <td align="left">刪除此行，並進入編輯模式</td>
 </tr>
 <tr>
-<td align="center"><code>ESC</code></td>
+<td align="center"><span class="label label-default">ESC</span></td>
 <td align="left">退出編輯模式</td>
 </tr>
 </tbody></table>
@@ -303,11 +303,11 @@
 <td align="left">移至該行的最後</td>
 </tr>
 <tr>
-<td align="center"><code>n</code> <code>Space</code></td>
+<td align="center"><code>n</code> <span class="label label-default">Space</span></td>
 <td align="left">向右移 <code>n</code> 個字元</td>
 </tr>
 <tr>
-<td align="center"><code>n</code> <code>Enter</code></td>
+<td align="center"><code>n</code> <span class="label label-default">Enter</span></td>
 <td align="left">向下移 <code>n</code> 行</td>
 </tr>
 </tbody></table>
@@ -328,7 +328,7 @@
 <td align="left">開始行標記</td>
 </tr>
 <tr>
-<td align="center">v <code>Ctrl</code> v</td>
+<td align="center">v <span class="label label-default">CTRL</span> v</td>
 <td align="left">開始區塊標記</td>
 </tr>
 <tr>
@@ -368,7 +368,7 @@
 <td align="left">在上一行貼上複製或刪除的內容</td>
 </tr>
 <tr>
-<td align="center"><code>Ctrl</code> R 0</td>
+<td align="center"><span class="label label-default">CTRL</span> R 0</td>
 <td align="left">於編輯模式中，在下一行貼上複製或刪除的內容</td>
 </tr>
 </tbody></table>
@@ -521,18 +521,19 @@
 <li><code>:w !sudo tee %</code>：當要存檔的時候需要權限，可以用此指令來提升。</li>
 <li><code>"+y</code>：將選取的內容複製到 + 暫存器（剪貼簿)，方便在其他程式中貼上。<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？](https://www.zhihu.com/question/19863631)">[2]</span></a></sup></li>
 </ul>
-<blockquote>
-<p>vim 在複製、刪除時，會把資料放在預設暫存器中，有 0-9A-Za-z+” 這些暫存器可選擇，其中：</p>
-</blockquote>
+<div class="alert alert-info"><p>vim 在複製、刪除時，會把資料放在預設暫存器中，有 0-9A-Za-z+” 這些暫存器可選擇，其中：</p>
 <ul>
 <li>0-9：vim 會用到 0-9，0 存放最近一次的資料</li>
 <li>“：預設暫存器</li>
 <li>+：剪貼簿暫存器</li>
 </ul>
-<p>因此將資料放進 + 暫存器等同於將資料放進剪貼簿。</p>
+<p>因此將資料放進 + 暫存器等同於將資料放進剪貼簿。</p></div>
+
+
+
 <hr>
 <h2 id="vim-rc-設定檔"><a href="#vim-rc-設定檔" class="headerlink" title="vim.rc 設定檔"></a>vim.rc 設定檔</h2><p>記錄我目前的設定檔。</p>
-<figure class="highlight vim"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span></span><br><span class="line"><span class="keyword">set</span> incsearch</span><br><span class="line"><span class="keyword">set</span> smartindent</span><br><span class="line"><span class="keyword">set</span> cursorline</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">inoremap</span> ( ()<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> [ []<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> <span class="string">' '</span><span class="string">'&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap " ""&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap {&lt;CR&gt; {&lt;CR&gt;}&lt;Esc&gt;ko</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight vim line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span></span><br><span class="line"><span class="keyword">set</span> incsearch</span><br><span class="line"><span class="keyword">set</span> smartindent</span><br><span class="line"><span class="keyword">set</span> cursorline</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">inoremap</span> ( ()<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> [ []<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> <span class="string">' '</span><span class="string">'&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap " ""&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap {&lt;CR&gt; {&lt;CR&gt;}&lt;Esc&gt;ko</span></span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><code>set nu</code></li>
@@ -596,6 +597,13 @@
     </div>
 </article> 
 
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
 
 
 
@@ -603,7 +611,7 @@
     <hr />
 
 <!-- Footer -->
-<footer>
+<footer id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -673,8 +681,6 @@
                         </li>
                     
                 </ul>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>

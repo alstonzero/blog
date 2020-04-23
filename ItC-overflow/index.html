@@ -98,7 +98,7 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -216,16 +216,14 @@
 <li>下溢位 underflow：表示為0。</li>
 </ul>
 <p>$$<br>\begin{equation}\begin{split}<br>4412 &amp; \times 10^{-9}\\<br>\times \ 1000 &amp; \times 10^{-8}\\<br>= 4412000 &amp; \times 10^{-17}\\<br>= 4412 &amp; \times 10^{-14}\\<br>\end{split}\end{equation}<br>$$ </p>
-<blockquote>
-<p>太小了無法表示</p>
-</blockquote>
+<div class="alert alert-warning"><p>太小了無法表示</p></div>
+
 <ul>
-<li>上溢位 overflow：以最大值表示</li>
+<li>上溢位 overflow：以最大值表示\</li>
 </ul>
 <p>$$<br>\begin{equation}\begin{split}<br>4412 &amp; \times 10^9\\<br>\times \ 1000 &amp; \times 10^8\\<br>= 4412000 &amp; \times 10^{17}\\<br>= 4412 &amp; \times 10^{20}\\<br>\end{split}\end{equation}<br>$$</p>
-<blockquote>
-<p>太大了無法表示<br>表示為 $9999 \times 10^9$</p>
-</blockquote>
+<div class="alert alert-warning"><p>太大了無法表示<br>表示為 $9999 \times 10^9$</p></div>
+
 <ul>
 <li>相消錯誤</li>
 </ul>
@@ -318,6 +316,13 @@
     </div>
 </article> 
 
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
 
 <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
@@ -332,7 +337,7 @@
     <hr />
 
 <!-- Footer -->
-<footer>
+<footer id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -402,8 +407,6 @@
                         </li>
                     
                 </ul>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>

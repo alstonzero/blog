@@ -98,7 +98,7 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -204,8 +204,9 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有分三種： ① 對副函式的　② 對資料的　③ 對結構的</p>
-<p><i class="fa fa-bell"></i> 註：<strong>attribute</strong> 是給 compiler 看的。</p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有分三種： <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/0031-20e3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/0031-20e3.png?v8">1⃣</span> 對副函式的 <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/0032-20e3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/0032-20e3.png?v8">2⃣</span> 對資料的　<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/0033-20e3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/0033-20e3.png?v8">3⃣</span> 對結構的</p>
+<div class="alert alert-warning"><p><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f514.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f514.png?v8">🔔</span> 註：<strong>attribute</strong> 是給 compiler 看的。</p></div>
+
 <h2 id="對結構的"><a href="#對結構的" class="headerlink" title="對結構的"></a>對結構的</h2><h3 id="packed"><a href="#packed" class="headerlink" title="packed"></a>packed</h3><p>C語言在宣告結構的時候，會對裡面的元素作對齊，給個例子：</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sample</span> {</span></span><br><span class="line">    <span class="keyword">int</span>  memberA;</span><br><span class="line">    <span class="keyword">char</span> memberB[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span>  memberC;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
@@ -319,6 +320,13 @@
     </div>
 </article> 
 
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
 
 
 
@@ -326,7 +334,7 @@
     <hr />
 
 <!-- Footer -->
-<footer>
+<footer id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -396,8 +404,6 @@
                         </li>
                     
                 </ul>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>

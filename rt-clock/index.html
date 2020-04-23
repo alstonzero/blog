@@ -98,7 +98,7 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -204,13 +204,10 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>File: clock.c</p>
-</blockquote>
-<h2 id="取得當前-tick"><a href="#取得當前-tick" class="headerlink" title="取得當前 tick"></a>取得當前 tick</h2><blockquote>
-<p>即回傳全域變數 <code>rt_tick</code> 值</p>
-</blockquote>
-<p><i class="fa fa-code"></i> Code: <code>rt_tick_get</code></p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div class="alert alert-success"><p><strong>File:</strong> clock.c</p></div>
+
+<h2 id="取得當前-tick"><a href="#取得當前-tick" class="headerlink" title="取得當前 tick"></a>取得當前 tick</h2><div class="alert alert-default"><p>即回傳全域變數 <code>rt_tick</code> 值</p></div>
+
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -224,44 +221,33 @@
 <td>tick 值</td>
 </tr>
 </tbody></table>
-</div><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will return current tick from operating system startup</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">rt_tick_t</span> rt_tick_get(<span class="keyword">void</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">/* return the global tick */</span></span><br><span class="line">    <span class="keyword">return</span> rt_tick;</span><br><span class="line">}</span><br><span class="line">RTM_EXPORT(rt_tick_get);</span><br></pre></td></tr></tbody></table></figure>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will return current tick from operating system startup</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">rt_tick_t</span> rt_tick_get(<span class="keyword">void</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">/* return the global tick */</span></span><br><span class="line">    <span class="keyword">return</span> rt_tick;</span><br><span class="line">}</span><br><span class="line">RTM_EXPORT(rt_tick_get);</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="設定當前-tick"><a href="#設定當前-tick" class="headerlink" title="設定當前 tick"></a>設定當前 tick</h2><p><i class="fa fa-code"></i> Code: <code>rt_tick_set</code></p>
-<div class="table-responsive">
+<h2 id="設定當前-tick"><a href="#設定當前-tick" class="headerlink" title="設定當前 tick"></a>設定當前 tick</h2><div class="table-responsive">
 <table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
 <th>回傳值</th>
+<th><code>tick</code></th>
 </tr>
 </thead>
 <tbody><tr>
 <td>修改 system tick</td>
 <td>void</td>
-</tr>
-</tbody></table>
-</div><div class="table-responsive">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th><code>tick</code></th>
-</tr>
-</thead>
-<tbody><tr>
 <td>欲修改的結果</td>
 </tr>
 </tbody></table>
 </div><ul>
 <li>由於需要修改全域變數，因此這裡需要將中斷關閉進入 critical region</li>
 </ul>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will set current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_set</span><span class="params">(<span class="keyword">rt_tick_t</span> tick)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">rt_base_t</span> level;</span><br><span class="line"></span><br><span class="line">    level = rt_hw_interrupt_disable();</span><br><span class="line">    rt_tick = tick;</span><br><span class="line">    rt_hw_interrupt_enable(level);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will set current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_set</span><span class="params">(<span class="keyword">rt_tick_t</span> tick)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">rt_base_t</span> level;</span><br><span class="line"></span><br><span class="line">    level = rt_hw_interrupt_disable();</span><br><span class="line">    rt_tick = tick;</span><br><span class="line">    rt_hw_interrupt_enable(level);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h2 id="增加-tick"><a href="#增加-tick" class="headerlink" title="增加 tick"></a>增加 tick</h2><ul>
 <li>增加 tick 是由 ISR 所執行的動作，因此修改 <code>rt_tick</code> 值不需進入 critical region</li>
 <li>由於增加 tick 需要發出中斷，所以所有的 ISR 都不可以佔用太多時間（如果執行超過一個 tick 的時間，clock ISR 就無法在正確的時間發生中斷，時間就會不準）</li>
 </ul>
-<p><i class="fa fa-code"></i> Code: <code>rt_tick_increase</code></p>
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -275,7 +261,7 @@
 <td>void</td>
 </tr>
 </tbody></table>
-</div><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will notify kernel there is one tick passed. Normally,</span></span><br><span class="line"><span class="comment"> * this function is invoked by clock ISR.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_increase</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">thread</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* increase the global tick */</span></span><br><span class="line">    ++ rt_tick;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check time slice */</span></span><br><span class="line">    thread = rt_thread_self();</span><br><span class="line"></span><br><span class="line">    -- thread-&gt;remaining_tick;</span><br><span class="line">    <span class="keyword">if</span> (thread-&gt;remaining_tick == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">/* change to initialized tick */</span></span><br><span class="line">        thread-&gt;remaining_tick = thread-&gt;init_tick;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* yield */</span></span><br><span class="line">        rt_thread_yield();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check timer */</span></span><br><span class="line">    rt_timer_check();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will notify kernel there is one tick passed. Normally,</span></span><br><span class="line"><span class="comment"> * this function is invoked by clock ISR.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_increase</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">thread</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* increase the global tick */</span></span><br><span class="line">    ++ rt_tick;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check time slice */</span></span><br><span class="line">    thread = rt_thread_self();</span><br><span class="line"></span><br><span class="line">    -- thread-&gt;remaining_tick;</span><br><span class="line">    <span class="keyword">if</span> (thread-&gt;remaining_tick == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">/* change to initialized tick */</span></span><br><span class="line">        thread-&gt;remaining_tick = thread-&gt;init_tick;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* yield */</span></span><br><span class="line">        rt_thread_yield();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check timer */</span></span><br><span class="line">    rt_timer_check();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>在增加 <code>rt_tick</code> 值的同時，也減少當前 thread 的剩餘 tick 值；當減至 0 時，重設剩餘 tick 並讓出處理器。</li>
@@ -340,6 +326,13 @@
     </div>
 </article> 
 
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
 
 
 
@@ -347,7 +340,7 @@
     <hr />
 
 <!-- Footer -->
-<footer>
+<footer id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -417,8 +410,6 @@
                         </li>
                     
                 </ul>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>

@@ -98,7 +98,6 @@ figure.highlight table .line {
 figure.highlight table .line.marked {
   background: #d6d6d6;
 }
-pre .meta,
 pre .comment,
 pre .template_comment,
 pre .diff .header,
@@ -129,6 +128,7 @@ pre .regexp,
 pre .hexcolor {
   color: #2aa198;
 }
+pre .meta-keyword,
 pre .title,
 pre .localvars,
 pre .chunk,
@@ -166,4 +166,7 @@ pre .clojure .title {
 }
 pre .deletion {
   color: #dc322f;
+}
+pre .meta {
+  color: #905;
 }

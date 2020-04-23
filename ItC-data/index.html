@@ -98,7 +98,7 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -224,46 +224,46 @@
 <h2 id="位置表示法"><a href="#位置表示法" class="headerlink" title="位置表示法"></a>位置表示法</h2><blockquote>
 <p>基底 base：由 0 開始，等於基底時進位。</p>
 </blockquote>
-<h3 id="位置表示法-positional-notation"><a href="#位置表示法-positional-notation" class="headerlink" title="位置表示法 positional notation"></a>位置表示法 positional notation</h3><p>base R，位元數為 n，di →第 i 個位元，則公式為：<br><br>$${d_nR^{n-1}+d_{n-1}R^{n-2}+···+d_2R+d_1}$$</p>
+<h3 id="位置表示法-positional-notation"><a href="#位置表示法-positional-notation" class="headerlink" title="位置表示法 positional notation"></a>位置表示法 positional notation</h3><p>base R，位元數為 n，di →第 i 個位元，則公式為：<br>$${d_nR^{n-1}+d_{n-1}R^{n-2}+···+d_2R+d_1}$$</p>
 <h3 id="二進位與八進位"><a href="#二進位與八進位" class="headerlink" title="二進位與八進位"></a>二進位與八進位</h3><ul>
-<li>只要分別知道各個位元在另外一個進制的表示法，合起來即是其數值在另一個進制的表示法。<br></li>
-<li>如：754(base 8)中 7(111)、5(101)、4(100)，則 111101100(base 2) == 754(base 8)。<br></li>
-<li>每一個儲存單元稱為二進制數元 binary digit，或簡稱位元 bit。<br></li>
+<li>只要分別知道各個位元在另外一個進制的表示法，合起來即是其數值在另一個進制的表示法。</li>
+<li>如：754(base 8)中 7(111)、5(101)、4(100)，則 111101100(base 2) == 754(base 8)。</li>
+<li>每一個儲存單元稱為二進制數元 binary digit，或簡稱位元 bit。</li>
 <li>8 個 bit 組合成位元組 bytes，bytes 組合成字組 words。</li>
 </ul>
 <h3 id="二進製表示法"><a href="#二進製表示法" class="headerlink" title="二進製表示法"></a>二進製表示法</h3><p>一個位元可表示兩件事（ 0 或是 1 ），如：會下雨、不會下雨；當需要表示超過兩件事時，就需要多重位元，兩個位元可表示四件事（ 00, 01, 10, 11 ）… 以此類推。</p>
 <hr>
 <h2 id="數字資料的表示"><a href="#數字資料的表示" class="headerlink" title="數字資料的表示"></a>數字資料的表示</h2><h3 id="負數的表示"><a href="#負數的表示" class="headerlink" title="負數的表示"></a>負數的表示</h3><ol>
-<li>帶號 — 數量表示法 singed-magintude representation<br><br>即日常身活中，常常使用的表示法；概念為，負數在 0 的左邊，正數在 0 的右邊；表示為，將符號（+,−）放在數字的前面，通常正號省略，即：5、-1、10、0 (忽略 -0）……<ul>
+<li>帶號 — 數量表示法 singed-magintude representation<br>即日常身活中，常常使用的表示法；概念為，負數在 0 的左邊，正數在 0 的右邊；表示為，將符號（+,−）放在數字的前面，通常正號省略，即：5、-1、10、0 (忽略 -0）……<ul>
 <li>計算方法：加法為：將前數往右移後數的數量，若為負數則往左；減法為：將前數往左移後數的數量，若為負數則往右。</li>
 </ul>
 </li>
-<li>固定大小數字表示法<br><br>如果我們固定數字總量的位元數，則我們有以下的表示法。<ol>
-<li>十的補數 ten’s complement<br>假設固定位元數 == 2，則我們可以用 0<del>49 來表示 0</del>49 的正值，用 50<del>99 來表示 -50</del>-1，則無論加減法都用表示值做運算即可，如：-2+1 可寫成 98+1 = 99，即 -1。<ul>
+<li>固定大小數字表示法<br>如果我們固定數字總量的位元數，則我們有以下的表示法。<ol>
+<li>十的補數 ten’s complement<br>假設固定位元數 == 2，則我們可以用 $0 \sim 49$ 來表示 $0 \sim 49$ 的正值，用 $50 \sim 99$ 來表示 $-50 \sim -1$ ，則無論加減法都用表示值做運算即可，如：$-2+1$ 可寫成 $98+1 = 99$，即 $-1$。<ul>
 <li>公式：負數 $I = 10^k − I$，其中 k 為數元的數目。</li>
 </ul>
 </li>
 <li>二的補數<br>假定數元數 == 8，則一個二進位的數，最左邊的值代表著符號，1 為負、0 為正，例如：00000010 為 10 進位的 2，11111110 為10 進位的 -2。<ul>
 <li>公式：負數 $I = 2^k − I$，其中 k 為數元的數目。</li>
-<li>計算：如何計算一個負數 I 利用二的補數求得的二進位值，則有以下步驟：<br><br>將負數 I 取絕對值，求得其二進位值。<br>將其值反相，並加ㄧ，求得答案。<br>如：-2，其絕對值的二進位為 00000010，反相：11111101，並加ㄧ，則答案為 11111110。</li>
+<li>計算：如何計算一個負數 I 利用二的補數求得的二進位值，則有以下步驟：<br>將負數 I 取絕對值，求得其二進位值。<br>將其值反相，並加ㄧ，求得答案。<br>如：-2，其絕對值的二進位為 00000010，反相：11111101，並加ㄧ，則答案為 11111110。</li>
 </ul>
 </li>
 </ol>
 </li>
 </ol>
 <h3 id="實數的表示"><a href="#實數的表示" class="headerlink" title="實數的表示"></a>實數的表示</h3><ul>
-<li>在電腦中，可被表示為非整數值稱作實數，即可寫成帶有小數的。<br><ul>
+<li>在電腦中，可被表示為非整數值稱作實數，即可寫成帶有小數的。<ul>
 <li>基數點 radix point ：即 base 10 的小數點，在任意基底中稱作基數點。</li>
-<li>浮點 floating point：即利用基數點浮動的方式來表示實數，公式為<br>$符號 \times 假數 \times 基底^{指數}$<br><br>其中假數為未加上基數點的數，指數則決定了基數點要浮動至哪裡，如指數為正，代表基數點右移，反之亦然。<br>例：$146.654$ 可表示為 $146654 * 10^{-3}$。</li>
+<li>浮點 floating point：即利用基數點浮動的方式來表示實數，公式為<br>$符號 \times 假數 \times 基底^{指數}$<br>其中假數為未加上基數點的數，指數則決定了基數點要浮動至哪裡，如指數為正，代表基數點右移，反之亦然。<br>例：$146.654$ 可表示為 $146654 * 10^{-3}$。</li>
 </ul>
 </li>
-<li>十進位小數轉換為二進位的方法：不斷乘以 2 直到其值為 0，取每次計算過程中，基數點左邊第一位。<br>例：$.75 → .11$<br><br>$<br>\begin{equation}\begin{split}<br>.75 \times 2 = 1.50\\<br>.50 \times 2 = 1.00\\<br>\end{split}\end{equation}<br>$</li>
+<li>十進位小數轉換為二進位的方法：不斷乘以 2 直到其值為 0，取每次計算過程中，基數點左邊第一位。<br>例：$.75 → .11$<br>$<br>\begin{equation}\begin{split}<br>.75 \times 2 = 1.50\\<br>.50 \times 2 = 1.00\\<br>\end{split}\end{equation}<br>$</li>
 </ul>
 <hr>
 <h2 id="文字的表示"><a href="#文字的表示" class="headerlink" title="文字的表示"></a>文字的表示</h2><ul>
 <li>字元集 character set：即字元表單，用碼來紀錄字元。<ul>
-<li>ASCII 字元集<br><br>  最初用 7 個位元表示每個字元，第八個位元為檢查位元，可協助電腦檢查資料正確性，之後演變成八個位元全部用來表示字元。</li>
-<li>Unicode 字元集<br><br>  為了表示所有語言而誕生，ASCII 為此集的子集。</li>
+<li>ASCII 字元集<br>  最初用 7 個位元表示每個字元，第八個位元為檢查位元，可協助電腦檢查資料正確性，之後演變成八個位元全部用來表示字元。</li>
+<li>Unicode 字元集<br>  為了表示所有語言而誕生，ASCII 為此集的子集。</li>
 </ul>
 </li>
 </ul>
@@ -364,6 +364,13 @@
     </div>
 </article> 
 
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
 
 <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
@@ -378,7 +385,7 @@
     <hr />
 
 <!-- Footer -->
-<footer>
+<footer id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -448,8 +455,6 @@
                         </li>
                     
                 </ul>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>

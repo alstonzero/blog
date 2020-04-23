@@ -98,7 +98,7 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -228,7 +228,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="File-spinlock-h"><a href="#File-spinlock-h" class="headerlink" title="File: spinlock.h"></a>File: spinlock.h</h3><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// Mutual exclusion lock.</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> {</span></span><br><span class="line">  uint locked;       <span class="comment">// Is the lock held?</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// For debugging:</span></span><br><span class="line">  <span class="keyword">char</span> *name;        <span class="comment">// Name of lock.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">cpu</span>;</span>   <span class="comment">// The cpu holding the lock.</span></span><br><span class="line">  uint pcs[<span class="number">10</span>];      <span class="comment">// The call stack (an array of program counters)</span></span><br><span class="line">                     <span class="comment">// that locked the lock.</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="File-spinlock-h"><a href="#File-spinlock-h" class="headerlink" title="File: spinlock.h"></a>File: spinlock.h</h3><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Mutual exclusion lock.</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> {</span></span><br><span class="line">  uint locked;       <span class="comment">// Is the lock held?</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// For debugging:</span></span><br><span class="line">  <span class="keyword">char</span> *name;        <span class="comment">// Name of lock.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">cpu</span>;</span>   <span class="comment">// The cpu holding the lock.</span></span><br><span class="line">  uint pcs[<span class="number">10</span>];      <span class="comment">// The call stack (an array of program counters)</span></span><br><span class="line">                     <span class="comment">// that locked the lock.</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>邏輯上，<code>acquire</code> 應該長這樣：</li>
@@ -240,63 +240,46 @@
 <li>XV6 使用 x86 的特殊指令 <code>xchg</code> 來完成動作。</li>
 </ul>
 <hr>
-<p><i class="fa fa-code"></i> Code: <code>acquire</code></p>
+<div class="alert alert-success"><p><strong>File:</strong> spinlock.c</p></div>
+
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
 <th>回傳值</th>
+<th><code>*lk</code></th>
 </tr>
 </thead>
 <tbody><tr>
 <td>要求鎖</td>
 <td>void</td>
-</tr>
-</tbody></table>
-</div><div class="table-responsive">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th><code>*lk</code></th>
-</tr>
-</thead>
-<tbody><tr>
 <td>欲要求的鎖</td>
 </tr>
 </tbody></table>
-</div><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// Acquire the lock.</span></span><br><span class="line"><span class="comment">// Loops (spins) until the lock is acquired.</span></span><br><span class="line"><span class="comment">// Holding a lock for a long time may cause</span></span><br><span class="line"><span class="comment">// other CPUs to waste time spinning to acquire it.</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">acquire(struct spinlock *lk)</span><br><span class="line">{</span><br><span class="line">  pushcli(); <span class="comment">// disable interrupts to avoid deadlock.</span></span><br><span class="line">  <span class="keyword">if</span>(holding(lk))</span><br><span class="line">    panic(<span class="string">"acquire"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The xchg is atomic.</span></span><br><span class="line">  <span class="comment">// It also serializes, so that reads after acquire are not</span></span><br><span class="line">  <span class="comment">// reordered before it. </span></span><br><span class="line">  <span class="keyword">while</span>(xchg(&amp;lk-&gt;locked, <span class="number">1</span>) != <span class="number">0</span>)</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Record info about lock acquisition for debugging.</span></span><br><span class="line">  lk-&gt;cpu = cpu;</span><br><span class="line">  getcallerpcs(&amp;lk, lk-&gt;pcs);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Acquire the lock.</span></span><br><span class="line"><span class="comment">// Loops (spins) until the lock is acquired.</span></span><br><span class="line"><span class="comment">// Holding a lock for a long time may cause</span></span><br><span class="line"><span class="comment">// other CPUs to waste time spinning to acquire it.</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">acquire(struct spinlock *lk)</span><br><span class="line">{</span><br><span class="line">  pushcli(); <span class="comment">// disable interrupts to avoid deadlock.</span></span><br><span class="line">  <span class="keyword">if</span>(holding(lk))</span><br><span class="line">    panic(<span class="string">"acquire"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The xchg is atomic.</span></span><br><span class="line">  <span class="comment">// It also serializes, so that reads after acquire are not</span></span><br><span class="line">  <span class="comment">// reordered before it. </span></span><br><span class="line">  <span class="keyword">while</span>(xchg(&amp;lk-&gt;locked, <span class="number">1</span>) != <span class="number">0</span>)</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Record info about lock acquisition for debugging.</span></span><br><span class="line">  lk-&gt;cpu = cpu;</span><br><span class="line">  getcallerpcs(&amp;lk, lk-&gt;pcs);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
-<p><i class="fa fa-code"></i> Code: <code>release</code></p>
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
 <tr>
 <th>功能</th>
 <th>回傳值</th>
+<th><code>*lk</code></th>
 </tr>
 </thead>
 <tbody><tr>
 <td>還鎖</td>
 <td>void</td>
-</tr>
-</tbody></table>
-</div><div class="table-responsive">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th><code>*lk</code></th>
-</tr>
-</thead>
-<tbody><tr>
 <td>欲還的鎖</td>
 </tr>
 </tbody></table>
-</div><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// Release the lock.</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">release(struct spinlock *lk)</span><br><span class="line">{</span><br><span class="line">  <span class="keyword">if</span>(!holding(lk))</span><br><span class="line">    panic(<span class="string">"release"</span>);</span><br><span class="line"></span><br><span class="line">  lk-&gt;pcs[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">  lk-&gt;cpu = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The xchg serializes, so that reads before release are </span></span><br><span class="line">  <span class="comment">// not reordered after it.  The 1996 PentiumPro manual (Volume 3,</span></span><br><span class="line">  <span class="comment">// 7.2) says reads can be carried out speculatively and in</span></span><br><span class="line">  <span class="comment">// any order, which implies we need to serialize here.</span></span><br><span class="line">  <span class="comment">// But the 2007 Intel 64 Architecture Memory Ordering White</span></span><br><span class="line">  <span class="comment">// Paper says that Intel 64 and IA-32 will not move a load</span></span><br><span class="line">  <span class="comment">// after a store. So lock-&gt;locked = 0 would work here.</span></span><br><span class="line">  <span class="comment">// The xchg being asm volatile ensures gcc emits it after</span></span><br><span class="line">  <span class="comment">// the above assignments (and after the critical section).</span></span><br><span class="line">  xchg(&amp;lk-&gt;locked, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  popcli();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Release the lock.</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">release(struct spinlock *lk)</span><br><span class="line">{</span><br><span class="line">  <span class="keyword">if</span>(!holding(lk))</span><br><span class="line">    panic(<span class="string">"release"</span>);</span><br><span class="line"></span><br><span class="line">  lk-&gt;pcs[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">  lk-&gt;cpu = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The xchg serializes, so that reads before release are </span></span><br><span class="line">  <span class="comment">// not reordered after it.  The 1996 PentiumPro manual (Volume 3,</span></span><br><span class="line">  <span class="comment">// 7.2) says reads can be carried out speculatively and in</span></span><br><span class="line">  <span class="comment">// any order, which implies we need to serialize here.</span></span><br><span class="line">  <span class="comment">// But the 2007 Intel 64 Architecture Memory Ordering White</span></span><br><span class="line">  <span class="comment">// Paper says that Intel 64 and IA-32 will not move a load</span></span><br><span class="line">  <span class="comment">// after a store. So lock-&gt;locked = 0 would work here.</span></span><br><span class="line">  <span class="comment">// The xchg being asm volatile ensures gcc emits it after</span></span><br><span class="line">  <span class="comment">// the above assignments (and after the critical section).</span></span><br><span class="line">  xchg(&amp;lk-&gt;locked, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  popcli();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
-<p><i class="fa fa-code"></i> Code: <code>xchg</code></p>
+<div class="alert alert-success"><p><strong>File:</strong> x86.h</p></div>
+
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -323,7 +306,7 @@
 <td>欲填的值</td>
 </tr>
 </tbody></table>
-</div><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> uint</span><br><span class="line">xchg(<span class="keyword">volatile</span> uint *addr, uint newval)</span><br><span class="line">{</span><br><span class="line">  uint result;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// The + in "+m" denotes a read-modify-write operand.</span></span><br><span class="line">  <span class="function"><span class="keyword">asm</span> <span class="title">volatile</span><span class="params">(<span class="string">"lock; xchgl %0, %1"</span> :</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="string">"+m"</span> (*addr), <span class="string">"=a"</span> (result) :</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="string">"1"</span> (newval) :</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="string">"cc"</span>)</span></span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> uint</span><br><span class="line">xchg(<span class="keyword">volatile</span> uint *addr, uint newval)</span><br><span class="line">{</span><br><span class="line">  uint result;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// The + in "+m" denotes a read-modify-write operand.</span></span><br><span class="line">  <span class="function"><span class="keyword">asm</span> <span class="title">volatile</span><span class="params">(<span class="string">"lock; xchgl %0, %1"</span> :</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="string">"+m"</span> (*addr), <span class="string">"=a"</span> (result) :</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="string">"1"</span> (newval) :</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="string">"cc"</span>)</span></span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -382,6 +365,13 @@
     </div>
 </article> 
 
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
 
 
 
@@ -389,7 +379,7 @@
     <hr />
 
 <!-- Footer -->
-<footer>
+<footer id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -459,8 +449,6 @@
                         </li>
                     
                 </ul>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>
