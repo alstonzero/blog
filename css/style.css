@@ -599,107 +599,6 @@ pre .clojure .title {
 pre .deletion {
   color: #dc322f;
 }
-.note {
-  position: relative;
-  padding: 15px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  border: initial;
-  border-left: 3px solid #eee;
-  background-color: #f9f9f9;
-  border-radius: 3px;
-}
-.note h2,
-.note h3,
-.note h4,
-.note h5,
-.note h6 {
-  margin-bottom: 0;
-  border-bottom: initial;
-  padding-top: 0 !important;
-}
-.note p:first-child,
-.note ul:first-child,
-.note ol:first-child,
-.note table:first-child,
-.note pre:first-child,
-.note blockquote:first-child {
-  margin-top: 0;
-}
-.note p:last-child,
-.note ul:last-child,
-.note ol:last-child,
-.note table:last-child,
-.note pre:last-child,
-.note blockquote:last-child {
-  margin-bottom: 0;
-}
-.note.default {
-  background-color: #f7f7f7;
-  border-left-color: #777;
-}
-.note.default h2,
-.note.default h3,
-.note.default h4,
-.note.default h5,
-.note.default h6 {
-  color: #777;
-}
-.note.primary {
-  background-color: #f5f0fa;
-  border-left-color: #6f42c1;
-}
-.note.primary h2,
-.note.primary h3,
-.note.primary h4,
-.note.primary h5,
-.note.primary h6 {
-  color: #6f42c1;
-}
-.note.info {
-  background-color: #eef7fa;
-  border-left-color: #428bca;
-}
-.note.info h2,
-.note.info h3,
-.note.info h4,
-.note.info h5,
-.note.info h6 {
-  color: #428bca;
-}
-.note.success {
-  background-color: #eff8f0;
-  border-left-color: #5cb85c;
-}
-.note.success h2,
-.note.success h3,
-.note.success h4,
-.note.success h5,
-.note.success h6 {
-  color: #5cb85c;
-}
-.note.warning {
-  background-color: #fdf8ea;
-  border-left-color: #f0ad4e;
-}
-.note.warning h2,
-.note.warning h3,
-.note.warning h4,
-.note.warning h5,
-.note.warning h6 {
-  color: #f0ad4e;
-}
-.note.danger {
-  background-color: #fcf1f2;
-  border-left-color: #d9534f;
-}
-.note.danger h2,
-.note.danger h3,
-.note.danger h4,
-.note.danger h5,
-.note.danger h6 {
-  color: #d9534f;
-}
 .label {
   display: inline;
   padding: 0 5px;
@@ -709,22 +608,25 @@ pre .deletion {
   font-weight: normal;
 }
 .label.default {
-  background-color: #f0f0f0;
+  background-color: #e2e3e5;
 }
 .label.primary {
-  background-color: #efe6f7;
+  background-color: #cce5ff;
 }
 .label.info {
-  background-color: #e5f2f8;
+  background-color: #d1ecf1;
 }
 .label.success {
-  background-color: #e7f4e9;
+  background-color: #d4edda;
 }
 .label.warning {
-  background-color: #fcf6e1;
+  background-color: #fff3cd;
 }
 .label.danger {
-  background-color: #fae8eb;
+  background-color: #f8d7da;
+}
+body {
+  font-size: 18px;
 }
 article .container .row blockquote {
   font-size: 1em;
@@ -734,11 +636,14 @@ article .container .row blockquote {
 .table-responsive {
   margin-top: 15px;
 }
-.table-responsive table.table {
-  width: unset;
+.table-responsive table.table thead>tr>td,
+.table-responsive thead>tr>th {
+  border-bottom-width: 1px;
 }
 code {
   font-size: 85%;
+  color: unset;
+  background-color: rgba(0,0,0,0.04);
 }
 figure.highlight {
   padding: 16px;
@@ -838,16 +743,14 @@ h5:before {
   float: right;
 }
 article .container .row blockquote {
+  color: #1b1e21;
   position: relative;
   padding: 15px;
   margin-bottom: 20px;
   margin-top: 20px;
-  border: initial;
-  border-left: 3px solid #eee;
-  background-color: #f9f9f9;
+  border: 1px solid #c6c8ca;
+  background-color: #d6d8d9;
   border-radius: 3px;
-  background-color: #f7f7f7;
-  border-left-color: #777;
 }
 article .container .row blockquote h2,
 article .container .row blockquote h3,
@@ -874,10 +777,24 @@ article .container .row blockquote pre:last-child,
 article .container .row blockquote blockquote:last-child {
   margin-bottom: 0;
 }
-article .container .row blockquote h2,
-article .container .row blockquote h3,
-article .container .row blockquote h4,
-article .container .row blockquote h5,
-article .container .row blockquote h6 {
-  color: #777;
+.alert p:first-child,
+.alert ul:first-child,
+.alert ol:first-child,
+.alert table:first-child,
+.alert pre:first-child,
+.alert blockquote:first-child {
+  margin-top: 0;
+}
+.alert p:last-child,
+.alert ul:last-child,
+.alert ol:last-child,
+.alert table:last-child,
+.alert pre:last-child,
+.alert blockquote:last-child {
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 426px) {
+  .table-responsive table.table {
+    width: unset;
+  }
 }
