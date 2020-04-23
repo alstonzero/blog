@@ -876,7 +876,8 @@ details.alert {
 .panel ol:first-child,
 .panel table:first-child,
 .panel pre:first-child,
-.panel blockquote:first-child {
+.panel blockquote:first-child,
+.panel figure:first-child {
   margin-top: 0;
 }
 .panel p:last-child,
@@ -884,8 +885,13 @@ details.alert {
 .panel ol:last-child,
 .panel table:last-child,
 .panel pre:last-child,
-.panel blockquote:last-child {
+.panel blockquote:last-child,
+.panel figure:last-child {
   margin-bottom: 0;
+}
+.panel .panel-footer figure.highlight {
+  background: none;
+  padding: 0 16px;
 }
 @media only screen and (min-width: 426px) {
   .table-responsive table.table {
