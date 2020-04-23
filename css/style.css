@@ -871,6 +871,22 @@ details.alert {
 .f-btn.t2b {
   bottom: 3%;
 }
+.panel p:first-child,
+.panel ul:first-child,
+.panel ol:first-child,
+.panel table:first-child,
+.panel pre:first-child,
+.panel blockquote:first-child {
+  margin-top: 0;
+}
+.panel p:last-child,
+.panel ul:last-child,
+.panel ol:last-child,
+.panel table:last-child,
+.panel pre:last-child,
+.panel blockquote:last-child {
+  margin-bottom: 0;
+}
 @media only screen and (min-width: 426px) {
   .table-responsive table.table {
     width: unset;
