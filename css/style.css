@@ -889,6 +889,12 @@ details.alert {
 .panel figure:last-child {
   margin-bottom: 0;
 }
+.panel h2:before,
+.panel h3:before,
+.panel h4:before,
+.panel h5:before {
+  content: '';
+}
 .panel .panel-footer figure.highlight {
   background: none;
   padding: 0 16px;

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.lusw.dev/add-bs-panel-for-hexo/</loc>
+    
+    <lastmod>2020-04-23T14:30:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.lusw.dev/c-bit-operation/</loc>
+    
+    <lastmod>2020-04-23T13:09:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.lusw.dev/css-not-selecter/</loc>
     
     <lastmod>2020-04-23T13:07:38.000Z</lastmod>
@@ -68,13 +82,6 @@
     <loc>http://blog.lusw.dev/starting-xv6/</loc>
     
     <lastmod>2020-04-23T08:09:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.lusw.dev/c-bit-operation/</loc>
-    
-    <lastmod>2020-04-23T08:04:49.000Z</lastmod>
     
   </url>
   
@@ -310,14 +317,14 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/tags/index.html</loc>
+    <loc>http://blog.lusw.dev/categories/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/categories/index.html</loc>
+    <loc>http://blog.lusw.dev/tags/index.html</loc>
     
     <lastmod>2020-01-26T16:54:30.125Z</lastmod>
     

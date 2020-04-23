@@ -250,7 +250,8 @@
 <p>這樣的寫法，更簡單，更易懂。</p>
 <hr>
 <h3 id="剩下的空間"><a href="#剩下的空間" class="headerlink" title="剩下的空間"></a>剩下的空間</h3><p>值得注意的一件事，我們沿用上面的例子；<code>method_ex</code> 有一個元素叫<em>真正的值</em>，他是一個整數（8 位），剛好另外一個元素我們使用位元欄位的技巧也控制在 8 位；但，如果我們沒有這麼做呢？</p>
-<p>答案是：你可以這麼寫，不會有什麼問題，但不建議。</p>
+<div class="alert alert-warning"><p>答案是：你可以這麼寫，不會有什麼問題，但不建議。</p></div>
+
 <h4 id="更大"><a href="#更大" class="headerlink" title="更大"></a>更大</h4><p>如果 <code>bits</code> 結構今天大於 8 位，那我們就沒辦法透過更改<em>真正的值</em>來改變到高於 8 位的值，因此這麼做是<strong>沒意義</strong>的。</p>
 <h4 id="更小"><a href="#更小" class="headerlink" title="更小"></a>更小</h4><p>如果 <code>bits</code> 結構今天小於 8 位，這麼做完全不會有任何問題，但習慣上，我們會把它補齊，像是我們在 <a href="/c-attribute">attribute</a> 篇裡提到的 padding。</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5and6 : <span class="number">2</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -298,6 +299,8 @@
             
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="pager">
+                        
+                            <li class="previous"><a href="/add-bs-panel-for-hexo/">&larr;  下一頁</a></li>
                         
                         
                             <li class="next"><a href="/linux-lookup-port/">上一頁  &rarr;</a></li>
