@@ -784,6 +784,11 @@ article h5:before {
 }
 .intro-header .post-heading .meta {
   display: inline;
+  font-style: unset;
+  color: #bdbdbd;
+}
+.intro-header .post-heading .meta a {
+  color: #bdbdbd;
 }
 .meta-right {
   float: right;
@@ -835,6 +840,13 @@ article .container .row blockquote blockquote:last-child {
 .alert pre:last-child,
 .alert blockquote:last-child {
   margin-bottom: 0;
+}
+.tag-category-item a {
+  text-decoration: none;
+  text-transform: unset !important;
+}
+.container.tags .badge {
+  display: none;
 }
 details.alert {
   color: #383d41;

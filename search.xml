@@ -53,8 +53,6 @@
             
             <tag> C </tag>
             
-            <tag> Clang </tag>
-            
             <tag> C語言 </tag>
             
             <tag> bit </tag>
@@ -255,8 +253,6 @@
         <tags>
             
             <tag> C </tag>
-            
-            <tag> Clang </tag>
             
             <tag> C語言 </tag>
             
@@ -462,7 +458,7 @@
       
       <categories>
           
-          <category> Note </category>
+          <category> Hexo </category>
           
       </categories>
       
@@ -882,8 +878,6 @@
         <tags>
             
             <tag> C </tag>
-            
-            <tag> Clang </tag>
             
             <tag> C語言 </tag>
             
