@@ -13,7 +13,7 @@
     
 
     
-        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+        <meta name="description" content="Notes of single-chip microcompute, RTOS and Firmware.">
     
 
     <!--Author-->
@@ -28,7 +28,7 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+        <meta property="og:description" content="Notes of single-chip microcompute, RTOS and Firmware.">
     
 
     <!--Open Graph Site Name-->
@@ -372,7 +372,7 @@
 </tbody></table>
 </div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Destroys the object */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _rtgui_object_destructor(<span class="keyword">rtgui_object_t</span> *object)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">/* Any valid objest should both have valid flag _and_ valid type. Only use</span></span><br><span class="line"><span class="comment">     * flag is not enough because the chunk of memory may be reallocted to other</span></span><br><span class="line"><span class="comment">     * object and thus the flag will become valid. */</span></span><br><span class="line">    object-&gt;flag = RTGUI_OBJECT_FLAG_NONE;</span><br><span class="line">    object-&gt;type = RT_NULL;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<div id="footnotes"><hr class="clearfix"><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/xuzhenglim/article/details/11883351" target="_blank" rel="noopener">RTGUI粗讲（个人见解篇之三、RTGUI WIDGET （2））</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+<hr class="block-hr"><div id="footnotes" class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Reference</h3></div><ul class="list-group"><li id="fn:1" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/xuzhenglim/article/details/11883351" target="_blank" rel="noopener">RTGUI粗讲（个人见解篇之三、RTGUI WIDGET （2））</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ul></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -423,7 +423,7 @@
             
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
-    <hr />
+    <hr class="block-hr"/>
     <h3>留言:</h3>
     <div id="disqus_thread">
         <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
