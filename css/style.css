@@ -868,6 +868,7 @@ details.alert {
   border-radius: 0;
   position: fixed;
   right: 3%;
+  bottom: 3%;
   z-index: 9999;
   width: 40px;
   height: 40px;
@@ -877,11 +878,8 @@ details.alert {
   background-color: #0085a1;
   border: 1px solid #0085a1;
 }
-.f-btn.b2t {
+.f-btn:nth-child(2) {
   bottom: calc(3% + 50px);
-}
-.f-btn.t2b {
-  bottom: 3%;
 }
 .panel p:first-child,
 .panel ul:first-child,
