@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="LuSkywalker">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="計概：資料表示法">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="技術筆記">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>計概：資料表示法 - 技術筆記</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" integrity="sha256-auSD6WsicI+oJhpUgntiZeIHFg0Vz0mYHrERIp079QU=" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-124928169-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">技術筆記</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/tags/Linux">
+                            
+                                Linux
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/RT-Thread">
+                            
+                                RT-Thread
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/XV6">
+                            
+                                XV6
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/Clang">
+                            
+                                C Lang
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading">
+                    <h1>計概：資料表示法</h1>
+                    
+                    <span class="meta">
+                        
+                            <i class="far fa-bookmark fa-fw"></i>
+                            
+
+<a href="/categories/ItC/">計算機概論</a>
+
+                        
+                        
+                        <!-- Date -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
+                            2018-02-06
+                        
+                        <!-- word count and read count -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
+                            1.9k
+                        
+        
+                        
+        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="資料與電腦"><a href="#資料與電腦" class="headerlink" title="資料與電腦"></a>資料與電腦</h2><ul>
+<li>資料 data：事實的基本數值。</li>
+<li>資訊 infromation：經過組織、處理過的資料。</li>
+</ul>
+<h3 id="資料壓縮-data-compression"><a href="#資料壓縮-data-compression" class="headerlink" title="資料壓縮 data compression"></a>資料壓縮 data compression</h3><ul>
+<li>壓縮率 compression ration：壓縮過後的大小 / 原始大小，介於 0 與 1 之間，越接近 0 代表壓縮越緊密。</li>
+<li>資料壓縮技術分為兩種：<ul>
+<li>無漏失型 lossless：指經過壓縮後無原始資料流失。</li>
+<li>漏失型 lossy：指資料壓縮後有資料會漏失。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>類比資料 analog data：連續的，較類似實際資訊</li>
+<li>數位資料 digital data：不連續的。</li>
+<li>數位化 digitize：由類比轉成數位。</li>
+</ol>
+<h2 id="位置表示法"><a href="#位置表示法" class="headerlink" title="位置表示法"></a>位置表示法</h2><blockquote>
+<p>基底 base：由 0 開始，等於基底時進位。</p>
+</blockquote>
+<h3 id="位置表示法-positional-notation"><a href="#位置表示法-positional-notation" class="headerlink" title="位置表示法 positional notation"></a>位置表示法 positional notation</h3><p>base R，位元數為 n，di →第 i 個位元，則公式為：<br>$${d_nR^{n-1}+d_{n-1}R^{n-2}+···+d_2R+d_1}$$</p>
+<h3 id="二進位與八進位"><a href="#二進位與八進位" class="headerlink" title="二進位與八進位"></a>二進位與八進位</h3><ul>
+<li>只要分別知道各個位元在另外一個進制的表示法，合起來即是其數值在另一個進制的表示法。</li>
+<li>如：754(base 8)中 7(111)、5(101)、4(100)，則 111101100(base 2) == 754(base 8)。</li>
+<li>每一個儲存單元稱為二進制數元 binary digit，或簡稱位元 bit。</li>
+<li>8 個 bit 組合成位元組 bytes，bytes 組合成字組 words。</li>
+</ul>
+<h3 id="二進製表示法"><a href="#二進製表示法" class="headerlink" title="二進製表示法"></a>二進製表示法</h3><p>一個位元可表示兩件事（ 0 或是 1 ），如：會下雨、不會下雨；當需要表示超過兩件事時，就需要多重位元，兩個位元可表示四件事（ 00, 01, 10, 11 ）… 以此類推。</p>
+<hr>
+<h2 id="數字資料的表示"><a href="#數字資料的表示" class="headerlink" title="數字資料的表示"></a>數字資料的表示</h2><h3 id="負數的表示"><a href="#負數的表示" class="headerlink" title="負數的表示"></a>負數的表示</h3><ol>
+<li>帶號 — 數量表示法 singed-magintude representation<br>即日常身活中，常常使用的表示法；概念為，負數在 0 的左邊，正數在 0 的右邊；表示為，將符號（+,−）放在數字的前面，通常正號省略，即：5、-1、10、0 (忽略 -0）……<ul>
+<li>計算方法：加法為：將前數往右移後數的數量，若為負數則往左；減法為：將前數往左移後數的數量，若為負數則往右。</li>
+</ul>
+</li>
+<li>固定大小數字表示法<br>如果我們固定數字總量的位元數，則我們有以下的表示法。<ol>
+<li>十的補數 ten’s complement<br>假設固定位元數 == 2，則我們可以用 $0 \sim 49$ 來表示 $0 \sim 49$ 的正值，用 $50 \sim 99$ 來表示 $-50 \sim -1$ ，則無論加減法都用表示值做運算即可，如：$-2+1$ 可寫成 $98+1 = 99$，即 $-1$。<ul>
+<li>公式：負數 $I = 10^k − I$，其中 k 為數元的數目。</li>
+</ul>
+</li>
+<li>二的補數<br>假定數元數 == 8，則一個二進位的數，最左邊的值代表著符號，1 為負、0 為正，例如：00000010 為 10 進位的 2，11111110 為10 進位的 -2。<ul>
+<li>公式：負數 $I = 2^k − I$，其中 k 為數元的數目。</li>
+<li>計算：如何計算一個負數 I 利用二的補數求得的二進位值，則有以下步驟：<br>將負數 I 取絕對值，求得其二進位值。<br>將其值反相，並加ㄧ，求得答案。<br>如：-2，其絕對值的二進位為 00000010，反相：11111101，並加ㄧ，則答案為 11111110。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="實數的表示"><a href="#實數的表示" class="headerlink" title="實數的表示"></a>實數的表示</h3><ul>
+<li>在電腦中，可被表示為非整數值稱作實數，即可寫成帶有小數的。<ul>
+<li>基數點 radix point ：即 base 10 的小數點，在任意基底中稱作基數點。</li>
+<li>浮點 floating point：即利用基數點浮動的方式來表示實數，公式為<br>$符號 \times 假數 \times 基底^{指數}$<br>其中假數為未加上基數點的數，指數則決定了基數點要浮動至哪裡，如指數為正，代表基數點右移，反之亦然。<br>例：$146.654$ 可表示為 $146654 * 10^{-3}$。</li>
+</ul>
+</li>
+<li>十進位小數轉換為二進位的方法：不斷乘以 2 直到其值為 0，取每次計算過程中，基數點左邊第一位。<br>例：$.75 → .11$<br>$<br>\begin{equation}\begin{split}<br>.75 \times 2 = 1.50\\<br>.50 \times 2 = 1.00\\<br>\end{split}\end{equation}<br>$</li>
+</ul>
+<hr>
+<h2 id="文字的表示"><a href="#文字的表示" class="headerlink" title="文字的表示"></a>文字的表示</h2><ul>
+<li>字元集 character set：即字元表單，用碼來紀錄字元。<ul>
+<li>ASCII 字元集<br>  最初用 7 個位元表示每個字元，第八個位元為檢查位元，可協助電腦檢查資料正確性，之後演變成八個位元全部用來表示字元。</li>
+<li>Unicode 字元集<br>  為了表示所有語言而誕生，ASCII 為此集的子集。</li>
+</ul>
+</li>
+</ul>
+<h3 id="文字的壓縮"><a href="#文字的壓縮" class="headerlink" title="文字的壓縮"></a>文字的壓縮</h3><ol>
+<li>關鍵字編碼：將一些常用的單詞以單一位元的符號取代，如：as → ^<ul>
+<li>限制：使用的符號不可為原始文字的一部份，如欲壓縮一份菜單，則不可以用 $ 來代替任何單詞。</li>
+<li>延伸：取代的為文字的樣式，如 ing、tion 等。缺點為，短樣式，節省的空間不多。</li>
+</ul>
+</li>
+<li>遊程長度編碼：某些情況下，某一字元可能會不斷的重複，則可用此編碼，如：AAAAAAA → *A7，其中 * 稱作旗標字元 flag character，7 為重複的數量。</li>
+<li>霍夫曼編碼：將常用的字元以短位元的字串表示，如 A → 00、E → 01。此編碼有一個重要的特徵為，沒有一個字串是另一個字串的開頭，即我們用 01 表示 O 後，不會有任何一個字元被表示為 0110，事實上任何用 01 開頭的字串接不會出現。</li>
+</ol>
+<hr>
+<h2 id="音訊資料的表示"><a href="#音訊資料的表示" class="headerlink" title="音訊資料的表示"></a>音訊資料的表示</h2><p>要在電腦上表示聲音，須將聲波數位化，也就是將聲波以電子訊號表示，為一系列不連續的數值。<br>類比訊號是以電壓來做連續變動，要將訊號數位化，則必須週期的測量電壓，記錄其值，這個過程稱作取樣 sampling。</p>
+<ul>
+<li>乙烯基錄音唱片（黑膠）：為一種聲波的類比表示法，記錄播放器的唱針延唱片的螺旋上升及下降，類似於電壓的變化。</li>
+<li>光碟片 CD：為數位的表示法，低強度的雷射光瞄準碟片，反射至感知器，如表面平坦，則會強烈反射，如有凹坑，則反射減弱；藉此分析結果，產生二進位資料。</li>
+</ul>
+<h3 id="音訊格式"><a href="#音訊格式" class="headerlink" title="音訊格式"></a>音訊格式</h3><ul>
+<li>MP3<br>為 MPEG-2 音訊第三層檔案的縮寫，MPEG Moving Picture Experts Group，為一個發展數位音訊與視訊壓縮的委員會。<br>MP3 使用了漏失與非漏失型兩種方式壓縮，分析實際聲音與人類心理聲音的關係之數學模型做比較，並丟棄人類無法聽到的資訊，最後用霍夫曼編碼的形式壓縮。</li>
+</ul>
+<hr>
+<h2 id="影像與圖形的表示"><a href="#影像與圖形的表示" class="headerlink" title="影像與圖形的表示"></a>影像與圖形的表示</h2><h3 id="顏色的表示"><a href="#顏色的表示" class="headerlink" title="顏色的表示"></a>顏色的表示</h3><ul>
+<li>電腦以 RGB 來表示，其中實際的數值代表主要顏色的相對貢獻度。<ul>
+<li>顏色深度 color depth：通常以位元數來表示。</li>
+<li>高彩 HiColor：表示16位元的顏色深度，其中5個位元用來表示每一個RGB值，其餘位元有時表示透明度 transparency。</li>
+<li>全彩 TureColor：表示24位元的顏色深度，每一個RGB值用8個位元。</li>
+</ul>
+</li>
+<li>影樣及圖形數位化<ul>
+<li>像素 pixels：圖形數位化是透過聚集個別點來表示圖像，此個別點稱作像素。一個像素是由一種單一顏色組成。</li>
+<li>解析度 resolution：代表圖像的像素數目。</li>
+</ul>
+</li>
+</ul>
+<h3 id="光柵圖形格式"><a href="#光柵圖形格式" class="headerlink" title="光柵圖形格式"></a>光柵圖形格式</h3><p>以一個像素接著一個的圖形稱作光柵圖形格式，如：JPG、BMP 等。</p>
+<h3 id="圖形向量表示法"><a href="#圖形向量表示法" class="headerlink" title="圖形向量表示法"></a>圖形向量表示法</h3><p>為另一種影像表示法，以線條及幾何形狀來描述圖像。</p>
+<hr>
+<h2 id="視訊的表示"><a href="#視訊的表示" class="headerlink" title="視訊的表示"></a>視訊的表示</h2><ul>
+<li>codec 壓縮/解壓縮器</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+
+                
+            </div>
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                    
+                        tags: 
+
+
+<a href="/tags/ItC/">#計算機概論</a> <a href="/tags/DigRes/">#數字表示</a>
+
+
+                    
+                </div>
+            
+
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="pager">
+                        
+                            <li class="previous"><a href="/ItC-gate.html">&larr;  下一頁</a></li>
+                        
+                        
+                            <li class="next"><a href="/ItC-intro.html">上一頁  &rarr;</a></li>
+                        
+                    </ul>
+                </div>
+            
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article> 
+
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+	MathJax.Hub.Config({
+		tex2jax:{inlineMath:[['$', '$']]}
+	})
+</script>
+
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted footer-author">
+                    &copy; 2018-2020 LuSkywalker
+                    
+                        <span id="busuanzi_container_site_pv">
+                            &nbsp;|&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;
+                        </span>
+                    
+                    
+                        <span id="busuanzi_container_site_uv">
+                            &nbsp;|&nbsp;<i class="fas fa-user-friends"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;
+                        </span>
+                    
+                </p>
+                <ul class="copyright text-muted footer-menu">
+                    
+                        <li>
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>

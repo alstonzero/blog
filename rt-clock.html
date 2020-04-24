@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="LuSkywalker">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="RT-Thread Clock">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="技術筆記">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>RT-Thread Clock - 技術筆記</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" integrity="sha256-auSD6WsicI+oJhpUgntiZeIHFg0Vz0mYHrERIp079QU=" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-124928169-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">技術筆記</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/tags/Linux">
+                            
+                                Linux
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/RT-Thread">
+                            
+                                RT-Thread
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/XV6">
+                            
+                                XV6
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/Clang">
+                            
+                                C Lang
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading">
+                    <h1>RT-Thread Clock</h1>
+                    
+                    <span class="meta">
+                        
+                            <i class="far fa-bookmark fa-fw"></i>
+                            
+
+<a href="/categories/RT-Thread/">RT-Thread</a>
+
+                        
+                        
+                        <!-- Date -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
+                            2018-11-25
+                        
+                        <!-- word count and read count -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
+                            366
+                        
+        
+                        
+        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div class="alert alert-success"><p><strong>File:</strong> clock.c</p></div>
+
+<h2 id="取得當前-tick"><a href="#取得當前-tick" class="headerlink" title="取得當前 tick"></a>取得當前 tick</h2><div class="alert alert-default"><p>即回傳全域變數 <code>rt_tick</code> 值</p></div>
+
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取得當前的 system tick</td>
+<td>tick 值</td>
+</tr>
+</tbody></table>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will return current tick from operating system startup</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">rt_tick_t</span> rt_tick_get(<span class="keyword">void</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">/* return the global tick */</span></span><br><span class="line">    <span class="keyword">return</span> rt_tick;</span><br><span class="line">}</span><br><span class="line">RTM_EXPORT(rt_tick_get);</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="設定當前-tick"><a href="#設定當前-tick" class="headerlink" title="設定當前 tick"></a>設定當前 tick</h2><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+<th><code>tick</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修改 system tick</td>
+<td>void</td>
+<td>欲修改的結果</td>
+</tr>
+</tbody></table>
+</div><ul>
+<li>由於需要修改全域變數，因此這裡需要將中斷關閉進入 critical region</li>
+</ul>
+<figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will set current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_set</span><span class="params">(<span class="keyword">rt_tick_t</span> tick)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">rt_base_t</span> level;</span><br><span class="line"></span><br><span class="line">    level = rt_hw_interrupt_disable();</span><br><span class="line">    rt_tick = tick;</span><br><span class="line">    rt_hw_interrupt_enable(level);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<hr>
+<h2 id="增加-tick"><a href="#增加-tick" class="headerlink" title="增加 tick"></a>增加 tick</h2><ul>
+<li>增加 tick 是由 ISR 所執行的動作，因此修改 <code>rt_tick</code> 值不需進入 critical region</li>
+<li>由於增加 tick 需要發出中斷，所以所有的 ISR 都不可以佔用太多時間（如果執行超過一個 tick 的時間，clock ISR 就無法在正確的時間發生中斷，時間就會不準）</li>
+</ul>
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>功能</th>
+<th>回傳值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>增加 tick（clock ISR）</td>
+<td>void</td>
+</tr>
+</tbody></table>
+</div><figure class="highlight c line_number"><table><tbody><tr><td class="gutter"><pre><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will notify kernel there is one tick passed. Normally,</span></span><br><span class="line"><span class="comment"> * this function is invoked by clock ISR.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_increase</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">thread</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* increase the global tick */</span></span><br><span class="line">    ++ rt_tick;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check time slice */</span></span><br><span class="line">    thread = rt_thread_self();</span><br><span class="line"></span><br><span class="line">    -- thread-&gt;remaining_tick;</span><br><span class="line">    <span class="keyword">if</span> (thread-&gt;remaining_tick == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">/* change to initialized tick */</span></span><br><span class="line">        thread-&gt;remaining_tick = thread-&gt;init_tick;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* yield */</span></span><br><span class="line">        rt_thread_yield();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check timer */</span></span><br><span class="line">    rt_timer_check();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>在增加 <code>rt_tick</code> 值的同時，也減少當前 thread 的剩餘 tick 值；當減至 0 時，重設剩餘 tick 並讓出處理器。</li>
+<li>（rt_timer_check()）</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+
+                
+            </div>
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                    
+                        tags: 
+
+
+<a href="/tags/kernel/">#kernel</a> <a href="/tags/RT-Thread/">#RT-Thread</a> <a href="/tags/clock/">#clock</a>
+
+
+                    
+                </div>
+            
+
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="pager">
+                        
+                            <li class="previous"><a href="/rt-ipc.html">&larr;  下一頁</a></li>
+                        
+                        
+                            <li class="next"><a href="/rt-thread-timer.html">上一頁  &rarr;</a></li>
+                        
+                    </ul>
+                </div>
+            
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article> 
+
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
+
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted footer-author">
+                    &copy; 2018-2020 LuSkywalker
+                    
+                        <span id="busuanzi_container_site_pv">
+                            &nbsp;|&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;
+                        </span>
+                    
+                    
+                        <span id="busuanzi_container_site_uv">
+                            &nbsp;|&nbsp;<i class="fas fa-user-friends"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;
+                        </span>
+                    
+                </p>
+                <ul class="copyright text-muted footer-menu">
+                    
+                        <li>
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>

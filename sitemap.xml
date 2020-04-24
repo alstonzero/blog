@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.lusw.dev/c-bit-operation/</loc>
+    <loc>http://blog.lusw.dev/c-bit-operation.html</loc>
     
     <lastmod>2020-04-24T08:55:05.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ascii-color/</loc>
+    <loc>http://blog.lusw.dev/ascii-color.html</loc>
     
     <lastmod>2020-04-24T08:54:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/c-attribute/</loc>
+    <loc>http://blog.lusw.dev/c-attribute.html</loc>
     
     <lastmod>2020-04-24T08:54:37.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/custom-domain-by-google-domain/</loc>
+    <loc>http://blog.lusw.dev/custom-domain-by-google-domain.html</loc>
     
     <lastmod>2020-04-24T08:51:09.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/add-bs-panel-for-hexo/</loc>
+    <loc>http://blog.lusw.dev/add-bs-panel-for-hexo.html</loc>
     
     <lastmod>2020-04-24T08:37:37.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/css-not-selecter/</loc>
+    <loc>http://blog.lusw.dev/css-not-selecter.html</loc>
     
     <lastmod>2020-04-23T13:07:38.000Z</lastmod>
     
@@ -51,238 +51,238 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-clock/</loc>
+    <loc>http://blog.lusw.dev/rt-clock.html</loc>
     
     <lastmod>2020-04-23T08:50:31.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-timer/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-timer.html</loc>
     
     <lastmod>2020-04-23T08:45:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-thread/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-thread.html</loc>
     
     <lastmod>2020-04-23T08:39:45.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-RTM-EXPORT/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-RTM-EXPORT.html</loc>
     
     <lastmod>2020-04-23T08:34:21.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-thread-scheduler/</loc>
+    <loc>http://blog.lusw.dev/rt-thread-scheduler.html</loc>
     
     <lastmod>2020-04-23T08:30:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/vim-instruction/</loc>
+    <loc>http://blog.lusw.dev/vim-instruction.html</loc>
     
     <lastmod>2020-04-23T08:17:21.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/starting-xv6/</loc>
+    <loc>http://blog.lusw.dev/starting-xv6.html</loc>
     
     <lastmod>2020-04-23T08:09:45.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-2-mem/</loc>
+    <loc>http://blog.lusw.dev/xv6-2-mem.html</loc>
     
     <lastmod>2020-04-23T08:03:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/running-xv6/</loc>
+    <loc>http://blog.lusw.dev/running-xv6.html</loc>
     
     <lastmod>2020-04-23T07:59:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-b-bootloader/</loc>
+    <loc>http://blog.lusw.dev/xv6-b-bootloader.html</loc>
     
     <lastmod>2020-04-23T07:51:22.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-6-fs/</loc>
+    <loc>http://blog.lusw.dev/xv6-6-fs.html</loc>
     
     <lastmod>2020-04-23T07:17:33.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-5-scheduler/</loc>
+    <loc>http://blog.lusw.dev/xv6-5-scheduler.html</loc>
     
     <lastmod>2020-04-23T07:12:41.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-4-lock/</loc>
+    <loc>http://blog.lusw.dev/xv6-4-lock.html</loc>
     
     <lastmod>2020-04-23T07:05:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-3-trap/</loc>
+    <loc>http://blog.lusw.dev/xv6-3-trap.html</loc>
     
     <lastmod>2020-04-23T06:39:26.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-1-process/</loc>
+    <loc>http://blog.lusw.dev/xv6-1-process.html</loc>
     
     <lastmod>2020-04-23T05:53:37.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-overflow/</loc>
+    <loc>http://blog.lusw.dev/ItC-overflow.html</loc>
     
     <lastmod>2020-04-23T05:39:33.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-com/</loc>
+    <loc>http://blog.lusw.dev/ItC-com.html</loc>
     
     <lastmod>2020-04-23T05:36:45.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-data/</loc>
+    <loc>http://blog.lusw.dev/ItC-data.html</loc>
     
     <lastmod>2020-04-23T05:34:56.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-ipc/</loc>
+    <loc>http://blog.lusw.dev/rt-ipc.html</loc>
     
     <lastmod>2020-04-23T05:17:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-mem/</loc>
+    <loc>http://blog.lusw.dev/rt-mem.html</loc>
     
     <lastmod>2020-04-23T05:02:54.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-memheap/</loc>
+    <loc>http://blog.lusw.dev/rt-memheap.html</loc>
     
     <lastmod>2020-04-23T05:02:48.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-slab/</loc>
+    <loc>http://blog.lusw.dev/rt-slab.html</loc>
     
     <lastmod>2020-04-23T05:02:42.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-small-mem/</loc>
+    <loc>http://blog.lusw.dev/rt-small-mem.html</loc>
     
     <lastmod>2020-04-23T05:02:36.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-object/</loc>
+    <loc>http://blog.lusw.dev/rtgui-object.html</loc>
     
     <lastmod>2020-04-23T05:02:31.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-widget/</loc>
+    <loc>http://blog.lusw.dev/rtgui-widget.html</loc>
     
     <lastmod>2020-04-23T05:02:26.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-window/</loc>
+    <loc>http://blog.lusw.dev/rtgui-window.html</loc>
     
     <lastmod>2020-04-23T05:02:18.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-server/</loc>
+    <loc>http://blog.lusw.dev/rtgui-server.html</loc>
     
     <lastmod>2020-04-23T05:02:07.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rtgui-dc-hw/</loc>
+    <loc>http://blog.lusw.dev/rtgui-dc-hw.html</loc>
     
     <lastmod>2020-04-23T05:01:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/rt-ipc-2/</loc>
+    <loc>http://blog.lusw.dev/rt-ipc-2.html</loc>
     
     <lastmod>2020-04-23T05:01:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/auto-backup-with-crontab/</loc>
+    <loc>http://blog.lusw.dev/auto-backup-with-crontab.html</loc>
     
     <lastmod>2020-04-22T08:51:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/arduino-interrupt/</loc>
+    <loc>http://blog.lusw.dev/arduino-interrupt.html</loc>
     
     <lastmod>2020-04-22T06:55:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/linux-lookup-port/</loc>
+    <loc>http://blog.lusw.dev/linux-lookup-port.html</loc>
     
     <lastmod>2020-04-22T06:49:54.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/perl-install-module/</loc>
+    <loc>http://blog.lusw.dev/perl-install-module.html</loc>
     
     <lastmod>2020-04-22T04:30:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/linux-init-number/</loc>
+    <loc>http://blog.lusw.dev/linux-init-number.html</loc>
     
     <lastmod>2020-04-22T04:29:36.000Z</lastmod>
     
@@ -296,21 +296,21 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/renew-xcode-profile-free-develope-account/</loc>
+    <loc>http://blog.lusw.dev/renew-xcode-profile-free-develope-account.html</loc>
     
     <lastmod>2020-04-19T14:29:53.843Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/Ubuntu-change-home-partition/</loc>
+    <loc>http://blog.lusw.dev/Ubuntu-change-home-partition.html</loc>
     
     <lastmod>2020-04-08T06:21:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/RT-Thread-GUI/</loc>
+    <loc>http://blog.lusw.dev/RT-Thread-GUI.html</loc>
     
     <lastmod>2020-03-02T04:34:00.000Z</lastmod>
     
@@ -331,84 +331,84 @@
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-OS/</loc>
+    <loc>http://blog.lusw.dev/ItC-OS.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-a-headware/</loc>
+    <loc>http://blog.lusw.dev/xv6-a-headware.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-internet/</loc>
+    <loc>http://blog.lusw.dev/ItC-internet.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-database/</loc>
+    <loc>http://blog.lusw.dev/ItC-database.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-FS/</loc>
+    <loc>http://blog.lusw.dev/ItC-FS.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-data-structure/</loc>
+    <loc>http://blog.lusw.dev/ItC-data-structure.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/xv6-0-intro/</loc>
+    <loc>http://blog.lusw.dev/xv6-0-intro.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-OOP/</loc>
+    <loc>http://blog.lusw.dev/ItC-OOP.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-code/</loc>
+    <loc>http://blog.lusw.dev/ItC-code.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-algorithm/</loc>
+    <loc>http://blog.lusw.dev/ItC-algorithm.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-gate/</loc>
+    <loc>http://blog.lusw.dev/ItC-gate.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.lusw.dev/ItC-intro/</loc>
+    <loc>http://blog.lusw.dev/ItC-intro.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     

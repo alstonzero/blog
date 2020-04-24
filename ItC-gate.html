@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="LuSkywalker">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="計概：閘與電路">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="技術筆記">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>計概：閘與電路 - 技術筆記</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" integrity="sha256-auSD6WsicI+oJhpUgntiZeIHFg0Vz0mYHrERIp079QU=" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-124928169-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">技術筆記</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/tags/Linux">
+                            
+                                Linux
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/RT-Thread">
+                            
+                                RT-Thread
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/XV6">
+                            
+                                XV6
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/Clang">
+                            
+                                C Lang
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading">
+                    <h1>計概：閘與電路</h1>
+                    
+                    <span class="meta">
+                        
+                            <i class="far fa-bookmark fa-fw"></i>
+                            
+
+<a href="/categories/ItC/">計算機概論</a>
+
+                        
+                        
+                        <!-- Date -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
+                            2018-02-06
+                        
+                        <!-- word count and read count -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
+                            1.6k
+                        
+        
+                        
+        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦與電學"><a href="#電腦與電學" class="headerlink" title="電腦與電學"></a>電腦與電學</h2><p>電子訊號有某個電壓準位，一般而言電壓準位在 0<del>2 伏特時屬於「低」，代表二進制的 0，而位於 2</del>5 伏特時則為「高」，代表二進制的 1。</p>
+<ul>
+<li>閘 gate：是完成電子訊號基本運算的裝置。閘接受一至多個輸入訊號，產生單一輸出訊號；有數種特定裝置的閘，以下討論六種基本的閘。</li>
+<li>電路 circuits：閘可組成電路，完成更複雜的工作。有三種可以描述電路的表示法：<ul>
+<li>布林表示法</li>
+<li>邏輯圖</li>
+<li>真值表</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="閘"><a href="#閘" class="headerlink" title="閘"></a>閘</h2><h3 id="1-NOT閘"><a href="#1-NOT閘" class="headerlink" title="1. NOT閘"></a>1. NOT閘</h3><p>NOT閘接受一個輸入，產生一個輸出。</p>
+<h4 id="DEF"><a href="#DEF" class="headerlink" title="DEF"></a>DEF</h4><p>如輸入為 1，則輸出 0；反之亦然。</p>
+<h4 id="布林運算式"><a href="#布林運算式" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A ‘$</p>
+<h4 id="邏輯圖"><a href="#邏輯圖" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/mHBP6FW.png" alt="NOT閘" title="NOT閘"></p>
+<h4 id="真值表"><a href="#真值表" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</div><hr>
+<h3 id="2-AND閘"><a href="#2-AND閘" class="headerlink" title="2. AND閘"></a>2. AND閘</h3><p>AND閘接受多個訊號，產生一個輸出。</p>
+<h4 id="DEF-1"><a href="#DEF-1" class="headerlink" title="DEF"></a>DEF</h4><p>若輸入全為1，則輸出1，反之，則為0。</p>
+<h4 id="布林運算式-1"><a href="#布林運算式-1" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A \cdot B$</p>
+<h4 id="邏輯圖-1"><a href="#邏輯圖-1" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/IJHEbrP.png" alt="AND閘" title="AND閘"></p>
+<h4 id="真值表-1"><a href="#真值表-1" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+</div><hr>
+<h3 id="3-OR閘"><a href="#3-OR閘" class="headerlink" title="3.OR閘"></a>3.OR閘</h3><p>OR閘接受兩個輸入，產生一個輸出。</p>
+<h4 id="DEF-2"><a href="#DEF-2" class="headerlink" title="DEF"></a>DEF</h4><p>如兩個輸入全為0，則輸出0，反之，輸出1。</p>
+<h4 id="布林運算式-2"><a href="#布林運算式-2" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A + B$</p>
+<h4 id="邏輯圖-2"><a href="#邏輯圖-2" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/87CEd05.png" alt="OR閘" title="OR閘"></p>
+<h4 id="真值表-2"><a href="#真值表-2" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+</div><hr>
+<h3 id="4-XOR閘"><a href="#4-XOR閘" class="headerlink" title="4.XOR閘"></a>4.XOR閘</h3><p>XOR閘，又稱互斥閘。</p>
+<h4 id="DEF-3"><a href="#DEF-3" class="headerlink" title="DEF"></a>DEF</h4><p>若輸出相同，則輸出0，反之，輸出1。</p>
+<h4 id="布林運算式-3"><a href="#布林運算式-3" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A \oplus B$</p>
+<h4 id="邏輯圖-3"><a href="#邏輯圖-3" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/dyp1SSN.png" alt="XOR閘" title="XOR閘"></p>
+<h4 id="真值表-3"><a href="#真值表-3" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</div><hr>
+<h3 id="5-NAND-與-NOR閘"><a href="#5-NAND-與-NOR閘" class="headerlink" title="5.NAND 與 NOR閘"></a>5.NAND 與 NOR閘</h3><p>分別為AND與OR閘的相反</p>
+<h4 id="NAND閘"><a href="#NAND閘" class="headerlink" title="NAND閘"></a>NAND閘</h4><h5 id="布林運算式-4"><a href="#布林運算式-4" class="headerlink" title="布林運算式"></a>布林運算式</h5><p>$X = ( A \cdot B ) ‘$</p>
+<h5 id="邏輯圖-4"><a href="#邏輯圖-4" class="headerlink" title="邏輯圖"></a>邏輯圖</h5><p><img src="https://i.imgur.com/LVGmMnV.png" alt="NAND閘" title="NAND閘"></p>
+<h5 id="真值表-4"><a href="#真值表-4" class="headerlink" title="真值表"></a>真值表</h5><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</div><hr>
+<h4 id="NOR閘"><a href="#NOR閘" class="headerlink" title="NOR閘"></a>NOR閘</h4><h5 id="布林運算式-5"><a href="#布林運算式-5" class="headerlink" title="布林運算式"></a>布林運算式</h5><p>$X = ( A + B ) ‘$</p>
+<h5 id="邏輯圖-5"><a href="#邏輯圖-5" class="headerlink" title="邏輯圖"></a>邏輯圖</h5><p><img src="https://i.imgur.com/76wkbGw.png" alt="NOR閘" title="NOR閘"></p>
+<h5 id="真值表-5"><a href="#真值表-5" class="headerlink" title="真值表"></a>真值表</h5><div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</div><hr>
+<h2 id="閘的建構"><a href="#閘的建構" class="headerlink" title="閘的建構"></a>閘的建構</h2><ul>
+<li>電晶體 transistor：是以半導體所製成，依據電壓準位來決定要當導線還是電阻的裝置。<br><img src="https://i.imgur.com/I6OFGJq.png" alt="transistor" title="電晶體"></li>
+</ul>
+<p>射極一般是接地的。而對電腦而言，源極產生大約5伏特的高電壓值，基極的電壓值用來判斷源極是否形成接地，若接地，電壓值會被下拉至0，反之，則會維持高電壓。</p>
+<ul>
+<li>輸出線會接在源極上，若源極接地，則輸出為低準位（二進制的 0），反之則為高準位（二進制的 1）。</li>
+<li>如基極訊號為高準位，則源極接地，此時電晶體為 on，反之，電晶體為off。</li>
+</ul>
+<hr>
+<h2 id="電路"><a href="#電路" class="headerlink" title="電路"></a>電路</h2><ul>
+<li>組合電路<br><br>藉由某個閘的輸出作為另一個閘的輸入，便可組合成電路。<br><img src="https://i.imgur.com/cvi0B0J.png" alt="組合電路" title="組合電路範例"></li>
+</ul>
+<p>其中圖中的黑點，表示兩線是相連接的，如果沒有點，代表其中一條線從另一條線的上方跳過，互不影響。<br><br>此邏輯圖的布林運算式為：( AB + AC )，也可寫成 A ( B + C )，讀者可自行寫出真值表來確認。此現象稱作電路等效性。<br></p>
+<ul>
+<li><p>事實上，布林運算式滿足幾種數學性質：</p>
+<ul>
+<li>交換律，如：$AB = BA$、$A + B = B + A$。</li>
+<li>結合律，如：$( AB ) C = A ( BC )$、$A + ( B + C ) = ( A + B ) + C$。</li>
+<li>分配律，如：$A ( B + C ) = AB + AC$、$A + BC = ( A + B ) ( A + C )$。</li>
+<li>恆等，如：$A1 = A$、$A + 0 = A$。</li>
+<li>互補，如：$A ( A ‘ ) = 0$、$A + A ‘ = 1$。</li>
+<li>狄摩根定律，如：$( AB ) ‘ = A ‘ + B ‘$、$( A + B ) ‘ = A ‘ B ‘$。</li>
+</ul>
+</li>
+<li><p>加法器<br><br>二進制數元相加可能會產生進位值，如 1 + 1 = 10，能計算 2 個位元總和並產生進位為元的電路稱作半加器 half adder。<br>考慮半加器時，可寫出以下真值表：</p>
+</li>
+</ul>
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th align="center">總和</th>
+<th align="center">進位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+</div><p>可看出來，總和為 $A \oplus B$，進位為 $AB$。<br></p>
+<ul>
+<li>一個半加器並未將可能的進位值併入計算，也就是說，一個半加器在兩個單一數元的相加是沒問題的，但在多重數元時會產生問題。</li>
+<li>可以考慮進位輸入的電路稱作全加器 full adder。簡單的想法可以用兩個半加器來製作一個全加器；作法為：在總和輸出前，再加上一個半加器與進位輸入做總和，最後調整進位輸出。<br>以下為全加器的真值表及邏輯圖：</li>
+</ul>
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th align="center">進位輸入</th>
+<th align="center">總和</th>
+<th align="center">進位輸出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+</div><p><img src="https://i.imgur.com/Y6PH0oI.png" alt="加法器" title="全加器"></p>
+<ul>
+<li>多工器 multiplexer<br><br>為一種產生單一輸出的電路，輸出等於電路中數個輸入的其中一個。依據一些原始輸入以外的輸入訊號（選擇訊號、選擇控制線）來決定哪條輸入將被輸出。<br>如：選擇訊號為 S0、S1、S2，輸入為D0~D7，則有以下真值表。</li>
+</ul>
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>S0</th>
+<th>S1</th>
+<th>S2</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>D0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>D1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>D2</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>D3</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>D4</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>D5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>D6</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>D7</td>
+</tr>
+</tbody></table>
+</div><p>上述多工器可化成此方塊圖。<br><br><img src="https://i.imgur.com/zrGhNVm.png" alt="多工器" title="多工器"></p>
+<hr>
+<h2 id="作為記憶體的電路"><a href="#作為記憶體的電路" class="headerlink" title="作為記憶體的電路"></a>作為記憶體的電路</h2><p>數位電路也可以儲存資訊，這些電路形成一個循序電路，電路的輸出可以當成電路的輸入，也就是說，某些電路的存在狀態有些被用來決定此電路的下個狀態；一些記憶體設計如：S-R閂。</p>
+<ul>
+<li>S-R閂 S-R latch：用來儲存一個單一二進制的數元。<br><img src="https://i.imgur.com/kubXSgE.png" alt="S-R閂" title="S-R閂"></li>
+</ul>
+<p>S Set、R Reset，透過此設計，只要S與R保持為1，X與Y的值皆能保持不變；通常，我們把X當作現在電路的狀態。<br><br>假設目前X為1，則Y為0，如果須將X設為0的話，只需將R設為0，X就會變成0，這時立刻將R設為1，X就會保持為0了。相反的，如需將X設為1，則需變動S為0，待X變為1後，再立刻改變S為1，X就會保持為1。</p>
+<hr>
+<h2 id="積體電路"><a href="#積體電路" class="headerlink" title="積體電路"></a>積體電路</h2><p>積體電路是一種嵌入多重閘的矽片，矽片邊緣上有許多腳位，代表著輸入或輸出。積體電路是依據閘的數量來分類的</p>
+<ul>
+<li>SSI（小型積體電路）<i class="fa fa-arrow-right"></i> 1~10</li>
+<li>MSI（中型積體電路）<i class="fa fa-arrow-right"></i> 10~100</li>
+<li>LSI（大型積體電路）<i class="fa fa-arrow-right"></i> 100~100,000</li>
+<li>VLSI（超大型積體電路 <i class="fa fa-arrow-right"></i> 100,000 <i class="fa fa-arrow-up"></i></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+
+                
+            </div>
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                    
+                        tags: 
+
+
+<a href="/tags/ItC/">#計算機概論</a> <a href="/tags/gate/">#閘</a> <a href="/tags/LogicG/">#邏輯圖</a> <a href="/tags/circuit/">#電路</a>
+
+
+                    
+                </div>
+            
+
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="pager">
+                        
+                            <li class="previous"><a href="/ItC-com.html">&larr;  下一頁</a></li>
+                        
+                        
+                            <li class="next"><a href="/ItC-data.html">上一頁  &rarr;</a></li>
+                        
+                    </ul>
+                </div>
+            
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article> 
+
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+	MathJax.Hub.Config({
+		tex2jax:{inlineMath:[['$', '$']]}
+	})
+</script>
+
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted footer-author">
+                    &copy; 2018-2020 LuSkywalker
+                    
+                        <span id="busuanzi_container_site_pv">
+                            &nbsp;|&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;
+                        </span>
+                    
+                    
+                        <span id="busuanzi_container_site_uv">
+                            &nbsp;|&nbsp;<i class="fas fa-user-friends"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;
+                        </span>
+                    
+                </p>
+                <ul class="copyright text-muted footer-menu">
+                    
+                        <li>
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>

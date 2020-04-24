@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="LuSkywalker">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="計概：抽象資料型態與副程式">
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="單晶片、即時作業系統與韌體相關之技術筆記">
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="技術筆記">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+        <meta name="twitter:card" content="summary_large_image">
+
+    
+
+    
+        <meta name="twitter:image" content="http://blog.lusw.dev/img/home-bg.jpg">
+    
+
+    <!-- Title -->
+    
+    <title>計概：抽象資料型態與副程式 - 技術筆記</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" integrity="sha256-auSD6WsicI+oJhpUgntiZeIHFg0Vz0mYHrERIp079QU=" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-124928169-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="alternate" href="/atom.xml" title="技術筆記" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">技術筆記</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/tags/Linux">
+                            
+                                Linux
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/RT-Thread">
+                            
+                                RT-Thread
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/XV6">
+                            
+                                XV6
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags/Clang">
+                            
+                                C Lang
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading">
+                    <h1>計概：抽象資料型態與副程式</h1>
+                    
+                    <span class="meta">
+                        
+                            <i class="far fa-bookmark fa-fw"></i>
+                            
+
+<a href="/categories/ItC/">計算機概論</a>
+
+                        
+                        
+                        <!-- Date -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
+                            2018-02-08
+                        
+                        <!-- word count and read count -->
+                        
+                            &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
+                            413
+                        
+        
+                        
+        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="抽象資料型態"><a href="#抽象資料型態" class="headerlink" title="抽象資料型態"></a>抽象資料型態</h2><p>Abstract data type, ADT，就是一種容器。</p>
+<h2 id="堆疊-Stack"><a href="#堆疊-Stack" class="headerlink" title="堆疊 Stack"></a>堆疊 Stack</h2><p>為LIFO(Last In First Out)，後進先出，即當我們要放資料時，放在最上面（也就是最後一個），要拿資料的時候也是拿最上面。</p>
+<p><img src="https://i.imgur.com/5WjOSt2.png" alt="stack" title="堆疊"></p>
+<ul>
+<li>插入 Push </li>
+<li>刪除 Pop</li>
+</ul>
+<hr>
+<h2 id="佇列-Queue"><a href="#佇列-Queue" class="headerlink" title="佇列 Queue"></a>佇列 Queue</h2><p>為FIFO(First In First Out)，先進先出，即當我們要放資料時，排在最後面 rear，拿資料時拿第一個 front；類似於排隊。</p>
+<p><img src="https://i.imgur.com/TT68nAV.png" alt="queue" title="佇列"></p>
+<hr>
+<h2 id="串列"><a href="#串列" class="headerlink" title="串列"></a>串列</h2><p>項目是同性質的、線性的、可變長度的；可由陣列實現。</p>
+<ul>
+<li>也可視為鍵結結構，基於節點 node的概念，一個接著下一個。</li>
+</ul>
+<hr>
+<h2 id="樹-Tree"><a href="#樹-Tree" class="headerlink" title="樹 Tree"></a>樹 Tree</h2><h3 id="二元樹"><a href="#二元樹" class="headerlink" title="二元樹"></a>二元樹</h3><p>每個node有兩個後繼節點，稱作子結點 children，可一直延續下去。起始節點稱作樹根 root。<br><br>一個node 可能有0至2個節點，左邊的稱作 left child，右邊的稱作 right child；如有一個節點沒有子結點，則稱作樹葉 leaf。</p>
+<p><img src="https://i.imgur.com/B9nhAz7.png" alt="二元樹" title="二元樹"></p>
+<h3 id="二元搜尋樹-BST"><a href="#二元搜尋樹-BST" class="headerlink" title="二元搜尋樹 BST"></a>二元搜尋樹 BST</h3><p>如果 left child &lt; node &lt; right child，則此數為BST。</p>
+<p><img src="https://i.imgur.com/YJ2kFFZ.png" alt="二元搜尋樹" title="二元搜尋樹"></p>
+<hr>
+<h2 id="圖形-Graph"><a href="#圖形-Graph" class="headerlink" title="圖形 Graph"></a>圖形 Graph</h2><p>G=(V,E)，V 為圖形中的點集合，E 為編集合。<br><br>如果邊有方向，稱作有向圖，反之，則為無向圖。<br><br>若兩個邊之間存在一條邊，則稱作相鄰頂點。<br><br>兩點之間的路徑由一連串的相鄰頂點組成。</p>
+<h3 id="圖形演算法"><a href="#圖形演算法" class="headerlink" title="圖形演算法"></a>圖形演算法</h3><ul>
+<li>深度優先搜索 BFS</li>
+<li>廣度優先搜索 DFS</li>
+<li>最短路徑搜索</li>
+</ul>
+<hr>
+<h2 id="副程式"><a href="#副程式" class="headerlink" title="副程式"></a>副程式</h2><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">swap(num1,num2)</span><br><span class="line">temp ← num1</span><br><span class="line">num1 ← num2</span><br><span class="line">num2 ← temp</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+
+                
+            </div>
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                    
+                        tags: 
+
+
+<a href="/tags/ItC/">#計算機概論</a> <a href="/tags/DataStructure/">#資料結構</a>
+
+
+                    
+                </div>
+            
+
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="pager">
+                        
+                            <li class="previous"><a href="/ItC-OOP.html">&larr;  下一頁</a></li>
+                        
+                        
+                            <li class="next"><a href="/ItC-algorithm.html">上一頁  &rarr;</a></li>
+                        
+                    </ul>
+                </div>
+            
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article> 
+
+<a href="#nav" class="b2t f-btn">
+    <i class="fa fa-caret-up"></i>
+</a>
+<a href="#footer" class="t2b f-btn">
+    <i class="fa fa-caret-down"></i>
+</a>
+
+
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted footer-author">
+                    &copy; 2018-2020 LuSkywalker
+                    
+                        <span id="busuanzi_container_site_pv">
+                            &nbsp;|&nbsp;<i class="fas fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;
+                        </span>
+                    
+                    
+                        <span id="busuanzi_container_site_uv">
+                            &nbsp;|&nbsp;<i class="fas fa-user-friends"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;
+                        </span>
+                    
+                </p>
+                <ul class="copyright text-muted footer-menu">
+                    
+                        <li>
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</body>
+
+</html>
