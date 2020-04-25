@@ -869,7 +869,7 @@ details.alert {
   position: fixed;
   right: 3%;
   bottom: 3%;
-  z-index: 9999;
+  z-index: 10;
   width: 40px;
   height: 40px;
 }
