@@ -171,7 +171,7 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Multiplexing">Multiplexing</h2>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Multiplexing"><a class="header-anchor" href="#Multiplexing">#</a>Multiplexing</h2>
 <ul>
 <li>如果 process 需要等待 I/O 或是子 process 結束，XV6 讓其進入睡眠狀態，接著將處理器 switch 給其他 process。</li>
 <li>此機制使 process 有獨佔 CPU 的假象。</li>
@@ -183,7 +183,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="Code-Context-switch">Code: Context switch</h2>
+<h2 id="Code-Context-switch"><a class="header-anchor" href="#Code-Context-switch">#</a>Code: Context switch</h2>
 <ul>
 <li>從 process 的 kernel stack -&gt; schedluler kernel stack (CPU) -&gt; 另一個 process 的 kernel stack。</li>
 <li>永遠不會從 process 的 kernel stack -&gt; process 的 kernel stack。</li>
@@ -198,7 +198,7 @@
 <ul>
 <li>trap 有可能會呼叫 <code>yield</code>，<code>yield</code> 會呼叫 <code>sched</code>，最後 <code>sched</code> 呼叫 <code>swtch(&amp;proc-&gt;context, cpu-&gt;scheduler);</code>。</li>
 </ul>
-<h3 id="File-swtch-S">File: swtch.S</h3>
+<h3 id="File-swtch-S"><a class="header-anchor" href="#File-swtch-S">#</a>File: swtch.S</h3>
 <ul>
 <li><em>swtch</em> 有兩個參數：<code>struct context ** old</code>、<code>struct context * new</code>。</li>
 </ul>
@@ -223,13 +223,13 @@
 <li>恢復保存的暫存器，用<code>ret</code> 指令跳回</li>
 </ul>
 <hr>
-<h2 id="Scheduling">Scheduling</h2>
+<h2 id="Scheduling"><a class="header-anchor" href="#Scheduling">#</a>Scheduling</h2>
 <ul>
 <li>process 要讓出 CPU 前需要先取得 ptable.lock，釋放其他擁有的鎖，修改 p-&gt;state，呼叫 <code>sched</code>。</li>
 <li><code>sched</code> 會再次檢查以上動作，並且確定此時中斷是關閉的，最後呼叫 <code>swtch</code>，將 process 的暫存器保存在 proc-&gt;context，switch 到 cpu-&gt;scheduler。</li>
 </ul>
 <div class="alert alert-success"><p><strong>File:</strong> proc.c</p></div>
-<h3 id="sched">sched</h3>
+<h3 id="sched"><a class="header-anchor" href="#sched">#</a>sched</h3>
 <table>
 <thead>
 <tr>
@@ -248,7 +248,7 @@
 <ul>
 <li><code>swtch</code> 會 return 回 scheduler 的堆疊上，scheduler 繼續執行迴圈：找到一個 process 運行，<code>swtch</code> 到該 process，repeat。</li>
 </ul>
-<h3 id="scheduler">scheduler</h3>
+<h3 id="scheduler"><a class="header-anchor" href="#scheduler">#</a>scheduler</h3>
 <table>
 <thead>
 <tr>
@@ -268,12 +268,12 @@
 <li><code>scheduler</code> 找到一個 <code>RUNNABLE</code> 的 process，將 per-cpu 設為此 process，呼叫 <code>switchuvm</code> 切換到該 process 的頁表，更新狀態為<code>RUNNING</code>，<code>swtch</code> 到該 process 中運行。</li>
 </ul>
 <hr>
-<h2 id="Code-mycpu-and-myproc">Code:  mycpu  and  myproc</h2>
+<h2 id="Code-mycpu-and-myproc"><a class="header-anchor" href="#Code-mycpu-and-myproc">#</a>Code:  mycpu  and  myproc</h2>
 <ul>
 <li>CPU 需要辨識目前正在執行的 process，XV6 有一個 struct cpu 的陣列，裡面包含了一些 CPU 的資訊，及當前 process 的資訊。</li>
 <li><code>mycpu</code> 尋找當前的 <code>lapicid</code> 是哪顆 CPU 的。</li>
 </ul>
-<h3 id="mycpu">mycpu</h3>
+<h3 id="mycpu"><a class="header-anchor" href="#mycpu">#</a>mycpu</h3>
 <table>
 <thead>
 <tr>
@@ -308,13 +308,13 @@
 </table>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">proc</span>*</span></span><br><span class="line"><span class="class"><span class="title">myproc</span>(<span class="title">void</span>) {</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">c</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  pushcli();</span><br><span class="line">  c = mycpu();</span><br><span class="line">  p = c-&gt;proc;</span><br><span class="line">  popcli();</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="睡眠與喚醒（例子）">睡眠與喚醒（例子）</h2>
+<h2 id="睡眠與喚醒（例子）"><a class="header-anchor" href="#睡眠與喚醒（例子）">#</a>睡眠與喚醒（例子）</h2>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">q</span> {</span></span><br><span class="line">    <span class="keyword">void</span> *ptr;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span>*</span><br><span class="line">send(struct q *q, <span class="keyword">void</span> *p)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">while</span>(q-&gt;ptr != <span class="number">0</span>)</span><br><span class="line">        ;</span><br><span class="line">    q-&gt;ptr = p;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span>*</span><br><span class="line">recv(struct q * q)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">void</span> *p;</span><br><span class="line">    <span class="keyword">while</span>((p = q-&gt;ptr) == <span class="number">0</span>)</span><br><span class="line">        ;</span><br><span class="line">    q-&gt;ptr = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li><code>send</code> 直到隊伍 <code>q</code> 為空時，將要傳送的資料 <code>p</code> 放入隊中，<code>recv</code> 直到 <code>q</code> 有東西時將資料取出，把 <code>q</code> 再次設為 <code>0</code></li>
 <li>這允許不同的 process 交換資料，但是很耗資源。</li>
 </ul>
-<h3 id="方案-1">方案 1</h3>
+<h3 id="方案-1"><a class="header-anchor" href="#方案-1">#</a>方案 1</h3>
 <ul>
 <li>加入 <code>sleep</code> 及 <code>wakeup</code> 機制，<code>sleep(chan)</code> 將 process 在 <code>chan</code> 中睡眠（一個 wait channel），<code>wakeup(chan)</code> 將 <code>chan</code> 上睡眠的 process 喚醒。</li>
 </ul>
@@ -328,7 +328,7 @@
 <li>假設 <code>recv</code> 在 215 行查看隊伍，發現需要睡眠，就在要呼叫 <code>sleep</code> 之前發生中斷，<code>send</code> 在其他的 CPU 將資料放進隊伍中，呼叫 <code>wakeup</code>，發現沒有正在休眠的 process，於是不做事；接著 <code>recv</code> 終於呼叫 <code>sleep</code> 進入睡眠。</li>
 <li>此時，<code>revc</code> 正在等待 <code>send</code> 將它喚醒，但是 <code>send</code> 正在等待隊伍清空，清空的動作須由 <code>recv</code> 完成（休眠中），於是就產生了 <strong>deadlock</strong>。</li>
 </ul></div>
-<h3 id="方案-2">方案 2</h3>
+<h3 id="方案-2"><a class="header-anchor" href="#方案-2">#</a>方案 2</h3>
 <ul>
 <li>讓 <code>send</code> 及 <code>recv</code> 在睡眠及喚醒前都持有鎖。</li>
 </ul>
@@ -336,13 +336,13 @@
 <ul>
 <li>但這一樣有問題：<code>recv</code> 帶著鎖進入睡眠，<code>send</code> 也同時需要鎖來喚醒，於是就產生了 <strong>deadlock</strong>。</li>
 </ul>
-<h3 id="方案-3">方案 3</h3>
+<h3 id="方案-3"><a class="header-anchor" href="#方案-3">#</a>方案 3</h3>
 <ul>
 <li>在 <code>sleep</code> 時一併釋放鎖，也就是將鎖當成參數傳進去。</li>
 </ul>
 <figure class="highlight diff"><table><tbody><tr><td class="code"><pre><span class="line">struct q {</span><br><span class="line">    struct spinlock lock;</span><br><span class="line">    void *ptr;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">void *</span><br><span class="line">send(struct q *q, void *p)</span><br><span class="line">{</span><br><span class="line">    acquire(&amp;q-&gt;lock);</span><br><span class="line">    while(q-&gt;ptr != 0)</span><br><span class="line">        ;</span><br><span class="line">    q-&gt;ptr = p;</span><br><span class="line">    wakeup(q);</span><br><span class="line">    release(&amp;q-&gt;lock);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">void*</span><br><span class="line">recv(struct q *q)</span><br><span class="line">{</span><br><span class="line">    void *p;</span><br><span class="line">    acquire(&amp;q-&gt;lock);</span><br><span class="line">    while((p = q-&gt;ptr) == 0)</span><br><span class="line"><span class="addition">+        sleep(q, &amp;q-&gt;lock);</span></span><br><span class="line">    q-&gt;ptr = 0;</span><br><span class="line">    release(&amp;q-&gt;lock);</span><br><span class="line">    return p;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-睡眠與喚醒">Code: 睡眠與喚醒</h2>
+<h2 id="Code-睡眠與喚醒"><a class="header-anchor" href="#Code-睡眠與喚醒">#</a>Code: 睡眠與喚醒</h2>
 <table>
 <thead>
 <tr>
@@ -361,7 +361,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="sleep">sleep</h3>
+<h3 id="sleep"><a class="header-anchor" href="#sleep">#</a>sleep</h3>
 <table>
 <thead>
 <tr>
@@ -404,7 +404,7 @@
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// Tidy up.</span></span><br><span class="line">  p-&gt;chan = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Reacquire original lock.</span></span><br><span class="line">  <span class="keyword">if</span>(lk != &amp;ptable.lock){  <span class="comment">//DOC: sleeplock2</span></span><br><span class="line">    release(&amp;ptable.lock);</span><br><span class="line">    acquire(lk);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="wakeup1">wakeup1</h3>
+<h3 id="wakeup1"><a class="header-anchor" href="#wakeup1">#</a>wakeup1</h3>
 <table>
 <thead>
 <tr>
@@ -423,7 +423,7 @@
 </table>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span></span><br><span class="line">wakeup1(<span class="keyword">void</span> *chan)</span><br><span class="line">{</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(p = ptable.proc; p &lt; &amp;ptable.proc[NPROC]; p++)</span><br><span class="line">    <span class="keyword">if</span>(p-&gt;state == SLEEPING &amp;&amp; p-&gt;chan == chan)</span><br><span class="line">      p-&gt;state = RUNNABLE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="wakeup">wakeup</h3>
+<h3 id="wakeup"><a class="header-anchor" href="#wakeup">#</a>wakeup</h3>
 <table>
 <thead>
 <tr>
@@ -445,7 +445,7 @@
 <li><code>wakeup</code> 找到 <code>chan</code> 上在睡眠的 process，並喚醒。</li>
 </ul>
 <hr>
-<h2 id="Code-Pipes">Code: Pipes</h2>
+<h2 id="Code-Pipes"><a class="header-anchor" href="#Code-Pipes">#</a>Code: Pipes</h2>
 <div class="alert alert-success"><p><strong>File:</strong> pipe.c</p></div>
 <ul>
 <li>pipe 為一個結構，包含一個鎖，一個 <code>buf</code> 等。</li>
@@ -454,7 +454,7 @@
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pipe</span> {</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> <span class="title">lock</span>;</span></span><br><span class="line">  <span class="keyword">char</span> data[PIPESIZE];</span><br><span class="line">  uint nread;     <span class="comment">// number of bytes read</span></span><br><span class="line">  uint nwrite;    <span class="comment">// number of bytes written</span></span><br><span class="line">  <span class="keyword">int</span> readopen;   <span class="comment">// read fd is still open</span></span><br><span class="line">  <span class="keyword">int</span> writeopen;  <span class="comment">// write fd is still open</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="pipewrite">pipewrite</h3>
+<h3 id="pipewrite"><a class="header-anchor" href="#pipewrite">#</a>pipewrite</h3>
 <table>
 <thead>
 <tr>
@@ -491,7 +491,7 @@
 <li><code>pipewrite</code> 從 0 開始將資料讀入 <code>buf</code>，更新 <code>nwrite</code> 計數器，當 <code>buf</code> 滿了，則喚醒 <code>piperead</code> 並睡眠；或是讀入完畢，一樣喚醒 <code>pipiread</code>。</li>
 </ul>
 <hr>
-<h3 id="piperead">piperead</h3>
+<h3 id="piperead"><a class="header-anchor" href="#piperead">#</a>piperead</h3>
 <table>
 <thead>
 <tr>
@@ -530,9 +530,9 @@
 <li>讀取完畢後，喚醒 <code>pipewrite</code>。</li>
 </ul>
 <hr>
-<h2 id="Code-Wait-exit-and-kill">Code: Wait, exit and kill</h2>
+<h2 id="Code-Wait-exit-and-kill"><a class="header-anchor" href="#Code-Wait-exit-and-kill">#</a>Code: Wait, exit and kill</h2>
 <div class="alert alert-success"><p><strong>File:</strong> proc.c</p></div>
-<h3 id="wait">wait</h3>
+<h3 id="wait"><a class="header-anchor" href="#wait">#</a>wait</h3>
 <table>
 <thead>
 <tr>
@@ -554,7 +554,7 @@
 <li>如果找到已退出的子 process，紀錄該子 process 的 pid，清理 <code>struct proc</code>，釋放相關記憶體。</li>
 </ul>
 <hr>
-<h3 id="exit">exit</h3>
+<h3 id="exit"><a class="header-anchor" href="#exit">#</a>exit</h3>
 <table>
 <thead>
 <tr>
@@ -575,7 +575,7 @@
 <li>喚醒父 process，將子 process 交給 <em>initproc</em>，修改狀態，呼叫 <code>sched</code> switch 至 scheduler。</li>
 </ul>
 <hr>
-<h3 id="kill">kill</h3>
+<h3 id="kill"><a class="header-anchor" href="#kill">#</a>kill</h3>
 <table>
 <thead>
 <tr>

@@ -189,7 +189,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="結構">結構</h2>
+<h2 id="結構"><a class="header-anchor" href="#結構">#</a>結構</h2>
 <div class="alert alert-success"><p><strong>File:</strong> redef.h</p></div>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_MEMPOOL</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Base structure of Memory pool object</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_mempool</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_object</span> <span class="title">parent</span>;</span>                            <span class="comment">/**&lt; inherit from rt_object */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span>            *start_address;                     <span class="comment">/**&lt; memory pool start */</span></span><br><span class="line">    <span class="keyword">rt_size_t</span>        size;                              <span class="comment">/**&lt; size of memory pool */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_size_t</span>        block_size;                        <span class="comment">/**&lt; size of memory blocks */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span>      *block_list;                        <span class="comment">/**&lt; memory blocks list */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_size_t</span>        block_total_count;                 <span class="comment">/**&lt; numbers of memory block */</span></span><br><span class="line">    <span class="keyword">rt_size_t</span>        block_free_count;                  <span class="comment">/**&lt; numbers of free memory block */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_list_t</span>        suspend_thread;                    <span class="comment">/**&lt; threads pended on this resource */</span></span><br><span class="line">    <span class="keyword">rt_size_t</span>        suspend_thread_count;              <span class="comment">/**&lt; numbers of thread pended on this resource */</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_mempool</span> *<span class="title">rt_mp_t</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
 <p>我們從文本的圖來解釋結構：<br>
@@ -206,12 +206,12 @@
 </ul>
 <hr>
 <div class="alert alert-success"><p><strong>File:</strong> mempool.c</p></div>
-<h2 id="建立-memory-pool">建立 memory pool</h2>
+<h2 id="建立-memory-pool"><a class="header-anchor" href="#建立-memory-pool">#</a>建立 memory pool</h2>
 <ul>
 <li>建立 memory pool 的方法一樣也可分為靜態的與動態的</li>
 <li>這裡的動態是指從原先記憶體 heap 的區塊拿取記憶體</li>
 </ul>
-<h3 id="動態">動態</h3>
+<h3 id="動態"><a class="header-anchor" href="#動態">#</a>動態</h3>
 <table>
 <thead>
 <tr>
@@ -265,7 +265,7 @@
 </li>
 </ul>
 <hr>
-<h3 id="靜態">靜態</h3>
+<h3 id="靜態"><a class="header-anchor" href="#靜態">#</a>靜態</h3>
 <ul>
 <li>多傳了兩個參數 <code>size</code> 與 <code>*start</code></li>
 </ul>
@@ -334,8 +334,8 @@
 <li>其他的動作皆相同</li>
 </ul>
 <hr>
-<h2 id="刪除-memory-pool">刪除 memory pool</h2>
-<h3 id="動態-2">動態</h3>
+<h2 id="刪除-memory-pool"><a class="header-anchor" href="#刪除-memory-pool">#</a>刪除 memory pool</h2>
+<h3 id="動態-v2"><a class="header-anchor" href="#動態-v2">#</a>動態</h3>
 <table>
 <thead>
 <tr>
@@ -373,7 +373,7 @@
 <li>再透過 <code>rt_object_delete</code> 刪除</li>
 </ul>
 <hr>
-<h3 id="靜態-2">靜態</h3>
+<h3 id="靜態-v2"><a class="header-anchor" href="#靜態-v2">#</a>靜態</h3>
 <table>
 <thead>
 <tr>
@@ -395,7 +395,7 @@
 <li>如果是靜態的，就不需要 free</li>
 </ul>
 <hr>
-<h2 id="Code-allocate">Code: allocate</h2>
+<h2 id="Code-allocate"><a class="header-anchor" href="#Code-allocate">#</a>Code: allocate</h2>
 <table>
 <thead>
 <tr>
@@ -470,7 +470,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="Code-free">Code: free</h2>
+<h2 id="Code-free"><a class="header-anchor" href="#Code-free">#</a>Code: free</h2>
 <table>
 <thead>
 <tr>

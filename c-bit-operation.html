@@ -180,13 +180,13 @@
 </ul>
 <p>如果要解決上述缺點，有一個方式是使用 <code>union</code>，一個在嵌入式、驅動程式裡常常用到的方法。</p>
 <hr>
-<h2 id="Union">Union</h2>
+<h2 id="Union"><a class="header-anchor" href="#Union">#</a>Union</h2>
 <p><code>union</code> 是 C 語言裡面可以對一個結構裡面的元素，可以有不同的資料型態去理解，如以下例子：</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> sample {</span><br><span class="line">    <span class="keyword">int</span> sample_int;</span><br><span class="line">    <span class="keyword">char</span> sample_str[<span class="number">4</span>];</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>需要注意的是：同一時間內只能存取一個屬性，準確來說他們是共用一個記憶體區塊，所以改第一個值第二個值會同時更改。<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[[C 語言] 程式設計教學：如何使用聯合 (Union)](https://michaelchen.tech/c-programming/union/)">[1]</span></a></sup></p>
 </blockquote>
-<h3 id="struct">struct</h3>
+<h3 id="struct"><a class="header-anchor" href="#struct">#</a>struct</h3>
 <p>奇怪，不是在講 <code>union</code> 嗎，怎麼會提到 <code>struct</code> 呢？那是因為 C 裡面有一個有趣的東西叫做位元欄位<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[位元欄](https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%AE%B5)">[2]</span></a></sup>，這個東西必須搭配結構使用；先看例子：</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bit_row</span> {</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> row1 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> row2 : <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> row3 : <span class="number">1</span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <p>乍看之下好像跟一般的結構差不多，可是我們注意到在每個元素宣告的結尾多了一個 <code>: 數字</code>，這是什麼意思？</p>
@@ -202,12 +202,12 @@
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex int_ex;</span><br><span class="line">int_ex.real_val = <span class="number">0x0123</span>; <span class="comment">/* 0000 0001 0010 0011 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* change 3 and 4 bits to 01 */</span></span><br><span class="line">int_ex.bits.bit3and4 = B01; <span class="comment">/* 0000 0001 0010 1011 */</span></span><br></pre></td></tr></tbody></table></figure>
 <p>這樣的寫法，更簡單，更易懂。</p>
 <hr>
-<h3 id="剩下的空間">剩下的空間</h3>
+<h3 id="剩下的空間"><a class="header-anchor" href="#剩下的空間">#</a>剩下的空間</h3>
 <p>值得注意的一件事，我們沿用上面的例子；<code>method_ex</code> 有一個元素叫<em>真正的值</em>，他是一個整數（8 位），剛好另外一個元素我們使用位元欄位的技巧也控制在 8 位；但，如果我們沒有這麼做呢？</p>
 <div class="alert alert-warning"><p>答案是：你可以這麼寫，不會有什麼問題，但不建議。</p></div>
-<h4 id="更大">更大</h4>
+<h4 id="更大"><a class="header-anchor" href="#更大">#</a>更大</h4>
 <p>如果 <code>bits</code> 結構今天大於 8 位，那我們就沒辦法透過更改<em>真正的值</em>來改變到高於 8 位的值，因此這麼做是<strong>沒意義</strong>的。</p>
-<h4 id="更小">更小</h4>
+<h4 id="更小"><a class="header-anchor" href="#更小">#</a>更小</h4>
 <p>如果 <code>bits</code> 結構今天小於 8 位，這麼做完全不會有任何問題，但習慣上，我們會把它補齊，像是我們在 <a href="/c-attribute">attribute</a> 篇裡提到的 padding。</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5and6 : <span class="number">2</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <div class="alert alert-info"><p>沒有定義第 7 位</p></div>

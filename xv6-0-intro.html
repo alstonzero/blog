@@ -192,7 +192,7 @@
 <li>Kernel 使用 CPU 的硬體保護機制去確保 process 只會在 user space 中執行，及只存取自己的記憶體（使用特權 privilege 機制）。</li>
 </ul>
 <hr>
-<h2 id="Process-及記憶體">Process 及記憶體</h2>
+<h2 id="Process-及記憶體"><a class="header-anchor" href="#Process-及記憶體">#</a>Process 及記憶體</h2>
 <ul>
 <li>Time-share：透明的在等待執行的 process 中切換可用的CPU。
 <ul>
@@ -208,7 +208,7 @@
 <li><code>wait()</code>：在主 process 中使用；當子 process 結束後，才繼續執行主 process（通常搭配 <code>exit()</code> 使用）。</li>
 </ul>
 <hr>
-<h2 id="I-O-及檔案描述符">I/O 及檔案描述符</h2>
+<h2 id="I-O-及檔案描述符"><a class="header-anchor" href="#I-O-及檔案描述符">#</a>I/O 及檔案描述符</h2>
 <ul>
 <li>檔案描述符 file descriptor：一個小整數代表一個 process 可能會讀取或寫入的kernel-managed 物件；XV6 kernel 使用檔案描述符做為一個 pre-process table 的索引。
 <ul>
@@ -221,7 +221,7 @@
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// read something from file descriptor to "buf"</span></span><br><span class="line">read(fd, buf, n);</span><br><span class="line"><span class="comment">// write something from "buf" to file descriptor</span></span><br><span class="line">write(fd, buf, n);</span><br><span class="line"><span class="comment">// both read and write will return n of how much its read/write</span></span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Pipes">Pipes</h2>
+<h2 id="Pipes"><a class="header-anchor" href="#Pipes">#</a>Pipes</h2>
 <ul>
 <li>如同一條水管，pipes 的兩端連接不同的 process，其中一端寫入資料，其中一端讀取其資料。也就是說，pipes 提供使兩個不同的 process 互相溝通的方法。</li>
 </ul>
@@ -236,7 +236,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="檔案系統">檔案系統</h2>
+<h2 id="檔案系統"><a class="header-anchor" href="#檔案系統">#</a>檔案系統</h2>
 <ul>
 <li>一個文件即為位元組陣列。</li>
 <li>一個目錄中包含一些檔案或其他的目錄。</li>

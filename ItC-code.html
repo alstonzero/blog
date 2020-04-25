@@ -171,13 +171,13 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦的動作">電腦的動作</h2>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦的動作"><a class="header-anchor" href="#電腦的動作">#</a>電腦的動作</h2>
 <blockquote>
 <p>即可程式化 programmable、儲存 store、擷取 retrieve 及運算 process。</p>
 </blockquote>
-<h2 id="機器語言">機器語言</h2>
+<h2 id="機器語言"><a class="header-anchor" href="#機器語言">#</a>機器語言</h2>
 <p>機器語言是電腦唯一能執行的指令，由二進制的數字組成。</p>
-<h3 id="Pep-8-虛擬電腦">Pep/8 虛擬電腦</h3>
+<h3 id="Pep-8-虛擬電腦"><a class="header-anchor" href="#Pep-8-虛擬電腦">#</a>Pep/8 虛擬電腦</h3>
 <p>依據不同的CPU會有不同的機器語言，而Pep/8為一台假想的電腦，具有真實電腦應有的特徵，及39個機器語言指令。</p>
 <ul>
 <li>記憶單元：由65536個位元組的記憶體組成。</li>
@@ -191,7 +191,7 @@
 </li>
 </ul>
 <p>一個位元組能表示的最大數為255(base 10)，也就是11111111(base 2)、0xFF，一個字語（16位元）能表示的最大數為65535，也就是0xFFFF，若要表示負數，則範圍為0x-7FFF~0x7FFF</p>
-<h3 id="指令格式">指令格式</h3>
+<h3 id="指令格式"><a class="header-anchor" href="#指令格式">#</a>指令格式</h3>
 <p>有兩個部分：<br>
 8bits 的指令指標 instruction specifier：表示要執行何種運算，及指標需如何解讀。<br>
 16bits 的運算元指標 operand specifier（非必要）：存放運算元本身或運算元地址。</p>
@@ -201,9 +201,9 @@
 <p>運算碼 operation codes (opcodes) 有4~8個位元長度，我們討論4或是5個bit的，其中 4bits 的第五個 bit 用來表示使用哪個暫存器，暫存器指標為0代表使用A暫存器。</p>
 <p>定址模式指標佔 3bits，如果為000代表為立即定址，代表運算元指標即運算元本身；001為直接定址，代表運算元指標為記憶體位址；還有兩種定址模式不討論。</p>
 <hr>
-<h2 id="組合語言">組合語言</h2>
+<h2 id="組合語言"><a class="header-anchor" href="#組合語言">#</a>組合語言</h2>
 <p>以指定的字母來助憶機器語言，由組譯器負責翻譯。</p>
-<h3 id="Pep-8-組合語言">Pep/8 組合語言</h3>
+<h3 id="Pep-8-組合語言"><a class="header-anchor" href="#Pep-8-組合語言">#</a>Pep/8 組合語言</h3>
 <p>運算碼由0x和四位16進位值組成，定址模式由i（立即）或d（直接）表示。</p>
 <table>
 <thead>
@@ -291,21 +291,21 @@
 </tr>
 </tbody>
 </table>
-<h3 id="組譯器指揮動作">組譯器指揮動作</h3>
+<h3 id="組譯器指揮動作"><a class="header-anchor" href="#組譯器指揮動作">#</a>組譯器指揮動作</h3>
 <ul>
 <li>.ASCII+”STR/x00"：表示一組字串。</li>
 <li>.BLOCK+位元組數目：產生一個空間。</li>
 <li>.WORD+值：指派一個值給字語。</li>
 <li>.END：結束。</li>
 </ul>
-<h3 id="分歧指令">分歧指令</h3>
+<h3 id="分歧指令"><a class="header-anchor" href="#分歧指令">#</a>分歧指令</h3>
 <ul>
 <li>BRLT，若小於則跳至分歧。</li>
 <li>BREQ，若等於則跳至分歧。</li>
 </ul>
 <hr>
-<h2 id="演算法表示">演算法表示</h2>
-<h3 id="虛擬碼-pseudocode-功能">虛擬碼 pseudocode 功能</h3>
+<h2 id="演算法表示"><a class="header-anchor" href="#演算法表示">#</a>演算法表示</h2>
+<h3 id="虛擬碼-pseudocode-功能"><a class="header-anchor" href="#虛擬碼-pseudocode-功能">#</a>虛擬碼 pseudocode 功能</h3>
 <ul>
 <li>變數：出現的名稱，需反應其角色。</li>
 <li>指定：變數需要放值，如 Set sum to 0，或是 sum ← 0。</li>

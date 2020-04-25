@@ -183,7 +183,7 @@
 </ol>
 </li>
 </ul>
-<h2 id="System-call，例外及中斷">System call，例外及中斷</h2>
+<h2 id="System-call，例外及中斷"><a class="header-anchor" href="#System-call，例外及中斷">#</a>System call，例外及中斷</h2>
 <ul>
 <li>有三種情況須從 user 轉至 kernel：
 <ol>
@@ -213,7 +213,7 @@
 </ul>
 <div class="alert alert-warning"><p>XV6 用 trap 來表示中斷，這是因為此術語被 PDP11/40 使用，也是 UNIX 的傳統術語。</p></div>
 <hr>
-<h2 id="X86-的保護機制">X86 的保護機制</h2>
+<h2 id="X86-的保護機制"><a class="header-anchor" href="#X86-的保護機制">#</a>X86 的保護機制</h2>
 <ul>
 <li>x86 有 4 個 protection level，0（最高）至 3（最低）。</li>
 <li>實際上大部分只使用兩個層級：0（kernel mode）及 3（user mode）；當前的層級儲存在 <code>%cs</code> 的 CPL 中。</li>
@@ -232,8 +232,8 @@
 </ul>
 <p><img src="https://i.imgur.com/Syfs25x.png" alt="kstack" title="Kernel stack after an int instruction."></p>
 <hr>
-<h2 id="Code-第一個-system-call">Code: 第一個 system call</h2>
-<h3 id="File-initcode-S">File: initcode.S</h3>
+<h2 id="Code-第一個-system-call"><a class="header-anchor" href="#Code-第一個-system-call">#</a>Code: 第一個 system call</h2>
+<h3 id="File-initcode-S"><a class="header-anchor" href="#File-initcode-S">#</a>File: initcode.S</h3>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">.globl</span> start</span><br><span class="line"><span class="symbol">start:</span></span><br><span class="line">  pushl $argv</span><br><span class="line">  pushl $init</span><br><span class="line">  pushl <span class="number">$0</span>  // where caller pc would be</span><br><span class="line">  movl $SYS_exec, %eax</span><br><span class="line">  <span class="keyword">int</span> $T_SYSCALL</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>Process 將<code>exec</code> 的參數 push 進堆疊，並將 system call number 放進 <code>%eax</code>。</li>
@@ -242,7 +242,7 @@
 <div class="alert alert-success"><p><strong>File:</strong> syscall.c</p></div>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">int</span> <span class="params">(*syscalls[])</span><span class="params">(<span class="keyword">void</span>)</span> </span>= {</span><br><span class="line">[SYS_fork]    sys_fork,</span><br><span class="line">[SYS_exit]    sys_exit,</span><br><span class="line">[SYS_wait]    sys_wait,</span><br><span class="line">[SYS_pipe]    sys_pipe,</span><br><span class="line">[SYS_read]    sys_read,</span><br><span class="line">[SYS_kill]    sys_kill,</span><br><span class="line">[SYS_exec]    sys_exec,</span><br><span class="line">[SYS_fstat]   sys_fstat,</span><br><span class="line">[SYS_chdir]   sys_chdir,</span><br><span class="line">[SYS_dup]     sys_dup,</span><br><span class="line">[SYS_getpid]  sys_getpid,</span><br><span class="line">[SYS_sbrk]    sys_sbrk,</span><br><span class="line">[SYS_sleep]   sys_sleep,</span><br><span class="line">[SYS_uptime]  sys_uptime,</span><br><span class="line">[SYS_open]    sys_open,</span><br><span class="line">[SYS_write]   sys_write,</span><br><span class="line">[SYS_mknod]   sys_mknod,</span><br><span class="line">[SYS_unlink]  sys_unlink,</span><br><span class="line">[SYS_link]    sys_link,</span><br><span class="line">[SYS_mkdir]   sys_mkdir,</span><br><span class="line">[SYS_close]   sys_close,</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-Assembly-trap-handler">Code: Assembly trap handler</h2>
+<h2 id="Code-Assembly-trap-handler"><a class="header-anchor" href="#Code-Assembly-trap-handler">#</a>Code: Assembly trap handler</h2>
 <ul>
 <li>x86 提供 256 種中斷，0-31 為軟體異常。</li>
 <li>XV6 將 32-63 給硬體中斷，64 作為 system call。</li>
@@ -277,21 +277,21 @@
 <div class="alert alert-success"><p><strong>File:</strong> mmu.h</p></div>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SETGATE(gate, istrap, sel, off, d)                \</span></span><br><span class="line">{                                                         \</span><br><span class="line">  (gate).off_15_0 = (uint)(off) &amp; <span class="number">0xffff</span>;                 \</span><br><span class="line">  (gate).cs = (sel);                                      \</span><br><span class="line">  (gate).args = <span class="number">0</span>;                                        \</span><br><span class="line">  (gate).rsv1 = <span class="number">0</span>;                                        \</span><br><span class="line">  (gate).type = (istrap) ? STS_TG32 : STS_IG32;           \</span><br><span class="line">  (gate).s = <span class="number">0</span>;                                           \</span><br><span class="line">  (gate).dpl = (d);                                       \</span><br><span class="line">  (gate).p = <span class="number">1</span>;                                           \</span><br><span class="line">  (gate).off_31_16 = (uint)(off) &gt;&gt; <span class="number">16</span>;                   \</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STS_IG32    0xE     <span class="comment">// 32-bit Interrupt Gate</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STS_TG32    0xF     <span class="comment">// 32-bit Trap Gate</span></span></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Trap-發生時">Trap 發生時</h3>
+<h3 id="Trap-發生時"><a class="header-anchor" href="#Trap-發生時">#</a>Trap 發生時</h3>
 <ul>
 <li>user mode：從 task segment descriptor 讀取 <code>%esp</code>、<code>%ss</code>， 接著 push 舊的 <code>%ss</code>、<code>%esp</code> 進新的堆疊。</li>
 <li>kernel mode：不用上述動作。</li>
 <li>接著 push <code>%eflags</code>、<code>%cs</code>、<code>%eip</code>。</li>
 <li>從對應的 IDT 讀取 <code>%eip</code>、<code>%cs</code>。</li>
 </ul>
-<h4 id="File-vector-pl">File: <a href="http://vector.pl" target="_blank" rel="noopener">vector.pl</a></h4>
+<h4 id="File-vector-pl"><a class="header-anchor" href="#File-vector-pl">#</a>File: <a href="http://vector.pl" target="_blank" rel="noopener">vector.pl</a></h4>
 <figure class="highlight pl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/perl -w</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate vectors.S, the trap/interrupt entry points.</span></span><br><span class="line"><span class="comment"># There has to be one entry point per interrupt number</span></span><br><span class="line"><span class="comment"># since otherwise there's no way for trap() to discover</span></span><br><span class="line"><span class="comment"># the interrupt number.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"# generated by vectors.pl - do not edit\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"# handlers\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">".globl alltraps\n"</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">my</span> $i = <span class="number">0</span>; $i &lt; <span class="number">256</span>; $i++){</span><br><span class="line">    <span class="keyword">print</span> <span class="string">".globl vector$i\n"</span>;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"vector$i:\n"</span>;</span><br><span class="line">    <span class="keyword">if</span>(!($i == <span class="number">8</span> || ($i &gt;= <span class="number">10</span> &amp;&amp; $i &lt;= <span class="number">14</span>) || $i == <span class="number">17</span>)){</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"  pushl \$0\n"</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"  pushl \$$i\n"</span>;</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"  jmp alltraps\n"</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\n# vector table\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">".data\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">".globl vectors\n"</span>;</span><br><span class="line"><span class="keyword">print</span> <span class="string">"vectors:\n"</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">my</span> $i = <span class="number">0</span>; $i &lt; <span class="number">256</span>; $i++){</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"  .long vector$i\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>XV6 用 Perl 腳本來生成 IDT 的進入點（<code>vector[]</code>）。</li>
 <li>如果處理器沒有 push 錯誤碼，則在其項 push。</li>
 <li>Push 中斷號碼，跳至 <code>alltraps</code>。</li>
 </ul>
-<h4 id="File-trapret-S">File: trapret.S</h4>
+<h4 id="File-trapret-S"><a class="header-anchor" href="#File-trapret-S">#</a>File: trapret.S</h4>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="string">"mmu.h"</span></span><br><span class="line"></span><br><span class="line">  # vectors.S sends all traps here.</span><br><span class="line"><span class="meta">.globl</span> alltraps</span><br><span class="line"><span class="symbol">alltraps:</span></span><br><span class="line">  # Build trap frame.</span><br><span class="line">  pushl %ds</span><br><span class="line">  pushl %es</span><br><span class="line">  pushl %fs</span><br><span class="line">  pushl %gs</span><br><span class="line">  pushal</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>接著繼續 push <code>%ds</code>、<code>%es</code>、<code>%fs</code>、<code>%gs</code> 及通用暫存器，現在 kernel stack 包含一個 <code>struct trapframe</code>。</li>
@@ -308,8 +308,8 @@
 <div class="alert alert-success"><p><strong>File:</strong> x86.h</p></div>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">trapframe</span> {</span></span><br><span class="line">  <span class="comment">// registers as pushed by pusha</span></span><br><span class="line">  uint edi;</span><br><span class="line">  uint esi;</span><br><span class="line">  uint ebp;</span><br><span class="line">  uint oesp;      <span class="comment">// useless &amp; ignored</span></span><br><span class="line">  uint ebx;</span><br><span class="line">  uint edx;</span><br><span class="line">  uint ecx;</span><br><span class="line">  uint eax;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// rest of trap frame</span></span><br><span class="line">  ushort gs;</span><br><span class="line">  ushort padding1;</span><br><span class="line">  ushort fs;</span><br><span class="line">  ushort padding2;</span><br><span class="line">  ushort es;</span><br><span class="line">  ushort padding3;</span><br><span class="line">  ushort ds;</span><br><span class="line">  ushort padding4;</span><br><span class="line">  uint trapno;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// below here defined by x86 hardware</span></span><br><span class="line">  uint err;</span><br><span class="line">  uint eip;</span><br><span class="line">  ushort cs;</span><br><span class="line">  ushort padding5;</span><br><span class="line">  uint eflags;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// below here only when crossing rings, such as from user to kernel</span></span><br><span class="line">  uint esp;</span><br><span class="line">  ushort ss;</span><br><span class="line">  ushort padding6;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-C-trap-handler">Code: C trap handler</h2>
-<h3 id="trap">trap</h3>
+<h2 id="Code-C-trap-handler"><a class="header-anchor" href="#Code-C-trap-handler">#</a>Code: C trap handler</h2>
+<h3 id="trap"><a class="header-anchor" href="#trap">#</a>trap</h3>
 <table>
 <thead>
 <tr>
@@ -344,13 +344,13 @@
 </li>
 </ul>
 <hr>
-<h2 id="Code-System-calls（機制）">Code: System calls（機制）</h2>
+<h2 id="Code-System-calls（機制）"><a class="header-anchor" href="#Code-System-calls（機制）">#</a>Code: System calls（機制）</h2>
 <div class="alert alert-success"><p><strong>File:</strong> syscall.c</p></div>
 <ul>
 <li>從 trap frame 中的 <code>%eax</code> 讀取 system call 號碼，及對應 syscall table 的索引。</li>
 <li>如果 system call 號碼是非法的，<code>return -1</code>。</li>
 </ul>
-<h3 id="syscall">syscall</h3>
+<h3 id="syscall"><a class="header-anchor" href="#syscall">#</a>syscall</h3>
 <table>
 <thead>
 <tr>
@@ -380,8 +380,8 @@
 </li>
 </ul>
 <hr>
-<h2 id="Code-interrupts">Code: interrupts</h2>
-<h3 id="PIC">PIC</h3>
+<h2 id="Code-interrupts"><a class="header-anchor" href="#Code-interrupts">#</a>Code: interrupts</h2>
+<h3 id="PIC"><a class="header-anchor" href="#PIC">#</a>PIC</h3>
 <ul>
 <li>早期主機板（單核心）上有一塊 PIC，code: picirq.c</li>
 <li>多核心主機板的每顆 CPU 都需要一個 PIC，需要一個方法來分發中斷，操作方式分為兩部份：
@@ -396,11 +396,11 @@
 <li><code>%eflags</code> 的 IF bit 是處理器用來控制是否要接收中斷，<code>cli</code> 清除 IF 來關閉中斷，<code>sti</code> 打開。</li>
 </ul>
 <hr>
-<h2 id="Code-硬碟驅動程式">Code: 硬碟驅動程式</h2>
+<h2 id="Code-硬碟驅動程式"><a class="header-anchor" href="#Code-硬碟驅動程式">#</a>Code: 硬碟驅動程式</h2>
 <ul>
 <li>硬碟驅動程式用 <code>struct buf</code> 來表示一個磁碟區</li>
 </ul>
-<h3 id="File-buf-h">File: buf.h</h3>
+<h3 id="File-buf-h"><a class="header-anchor" href="#File-buf-h">#</a>File: buf.h</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">buf</span> {</span></span><br><span class="line">  <span class="keyword">int</span> flags;</span><br><span class="line">  uint dev;          <span class="comment">// device number</span></span><br><span class="line">  uint sector;       <span class="comment">// sector number</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">prev</span>;</span>  <span class="comment">// LRU cache list</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">next</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">buf</span> *<span class="title">qnext</span>;</span> <span class="comment">// disk queue</span></span><br><span class="line">  uchar data[<span class="number">512</span>];   <span class="comment">// copy of the disk sector</span></span><br><span class="line">};</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> B_BUSY  0x1  <span class="comment">// buffer is locked by some process</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> B_VALID 0x2  <span class="comment">// buffer has been read from disk</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> B_DIRTY 0x4  <span class="comment">// buffer needs to be written to disk</span></span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li><code>flags</code> 紀錄記憶體與硬碟的關係：

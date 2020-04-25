@@ -173,8 +173,8 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有分三種： <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/0031-20e3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/0031-20e3.png?v8">1⃣</span> 對副函式的 <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/0032-20e3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/0032-20e3.png?v8">2⃣</span> 對資料的　<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/0033-20e3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/0033-20e3.png?v8">3⃣</span> 對結構的</p>
 <div class="alert alert-warning"><p><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f514.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f514.png?v8">🔔</span> 註：<strong>attribute</strong> 是給 compiler 看的。</p></div>
-<h2 id="對結構的">對結構的</h2>
-<h3 id="packed">packed</h3>
+<h2 id="對結構的"><a class="header-anchor" href="#對結構的">#</a>對結構的</h2>
+<h3 id="packed"><a class="header-anchor" href="#packed">#</a>packed</h3>
 <p>C語言在宣告結構的時候，會對裡面的元素作對齊，給個例子：</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sample</span> {</span></span><br><span class="line">    <span class="keyword">int</span>  memberA;</span><br><span class="line">    <span class="keyword">char</span> memberB[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span>  memberC;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>如果我們手算此結構的大小的話，會是：</p>
@@ -191,7 +191,7 @@
 <p>在嵌入式系統中，不可浪費太多記憶體，所以需要使用 packed 屬性來告訴 compiler 不要幫我們對齊，<code>sizeof</code> 出來的結果就會如我們預期。</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sample</span> {</span></span><br><span class="line">    <span class="keyword">int</span>  memberA;</span><br><span class="line">    <span class="keyword">char</span> memberB[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span>  memberC;</span><br><span class="line">}__attribute__((packed));</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="aligned">aligned</h3>
+<h3 id="aligned"><a class="header-anchor" href="#aligned">#</a>aligned</h3>
 <p>相反的，<code>aligned</code> 屬性就是告訴 compiler 幫我們對齊資料，可以指定對其的大小，如：</p>
 <ul>
 <li><code>__attribute__((aligned(8)))</code></li>
@@ -204,26 +204,26 @@
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sample</span> {</span></span><br><span class="line">    <span class="keyword">int</span>  memberA;</span><br><span class="line">    <span class="keyword">char</span> memberB[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">char</span> padding1;</span><br><span class="line">    <span class="keyword">int</span>  memberC;</span><br><span class="line">    <span class="keyword">int</span>  padding2;</span><br><span class="line">}__attribute__((aligned(<span class="number">8</span>)));</span><br></pre></td></tr></tbody></table></figure>
 <p>如果沒有加數字，compiler 會進行最佳化的對齊。<br>
 以此例子將以 4 對齊。</p>
-<h2 id="對資料的">對資料的</h2>
+<h2 id="對資料的"><a class="header-anchor" href="#對資料的">#</a>對資料的</h2>
 <ul>
 <li><code>__attribute__((aligned))</code></li>
 <li><code>__attribute__((packed))</code></li>
 </ul>
 <p>與結構道理相同，也是決定要不要對齊。</p>
-<h2 id="aligned-v-s-packed">aligned v.s. packed</h2>
+<h2 id="aligned-v-s-packed"><a class="header-anchor" href="#aligned-v-s-packed">#</a>aligned v.s. packed</h2>
 <ul>
 <li>aligned: 速度快</li>
 <li>packed: 省記憶體</li>
 </ul>
-<h2 id="對副程式的">對副程式的</h2>
-<h3 id="noreturn">noreturn</h3>
+<h2 id="對副程式的"><a class="header-anchor" href="#對副程式的">#</a>對副程式的</h2>
+<h3 id="noreturn"><a class="header-anchor" href="#noreturn">#</a>noreturn</h3>
 <p>對於 void 的副程式，如果放在某個需要回傳值的副程式，理論上會需要回傳值，也就是 <code>return void</code></p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sample</span><span class="params">(<span class="keyword">int</span> a)</span></span>{</span><br><span class="line">    <span class="keyword">return</span> a==<span class="number">0</span> ? a : <span class="built_in">exit</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>但這是無效的操作，所以需要加上 <code>__attribute__((noreturn))</code></p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span>__<span class="title">attribute__</span><span class="params">((noreturn))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sample</span><span class="params">(<span class="keyword">int</span> a)</span></span>{</span><br><span class="line">    <span class="keyword">return</span> a==<span class="number">0</span>? a : <span class="built_in">exit</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="通用">通用</h2>
-<h3 id="section">section</h3>
+<h2 id="通用"><a class="header-anchor" href="#通用">#</a>通用</h2>
+<h3 id="section"><a class="header-anchor" href="#section">#</a>section</h3>
 <p>如果需要將特定的變數、結構或是副程式放到指定的記憶體位置，即可使用此屬性，用法如下：</p>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sample</span>{</span></span><br><span class="line">    <span class="keyword">int</span>  some;</span><br><span class="line">    <span class="keyword">char</span> members;</span><br><span class="line">    <span class="keyword">int</span>  here;</span><br><span class="line">}__attribute__((section(<span class="string">"name"</span>)));</span><br></pre></td></tr></tbody></table></figure>
 <p>上述例子我們指定將 sample 結構放置於指定的記憶體區塊，名為 <code>"name"</code>。<br><br>

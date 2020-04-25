@@ -185,7 +185,7 @@
 <li>由於 timer 鏈需要由小到大排，所以將 timer #4 插在 #2 與 #3 之間</li>
 </ul>
 <hr>
-<h2 id="結構">結構</h2>
+<h2 id="結構"><a class="header-anchor" href="#結構">#</a>結構</h2>
 <div class="alert alert-success"><p><strong>File:</strong> rtdef.h</p></div>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * timer structure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_timer</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_object</span> <span class="title">parent</span>;</span>                            <span class="comment">/**&lt; inherit from rt_object */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_list_t</span>        row[RT_TIMER_SKIP_LIST_LEVEL];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> (*timeout_func)(<span class="keyword">void</span> *parameter);              <span class="comment">/**&lt; timeout function */</span></span><br><span class="line">    <span class="keyword">void</span>            *parameter;                         <span class="comment">/**&lt; timeout function's parameter */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_tick_t</span>        init_tick;                         <span class="comment">/**&lt; timer timeout tick */</span></span><br><span class="line">    <span class="keyword">rt_tick_t</span>        timeout_tick;                      <span class="comment">/**&lt; timeout tick */</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_timer</span> *<span class="title">rt_timer_t</span>;</span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
@@ -194,11 +194,11 @@
 </ul>
 <hr>
 <div class="alert alert-success"><p><strong>File:</strong> timer.c</p></div>
-<h2 id="初始化、建立-timer">初始化、建立 timer</h2>
+<h2 id="初始化、建立-timer"><a class="header-anchor" href="#初始化、建立-timer">#</a>初始化、建立 timer</h2>
 <ul>
 <li>在建立一個 thread 時，<code>_rt_thread_init</code> 會呼叫 <code>rt_timer_init</code> 來初始化 timer</li>
 </ul>
-<h3 id="靜態記憶體管理">靜態記憶體管理</h3>
+<h3 id="靜態記憶體管理"><a class="header-anchor" href="#靜態記憶體管理">#</a>靜態記憶體管理</h3>
 <table>
 <thead>
 <tr>
@@ -260,7 +260,7 @@
 <li>設定 flag 為 decativated，設定 timeout_func、tick、timerlist</li>
 </ul>
 <hr>
-<h3 id="動態記憶體管理">動態記憶體管理</h3>
+<h3 id="動態記憶體管理"><a class="header-anchor" href="#動態記憶體管理">#</a>動態記憶體管理</h3>
 <table>
 <thead>
 <tr>
@@ -300,8 +300,8 @@
 <li>同樣也是透過 <code>_rt_timer_init</code> 完成動作</li>
 </ul>
 <hr>
-<h2 id="刪除-timer">刪除 timer</h2>
-<h3 id="動態記憶體管理-2">動態記憶體管理</h3>
+<h2 id="刪除-timer"><a class="header-anchor" href="#刪除-timer">#</a>刪除 timer</h2>
+<h3 id="動態記憶體管理-v2"><a class="header-anchor" href="#動態記憶體管理-v2">#</a>動態記憶體管理</h3>
 <table>
 <thead>
 <tr>
@@ -324,7 +324,7 @@
 <li>透過 <code>rt_object_delete</code> 移除 timer</li>
 </ul>
 <hr>
-<h3 id="靜態記憶體管理-2">靜態記憶體管理</h3>
+<h3 id="靜態記憶體管理-v2"><a class="header-anchor" href="#靜態記憶體管理-v2">#</a>靜態記憶體管理</h3>
 <table>
 <thead>
 <tr>
@@ -347,8 +347,8 @@
 <li>透過 <code>rt_object_detach</code> 移除 timer</li>
 </ul>
 <hr>
-<h2 id="啟動、停止-timer">啟動、停止 timer</h2>
-<h3 id="Code-rt-timer-start">Code: rt_timer_start</h3>
+<h2 id="啟動、停止-timer"><a class="header-anchor" href="#啟動、停止-timer">#</a>啟動、停止 timer</h2>
+<h3 id="Code-rt-timer-start"><a class="header-anchor" href="#Code-rt-timer-start">#</a>Code: rt_timer_start</h3>
 <table>
 <thead>
 <tr>
@@ -383,7 +383,7 @@
 <li>接著插入 timer 並啟動</li>
 </ul>
 <hr>
-<h3 id="Code-rt-timer-stop">Code: rt_timer_stop</h3>
+<h3 id="Code-rt-timer-stop"><a class="header-anchor" href="#Code-rt-timer-stop">#</a>Code: rt_timer_stop</h3>
 <table>
 <thead>
 <tr>
@@ -405,7 +405,7 @@
 <li>首先將 timer 從鏈結移出，再將 flag 設為 <code>RT_TIMER_FLAG_DEACTIVATED </code></li>
 </ul>
 <hr>
-<h2 id="控制-timer">控制 timer</h2>
+<h2 id="控制-timer"><a class="header-anchor" href="#控制-timer">#</a>控制 timer</h2>
 <table>
 <thead>
 <tr>
@@ -453,7 +453,7 @@
 <li>如果要設定 timer 為週期性的，添加 <code>RT_TIMER_FLAG_PERIODIC</code></li>
 </ul>
 <hr>
-<h2 id="檢查-timer">檢查 timer</h2>
+<h2 id="檢查-timer"><a class="header-anchor" href="#檢查-timer">#</a>檢查 timer</h2>
 <table>
 <thead>
 <tr>

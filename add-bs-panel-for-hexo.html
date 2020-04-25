@@ -171,22 +171,22 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Bootstrap-Panel">Bootstrap Panel</h2>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Bootstrap-Panel"><a class="header-anchor" href="#Bootstrap-Panel">#</a>Bootstrap Panel</h2>
 <div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">panel title</h3><p>panel heading content</p></div><div class="panel-body"><p>panel content</p></div><div class="panel-footer"><p>panel footer</p></div></div>
 <p>So this is a panel given by <a href="https://getbootstrap.com/docs/3.3/components/#panels" target="_blank" rel="noopener">bootstrap</a>, we can add this into hexo just simply write some <span class="label label-warning">HTML</span> like this.</p>
 <figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">"panel-title"</span>&gt;</span>panel title<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>panel heading content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>panel content<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-footer"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>panel footer<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>But this kind of things is not like <em>Hexo</em> style, and hardly to modify.<br>
+<p>But this kind of things is not like <ins><em>Hexo</em></ins> style, and hardly to modify.<br>
 Luckly, Hexo is giving us some api call <a href="https://hexo.io/api/tag" target="_blank" rel="noopener"><strong>tag plugin</strong></a>, so let made a tag to insert a panel!</p>
 <hr>
-<h2 id="Tag-Plugin">Tag Plugin</h2>
+<h2 id="Tag-Plugin"><a class="header-anchor" href="#Tag-Plugin">#</a>Tag Plugin</h2>
 <p>So what is actually tag plugin is? This is the answer of Hexo doc.</p>
 <div class="alert alert-default"><p>A tag allows users to quickly and easily insert snippets into their posts.</p></div>
 <p>As you see, we can simply build a tag and it will render a block our want. A example is above. This <strong>Bs Alert</strong> block is write down in <code>.md</code> like this:</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">{%<span class="built_in"> note </span>%}</span><br><span class="line">blah blah</span><br><span class="line">blah more</span><br><span class="line">{% endnote %}</span><br></pre></td></tr></tbody></table></figure>
 <p>And this tag is named by <em>note</em>. OK, let we get started to build panel tag.</p>
 <hr>
-<h2 id="Panel-Tag">Panel Tag</h2>
-<h3 id="panel-js">panel.js</h3>
+<h2 id="Panel-Tag"><a class="header-anchor" href="#Panel-Tag">#</a>Panel Tag</h2>
+<h3 id="panel-js"><a class="header-anchor" href="#panel-js">#</a>panel.js</h3>
 <p>First things to do, new a file call <em>panel.js</em> and put into <code>scripts</code> directory in current theme’s directory:</p>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch /path/to/your/current/theme/dir/script/panel.js</span></span><br></pre></td></tr></tbody></table></figure>
 <div class="alert alert-warning"><p>if <code>scripts</code> directory is not existed, first new a directory.</p>
@@ -196,7 +196,7 @@ Luckly, Hexo is giving us some api call <a href="https://hexo.io/api/tag" target
 <p>In line 55, we registed a tag name panel, and next time we write something like below , it will show like bs panel.</p>
 <figure class="highlight django"><table><tbody><tr><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">{% <span class="name">panel</span> %}</span><span class="xml"></span></span><br><span class="line"><span class="xml">panel stuff</span></span><br><span class="line"><span class="xml"></span><span class="template-tag">{% <span class="name">endpanel</span> %}</span><span class="xml"></span></span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="Classes">Classes</h3>
+<h3 id="Classes"><a class="header-anchor" href="#Classes">#</a>Classes</h3>
 <p>Panel has some <a href="https://getbootstrap.com/docs/3.3/components/#panels-alternatives" target="_blank" rel="noopener">different styles</a>, we can use args to implement it.</p>
 <div class="panel panel-default"><div class="panel-body"><p>Args is given by hexo tag api, we can pass argument to tag.<br>
 so we combine style name into bs classes, this is the code.</p></div><div class="panel-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">panelContent</span> (<span class="params">args, content</span>) </span>{</span><br><span class="line">    <span class="keyword">var</span> classes = args[<span class="number">0</span>] || <span class="string">'default'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> returnVal = <span class="string">'&lt;div class="panel panel-'</span> + classes + <span class="string">'"&gt;'</span>;</span><br><span class="line">    ...</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
@@ -206,11 +206,11 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
 <div class="panel panel-warning"><div class="panel-heading"><h3 class="panel-title">Warning Panel</h3></div><div class="panel-body"><p>Panel content</p></div></div>
 <div class="panel panel-danger"><div class="panel-heading"><h3 class="panel-title">Danger Panel</h3></div><div class="panel-body"><p>Panel content</p></div></div>
 <hr>
-<h3 id="Content">Content</h3>
+<h3 id="Content"><a class="header-anchor" href="#Content">#</a>Content</h3>
 <p>This is how content show.</p>
 <div class="panel panel-default"><div class="panel-body"><p>Content is given by hexo tag api, this is a string inside tag (of course markdown). We can use hexo render engine to show it.</p></div><div class="panel-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">panelContent</span> (<span class="params">args, content</span>) </span>{</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> returnVal = <span class="string">'&lt;div class="panel panel-'</span> + classes + <span class="string">'"&gt;'</span>;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    returnVal += <span class="string">'&lt;div class="panel-body"&gt;'</span> + hexo.render.renderSync({<span class="attr">text</span>: content, <span class="attr">engine</span>: <span class="string">'markdown'</span>}).trim() + <span class="string">'&lt;/div&gt;&lt;/div&gt;'</span>;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> returnVal;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
 <hr>
-<h3 id="Heading-and-Footer">Heading and Footer</h3>
+<h3 id="Heading-and-Footer"><a class="header-anchor" href="#Heading-and-Footer">#</a>Heading and Footer</h3>
 <p>Panel heading and footer is also given in bs, so we can implement it.</p>
 <div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">panel heading</h3></div><div class="panel-body"><p>This is how heading work.</p>
 <ol>
@@ -227,13 +227,13 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
 <li>After finding, we render this stuff by using hexo render engine.</li>
 </ol></div><div class="panel-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rFooter = <span class="regexp">/&lt;!--\s*footer\s*--&gt;\n([\w\W\s\S]*?)&lt;!--\s*endfooter\s*--&gt;/g</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (footer = rFooter.exec(content)) {</span><br><span class="line">    content = content.replace(rFooter, <span class="string">''</span>);</span><br><span class="line">    returnVal += <span class="string">'&lt;div class="panel-body"&gt;'</span> + hexo.render.renderSync({<span class="attr">text</span>: content, <span class="attr">engine</span>: <span class="string">'markdown'</span>}).trim() + <span class="string">'&lt;/div&gt;'</span>;</span><br><span class="line">    returnVal += <span class="string">'&lt;div class="panel-footer"&gt;'</span> + hexo.render.renderSync({<span class="attr">text</span>: footer[<span class="number">1</span>], <span class="attr">engine</span>: <span class="string">'markdown'</span>}).trim() + <span class="string">'&lt;/div&gt;&lt;/div&gt;'</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
 <hr>
-<h3 id="Remind">Remind</h3>
+<h3 id="Remind"><a class="header-anchor" href="#Remind">#</a>Remind</h3>
 <p>This panel styling is using <a href="https://getbootstrap.com/docs/3.3/" target="_blank" rel="noopener">Bootstrap</a> v3.3, so you need to include bs stylesheet in <code>&lt;head&gt;</code>.</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Latest compiled and minified CSS --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span> <span class="attr">integrity</span>=<span class="string">"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Latest compiled and minified CSS --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 <p>Of course you can use newest libary like v4.0, all version are <a href="https://getbootstrap.com/docs/versions/" target="_blank" rel="noopener">here</a>.</p>
 <div class="alert alert-danger"><p>In newer version like v4.x, <code>.panel</code> is merge into <code>.card</code>, so you need to replace all <code>.panel</code> classes into <code>.card</code> classes.</p></div>
 <hr>
-<h2 id="Example">Example</h2>
+<h2 id="Example"><a class="header-anchor" href="#Example">#</a>Example</h2>
 <figure class="highlight md"><table><tbody><tr><td class="code"><pre><span class="line">{% panel %}</span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- heading  --&gt;</span></span></span><br><span class="line"><span class="section">### panel title</span></span><br><span class="line">panel heading content</span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- endheading --&gt;</span></span></span><br><span class="line">panel content</span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- footer --&gt;</span></span></span><br><span class="line">panel footer</span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- endfooter --&gt;</span></span></span><br><span class="line">{% endpanel %}</span><br></pre></td></tr></tbody></table></figure>
 <p>So this is the correct code I wrote in the top. Panel box in the tag of:</p>
 <figure class="highlight django"><table><tbody><tr><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">{% <span class="name">panel</span> %}</span><span class="xml"></span></span><br><span class="line"><span class="xml">...</span></span><br><span class="line"><span class="xml"></span><span class="template-tag">{% <span class="name">endpanel</span> %}</span><span class="xml"></span></span><br></pre></td></tr></tbody></table></figure>
@@ -277,7 +277,7 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
                         tags: 
 
 
-<a href="/tags/Hexo/">#Hexo</a> <a href="/tags/panel/">#panel</a> <a href="/tags/bootstrap/">#bootstrap</a> <a href="/tags/tags/">#tags</a>
+<a href="/tags/Hexo/">#Hexo</a> <a href="/tags/bootstrap/">#bootstrap</a> <a href="/tags/tags/">#tags</a> <a href="/tags/panel/">#panel</a>
 
 
                     
@@ -287,6 +287,8 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
             
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="pager">
+                        
+                            <li class="previous"><a href="/add-bs-label-for-hexo.html">&larr;  下一頁</a></li>
                         
                         
                             <li class="next"><a href="/c-bit-operation.html">上一頁  &rarr;</a></li>

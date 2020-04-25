@@ -171,14 +171,14 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="購買網域">購買網域</h2>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="購買網域"><a class="header-anchor" href="#購買網域">#</a>購買網域</h2>
 <p>網路上已經有很多如何在 <a href="https://domains.google.com/m/registrar/omuskywalker.com?hl=en#" target="_blank" rel="noopener">Google Domain</a> 上買網域的文章了，在此就不特別贅述，放上我看的幾篇文章：</p>
 <ul>
 <li><a href="https://free.com.tw/google-domains/" target="_blank" rel="noopener">台灣用戶也能在 Google Domains 註冊購買網域名稱，詳細申請設定教學</a></li>
 <li><a href="https://sofree.cc/google-domains/" target="_blank" rel="noopener">[教學]如何用 Google Domains 買網址、註冊網域？ - 香腸炒魷魚</a></li>
 </ul>
 <div class="alert alert-default"><p>比較特別的的地方是，現在只開放部分國家可使用，所以在填地址的時候，可以去 google map 搜尋隨便一個美國的地址，然後使用</p></div>
-<h2 id="設定-DNS">設定 DNS</h2>
+<h2 id="設定-DNS"><a class="header-anchor" href="#設定-DNS">#</a>設定 DNS</h2>
 <p>根據 Github 官方的說明，需設定 type <code>A</code> 的 IP 位址為</p>
 <ul>
 <li>185.199.108.153</li>
@@ -191,7 +191,7 @@
 CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，注意最後有一個點</p>
 <p>這些都設定完，之後你的網址就會變成 <code>subdomain.domain.com</code></p>
 <div class="alert alert-warning"><p>一個很重要的事情是，發布 hexo 的 github repo 須為 <strong><a href="http://github.io" target="_blank" rel="noopener">github.io</a></strong> 類型的，否則設定會有誤</p></div>
-<h2 id="設定-github-CNAME">設定 github CNAME</h2>
+<h2 id="設定-github-CNAME"><a class="header-anchor" href="#設定-github-CNAME">#</a>設定 github CNAME</h2>
 <p>Github 官方有提供 301 轉址功能，只要在網頁的 branch 下建立一個 <code>CNAME</code> 檔案，就會把舊網址轉址到新網址。你的 CNAME 應該要填以下內容：</p>
 <figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
 <p>其中 <code>subdomain</code> 與 <code>domain</code> 與自己的有關，像我的就是</p>
@@ -203,7 +203,7 @@ CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，�
 <p>如果這些都有設定好，你的 github 應該會長這樣：<br>
 <img src="https://i.imgur.com/e5GzzZH.png" alt=""></p>
 <p>大概過幾個小時，你的新網址就可以用了（大功告成）!</p>
-<h2 id="補充：HTTPS">補充：HTTPS</h2>
+<h2 id="補充：HTTPS"><a class="header-anchor" href="#補充：HTTPS">#</a>補充：HTTPS</h2>
 <p>Github page 有提供內建的 HTTPS，只要你的網站設定好一陣子（不會很久，一天內），會有這個選項可以按：<br>
 <img src="https://i.imgur.com/z9HdVbV.png" alt=""><br>
 按下去，就會獲得 HTTPS 了</p>

@@ -171,13 +171,13 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Race-conditions">Race conditions</h2>
-<h3 id="例子">例子</h3>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Race-conditions"><a class="header-anchor" href="#Race-conditions">#</a>Race conditions</h2>
+<h3 id="例子"><a class="header-anchor" href="#例子">#</a>例子</h3>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list</span>{</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list</span> *<span class="title">next</span>;</span></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list</span> *<span class="title">list</span> = 0;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">insert(<span class="keyword">int</span> data)</span><br><span class="line">{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list</span> *<span class="title">l</span>;</span></span><br><span class="line">    l = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span> *l);</span><br><span class="line">    l-&gt;data = data;</span><br><span class="line">    l-&gt;next = <span class="built_in">list</span>;</span><br><span class="line">    <span class="built_in">list</span> = l;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p><img src="https://i.imgur.com/T6893f9.png" alt="" title="Example race"></p>
 <p>假設現在有兩個 process 同時在不同的 CPU 上執行上述程式碼，當兩個 process 都執行到 14 行，則兩條鏈結的 <code>next</code> 都設置為 <code>list</code>；接著，先執行的 process A 將 list 設定為自己的鏈結，後執行的 process B 也將 list 設為自己的鏈結。</p>
 <p><strong>問題</strong>：此時 list 上將會遺失原本 process A <code>insert</code> 的節點。</p>
-<h3 id="圖解">圖解</h3>
+<h3 id="圖解"><a class="header-anchor" href="#圖解">#</a>圖解</h3>
 <ul>
 <li>一開始的 list</li>
 </ul>
@@ -190,10 +190,10 @@
 <li>最後 process B 也將 list 設為 l，此時 list 上的第一顆為 B 的資料，且 A 的資料遺失了。<br>
 <img src="https://i.imgur.com/B659a3t.png" alt=""></li>
 </ul>
-<h3 id="使用鎖">使用鎖</h3>
+<h3 id="使用鎖"><a class="header-anchor" href="#使用鎖">#</a>使用鎖</h3>
 <figure class="highlight diff"><table><tbody><tr><td class="code"><pre><span class="line">struct list *list = 0;</span><br><span class="line">struct lock listlock;</span><br><span class="line"></span><br><span class="line">void</span><br><span class="line">insert(int data)</span><br><span class="line">{</span><br><span class="line">    struct list *l;</span><br><span class="line"><span class="addition">+    acquire(&amp;listlock);</span></span><br><span class="line">    l = malloc(sizeof *l);</span><br><span class="line">    l-&gt;data = data;</span><br><span class="line">    l-&gt;next = list;</span><br><span class="line">    list = l;</span><br><span class="line"><span class="addition">+    release(&amp;listlock);</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-鎖">Code: 鎖</h2>
+<h2 id="Code-鎖"><a class="header-anchor" href="#Code-鎖">#</a>Code: 鎖</h2>
 <ul>
 <li>XV6 使用 <code>struct spinlock</code>，其中以 locked 作為標記。
 <ul>
@@ -202,7 +202,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="File-spinlock-h">File: spinlock.h</h3>
+<h3 id="File-spinlock-h"><a class="header-anchor" href="#File-spinlock-h">#</a>File: spinlock.h</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Mutual exclusion lock.</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">spinlock</span> {</span></span><br><span class="line">  uint locked;       <span class="comment">// Is the lock held?</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// For debugging:</span></span><br><span class="line">  <span class="keyword">char</span> *name;        <span class="comment">// Name of lock.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">cpu</span> *<span class="title">cpu</span>;</span>   <span class="comment">// The cpu holding the lock.</span></span><br><span class="line">  uint pcs[<span class="number">10</span>];      <span class="comment">// The call stack (an array of program counters)</span></span><br><span class="line">                     <span class="comment">// that locked the lock.</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>邏輯上，<code>acquire</code> 應該長這樣：</li>

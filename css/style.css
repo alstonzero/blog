@@ -775,12 +775,9 @@ article hr:not(.block-hr) {
   border: 0;
   border-radius: 0.25em;
 }
-article h2:before,
-article h3:before,
-article h4:before,
-article h5:before {
-  content: '# ';
+article .header-anchor {
   color: #ddd;
+  padding-right: 5px;
 }
 .intro-header .post-heading .meta {
   display: inline;

@@ -179,8 +179,8 @@
 <li>BIOS 將 boot sector 寫入 0x7c00 的位置，並跳至該位址(透過設定暫存器 %ip)。</li>
 <li>XV6 boot loader 包含兩個檔案：<em>bootasm.s</em>、<em>bootmain.c</em>。</li>
 </ul>
-<h2 id="Code-Assembly-bootstrap">Code: Assembly bootstrap</h2>
-<h3 id="File-bootasm-s">File: bootasm.s</h3>
+<h2 id="Code-Assembly-bootstrap"><a class="header-anchor" href="#Code-Assembly-bootstrap">#</a>Code: Assembly bootstrap</h2>
+<h3 id="File-bootasm-s"><a class="header-anchor" href="#File-bootasm-s">#</a>File: bootasm.s</h3>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="string">"asm.h"</span></span><br><span class="line">#include <span class="string">"memlayout.h"</span></span><br><span class="line">#include <span class="string">"mmu.h"</span></span><br><span class="line"></span><br><span class="line"># Start the first <span class="meta">CPU</span>: switch to <span class="number">32</span>-bit protected mode, jump <span class="keyword">into</span> C.</span><br><span class="line"># The BIOS loads this code from the first sector of the hard disk <span class="keyword">into</span></span><br><span class="line"># memory <span class="meta">at</span> physical address <span class="number">0x7c00</span> <span class="keyword">and</span> starts executing <span class="keyword">in</span> real mode</span><br><span class="line"># with %cs=<span class="number">0</span> %ip=7c00.</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>第一行指令：<code>cli</code>，禁止處理器中斷。</li>
@@ -261,8 +261,8 @@
 </ul>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">spin:</span></span><br><span class="line">  <span class="keyword">jmp</span>     spin</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-C-bootstrap">Code: C bootstrap</h2>
-<h3 id="File-bootmain-c">File: bootmain.c</h3>
+<h2 id="Code-C-bootstrap"><a class="header-anchor" href="#Code-C-bootstrap">#</a>Code: C bootstrap</h2>
+<h3 id="File-bootmain-c"><a class="header-anchor" href="#File-bootmain-c">#</a>File: bootmain.c</h3>
 <ul>
 <li><em>bootmain</em> 的工作：載入並執行 kernel。</li>
 <li>Kernel 為 ELF 格式的二進位檔。</li>

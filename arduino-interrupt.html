@@ -171,7 +171,7 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="新增中斷">新增中斷</h2>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="新增中斷"><a class="header-anchor" href="#新增中斷">#</a>新增中斷</h2>
 <figure class="highlight arduino"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">attachInterrupt</span>(digitalPinToInterrupt(pin), ISR, mode);</span><br><span class="line"><span class="built_in">attachInterrupt</span>(interrupt, ISR, mode);</span><br><span class="line"><span class="built_in">attachInterrupt</span>(pin, ISR, mode);</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>有三種可選：
@@ -182,7 +182,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="模式">模式</h3>
+<h3 id="模式"><a class="header-anchor" href="#模式">#</a>模式</h3>
 <ul>
 <li>LOW：當 pin 處於低電位的時候觸發中斷</li>
 <li>RISING：當 pin 從低電位轉為高電位時觸發中斷</li>
@@ -190,12 +190,12 @@
 <li>CHANGE：當 pin 的電位發生改變時觸發中斷</li>
 <li>HIGH：當 pin 處於高電位時觸發中斷（只適用 arduino due）</li>
 </ul>
-<h2 id="移除中斷">移除中斷</h2>
+<h2 id="移除中斷"><a class="header-anchor" href="#移除中斷">#</a>移除中斷</h2>
 <figure class="highlight arduino"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">detachInterrupt</span>(digitalPinToInterrupt(pin));</span><br><span class="line"><span class="built_in">detachInterrupt</span>(interrupt);</span><br><span class="line"><span class="built_in">detachInterrupt</span>(pin);</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>一樣有三個寫法，與新增中斷的第一個參數相同。</li>
 </ul>
-<h2 id="關閉-開啟中斷">關閉/開啟中斷</h2>
+<h2 id="關閉-開啟中斷"><a class="header-anchor" href="#關閉-開啟中斷">#</a>關閉/開啟中斷</h2>
 <figure class="highlight arduino"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">noInterrupts</span>();</span><br><span class="line"><span class="built_in">interrupts</span>();</span><br></pre></td></tr></tbody></table></figure>
 <div class="alert alert-warning"><p><code>noInterrupts</code> 不會將 <code>reset</code> 中斷關閉。</p></div>
 <script>

@@ -178,19 +178,19 @@
 <li>RT-Thread 利用 7 種方式來完成同步：關閉中斷、scheduler lock、semaphore、互斥鎖、事件、mail box 及 message</li>
 </ul>
 <hr>
-<h2 id="關閉中斷">關閉中斷</h2>
+<h2 id="關閉中斷"><a class="header-anchor" href="#關閉中斷">#</a>關閉中斷</h2>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">level = rt_hw_interrupt_disable();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  critical region </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">rt_hw_interrupt_enable(level);</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>此方式是最強大的一種，但此 critical region 不可以佔用太多時間</li>
 </ul>
 <hr>
-<h2 id="Scheduler-lock">Scheduler lock</h2>
+<h2 id="Scheduler-lock"><a class="header-anchor" href="#Scheduler-lock">#</a>Scheduler lock</h2>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">rt_enter_critical()</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *  critical region </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">rt_exit_critical()</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>使用此方式可確保當前 thread 不會被 scheduler 踢出，但還是有可能會被中斷影響。</li>
 </ul>
 <hr>
-<h3 id="進入-scheuler-鎖">進入 scheuler 鎖</h3>
+<h3 id="進入-scheuler-鎖"><a class="header-anchor" href="#進入-scheuler-鎖">#</a>進入 scheuler 鎖</h3>
 <div class="alert alert-success"><p><strong>File:</strong> scheduler.c</p></div>
 <table>
 <thead>
@@ -211,7 +211,7 @@
 <li>即，將 <code>rt_scheduler_lock_nest</code> 加一</li>
 </ul>
 <hr>
-<h3 id="離開-scheduler-鎖">離開 scheduler 鎖</h3>
+<h3 id="離開-scheduler-鎖"><a class="header-anchor" href="#離開-scheduler-鎖">#</a>離開 scheduler 鎖</h3>
 <table>
 <thead>
 <tr>
@@ -254,22 +254,22 @@
 <li>即，回傳 <code>rt_scheduler_lock_nest</code> 值</li>
 </ul>
 <hr>
-<h2 id="Semaphore">Semaphore</h2>
+<h2 id="Semaphore"><a class="header-anchor" href="#Semaphore">#</a>Semaphore</h2>
 <ul>
 <li>為一個值，代表同時可用的個數</li>
 <li>不等於 0 時可用，取用時將值減 1</li>
 <li>當不可用時，將 thread 掛在等待的鏈上</li>
 </ul>
 <div class="alert alert-success"><p><strong>File:</strong> rtdef.h</p></div>
-<h3 id="結構">結構</h3>
+<h3 id="結構"><a class="header-anchor" href="#結構">#</a>結構</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_SEMAPHORE</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Semaphore structure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_semaphore</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_ipc_object</span> <span class="title">parent</span>;</span>                        <span class="comment">/**&lt; inherit from ipc_object */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_uint16_t</span>          value;                         <span class="comment">/**&lt; value of semaphore. */</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_semaphore</span> *<span class="title">rt_sem_t</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="flags">flags</h3>
+<h3 id="flags"><a class="header-anchor" href="#flags">#</a>flags</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * IPC flags and control command definitions</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_IPC_FLAG_FIFO                0x00            <span class="comment">/**&lt; FIFOed IPC. @ref IPC. */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_IPC_FLAG_PRIO                0x01            <span class="comment">/**&lt; PRIOed IPC. @ref IPC. */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_IPC_CMD_UNKNOWN              0x00            <span class="comment">/**&lt; unknown IPC command */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_IPC_CMD_RESET                0x01            <span class="comment">/**&lt; reset IPC object */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_WAITING_FOREVER              -1              <span class="comment">/**&lt; Block forever until get resource. */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_WAITING_NO                   0               <span class="comment">/**&lt; Non-block. */</span></span></span><br></pre></td></tr></tbody></table></figure>
 <hr>
 <div class="alert alert-success"><p><strong>File:</strong> ipc.c</p></div>
-<h3 id="建立-semaphore">建立 semaphore</h3>
-<h4 id="動態記憶體管理">動態記憶體管理</h4>
+<h3 id="建立-semaphore"><a class="header-anchor" href="#建立-semaphore">#</a>建立 semaphore</h3>
+<h4 id="動態記憶體管理"><a class="header-anchor" href="#動態記憶體管理">#</a>動態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -305,7 +305,7 @@
 <li>首先需要一塊 semaphore 的大小，初始化 ipc 物件，再依序寫入初始值及 flag</li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理"><a class="header-anchor" href="#靜態記憶體管理">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -343,8 +343,8 @@
 <li>由於使用靜態記憶體，這裡就不需要再 allocate。</li>
 </ul>
 <hr>
-<h3 id="刪除-semaphore">刪除 semaphore</h3>
-<h4 id="動態記憶體管理-2">動態記憶體管理</h4>
+<h3 id="刪除-semaphore"><a class="header-anchor" href="#刪除-semaphore">#</a>刪除 semaphore</h3>
+<h4 id="動態記憶體管理-v2"><a class="header-anchor" href="#動態記憶體管理-v2">#</a>動態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -367,7 +367,7 @@
 <li>接著呼叫 <code>rt_object_delete</code> 清除此物件（semaphore）</li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理-2">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理-v2"><a class="header-anchor" href="#靜態記憶體管理-v2">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -389,7 +389,7 @@
 <li>這裡則透過 <code>rt_object_detach</code> 清除</li>
 </ul>
 <hr>
-<h3 id="使用-semaphore">使用 semaphore</h3>
+<h3 id="使用-semaphore"><a class="header-anchor" href="#使用-semaphore">#</a>使用 semaphore</h3>
 <ul>
 <li>呼叫 <code>rt_sem_take</code> 來取得 semaphore，傳入的 time 是等待時間</li>
 </ul>
@@ -506,20 +506,20 @@
 <li>最後開啟中斷，並根據 <code>need_schedule</code> 來決定需不需要執行一次調度</li>
 </ul>
 <hr>
-<h2 id="互斥鎖（mutex）">互斥鎖（mutex）</h2>
+<h2 id="互斥鎖（mutex）"><a class="header-anchor" href="#互斥鎖（mutex）">#</a>互斥鎖（mutex）</h2>
 <ul>
 <li>即一種值為 1 的特殊 semaphore，特別的是具有防止優先級翻轉的特性</li>
 </ul>
 <div class="alert alert-success"><p><strong>File:</strong> rtdef.h</p></div>
-<h3 id="結構-2">結構</h3>
+<h3 id="結構-v2"><a class="header-anchor" href="#結構-v2">#</a>結構</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_MUTEX</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Mutual exclusion (mutex) structure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_mutex</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_ipc_object</span> <span class="title">parent</span>;</span>                        <span class="comment">/**&lt; inherit from ipc_object */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_uint16_t</span>          value;                         <span class="comment">/**&lt; value of mutex */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_uint8_t</span>           original_priority;             <span class="comment">/**&lt; priority of last thread hold the mutex */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span>           hold;                          <span class="comment">/**&lt; numbers of thread hold the mutex */</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span>    *<span class="title">owner</span>;</span>                         <span class="comment">/**&lt; current owner of mutex */</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_mutex</span> *<span class="title">rt_mutex_t</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>為了防止優先權翻轉，在持有鎖的過程中可能會被提升優先權，在結構中就需要紀錄原本的優先級。</li>
 </ul>
 <hr>
 <div class="alert alert-success"><p><strong>File:</strong> ipc.c</p></div>
-<h3 id="建立-mutex">建立 mutex</h3>
-<h4 id="動態記憶體管理-3">動態記憶體管理</h4>
+<h3 id="建立-mutex"><a class="header-anchor" href="#建立-mutex">#</a>建立 mutex</h3>
+<h4 id="動態記憶體管理-v3"><a class="header-anchor" href="#動態記憶體管理-v3">#</a>動態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -561,7 +561,7 @@
 <li>同時填入 flag</li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理-3">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理-v3"><a class="header-anchor" href="#靜態記憶體管理-v3">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -597,8 +597,8 @@
 <li>這裡不需要 allocate，只需要初始化物件</li>
 </ul>
 <hr>
-<h3 id="刪除-mutex">刪除 mutex</h3>
-<h4 id="動態記憶體管理-4">動態記憶體管理</h4>
+<h3 id="刪除-mutex"><a class="header-anchor" href="#刪除-mutex">#</a>刪除 mutex</h3>
+<h4 id="動態記憶體管理-v4"><a class="header-anchor" href="#動態記憶體管理-v4">#</a>動態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -630,7 +630,7 @@
 <li>與 semaphore 類似，先將正在等待此鎖的所有 thread 叫醒，接著透過 <code>rt_object_delete</code> 刪除 mutex</li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理-4">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理-v4"><a class="header-anchor" href="#靜態記憶體管理-v4">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -662,7 +662,7 @@
 <li>這裡則運用 <code>rt_object_detach</code> 刪除</li>
 </ul>
 <hr>
-<h3 id="使用-mutex">使用 mutex</h3>
+<h3 id="使用-mutex"><a class="header-anchor" href="#使用-mutex">#</a>使用 mutex</h3>
 <ul>
 <li>呼叫 <code>rt_mutex_take</code> 來取得鎖</li>
 </ul>
@@ -778,12 +778,12 @@
 <li>開啟中斷，並視情況做一次調度</li>
 </ul>
 <hr>
-<h2 id="事件">事件</h2>
+<h2 id="事件"><a class="header-anchor" href="#事件">#</a>事件</h2>
 <ul>
 <li>可實現一對多，多對多</li>
 <li>僅用來同步，無傳輸的功能</li>
 </ul>
-<h3 id="實作">實作</h3>
+<h3 id="實作"><a class="header-anchor" href="#實作">#</a>實作</h3>
 <ul>
 <li>thread 的結構中有一個 32 位的事件標記，一個事件的資訊</li>
 </ul>
@@ -799,12 +799,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="結構-3">結構</h3>
+<h3 id="結構-v3"><a class="header-anchor" href="#結構-v3">#</a>結構</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_EVENT</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * flag defintions in event</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_EVENT_FLAG_AND               0x01            <span class="comment">/**&lt; logic and */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_EVENT_FLAG_OR                0x02            <span class="comment">/**&lt; logic or */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RT_EVENT_FLAG_CLEAR             0x04            <span class="comment">/**&lt; clear flag */</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * event structure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_event</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_ipc_object</span> <span class="title">parent</span>;</span>                        <span class="comment">/**&lt; inherit from ipc_object */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_uint32_t</span>          <span class="built_in">set</span>;                           <span class="comment">/**&lt; event set */</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_event</span> *<span class="title">rt_event_t</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
 <hr>
 <div class="alert alert-success"><p><strong>File:</strong> ipc.c</p></div>
-<h3 id="建立事件">建立事件</h3>
-<h4 id="動態記憶體管理-5">動態記憶體管理</h4>
+<h3 id="建立事件"><a class="header-anchor" href="#建立事件">#</a>建立事件</h3>
+<h4 id="動態記憶體管理-v5"><a class="header-anchor" href="#動態記憶體管理-v5">#</a>動態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -838,7 +838,7 @@
 <li>一樣 allocate 記憶體，填入 flag，初始化，最後設定值為 0</li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理-5">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理-v5"><a class="header-anchor" href="#靜態記憶體管理-v5">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -874,8 +874,8 @@
 <li>這裡則不需要 allocate</li>
 </ul>
 <hr>
-<h3 id="刪除事件">刪除事件</h3>
-<h4 id="靜態記憶體管理-6">靜態記憶體管理</h4>
+<h3 id="刪除事件"><a class="header-anchor" href="#刪除事件">#</a>刪除事件</h3>
+<h4 id="靜態記憶體管理-v6"><a class="header-anchor" href="#靜態記憶體管理-v6">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -897,7 +897,7 @@
 <li>相同的，需要先將正在等待此事件的 thread 叫醒，再刪除</li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理-7">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理-v7"><a class="header-anchor" href="#靜態記憶體管理-v7">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -919,7 +919,7 @@
 <li>這裡則用 <code>rt_object_detach</code></li>
 </ul>
 <hr>
-<h3 id="傳遞事件">傳遞事件</h3>
+<h3 id="傳遞事件"><a class="header-anchor" href="#傳遞事件">#</a>傳遞事件</h3>
 <table>
 <thead>
 <tr>
@@ -982,7 +982,7 @@
 <li>最後開啟中斷，視情況做一次調度</li>
 </ul>
 <hr>
-<h3 id="接收事件">接收事件</h3>
+<h3 id="接收事件"><a class="header-anchor" href="#接收事件">#</a>接收事件</h3>
 <table>
 <thead>
 <tr>

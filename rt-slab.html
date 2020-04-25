@@ -187,19 +187,19 @@
 </ul>
 <p><img src="https://i.imgur.com/GZdBl7V.png" alt="" title="SLAB example"></p>
 <hr>
-<h2 id="結構">結構</h2>
+<h2 id="結構"><a class="header-anchor" href="#結構">#</a>結構</h2>
 <div class="alert alert-success"><p><strong>File:</strong> slab.c</p></div>
-<h3 id="Zone">Zone</h3>
+<h3 id="Zone"><a class="header-anchor" href="#Zone">#</a>Zone</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * The IN-BAND zone header is placed at the beginning of each zone.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">slab_zone</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">rt_int32_t</span>  z_magic;        <span class="comment">/* magic number for sanity check */</span></span><br><span class="line">    <span class="keyword">rt_int32_t</span>  z_nfree;        <span class="comment">/* total free chunks / ualloc space in zone */</span></span><br><span class="line">    <span class="keyword">rt_int32_t</span>  z_nmax;         <span class="comment">/* maximum free chunks */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">slab_zone</span> *<span class="title">z_next</span>;</span>   <span class="comment">/* zoneary[] link if z_nfree non-zero */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span>  *z_baseptr;     <span class="comment">/* pointer to start of chunk array */</span></span><br><span class="line">    <span class="keyword">rt_int32_t</span>  z_uindex;       <span class="comment">/* current initial allocation index */</span></span><br><span class="line">    <span class="keyword">rt_int32_t</span>  z_chunksize;    <span class="comment">/* chunk size for validation */</span></span><br><span class="line">    <span class="keyword">rt_int32_t</span>  z_zoneindex;    <span class="comment">/* zone index */</span></span><br><span class="line">    slab_chunk  *z_freechunk;   <span class="comment">/* free chunk list */</span></span><br><span class="line">} slab_zone;</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Chunk structure for free elements</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">slab_chunk</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">slab_chunk</span> *<span class="title">c_next</span>;</span></span><br><span class="line">} slab_chunk;</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="Page-Allocator">Page Allocator</h3>
+<h3 id="Page-Allocator"><a class="header-anchor" href="#Page-Allocator">#</a>Page Allocator</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* page allocator */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_page_head</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_page_head</span> *<span class="title">next</span>;</span>      <span class="comment">/* next valid page */</span></span><br><span class="line">    <span class="keyword">rt_size_t</span> page;                 <span class="comment">/* number of page  */</span></span><br><span class="line">    <span class="comment">/* dummy */</span></span><br><span class="line">    <span class="keyword">char</span> dummy[RT_MM_PAGE_SIZE - (<span class="keyword">sizeof</span>(struct rt_page_head *) + <span class="keyword">sizeof</span>(<span class="keyword">rt_size_t</span>))];</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="Descriptor">Descriptor</h3>
+<h3 id="Descriptor"><a class="header-anchor" href="#Descriptor">#</a>Descriptor</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Array of descriptors that describe the contents of each page</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PAGE_TYPE_FREE      0x00</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PAGE_TYPE_SMALL     0x01</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PAGE_TYPE_LARGE     0x02</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">memusage</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">rt_uint32_t</span> type: <span class="number">2</span> ;       <span class="comment">/* page type */</span></span><br><span class="line">    <span class="keyword">rt_uint32_t</span> size: <span class="number">30</span>;       <span class="comment">/* pages allocated or offset from zone */</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="初始化-heap">初始化 heap</h2>
+<h2 id="初始化-heap"><a class="header-anchor" href="#初始化-heap">#</a>初始化 heap</h2>
 <table>
 <thead>
 <tr>
@@ -254,7 +254,7 @@
 <li>最後建立一個陣列紀錄頁的資訊</li>
 </ul>
 <hr>
-<h3 id="rt-page-init">rt_page_init</h3>
+<h3 id="rt-page-init"><a class="header-anchor" href="#rt-page-init">#</a>rt_page_init</h3>
 <table>
 <thead>
 <tr>
@@ -288,8 +288,8 @@
 <li>將 page list 設為空，釋放所有的 page</li>
 </ul>
 <hr>
-<h2 id="分配記憶體">分配記憶體</h2>
-<h3 id="rt-malloc">rt_malloc</h3>
+<h2 id="分配記憶體"><a class="header-anchor" href="#分配記憶體">#</a>分配記憶體</h2>
+<h3 id="rt-malloc"><a class="header-anchor" href="#rt-malloc">#</a>rt_malloc</h3>
 <table>
 <thead>
 <tr>
@@ -395,7 +395,7 @@
 <li>最後回傳找到的 chunk</li>
 </ul>
 <hr>
-<h4 id="zoneindex">zoneindex</h4>
+<h4 id="zoneindex"><a class="header-anchor" href="#zoneindex">#</a>zoneindex</h4>
 <table>
 <thead>
 <tr>
@@ -415,7 +415,7 @@
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Calculate the zone index for the allocation request size and set the</span></span><br><span class="line"><span class="comment"> * allocation request size to that particular zone's chunk size.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">rt_inline <span class="keyword">int</span> <span class="title">zoneindex</span><span class="params">(<span class="keyword">rt_uint32_t</span> *bytes)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="comment">/* unsigned for shift opt */</span></span><br><span class="line">    <span class="keyword">rt_uint32_t</span> n = (<span class="keyword">rt_uint32_t</span>) * bytes;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">128</span>)</span><br><span class="line">    {</span><br><span class="line">        *bytes = n = (n + <span class="number">7</span>) &amp; ~<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 8 byte chunks, 16 zones */</span></span><br><span class="line">        <span class="keyword">return</span> (n / <span class="number">8</span> - <span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">256</span>)</span><br><span class="line">    {</span><br><span class="line">        *bytes = n = (n + <span class="number">15</span>) &amp; ~<span class="number">15</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (n / <span class="number">16</span> + <span class="number">7</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">8192</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">512</span>)</span><br><span class="line">        {</span><br><span class="line">            *bytes = n = (n + <span class="number">31</span>) &amp; ~<span class="number">31</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (n / <span class="number">32</span> + <span class="number">15</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">1024</span>)</span><br><span class="line">        {</span><br><span class="line">            *bytes = n = (n + <span class="number">63</span>) &amp; ~<span class="number">63</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (n / <span class="number">64</span> + <span class="number">23</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2048</span>)</span><br><span class="line">        {</span><br><span class="line">            *bytes = n = (n + <span class="number">127</span>) &amp; ~<span class="number">127</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (n / <span class="number">128</span> + <span class="number">31</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">4096</span>)</span><br><span class="line">        {</span><br><span class="line">            *bytes = n = (n + <span class="number">255</span>) &amp; ~<span class="number">255</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> (n / <span class="number">256</span> + <span class="number">39</span>);</span><br><span class="line">        }</span><br><span class="line">        *bytes = n = (n + <span class="number">511</span>) &amp; ~<span class="number">511</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (n / <span class="number">512</span> + <span class="number">47</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">16384</span>)</span><br><span class="line">    {</span><br><span class="line">        *bytes = n = (n + <span class="number">1023</span>) &amp; ~<span class="number">1023</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (n / <span class="number">1024</span> + <span class="number">55</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    rt_kprintf(<span class="string">"Unexpected byte count %d"</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>根據不同的 range，將傳入的大小對齊，並平均分配每個 range 有 16 個 zone index</p>
 <hr>
-<h4 id="rt-page-alloc">rt_page_alloc</h4>
+<h4 id="rt-page-alloc"><a class="header-anchor" href="#rt-page-alloc">#</a>rt_page_alloc</h4>
 <table>
 <thead>
 <tr>
@@ -442,7 +442,7 @@
 <li>最後回傳選擇的頁</li>
 </ul>
 <hr>
-<h3 id="rt-realloc">rt_realloc</h3>
+<h3 id="rt-realloc"><a class="header-anchor" href="#rt-realloc">#</a>rt_realloc</h3>
 <table>
 <thead>
 <tr>
@@ -496,7 +496,7 @@
 <li>如果不同，<code>malloc(size)</code>，並還原資料，釋放舊的記憶體</li>
 </ul>
 <hr>
-<h3 id="rt-calloc">rt_calloc</h3>
+<h3 id="rt-calloc"><a class="header-anchor" href="#rt-calloc">#</a>rt_calloc</h3>
 <table>
 <thead>
 <tr>
@@ -531,7 +531,7 @@
 <li>清 0 並回傳起始位址</li>
 </ul>
 <hr>
-<h2 id="釋放記憶體">釋放記憶體</h2>
+<h2 id="釋放記憶體"><a class="header-anchor" href="#釋放記憶體">#</a>釋放記憶體</h2>
 <table>
 <thead>
 <tr>
@@ -582,7 +582,7 @@
 </li>
 </ul>
 <hr>
-<h3 id="rt-page-free">rt_page_free</h3>
+<h3 id="rt-page-free"><a class="header-anchor" href="#rt-page-free">#</a>rt_page_free</h3>
 <table>
 <thead>
 <tr>

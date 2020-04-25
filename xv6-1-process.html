@@ -174,7 +174,7 @@
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>OS 必須具備三項技能：多工、獨立及交流。</p>
 </blockquote>
-<h2 id="kernel-組織">kernel 組織</h2>
+<h2 id="kernel-組織"><a class="header-anchor" href="#kernel-組織">#</a>kernel 組織</h2>
 <ul>
 <li><strong>Monolithic kernel</strong>：整個 OS 都位於 kernel 中，如此一來所有 system calls 都會在 kernel 中執行（XV6）。
 <ul>
@@ -196,7 +196,7 @@
 </ul>
 <p><img src="https://i.imgur.com/lCf7yfw.png" alt="microkernel" title="A mkernel with a file system server"></p>
 <hr>
-<h2 id="Process-概觀">Process 概觀</h2>
+<h2 id="Process-概觀"><a class="header-anchor" href="#Process-概觀">#</a>Process 概觀</h2>
 <ul>
 <li>為 UNIX（XV6） 中的一個獨立單元。</li>
 <li>確保一個 process 不會破壞或是竊取另一程序的記憶體、CPU、檔案描述符等等。</li>
@@ -216,7 +216,7 @@
 </ul>
 <p><img src="https://i.imgur.com/AQ9pMhW.png" alt="address space" title="Layout of a virtual address space"></p>
 <hr>
-<h2 id="Code-第一個-address-space">Code: 第一個 address space</h2>
+<h2 id="Code-第一個-address-space"><a class="header-anchor" href="#Code-第一個-address-space">#</a>Code: 第一個 address space</h2>
 <ul>
 <li>XV6 為 kernel 建立第一個 address space 的流程：
 <ol>
@@ -239,7 +239,7 @@
 <div class="alert alert-success"><p><strong><strong>File:</strong></strong> entry.s</p></div>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">_start = V2P_WO(entry)</span><br><span class="line"></span><br><span class="line"># Entering XV6 on boot processor, with paging off.</span><br><span class="line"><span class="meta">.globl</span> entry</span><br><span class="line"><span class="symbol">entry:</span></span><br><span class="line">    # Turn on page size extension for 4Mbyte pages</span><br><span class="line">    movl    %cr4, %eax</span><br><span class="line">    orl     $(CR4_PSE), %eax</span><br><span class="line">    movl    %eax, %cr4</span><br><span class="line">    # Set page directory</span><br><span class="line">    movl    $(V2P_WO(entrypgdir)), %eax</span><br><span class="line">    movl    %eax, %cr3</span><br><span class="line">    # Turn on paging.</span><br><span class="line">    movl    %cr0, %eax</span><br><span class="line">    orl     $(CR0_PG|CR0_WP), %eax</span><br><span class="line">    movl    %eax, %cr0</span><br><span class="line"></span><br><span class="line">    # Set <span class="meta">up</span> the stack pointer.</span><br><span class="line">    movl $(stack + KSTACKSIZE), %esp</span><br><span class="line"></span><br><span class="line">    # Jump to main(), <span class="keyword">and</span> switch to executing <span class="meta">at</span></span><br><span class="line">    # high addresses. The indirect <span class="keyword">call</span> is needed because</span><br><span class="line">    # the assembler produces a PC-relative instruction</span><br><span class="line">    # for a direct jump.</span><br><span class="line">    <span class="keyword">mov</span> $main, %eax</span><br><span class="line">    <span class="keyword">jmp</span> *%eax</span><br><span class="line"></span><br><span class="line"><span class="meta">.comm</span> stack, KSTACKSIZE</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-建立第一個-process">Code: 建立第一個 process</h2>
+<h2 id="Code-建立第一個-process"><a class="header-anchor" href="#Code-建立第一個-process">#</a>Code: 建立第一個 process</h2>
 <div class="alert alert-success"><p><strong><strong>File:</strong></strong> proc.c</p></div>
 <ul>
 <li>呼叫 <code>userinit()</code> 來建立第一個 process（只有在第一個process時會呼叫）。</li>
@@ -247,7 +247,7 @@
 <li><code>Allocproc</code> 在 process table 中分配一個 slot（<code>struct proc</code>），並初始化有關 kernel thread 的 process 片段。</li>
 <li><code>Allocproc</code> 掃描 proc tabel，找到 <code>p-&gt;state</code> 是 <code>UNUSED</code>，接著設定為 <code>EMBRYO</code> 來標示被使用，並給予一組唯一的 pid。</li>
 </ul>
-<h3 id="allocproc">allocproc</h3>
+<h3 id="allocproc"><a class="header-anchor" href="#allocproc">#</a>allocproc</h3>
 <table>
 <thead>
 <tr>
@@ -299,7 +299,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="userinit">userinit</h3>
+<h3 id="userinit"><a class="header-anchor" href="#userinit">#</a>userinit</h3>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">userinit(<span class="keyword">void</span>)</span><br><span class="line">{</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">proc</span> *<span class="title">p</span>;</span></span><br><span class="line">  <span class="keyword">extern</span> <span class="keyword">char</span> _binary_initcode_start[], _binary_initcode_size[];</span><br><span class="line">  </span><br><span class="line">  p = allocproc();</span><br><span class="line">  initproc = p;</span><br><span class="line">  <span class="keyword">if</span>((p-&gt;pgdir = setupkvm()) == <span class="number">0</span>)</span><br><span class="line">    panic(<span class="string">"userinit: out of memory?"</span>);</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li><code>inituvm</code> 請求一個 page 大小的實體記憶體，將虛擬記憶體 0 映射到此記憶體，並將 <code>_binary_initcode_start_</code> 及 <code>_binary_initcode_size_</code> 拷貝到 page。</li>
@@ -318,7 +318,7 @@
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">  p-&gt;state = RUNNABLE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Code-執行第一個-process">Code: 執行第一個 process</h2>
+<h2 id="Code-執行第一個-process"><a class="header-anchor" href="#Code-執行第一個-process">#</a>Code: 執行第一個 process</h2>
 <ul>
 <li>當 <em>main</em> 呼叫完 <em>userinit</em> 後，呼叫 <em>mpmain</em>，<em>mpmain</em> 接著呼叫 <em>scheduler</em> 開始運行 process。</li>
 </ul>
@@ -386,7 +386,7 @@
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line">      p-&gt;state = RUNNING;</span><br><span class="line">      swtch(&amp;cpu-&gt;scheduler, proc-&gt;context);</span><br><span class="line">      switchkvm();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Process is done running for now.</span></span><br><span class="line">      <span class="comment">// It should have changed its p-&gt;state before coming back.</span></span><br><span class="line">      proc = <span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">    release(&amp;ptable.lock);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="File-swtch-S"><strong>File:</strong> swtch.S</h3>
+<h3 id="File-swtch-S"><a class="header-anchor" href="#File-swtch-S">#</a><strong>File:</strong> swtch.S</h3>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># Context switch</span><br><span class="line">#</span><br><span class="line">#   void swtch(struct context **old, struct context *new)<span class="comment">;</span></span><br><span class="line"># </span><br><span class="line"># Save current register context <span class="keyword">in</span> old</span><br><span class="line"># <span class="keyword">and</span> then load register context from new.</span><br><span class="line"></span><br><span class="line"><span class="meta">.globl</span> swtch</span><br><span class="line"><span class="symbol">swtch:</span></span><br><span class="line">     movl <span class="number">4</span>(%esp), %eax</span><br><span class="line">     movl <span class="number">8</span>(%esp), %edx</span><br><span class="line"></span><br><span class="line">     # Save old callee-save registers</span><br><span class="line">     pushl %ebp</span><br><span class="line">     pushl %ebx</span><br><span class="line">     pushl %esi</span><br><span class="line">     pushl %edi</span><br><span class="line"></span><br><span class="line">     # Switch stacks</span><br><span class="line">     movl %esp, (%eax)</span><br><span class="line">     movl %edx, %esp</span><br><span class="line"></span><br><span class="line">     # Load new callee-save registers</span><br><span class="line">     popl %edi</span><br><span class="line">     popl %esi</span><br><span class="line">     popl %ebx</span><br><span class="line">     popl %ebp</span><br><span class="line">     <span class="keyword">ret</span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li><code>ret</code> 指令從 stack pop 目標程序的 <code>%eip</code>，結束 context switch。</li>
@@ -427,7 +427,7 @@
 <li>處理器從 <code>%eip</code> 的值繼續執行，對於 <code>initproc</code> 即為虛擬地址 0，也就是 <em>initcode.S</em> 的第一條指令。</li>
 </ul>
 <hr>
-<h2 id="第一個-system-call：exec">第一個 system call：exec</h2>
+<h2 id="第一個-system-call：exec"><a class="header-anchor" href="#第一個-system-call：exec">#</a>第一個 system call：exec</h2>
 <ul>
 <li><em>initcode.S</em> 第一件事是觸發 <code>exec</code> system call。</li>
 <li><code>exec</code> 用一個新的程式代替當前 process 的記憶體及暫存器。</li>
@@ -438,7 +438,7 @@
 <li><code>$init</code> 會 return <code>"/init\0"</code></li>
 <li>若 <code>exec</code> 失敗了且返回，<em>initcode</em> 會不斷的呼叫一個 system call：<code>exit()</code>(17)。</li>
 </ul>
-<h3 id="File-initcode-S"><strong>File:</strong> initcode.S</h3>
+<h3 id="File-initcode-S"><a class="header-anchor" href="#File-initcode-S">#</a><strong>File:</strong> initcode.S</h3>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># Initial process execs /init.</span><br><span class="line"></span><br><span class="line">#include <span class="string">"syscall.h"</span></span><br><span class="line">#include <span class="string">"traps.h"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># exec(init, argv)</span><br><span class="line"><span class="meta">.globl</span> start</span><br><span class="line"><span class="symbol">start:</span></span><br><span class="line">  pushl $argv</span><br><span class="line">  pushl $init</span><br><span class="line">  pushl <span class="number">$0</span>  // where caller pc would be</span><br><span class="line">  movl $SYS_exec, %eax</span><br><span class="line">  <span class="keyword">int</span> $T_SYSCALL</span><br><span class="line"></span><br><span class="line"># for(<span class="comment">;;) exit();</span></span><br><span class="line"><span class="symbol">exit:</span></span><br><span class="line">  movl $SYS_exit, %eax</span><br><span class="line">  <span class="keyword">int</span> $T_SYSCALL</span><br><span class="line">  <span class="keyword">jmp</span> exit</span><br><span class="line"></span><br><span class="line"># char init[] = <span class="string">"/init\0"</span><span class="comment">;</span></span><br><span class="line"><span class="symbol">init:</span></span><br><span class="line"><span class="meta">  .string</span> <span class="string">"/init\0"</span></span><br><span class="line"></span><br><span class="line"># char *argv[] = { init, <span class="number">0</span> }<span class="comment">;</span></span><br><span class="line"><span class="meta">.p2align</span> <span class="number">2</span></span><br><span class="line"><span class="symbol">argv:</span></span><br><span class="line"><span class="meta">  .long</span> init</span><br><span class="line"><span class="meta">  .long</span> <span class="number">0</span></span><br></pre></td></tr></tbody></table></figure><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

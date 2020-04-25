@@ -172,7 +172,7 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div class="alert alert-success"><p><strong>File:</strong> rtdef.h</p></div>
-<h2 id="結構">結構</h2>
+<h2 id="結構"><a class="header-anchor" href="#結構">#</a>結構</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Thread structure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="comment">/* rt object */</span></span><br><span class="line">    <span class="keyword">char</span>        name[RT_NAME_MAX];                      <span class="comment">/**&lt; the name of thread */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span>  type;                                   <span class="comment">/**&lt; type of object */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span>  flags;                                  <span class="comment">/**&lt; thread's flags */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_MODULE</span></span><br><span class="line">    <span class="keyword">void</span>       *module_id;                              <span class="comment">/**&lt; id of application module */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>一些基本資料，如名字等</li>
@@ -202,7 +202,7 @@
 <li><code>cleanup</code> 函數及 <code>user_data</code></li>
 </ul>
 <hr>
-<h2 id="狀態">狀態</h2>
+<h2 id="狀態"><a class="header-anchor" href="#狀態">#</a>狀態</h2>
 <ul>
 <li>一共有 6 種狀態</li>
 </ul>
@@ -214,8 +214,8 @@
 <img src="https://i.imgur.com/bysM6mg.png" alt=""></li>
 </ul>
 <hr>
-<h2 id="初始化、建立-thread">初始化、建立 thread</h2>
-<h3 id="靜態記憶體管理">靜態記憶體管理</h3>
+<h2 id="初始化、建立-thread"><a class="header-anchor" href="#初始化、建立-thread">#</a>初始化、建立 thread</h2>
+<h3 id="靜態記憶體管理"><a class="header-anchor" href="#靜態記憶體管理">#</a>靜態記憶體管理</h3>
 <table>
 <thead>
 <tr>
@@ -338,7 +338,7 @@
 <li>最後依序完成 tick、sig、hook 等的初始化</li>
 </ul>
 <hr>
-<h3 id="動態記憶體管理">動態記憶體管理</h3>
+<h3 id="動態記憶體管理"><a class="header-anchor" href="#動態記憶體管理">#</a>動態記憶體管理</h3>
 <table>
 <thead>
 <tr>
@@ -393,7 +393,7 @@
 <li>再呼叫 <code>_rt_thread_init</code> 完成初始化</li>
 </ul>
 <hr>
-<h2 id="啟動-thread">啟動 thread</h2>
+<h2 id="啟動-thread"><a class="header-anchor" href="#啟動-thread">#</a>啟動 thread</h2>
 <table>
 <thead>
 <tr>
@@ -424,7 +424,7 @@
 <li>啟動完成後呼叫 <code>rt_scheduler()</code> 來執行一次調度</li>
 </ul>
 <hr>
-<h2 id="暫停、復原-thread">暫停、復原 thread</h2>
+<h2 id="暫停、復原-thread"><a class="header-anchor" href="#暫停、復原-thread">#</a>暫停、復原 thread</h2>
 <table>
 <thead>
 <tr>
@@ -496,7 +496,7 @@
 </table>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will let current thread sleep for some ticks.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param tick the sleep ticks</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return RT_EOK</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">rt_err_t</span> rt_thread_sleep(<span class="keyword">rt_tick_t</span> tick)</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">rt_base_t</span> temp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">thread</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* disable interrupt */</span></span><br><span class="line">    temp = rt_hw_interrupt_disable();</span><br><span class="line">    <span class="comment">/* set to current thread */</span></span><br><span class="line">    thread = rt_current_thread;</span><br><span class="line">    RT_ASSERT(thread != RT_NULL);</span><br><span class="line">    RT_ASSERT(rt_object_get_type((<span class="keyword">rt_object_t</span>)thread) == RT_Object_Class_Thread);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* suspend thread */</span></span><br><span class="line">    rt_thread_suspend(thread);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* reset the timeout of thread timer and start it */</span></span><br><span class="line">    rt_timer_control(&amp;(thread-&gt;thread_timer), RT_TIMER_CTRL_SET_TIME, &amp;tick);</span><br><span class="line">    rt_timer_start(&amp;(thread-&gt;thread_timer));</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* enable interrupt */</span></span><br><span class="line">    rt_hw_interrupt_enable(temp);</span><br><span class="line"></span><br><span class="line">    rt_schedule();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* clear error number of this thread to RT_EOK */</span></span><br><span class="line">    <span class="keyword">if</span> (thread-&gt;error == -RT_ETIMEOUT)</span><br><span class="line">        thread-&gt;error = RT_EOK;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> RT_EOK;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h3 id="復原-thread">復原 thread</h3>
+<h3 id="復原-thread"><a class="header-anchor" href="#復原-thread">#</a>復原 thread</h3>
 <table>
 <thead>
 <tr>
@@ -519,7 +519,7 @@
 <li><code>rt_schedule_insert_thread</code> 會將狀態修改成 <code>RT_THREAD_READY</code></li>
 </ul>
 <hr>
-<h2 id="離開、刪除-thread">離開、刪除 thread</h2>
+<h2 id="離開、刪除-thread"><a class="header-anchor" href="#離開、刪除-thread">#</a>離開、刪除 thread</h2>
 <table>
 <thead>
 <tr>
@@ -544,8 +544,8 @@
 <li>否則，將 thread 插入至 <code>rt_thread_defunct</code>，此鏈上面的 thread 會由 idle 清除。</li>
 </ul>
 <hr>
-<h3 id="刪除-thread">刪除 thread</h3>
-<h4 id="動態記憶體管理-2">動態記憶體管理</h4>
+<h3 id="刪除-thread"><a class="header-anchor" href="#刪除-thread">#</a>刪除 thread</h3>
+<h4 id="動態記憶體管理-v2"><a class="header-anchor" href="#動態記憶體管理-v2">#</a>動態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -571,7 +571,7 @@
 <li>接著將 timer 還回去，修改狀態為 <code>RT_THREAD_CLOSE</code>，插入至 <code>rt_thread_defunct</code></li>
 </ul>
 <hr>
-<h4 id="靜態記憶體管理-2">靜態記憶體管理</h4>
+<h4 id="靜態記憶體管理-v2"><a class="header-anchor" href="#靜態記憶體管理-v2">#</a>靜態記憶體管理</h4>
 <table>
 <thead>
 <tr>
@@ -602,7 +602,7 @@
 <ul>
 <li>與 delete 不同的差在第32行</li>
 </ul>
-<h2 id="控制-thread">控制 thread</h2>
+<h2 id="控制-thread"><a class="header-anchor" href="#控制-thread">#</a>控制 thread</h2>
 <table>
 <thead>
 <tr>
