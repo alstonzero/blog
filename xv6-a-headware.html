@@ -171,15 +171,16 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="通用暫存器"><a href="#通用暫存器" class="headerlink" title="通用暫存器"></a>通用暫存器</h2><div class="table-responsive">
-<table class="table table-bordered">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="通用暫存器">通用暫存器</h2>
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Function</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>%eax</code></td>
 <td>Accumulator 累加器</td>
 </tr>
@@ -211,22 +212,26 @@
 <td><code>%esp</code></td>
 <td>Stack 堆疊指針暫存器</td>
 </tr>
-</tbody></table>
-</div><ul>
-<li><strong>程式計數器</strong> <code>%eip</code>：Instruction Pointer 指令指針暫存器 </li>
+</tbody>
+</table>
+<ul>
+<li><strong>程式計數器</strong> <code>%eip</code>：Instruction Pointer 指令指針暫存器</li>
 </ul>
-<p><code>e</code> 指的是 extended，為 16 位元暫存器的 32 位元擴展。<br>同時 <code>%ax</code> 為 <code>%eax</code> 的低位，以此類推；修改任意一個都會影響另一個。<br>另外，前四個暫存器有另一套低位別名：<code>%al</code>、<code>%ah</code>…etc，低八位為 <code>%al</code>，高八位為 <code>%ah</code>。</p>
+<p><code>e</code> 指的是 extended，為 16 位元暫存器的 32 位元擴展。<br>
+同時 <code>%ax</code> 為 <code>%eax</code> 的低位，以此類推；修改任意一個都會影響另一個。<br>
+另外，前四個暫存器有另一套低位別名：<code>%al</code>、<code>%ah</code>…etc，低八位為 <code>%al</code>，高八位為 <code>%ah</code>。</p>
 <p><img src="https://i.imgur.com/biz7b4q.png" alt="eax" title="Layout of eax."></p>
 <hr>
-<h2 id="控制暫存器"><a href="#控制暫存器" class="headerlink" title="控制暫存器"></a>控制暫存器</h2><div class="table-responsive">
-<table class="table table-bordered">
+<h2 id="控制暫存器">控制暫存器</h2>
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Function</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>%cr0</code></td>
 <td>包含了兩個標誌：</td>
 </tr>
@@ -250,11 +255,12 @@
 <td><code>%cr3</code></td>
 <td>保存頁目錄表的物理地址</td>
 </tr>
-</tbody></table>
-</div><p><img src="https://i.imgur.com/LjEa8lY.png" alt="cr" title="Layout of CR."></p>
+</tbody>
+</table>
+<p><img src="https://i.imgur.com/LjEa8lY.png" alt="cr" title="Layout of CR."></p>
 <hr>
-<h2 id="段暫存器"><a href="#段暫存器" class="headerlink" title="段暫存器"></a>段暫存器</h2><div class="table-responsive">
-<table class="table table-bordered">
+<h2 id="段暫存器">段暫存器</h2>
+<table>
 <thead>
 <tr>
 <th>Name</th>
@@ -263,7 +269,8 @@
 <th>Function</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>%cs</code></td>
 <td>Code Segment</td>
 <td><code>%es</code></td>
@@ -281,21 +288,25 @@
 <td><code>%gs</code></td>
 <td>extra Segment</td>
 </tr>
-</tbody></table>
-</div><hr>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><p><code>%gdtr</code> 全域段描述符表、<code>%ldtr</code> 區域段描述符表<br>（參考<a href="/xv6-b-bootloader/#gdt">Appendix B</a>)</p>
+</tbody>
+</table>
+<hr>
+<h2 id="其他">其他</h2>
+<ul>
+<li>
+<p><code>%gdtr</code> 全域段描述符表、<code>%ldtr</code> 區域段描述符表<br>
+（參考<a href="/xv6-b-bootloader/#gdt">Appendix B</a>)</p>
 </li>
-<li><p><code>%eflags</code> <strong>標誌暫存器</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)
+<li>
+<p><code>%eflags</code> <strong>標誌暫存器</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)
 ">[1]</span></a></sup></p>
-<p>  <img src="https://i.imgur.com/tfPZm5w.png" alt="eflags" title="Layout of eflags."></p>
+<p><img src="https://i.imgur.com/tfPZm5w.png" alt="eflags" title="Layout of eflags."></p>
 <ul>
 <li>灰色為保留位，值不變<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[x86—EFLAGS寄存器详解](https://blog.csdn.net/jn1158359135/article/details/7761011)">[2]</span></a></sup></li>
 </ul>
 </li>
 </ul>
-<div class="table-responsive">
-<table class="table table-bordered">
+<table>
 <thead>
 <tr>
 <th>Name</th>
@@ -304,7 +315,8 @@
 <th>Function</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>CF</td>
 <td>Carry Flag</td>
 <td>IOPL</td>
@@ -358,8 +370,9 @@
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
-</div><hr class="block-hr"><div id="footnotes" class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Reference</h3></div><ul class="list-group"><li id="fn:1" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/jn1158359135/article/details/7761011" target="_blank" rel="noopener">x86—EFLAGS寄存器详解</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ul></div><script>
+</tbody>
+</table>
+<hr class="block-hr"><div id="footnotes" class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Reference</h3></div><ul class="list-group"><li id="fn:1" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/jn1158359135/article/details/7761011" target="_blank" rel="noopener">x86—EFLAGS寄存器详解</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ul></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }

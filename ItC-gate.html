@@ -171,10 +171,12 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦與電學"><a href="#電腦與電學" class="headerlink" title="電腦與電學"></a>電腦與電學</h2><p>電子訊號有某個電壓準位，一般而言電壓準位在 0<del>2 伏特時屬於「低」，代表二進制的 0，而位於 2</del>5 伏特時則為「高」，代表二進制的 1。</p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="電腦與電學">電腦與電學</h2>
+<p>電子訊號有某個電壓準位，一般而言電壓準位在 0~2 伏特時屬於「低」，代表二進制的 0，而位於 2~5 伏特時則為「高」，代表二進制的 1。</p>
 <ul>
 <li>閘 gate：是完成電子訊號基本運算的裝置。閘接受一至多個輸入訊號，產生單一輸出訊號；有數種特定裝置的閘，以下討論六種基本的閘。</li>
-<li>電路 circuits：閘可組成電路，完成更複雜的工作。有三種可以描述電路的表示法：<ul>
+<li>電路 circuits：閘可組成電路，完成更複雜的工作。有三種可以描述電路的表示法：
+<ul>
 <li>布林表示法</li>
 <li>邏輯圖</li>
 <li>真值表</li>
@@ -182,19 +184,25 @@
 </li>
 </ul>
 <hr>
-<h2 id="閘"><a href="#閘" class="headerlink" title="閘"></a>閘</h2><h3 id="1-NOT閘"><a href="#1-NOT閘" class="headerlink" title="1. NOT閘"></a>1. NOT閘</h3><p>NOT閘接受一個輸入，產生一個輸出。</p>
-<h4 id="DEF"><a href="#DEF" class="headerlink" title="DEF"></a>DEF</h4><p>如輸入為 1，則輸出 0；反之亦然。</p>
-<h4 id="布林運算式"><a href="#布林運算式" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A ‘$</p>
-<h4 id="邏輯圖"><a href="#邏輯圖" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/mHBP6FW.png" alt="NOT閘" title="NOT閘"></p>
-<h4 id="真值表"><a href="#真值表" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
-<table class="table table-bordered">
+<h2 id="閘">閘</h2>
+<h3 id="1-NOT閘">1. NOT閘</h3>
+<p>NOT閘接受一個輸入，產生一個輸出。</p>
+<h4 id="DEF">DEF</h4>
+<p>如輸入為 1，則輸出 0；反之亦然。</p>
+<h4 id="布林運算式">布林運算式</h4>
+<p>$X = A '$</p>
+<h4 id="邏輯圖">邏輯圖</h4>
+<p><img src="https://i.imgur.com/mHBP6FW.png" alt="NOT閘" title="NOT閘"></p>
+<h4 id="真值表">真值表</h4>
+<table>
 <thead>
 <tr>
 <th>A</th>
 <th>X</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>1</td>
 </tr>
@@ -202,49 +210,19 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody></table>
-</div><hr>
-<h3 id="2-AND閘"><a href="#2-AND閘" class="headerlink" title="2. AND閘"></a>2. AND閘</h3><p>AND閘接受多個訊號，產生一個輸出。</p>
-<h4 id="DEF-1"><a href="#DEF-1" class="headerlink" title="DEF"></a>DEF</h4><p>若輸入全為1，則輸出1，反之，則為0。</p>
-<h4 id="布林運算式-1"><a href="#布林運算式-1" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A \cdot B$</p>
-<h4 id="邏輯圖-1"><a href="#邏輯圖-1" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/IJHEbrP.png" alt="AND閘" title="AND閘"></p>
-<h4 id="真值表-1"><a href="#真值表-1" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th>A</th>
-<th>B</th>
-<th>X</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody></table>
-</div><hr>
-<h3 id="3-OR閘"><a href="#3-OR閘" class="headerlink" title="3.OR閘"></a>3.OR閘</h3><p>OR閘接受兩個輸入，產生一個輸出。</p>
-<h4 id="DEF-2"><a href="#DEF-2" class="headerlink" title="DEF"></a>DEF</h4><p>如兩個輸入全為0，則輸出0，反之，輸出1。</p>
-<h4 id="布林運算式-2"><a href="#布林運算式-2" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A + B$</p>
-<h4 id="邏輯圖-2"><a href="#邏輯圖-2" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/87CEd05.png" alt="OR閘" title="OR閘"></p>
-<h4 id="真值表-2"><a href="#真值表-2" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
-<table class="table table-bordered">
+</tbody>
+</table>
+<hr>
+<h3 id="2-AND閘">2. AND閘</h3>
+<p>AND閘接受多個訊號，產生一個輸出。</p>
+<h4 id="DEF-2">DEF</h4>
+<p>若輸入全為1，則輸出1，反之，則為0。</p>
+<h4 id="布林運算式-2">布林運算式</h4>
+<p>$X = A \cdot B$</p>
+<h4 id="邏輯圖-2">邏輯圖</h4>
+<p><img src="https://i.imgur.com/IJHEbrP.png" alt="AND閘" title="AND閘"></p>
+<h4 id="真值表-2">真值表</h4>
+<table>
 <thead>
 <tr>
 <th>A</th>
@@ -252,7 +230,8 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -260,26 +239,31 @@
 <tr>
 <td>1</td>
 <td>0</td>
-<td>1</td>
+<td>0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td>1</td>
+<td>0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
-</tbody></table>
-</div><hr>
-<h3 id="4-XOR閘"><a href="#4-XOR閘" class="headerlink" title="4.XOR閘"></a>4.XOR閘</h3><p>XOR閘，又稱互斥閘。</p>
-<h4 id="DEF-3"><a href="#DEF-3" class="headerlink" title="DEF"></a>DEF</h4><p>若輸出相同，則輸出0，反之，輸出1。</p>
-<h4 id="布林運算式-3"><a href="#布林運算式-3" class="headerlink" title="布林運算式"></a>布林運算式</h4><p>$X = A \oplus B$</p>
-<h4 id="邏輯圖-3"><a href="#邏輯圖-3" class="headerlink" title="邏輯圖"></a>邏輯圖</h4><p><img src="https://i.imgur.com/dyp1SSN.png" alt="XOR閘" title="XOR閘"></p>
-<h4 id="真值表-3"><a href="#真值表-3" class="headerlink" title="真值表"></a>真值表</h4><div class="table-responsive">
-<table class="table table-bordered">
+</tbody>
+</table>
+<hr>
+<h3 id="3-OR閘">3.OR閘</h3>
+<p>OR閘接受兩個輸入，產生一個輸出。</p>
+<h4 id="DEF-3">DEF</h4>
+<p>如兩個輸入全為0，則輸出0，反之，輸出1。</p>
+<h4 id="布林運算式-3">布林運算式</h4>
+<p>$X = A + B$</p>
+<h4 id="邏輯圖-3">邏輯圖</h4>
+<p><img src="https://i.imgur.com/87CEd05.png" alt="OR閘" title="OR閘"></p>
+<h4 id="真值表-3">真值表</h4>
+<table>
 <thead>
 <tr>
 <th>A</th>
@@ -287,7 +271,8 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -305,15 +290,21 @@
 <tr>
 <td>1</td>
 <td>1</td>
-<td>0</td>
+<td>1</td>
 </tr>
-</tbody></table>
-</div><hr>
-<h3 id="5-NAND-與-NOR閘"><a href="#5-NAND-與-NOR閘" class="headerlink" title="5.NAND 與 NOR閘"></a>5.NAND 與 NOR閘</h3><p>分別為AND與OR閘的相反</p>
-<h4 id="NAND閘"><a href="#NAND閘" class="headerlink" title="NAND閘"></a>NAND閘</h4><h5 id="布林運算式-4"><a href="#布林運算式-4" class="headerlink" title="布林運算式"></a>布林運算式</h5><p>$X = ( A \cdot B ) ‘$</p>
-<h5 id="邏輯圖-4"><a href="#邏輯圖-4" class="headerlink" title="邏輯圖"></a>邏輯圖</h5><p><img src="https://i.imgur.com/LVGmMnV.png" alt="NAND閘" title="NAND閘"></p>
-<h5 id="真值表-4"><a href="#真值表-4" class="headerlink" title="真值表"></a>真值表</h5><div class="table-responsive">
-<table class="table table-bordered">
+</tbody>
+</table>
+<hr>
+<h3 id="4-XOR閘">4.XOR閘</h3>
+<p>XOR閘，又稱互斥閘。</p>
+<h4 id="DEF-4">DEF</h4>
+<p>若輸出相同，則輸出0，反之，輸出1。</p>
+<h4 id="布林運算式-4">布林運算式</h4>
+<p>$X = A \oplus B$</p>
+<h4 id="邏輯圖-4">邏輯圖</h4>
+<p><img src="https://i.imgur.com/dyp1SSN.png" alt="XOR閘" title="XOR閘"></p>
+<h4 id="真值表-4">真值表</h4>
+<table>
 <thead>
 <tr>
 <th>A</th>
@@ -321,10 +312,11 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
-<td>1</td>
+<td>0</td>
 </tr>
 <tr>
 <td>1</td>
@@ -341,12 +333,18 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody></table>
-</div><hr>
-<h4 id="NOR閘"><a href="#NOR閘" class="headerlink" title="NOR閘"></a>NOR閘</h4><h5 id="布林運算式-5"><a href="#布林運算式-5" class="headerlink" title="布林運算式"></a>布林運算式</h5><p>$X = ( A + B ) ‘$</p>
-<h5 id="邏輯圖-5"><a href="#邏輯圖-5" class="headerlink" title="邏輯圖"></a>邏輯圖</h5><p><img src="https://i.imgur.com/76wkbGw.png" alt="NOR閘" title="NOR閘"></p>
-<h5 id="真值表-5"><a href="#真值表-5" class="headerlink" title="真值表"></a>真值表</h5><div class="table-responsive">
-<table class="table table-bordered">
+</tbody>
+</table>
+<hr>
+<h3 id="5-NAND-與-NOR閘">5.NAND 與 NOR閘</h3>
+<p>分別為AND與OR閘的相反</p>
+<h4 id="NAND閘">NAND閘</h4>
+<h5 id="布林運算式-5">布林運算式</h5>
+<p>$X = ( A \cdot B ) '$</p>
+<h5 id="邏輯圖-5">邏輯圖</h5>
+<p><img src="https://i.imgur.com/LVGmMnV.png" alt="NAND閘" title="NAND閘"></p>
+<h5 id="真值表-5">真值表</h5>
+<table>
 <thead>
 <tr>
 <th>A</th>
@@ -354,7 +352,46 @@
 <th>X</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="NOR閘">NOR閘</h4>
+<h5 id="布林運算式-6">布林運算式</h5>
+<p>$X = ( A + B ) '$</p>
+<h5 id="邏輯圖-6">邏輯圖</h5>
+<p><img src="https://i.imgur.com/76wkbGw.png" alt="NOR閘" title="NOR閘"></p>
+<h5 id="真值表-6">真值表</h5>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
 <td>1</td>
@@ -374,10 +411,13 @@
 <td>1</td>
 <td>0</td>
 </tr>
-</tbody></table>
-</div><hr>
-<h2 id="閘的建構"><a href="#閘的建構" class="headerlink" title="閘的建構"></a>閘的建構</h2><ul>
-<li>電晶體 transistor：是以半導體所製成，依據電壓準位來決定要當導線還是電阻的裝置。<br><img src="https://i.imgur.com/I6OFGJq.png" alt="transistor" title="電晶體"></li>
+</tbody>
+</table>
+<hr>
+<h2 id="閘的建構">閘的建構</h2>
+<ul>
+<li>電晶體 transistor：是以半導體所製成，依據電壓準位來決定要當導線還是電阻的裝置。<br>
+<img src="https://i.imgur.com/I6OFGJq.png" alt="transistor" title="電晶體"></li>
 </ul>
 <p>射極一般是接地的。而對電腦而言，源極產生大約5伏特的高電壓值，基極的電壓值用來判斷源極是否形成接地，若接地，電壓值會被下拉至0，反之，則會維持高電壓。</p>
 <ul>
@@ -385,138 +425,150 @@
 <li>如基極訊號為高準位，則源極接地，此時電晶體為 on，反之，電晶體為off。</li>
 </ul>
 <hr>
-<h2 id="電路"><a href="#電路" class="headerlink" title="電路"></a>電路</h2><ul>
-<li>組合電路<br><br>藉由某個閘的輸出作為另一個閘的輸入，便可組合成電路。<br><img src="https://i.imgur.com/cvi0B0J.png" alt="組合電路" title="組合電路範例"></li>
-</ul>
-<p>其中圖中的黑點，表示兩線是相連接的，如果沒有點，代表其中一條線從另一條線的上方跳過，互不影響。<br><br>此邏輯圖的布林運算式為：( AB + AC )，也可寫成 A ( B + C )，讀者可自行寫出真值表來確認。此現象稱作電路等效性。<br></p>
+<h2 id="電路">電路</h2>
 <ul>
-<li><p>事實上，布林運算式滿足幾種數學性質：</p>
+<li>組合電路<br><br>
+藉由某個閘的輸出作為另一個閘的輸入，便可組合成電路。<br>
+<img src="https://i.imgur.com/cvi0B0J.png" alt="組合電路" title="組合電路範例"></li>
+</ul>
+<p>其中圖中的黑點，表示兩線是相連接的，如果沒有點，代表其中一條線從另一條線的上方跳過，互不影響。<br><br>
+此邏輯圖的布林運算式為：( AB + AC )，也可寫成 A ( B + C )，讀者可自行寫出真值表來確認。此現象稱作電路等效性。<br></p>
+<ul>
+<li>
+<p>事實上，布林運算式滿足幾種數學性質：</p>
 <ul>
 <li>交換律，如：$AB = BA$、$A + B = B + A$。</li>
 <li>結合律，如：$( AB ) C = A ( BC )$、$A + ( B + C ) = ( A + B ) + C$。</li>
 <li>分配律，如：$A ( B + C ) = AB + AC$、$A + BC = ( A + B ) ( A + C )$。</li>
 <li>恆等，如：$A1 = A$、$A + 0 = A$。</li>
-<li>互補，如：$A ( A ‘ ) = 0$、$A + A ‘ = 1$。</li>
-<li>狄摩根定律，如：$( AB ) ‘ = A ‘ + B ‘$、$( A + B ) ‘ = A ‘ B ‘$。</li>
+<li>互補，如：$A ( A ’ ) = 0$、$A + A ’ = 1$。</li>
+<li>狄摩根定律，如：$( AB ) ’ = A ’ + B '$、$( A + B ) ’ = A ’ B '$。</li>
 </ul>
 </li>
-<li><p>加法器<br><br>二進制數元相加可能會產生進位值，如 1 + 1 = 10，能計算 2 個位元總和並產生進位為元的電路稱作半加器 half adder。<br>考慮半加器時，可寫出以下真值表：</p>
+<li>
+<p>加法器<br><br>
+二進制數元相加可能會產生進位值，如 1 + 1 = 10，能計算 2 個位元總和並產生進位為元的電路稱作半加器 half adder。<br>
+考慮半加器時，可寫出以下真值表：</p>
 </li>
 </ul>
-<div class="table-responsive">
-<table class="table table-bordered">
+<table>
 <thead>
 <tr>
 <th>A</th>
 <th>B</th>
-<th align="center">總和</th>
-<th align="center">進位</th>
+<th style="text-align:center">總和</th>
+<th style="text-align:center">進位</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>0</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
-</tbody></table>
-</div><p>可看出來，總和為 $A \oplus B$，進位為 $AB$。<br></p>
+</tbody>
+</table>
+<p>可看出來，總和為 $A \oplus B$，進位為 $AB$。<br></p>
 <ul>
 <li>一個半加器並未將可能的進位值併入計算，也就是說，一個半加器在兩個單一數元的相加是沒問題的，但在多重數元時會產生問題。</li>
-<li>可以考慮進位輸入的電路稱作全加器 full adder。簡單的想法可以用兩個半加器來製作一個全加器；作法為：在總和輸出前，再加上一個半加器與進位輸入做總和，最後調整進位輸出。<br>以下為全加器的真值表及邏輯圖：</li>
+<li>可以考慮進位輸入的電路稱作全加器 full adder。簡單的想法可以用兩個半加器來製作一個全加器；作法為：在總和輸出前，再加上一個半加器與進位輸入做總和，最後調整進位輸出。<br>
+以下為全加器的真值表及邏輯圖：</li>
 </ul>
-<div class="table-responsive">
-<table class="table table-bordered">
+<table>
 <thead>
 <tr>
 <th>A</th>
 <th>B</th>
-<th align="center">進位輸入</th>
-<th align="center">總和</th>
-<th align="center">進位輸出</th>
+<th style="text-align:center">進位輸入</th>
+<th style="text-align:center">總和</th>
+<th style="text-align:center">進位輸出</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>0</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>0</td>
 <td>1</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
 <td>1</td>
 <td>0</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
 <td>1</td>
 <td>0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
 <td>1</td>
 <td>1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
 </tr>
-</tbody></table>
-</div><p><img src="https://i.imgur.com/Y6PH0oI.png" alt="加法器" title="全加器"></p>
+</tbody>
+</table>
+<p><img src="https://i.imgur.com/Y6PH0oI.png" alt="加法器" title="全加器"></p>
 <ul>
-<li>多工器 multiplexer<br><br>為一種產生單一輸出的電路，輸出等於電路中數個輸入的其中一個。依據一些原始輸入以外的輸入訊號（選擇訊號、選擇控制線）來決定哪條輸入將被輸出。<br>如：選擇訊號為 S0、S1、S2，輸入為D0~D7，則有以下真值表。</li>
+<li>多工器 multiplexer<br><br>
+為一種產生單一輸出的電路，輸出等於電路中數個輸入的其中一個。依據一些原始輸入以外的輸入訊號（選擇訊號、選擇控制線）來決定哪條輸入將被輸出。<br>
+如：選擇訊號為 S0、S1、S2，輸入為D0~D7，則有以下真值表。</li>
 </ul>
-<div class="table-responsive">
-<table class="table table-bordered">
+<table>
 <thead>
 <tr>
 <th>S0</th>
@@ -525,7 +577,8 @@
 <th>F</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0</td>
 <td>1</td>
@@ -573,16 +626,22 @@
 <td>0</td>
 <td>D7</td>
 </tr>
-</tbody></table>
-</div><p>上述多工器可化成此方塊圖。<br><br><img src="https://i.imgur.com/zrGhNVm.png" alt="多工器" title="多工器"></p>
+</tbody>
+</table>
+<p>上述多工器可化成此方塊圖。<br><br>
+<img src="https://i.imgur.com/zrGhNVm.png" alt="多工器" title="多工器"></p>
 <hr>
-<h2 id="作為記憶體的電路"><a href="#作為記憶體的電路" class="headerlink" title="作為記憶體的電路"></a>作為記憶體的電路</h2><p>數位電路也可以儲存資訊，這些電路形成一個循序電路，電路的輸出可以當成電路的輸入，也就是說，某些電路的存在狀態有些被用來決定此電路的下個狀態；一些記憶體設計如：S-R閂。</p>
+<h2 id="作為記憶體的電路">作為記憶體的電路</h2>
+<p>數位電路也可以儲存資訊，這些電路形成一個循序電路，電路的輸出可以當成電路的輸入，也就是說，某些電路的存在狀態有些被用來決定此電路的下個狀態；一些記憶體設計如：S-R閂。</p>
 <ul>
-<li>S-R閂 S-R latch：用來儲存一個單一二進制的數元。<br><img src="https://i.imgur.com/kubXSgE.png" alt="S-R閂" title="S-R閂"></li>
+<li>S-R閂 S-R latch：用來儲存一個單一二進制的數元。<br>
+<img src="https://i.imgur.com/kubXSgE.png" alt="S-R閂" title="S-R閂"></li>
 </ul>
-<p>S Set、R Reset，透過此設計，只要S與R保持為1，X與Y的值皆能保持不變；通常，我們把X當作現在電路的狀態。<br><br>假設目前X為1，則Y為0，如果須將X設為0的話，只需將R設為0，X就會變成0，這時立刻將R設為1，X就會保持為0了。相反的，如需將X設為1，則需變動S為0，待X變為1後，再立刻改變S為1，X就會保持為1。</p>
+<p>S Set、R Reset，透過此設計，只要S與R保持為1，X與Y的值皆能保持不變；通常，我們把X當作現在電路的狀態。<br><br>
+假設目前X為1，則Y為0，如果須將X設為0的話，只需將R設為0，X就會變成0，這時立刻將R設為1，X就會保持為0了。相反的，如需將X設為1，則需變動S為0，待X變為1後，再立刻改變S為1，X就會保持為1。</p>
 <hr>
-<h2 id="積體電路"><a href="#積體電路" class="headerlink" title="積體電路"></a>積體電路</h2><p>積體電路是一種嵌入多重閘的矽片，矽片邊緣上有許多腳位，代表著輸入或輸出。積體電路是依據閘的數量來分類的</p>
+<h2 id="積體電路">積體電路</h2>
+<p>積體電路是一種嵌入多重閘的矽片，矽片邊緣上有許多腳位，代表著輸入或輸出。積體電路是依據閘的數量來分類的</p>
 <ul>
 <li>SSI（小型積體電路）<i class="fa fa-arrow-right"></i> 1~10</li>
 <li>MSI（中型積體電路）<i class="fa fa-arrow-right"></i> 10~100</li>

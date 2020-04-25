@@ -171,34 +171,45 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="作業系統的角色"><a href="#作業系統的角色" class="headerlink" title="作業系統的角色"></a>作業系統的角色</h2><h3 id="記憶體、程序與CPU管理"><a href="#記憶體、程序與CPU管理" class="headerlink" title="記憶體、程序與CPU管理"></a>記憶體、程序與CPU管理</h3><ul>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="作業系統的角色">作業系統的角色</h2>
+<h3 id="記憶體、程序與CPU管理">記憶體、程序與CPU管理</h3>
+<ul>
 <li>持續追蹤什麼程式在記憶體，及其位置。</li>
 <li>程序 process 為執行中的程式，追蹤程序的進展及記錄。</li>
 <li>CPU 排程，為決定哪個程序可以執行。</li>
 </ul>
 <hr>
-<h2 id="記憶體管理"><a href="#記憶體管理" class="headerlink" title="記憶體管理"></a>記憶體管理</h2><ul>
+<h2 id="記憶體管理">記憶體管理</h2>
+<ul>
 <li>邏輯位址：相對位址。</li>
 <li>位址聯繫 address binding：邏輯位址對應到實體位址的過程。</li>
 </ul>
-<h3 id="單一連續記憶體管理"><a href="#單一連續記憶體管理" class="headerlink" title="單一連續記憶體管理"></a>單一連續記憶體管理</h3><p>記憶體中只有作業系統及一個要執行的程式。</p>
-<h3 id="分割記憶體管理"><a href="#分割記憶體管理" class="headerlink" title="分割記憶體管理"></a>分割記憶體管理</h3><p>記憶體中允許多個程序。</p>
+<h3 id="單一連續記憶體管理">單一連續記憶體管理</h3>
+<p>記憶體中只有作業系統及一個要執行的程式。</p>
+<h3 id="分割記憶體管理">分割記憶體管理</h3>
+<p>記憶體中允許多個程序。</p>
 <ul>
 <li>固定分割技術：分割區不需要相同大小，每個分割區的大小是固定的。</li>
 <li>動態分割技術：程式載入至分割區後，多餘的空間會分割成新的分割區。</li>
 </ul>
-<h3 id="分頁記憶體管理"><a href="#分頁記憶體管理" class="headerlink" title="分頁記憶體管理"></a>分頁記憶體管理</h3><p>記憶體分成固定大小的頁框 frame，程序分成同樣大小的分頁 page。</p>
+<h3 id="分頁記憶體管理">分頁記憶體管理</h3>
+<p>記憶體分成固定大小的頁框 frame，程序分成同樣大小的分頁 page。</p>
 <hr>
-<h2 id="程序管理"><a href="#程序管理" class="headerlink" title="程序管理"></a>程序管理</h2><ul>
+<h2 id="程序管理">程序管理</h2>
+<ul>
 <li>程序狀態：new、ready、running、waiting、terminated。</li>
 <li>程序控制區塊 PCB：儲存有關程序的各項資訊。</li>
 </ul>
 <hr>
-<h2 id="CPU排程"><a href="#CPU排程" class="headerlink" title="CPU排程"></a>CPU排程</h2><ul>
+<h2 id="CPU排程">CPU排程</h2>
+<ul>
 <li>先佔式排程：程序有可能在尚未執行完就被強制移出CPU。</li>
 <li>非先佔式排程：程序不會在尚未執行完就被強制移出CPU。</li>
 </ul>
-<h3 id="先到先服務-FCFS（非先佔式）"><a href="#先到先服務-FCFS（非先佔式）" class="headerlink" title="先到先服務 FCFS（非先佔式）"></a>先到先服務 FCFS（非先佔式）</h3><h3 id="最短工作優先-SJN（非先佔式）"><a href="#最短工作優先-SJN（非先佔式）" class="headerlink" title="最短工作優先 SJN（非先佔式）"></a>最短工作優先 SJN（非先佔式）</h3><h3 id="循環輪流（先佔式）"><a href="#循環輪流（先佔式）" class="headerlink" title="循環輪流（先佔式）"></a>循環輪流（先佔式）</h3><p>建立一個時間片段 time slice，使用CPU時間超過時間片段的程序必須先移出，直到下一次輪到此程序時才能繼續使CPU。</p>
+<h3 id="先到先服務-FCFS（非先佔式）">先到先服務 FCFS（非先佔式）</h3>
+<h3 id="最短工作優先-SJN（非先佔式）">最短工作優先 SJN（非先佔式）</h3>
+<h3 id="循環輪流（先佔式）">循環輪流（先佔式）</h3>
+<p>建立一個時間片段 time slice，使用CPU時間超過時間片段的程序必須先移出，直到下一次輪到此程序時才能繼續使CPU。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

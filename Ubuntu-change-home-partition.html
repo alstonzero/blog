@@ -148,7 +148,7 @@
                         <!-- word count and read count -->
                         
                             &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-                            474
+                            475
                         
         
                         
@@ -172,81 +172,76 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前為了解決我的問題，上網<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Partitioning/Home/Moving](https://help.ubuntu.com/community/Partitioning/Home/Moving)">[1]</span></a></sup>找到的解答，紀錄一下。</p>
-<h2 id="1-找到目標分割的-UUID"><a href="#1-找到目標分割的-UUID" class="headerlink" title="1. 找到目標分割的 UUID"></a>1. 找到目標分割的 UUID</h2><ul>
+<h2 id="1-找到目標分割的-UUID">1. 找到目標分割的 UUID</h2>
+<ul>
 <li>command:</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>result:</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">/dev/sda1: UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f" TYPE="ext4" PARTUUID="12345678-01"</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>其中 <code>UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f"</code> 為此分割的 UUID，記著。</li>
 </ul>
 <hr>
-<h2 id="2-設定-fstab"><a href="#2-設定-fstab" class="headerlink" title="2. 設定 fstab"></a>2. 設定 fstab</h2><p>fstab 是用來設定開機時哪些分割需要被載入，接下來會將原本的 fstab 備份，並於檔名中加入當前日期，接著修改該文件。</p>
+<h2 id="2-設定-fstab">2. 設定 fstab</h2>
+<p>fstab 是用來設定開機時哪些分割需要被載入，接下來會將原本的 fstab 備份，並於檔名中加入當前日期，接著修改該文件。</p>
 <ul>
 <li>備份 (Duplicate)</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo cp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>比較兩檔案</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">cmp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>開啟文字編輯器修改 fstab</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo gedit /etc/fstab</span><br></pre></td></tr></tbody></table></figure>
-
-<p>(gedit 可替換成任何文字編輯器，如 vim)<br>加入以下文字：</p>
+<p>(gedit 可替換成任何文字編輯器，如 vim)<br>
+加入以下文字：</p>
 <figure class="highlight angelscript"><table><tbody><tr><td class="code"><pre><span class="line"># (identifier)  (location, eg sda5)   (format, eg ext3 <span class="keyword">or</span> ext4)      (some settings) </span><br><span class="line">UUID=<span class="number">1</span>a2b3c4d<span class="number">-1</span>a2b<span class="number">-1</span>a2b<span class="number">-1</span>a2b<span class="number">-1</span>a2b3c4d5e6f   /media/home    ext4          defaults       <span class="number">0</span>       <span class="number">2</span></span><br></pre></td></tr></tbody></table></figure>
-
 <p>記得填入自己的 UUID，及正確的格式。</p>
 <p>存檔，關閉編輯器。</p>
 <ul>
 <li>建立新資料夾</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo mkdir /media/home</span><br></pre></td></tr></tbody></table></figure>
-
 <p>此資料夾是為了掛載新的分割，需與上一步驟填入的相同。</p>
 <ul>
 <li>重開機。</li>
 </ul>
 <hr>
-<h2 id="3-複製原本的-home-到新分割"><a href="#3-複製原本的-home-到新分割" class="headerlink" title="3. 複製原本的 home 到新分割"></a>3. 複製原本的 home 到新分割</h2><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo rsync -aXS --progress --exclude='/*/.gvfs' /home/. /media/home/.</span><br></pre></td></tr></tbody></table></figure>
-
+<h2 id="3-複製原本的-home-到新分割">3. 複製原本的 home 到新分割</h2>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo rsync -aXS --progress --exclude='/*/.gvfs' /home/. /media/home/.</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>檢查是否全複製過去了</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo diff -r /home /media/home -x ".gvfs/*"</span><br></pre></td></tr></tbody></table></figure>
-
 <hr>
-<h2 id="4-再次修改-fstab"><a href="#4-再次修改-fstab" class="headerlink" title="4. 再次修改 fstab"></a>4. 再次修改 fstab</h2><ul>
+<h2 id="4-再次修改-fstab">4. 再次修改 fstab</h2>
+<ul>
 <li>開啟</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo gedit /etc/fstab</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>修改上次新增的部分，將 <code>/media/home</code> 改成 <code>default</code>:</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> (identifier)  (location, eg sda5)   (format, eg ext3 or ext4)      (some settings) </span></span><br><span class="line">UUID=????????   /home    ext3          defaults       0       2</span><br></pre></td></tr></tbody></table></figure>
-
 <hr>
-<h2 id="5-備份舊的家目錄"><a href="#5-備份舊的家目錄" class="headerlink" title="5. 備份舊的家目錄"></a>5. 備份舊的家目錄</h2><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">cd / &amp;&amp; sudo mv /home /old_home &amp;&amp; sudo mkdir /home</span><br></pre></td></tr></tbody></table></figure>
-
+<h2 id="5-備份舊的家目錄">5. 備份舊的家目錄</h2>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">cd / &amp;&amp; sudo mv /home /old_home &amp;&amp; sudo mkdir /home</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="6-重開機，大功告成"><a href="#6-重開機，大功告成" class="headerlink" title="6. 重開機，大功告成"></a>6. 重開機，大功告成</h2><ol>
+<h2 id="6-重開機，大功告成">6. 重開機，大功告成</h2>
+<ol>
 <li>fstab 將新分割掛載在 /home 上</li>
 <li>原本的 /home 改名成 /old_home</li>
 </ol>
 <hr>
-<h2 id="刪除-old-home"><a href="#刪除-old-home" class="headerlink" title="刪除 old_home"></a>刪除 old_home</h2><p>如果磁碟空間不夠，或是想清理磁碟的話，可透過以下指令刪除。</p>
+<h2 id="刪除-old-home">刪除 old_home</h2>
+<p>如果磁碟空間不夠，或是想清理磁碟的話，可透過以下指令刪除。</p>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">cd /</span><br><span class="line">sudo rm -rI /old_home</span><br></pre></td></tr></tbody></table></figure>
-
 <hr class="block-hr"><div id="footnotes" class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Reference</h3></div><ul class="list-group"><li id="fn:1" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://help.ubuntu.com/community/Partitioning/Home/Moving" target="_blank" rel="noopener">Partitioning/Home/Moving</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ul></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

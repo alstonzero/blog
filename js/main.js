@@ -1,32 +1,38 @@
-$(document).ready( function() {
-    let articleInit = function () {
+$(document).ready( function () {
+    let imgInit = function () {
         $('article .container img').each(function () {
             let imgPath = $(this).attr('src');
             $(this).wrap('<div class="img-item" data-src="' + imgPath + '" data-sub-html=".caption"></div>');
 
-        $(this).addClass("img-shadow img-margin");
-            let alt = $(this).attr('alt');
-            let title = $(this).attr('title');
-            let captionText = "";
-
-            if (alt === undefined || alt === "") {
-                if (title !== undefined && title !== "") {
-                    captionText = title;
-                }
-            } else {
-                captionText = alt;
-            }
+            $(this).addClass("img-shadow img-margin");
+            let captionText = $(this).attr('alt') || $(this).attr('title') || "";
             
             if (captionText !== "") {
-                let captionDiv = document.createElement('div');
-                captionDiv.className = 'img-caption text-center';
-                let captionEle = document.createElement('b');
-                captionEle.className = 'center-caption';
-                captionEle.innerText = captionText;
-                captionDiv.appendChild(captionEle);
-                this.insertAdjacentElement('afterend', captionDiv)
+                let caption = "<div class='img-caption text-center'>";
+                caption += "<b class='center-caption'>" + captionText + "</b>";
+                caption += "</div>";
+
+                let captionHtml = $.parseHTML(caption);
+                $(this).parent().append(captionHtml);
             }
         });
     };
-    articleInit();
+    imgInit();
+
+    let tableInit = function () {
+        $('article .container table').each(function () {
+            if (!($(this).parent().hasClass("highlight"))) {
+                $(this).wrap('<div class="table-responsive"></div>');
+                $(this).addClass('table table-bordered');
+            }
+        });
+    }
+    tableInit();
+
+    let highlightInit = function() {
+        $('article .container figure:has(td.gutter)').each(function () {
+            $(this).addClass('line_number');
+        });
+    }
+    highlightInit();
 });

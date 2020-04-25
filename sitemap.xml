@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.lusw.dev/c-bit-operation.html</loc>
+    
+    <lastmod>2020-04-25T12:44:03.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.lusw.dev/about/index.html</loc>
     
     <lastmod>2020-04-25T09:19:57.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://blog.lusw.dev/c-attribute.html</loc>
     
     <lastmod>2020-04-24T09:16:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.lusw.dev/c-bit-operation.html</loc>
-    
-    <lastmod>2020-04-24T08:55:05.000Z</lastmod>
     
   </url>
   

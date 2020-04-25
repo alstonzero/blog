@@ -171,40 +171,70 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="硬體"><a href="#硬體" class="headerlink" title="硬體"></a>硬體</h2><p>算數上的限制</p>
-<h3 id="整數"><a href="#整數" class="headerlink" title="整數"></a>整數</h3><p>32位元→ $-2^{31}$ ~ $2^{31}-1$</p>
-<h3 id="實數"><a href="#實數" class="headerlink" title="實數"></a>實數</h3><ul>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="硬體">硬體</h2>
+<p>算數上的限制</p>
+<h3 id="整數">整數</h3>
+<p>32位元→ $-2^{31}$ ~ $2^{31}-1$</p>
+<h3 id="實數">實數</h3>
+<ul>
 <li>精確度：可以被表示的有效位數的最大數值。</li>
 </ul>
 <p>假設一個精確度為4位元，第五個位元表示指數，如：</p>
 <figure class="highlight angelscript"><table><tbody><tr><td class="code"><pre><span class="line">+  +  <span class="number">9</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> 為 <span class="number">1234</span> * <span class="number">10</span>^<span class="number">9</span>，-  -  <span class="number">3</span> <span class="number">1</span> <span class="number">4</span> <span class="number">4</span> <span class="number">6</span> 為 <span class="number">-1446</span> * <span class="number">10</span>^<span class="number">-3</span></span><br><span class="line">↑  ↑  ↑</span><br><span class="line">數 指 指</span><br><span class="line">字 數 數</span><br><span class="line">的 的 值</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="表示錯誤（捨去錯誤）"><a href="#表示錯誤（捨去錯誤）" class="headerlink" title="表示錯誤（捨去錯誤）"></a>表示錯誤（捨去錯誤）</h3><ul>
+<h3 id="表示錯誤（捨去錯誤）">表示錯誤（捨去錯誤）</h3>
+<ul>
 <li>下溢位 underflow：表示為0。</li>
 </ul>
-<p>$$<br>\begin{equation}\begin{split}<br>4412 &amp; \times 10^{-9}\\<br>\times \ 1000 &amp; \times 10^{-8}\\<br>= 4412000 &amp; \times 10^{-17}\\<br>= 4412 &amp; \times 10^{-14}\\<br>\end{split}\end{equation}<br>$$ </p>
+<p>$$<br>
+\begin{equation}\begin{split}<br>
+4412 &amp; \times 10^{-9}\\<br>
+\times \ 1000 &amp; \times 10^{-8}\\<br>
+= 4412000 &amp; \times 10^{-17}\\<br>
+= 4412 &amp; \times 10^{-14}\\<br>
+\end{split}\end{equation}<br>
+$$</p>
 <div class="alert alert-warning"><p>太小了無法表示</p></div>
-
 <ul>
 <li>上溢位 overflow：以最大值表示\</li>
 </ul>
-<p>$$<br>\begin{equation}\begin{split}<br>4412 &amp; \times 10^9\\<br>\times \ 1000 &amp; \times 10^8\\<br>= 4412000 &amp; \times 10^{17}\\<br>= 4412 &amp; \times 10^{20}\\<br>\end{split}\end{equation}<br>$$</p>
-<div class="alert alert-warning"><p>太大了無法表示<br>表示為 $9999 \times 10^9$</p></div>
-
+<p>$$<br>
+\begin{equation}\begin{split}<br>
+4412 &amp; \times 10^9\\<br>
+\times \ 1000 &amp; \times 10^8\\<br>
+= 4412000 &amp; \times 10^{17}\\<br>
+= 4412 &amp; \times 10^{20}\\<br>
+\end{split}\end{equation}<br>
+$$</p>
+<div class="alert alert-warning"><p>太大了無法表示<br>
+表示為 $9999 \times 10^9$</p></div>
 <ul>
 <li>相消錯誤</li>
 </ul>
-<p>$$<br>\begin{equation}\begin{split}<br>1 + 0.00001234 - 1 &amp; = 0.00001234\\<br>100000000 \times 10^{-8}&amp;+\ 1234 \times 10^{-8}\\<br>= 100001234 \times 10^{-8} &amp;\to 1000 \times 10^{-3}\\\\<br>1000 \times 10^{-3} -  1000 &amp;\times 10^{-3}=0\\<br>\end{split}\end{equation}<br>$$</p>
-<h3 id="溝通的限制"><a href="#溝通的限制" class="headerlink" title="溝通的限制"></a>溝通的限制</h3><h4 id="錯誤偵查編碼、錯誤修正編碼"><a href="#錯誤偵查編碼、錯誤修正編碼" class="headerlink" title="錯誤偵查編碼、錯誤修正編碼"></a>錯誤偵查編碼、錯誤修正編碼</h4><ul>
+<p>$$<br>
+\begin{equation}\begin{split}<br>
+1 + 0.00001234 - 1 &amp; = 0.00001234\\<br>
+100000000 \times 10^{-8}&amp;+\ 1234 \times 10^{-8}\\<br>
+= 100001234 \times 10^{-8} &amp;\to 1000 \times 10^{-3}\\\\<br>
+1000 \times 10^{-3} -  1000 &amp;\times 10^{-3}=0\\<br>
+\end{split}\end{equation}<br>
+$$</p>
+<h3 id="溝通的限制">溝通的限制</h3>
+<h4 id="錯誤偵查編碼、錯誤修正編碼">錯誤偵查編碼、錯誤修正編碼</h4>
+<ul>
 <li>同位元：用一個額外的位元來確保一個位元組的1的個數為基或偶數。</li>
 <li>奇同位：如10001100，此時同位元為0，10111101，此時同位元為1。</li>
 <li>偶同位</li>
 <li>檢查位元：將所有位數加起來，存取總和的個位數，如 34376 總和為 23 ，儲存：34376-3。</li>
 </ul>
 <hr>
-<h2 id="軟體"><a href="#軟體" class="headerlink" title="軟體"></a>軟體</h2><h3 id="軟體的複雜性"><a href="#軟體的複雜性" class="headerlink" title="軟體的複雜性"></a>軟體的複雜性</h3><h3 id="軟體工程"><a href="#軟體工程" class="headerlink" title="軟體工程"></a>軟體工程</h3><p>解決問題的步驟新增兩項，軟體需求、規格。</p>
+<h2 id="軟體">軟體</h2>
+<h3 id="軟體的複雜性">軟體的複雜性</h3>
+<h3 id="軟體工程">軟體工程</h3>
+<p>解決問題的步驟新增兩項，軟體需求、規格。</p>
 <hr>
-<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><h3 id="Big-O-分析"><a href="#Big-O-分析" class="headerlink" title="Big-O 分析"></a>Big-O 分析</h3><p>$$f(N) = N^4 + N^2 - 1 \to O(N^4)$$</p>
+<h2 id="問題">問題</h2>
+<h3 id="Big-O-分析">Big-O 分析</h3>
+<p>$$f(N) = N^4 + N^2 - 1 \to O(N^4)$$</p>
 <ul>
 <li>$O(1)$ 界線時間：如指定一個直到一個長度為N的陣列中的第i項。</li>
 <li>$O(logN)$ 對數時間：如二元搜尋法 BST。</li>
@@ -214,13 +244,15 @@
 <li>$O(2^N)$ 指數時間</li>
 <li>$O(N!)$ 階層時間</li>
 </ul>
-<h3 id="杜林機器（圖靈機器）"><a href="#杜林機器（圖靈機器）" class="headerlink" title="杜林機器（圖靈機器）"></a>杜林機器（圖靈機器）</h3><ul>
+<h3 id="杜林機器（圖靈機器）">杜林機器（圖靈機器）</h3>
+<ul>
 <li>讀取紙帶上一個儲存格的符號</li>
 <li>將一個符號寫入儲存格</li>
 <li>向左/右移一格，或不動</li>
 </ul>
 <p>任何具有可計算性的東西都可以藉由杜林機器來運算</p>
-<h3 id="演算法分類"><a href="#演算法分類" class="headerlink" title="演算法分類"></a>演算法分類</h3><ul>
+<h3 id="演算法分類">演算法分類</h3>
+<ul>
 <li>多項式演算法 P 類別</li>
 <li>NP 類別：可以在多項式時間內完成的演算法</li>
 </ul>
