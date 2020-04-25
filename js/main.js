@@ -19,6 +19,11 @@ $(document).ready( function () {
     };
     imgInit();
 
+    $('article').lightGallery({
+        selector: '.img-item',
+        subHtmlSelectorRelative: true
+    });
+
     let tableInit = function () {
         $('article .container table').each(function () {
             if (!($(this).parent().hasClass("highlight"))) {
