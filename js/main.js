@@ -29,10 +29,24 @@ $(document).ready( function () {
     }
     tableInit();
 
-    let highlightInit = function() {
+    let highlightInit = function () {
         $('article .container figure:has(td.gutter)').each(function () {
             $(this).addClass('line_number');
         });
     }
     highlightInit();
+
+    let footnoteInit = function () {
+        $("#footnotes hr").addClass("block-hr");
+        $("#footnotelist").addClass("panel panel-default");
+        $("#footnotelist ol").addClass("list-group");
+        $("#footnotelist li").addClass("list-group-item");
+        $("#footnotelist ol").css({"margin-left": "0"});
+        $("#footnotelist li span:first-child").css({"margin-left": "0"});
+
+        var heading = '<div class="panel-heading">Reference</div>'
+        let headingHtml = $.parseHTML(heading);
+        $("#footnotelist").prepend(headingHtml);
+    }
+    footnoteInit();
 });
