@@ -5,9 +5,9 @@
   <subtitle>單晶片、即時作業系統與韌體相關之技術筆記</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.lusw.dev/"/>
+  <link href="https://blog.lusw.dev/"/>
   <updated>2020-04-24T08:37:37.000Z</updated>
-  <id>http://blog.lusw.dev/</id>
+  <id>https://blog.lusw.dev/</id>
   
   <author>
     <name>LuSkywalker</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Add Bootstrap Panel Tags into Hexo</title>
-    <link href="http://blog.lusw.dev/add-bs-panel-for-hexo.html"/>
-    <id>http://blog.lusw.dev/add-bs-panel-for-hexo.html</id>
+    <link href="https://blog.lusw.dev/add-bs-panel-for-hexo.html"/>
+    <id>https://blog.lusw.dev/add-bs-panel-for-hexo.html</id>
     <published>2020-04-23T13:11:09.000Z</published>
     <updated>2020-04-24T08:37:37.000Z</updated>
     
@@ -35,23 +35,23 @@
     </summary>
     
     
-      <category term="Hexo" scheme="http://blog.lusw.dev/categories/Hexo/"/>
+      <category term="Hexo" scheme="https://blog.lusw.dev/categories/Hexo/"/>
     
     
-      <category term="Hexo" scheme="http://blog.lusw.dev/tags/Hexo/"/>
+      <category term="Hexo" scheme="https://blog.lusw.dev/tags/Hexo/"/>
     
-      <category term="panel" scheme="http://blog.lusw.dev/tags/panel/"/>
+      <category term="panel" scheme="https://blog.lusw.dev/tags/panel/"/>
     
-      <category term="bootstrap" scheme="http://blog.lusw.dev/tags/bootstrap/"/>
+      <category term="bootstrap" scheme="https://blog.lusw.dev/tags/bootstrap/"/>
     
-      <category term="tags" scheme="http://blog.lusw.dev/tags/tags/"/>
+      <category term="tags" scheme="https://blog.lusw.dev/tags/tags/"/>
     
   </entry>
   
   <entry>
     <title>C 語言使用 Union 與位元欄位來改特定 bit 區間值</title>
-    <link href="http://blog.lusw.dev/c-bit-operation.html"/>
-    <id>http://blog.lusw.dev/c-bit-operation.html</id>
+    <link href="https://blog.lusw.dev/c-bit-operation.html"/>
+    <id>https://blog.lusw.dev/c-bit-operation.html</id>
     <published>2020-04-10T09:28:52.000Z</published>
     <updated>2020-04-24T08:55:05.000Z</updated>
     
@@ -67,23 +67,23 @@
     </summary>
     
     
-      <category term="C語言" scheme="http://blog.lusw.dev/categories/Clang/"/>
+      <category term="C語言" scheme="https://blog.lusw.dev/categories/Clang/"/>
     
     
-      <category term="C" scheme="http://blog.lusw.dev/tags/C/"/>
+      <category term="C" scheme="https://blog.lusw.dev/tags/C/"/>
     
-      <category term="C語言" scheme="http://blog.lusw.dev/tags/Clang/"/>
+      <category term="C語言" scheme="https://blog.lusw.dev/tags/Clang/"/>
     
-      <category term="bit" scheme="http://blog.lusw.dev/tags/bit/"/>
+      <category term="bit" scheme="https://blog.lusw.dev/tags/bit/"/>
     
-      <category term="union" scheme="http://blog.lusw.dev/tags/union/"/>
+      <category term="union" scheme="https://blog.lusw.dev/tags/union/"/>
     
   </entry>
   
   <entry>
     <title>如何查看 Linux 被佔用的 port</title>
-    <link href="http://blog.lusw.dev/linux-lookup-port.html"/>
-    <id>http://blog.lusw.dev/linux-lookup-port.html</id>
+    <link href="https://blog.lusw.dev/linux-lookup-port.html"/>
+    <id>https://blog.lusw.dev/linux-lookup-port.html</id>
     <published>2020-04-08T07:08:31.000Z</published>
     <updated>2020-04-22T06:49:54.000Z</updated>
     
@@ -100,23 +100,23 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://blog.lusw.dev/categories/Linux/"/>
+      <category term="Linux" scheme="https://blog.lusw.dev/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://blog.lusw.dev/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.lusw.dev/tags/Linux/"/>
     
-      <category term="port" scheme="http://blog.lusw.dev/tags/port/"/>
+      <category term="port" scheme="https://blog.lusw.dev/tags/port/"/>
     
-      <category term="lsof" scheme="http://blog.lusw.dev/tags/lsof/"/>
+      <category term="lsof" scheme="https://blog.lusw.dev/tags/lsof/"/>
     
-      <category term="netstat" scheme="http://blog.lusw.dev/tags/netstat/"/>
+      <category term="netstat" scheme="https://blog.lusw.dev/tags/netstat/"/>
     
   </entry>
   
   <entry>
     <title>Linux 的 &quot;init&quot; 行程</title>
-    <link href="http://blog.lusw.dev/linux-init-number.html"/>
-    <id>http://blog.lusw.dev/linux-init-number.html</id>
+    <link href="https://blog.lusw.dev/linux-init-number.html"/>
+    <id>https://blog.lusw.dev/linux-init-number.html</id>
     <published>2020-04-08T06:18:01.000Z</published>
     <updated>2020-04-22T04:29:36.000Z</updated>
     
@@ -132,21 +132,21 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://blog.lusw.dev/categories/Linux/"/>
+      <category term="Linux" scheme="https://blog.lusw.dev/categories/Linux/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="Linux" scheme="http://blog.lusw.dev/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.lusw.dev/tags/Linux/"/>
     
-      <category term="init" scheme="http://blog.lusw.dev/tags/init/"/>
+      <category term="init" scheme="https://blog.lusw.dev/tags/init/"/>
     
   </entry>
   
   <entry>
     <title>在 Xcode 中為免費開發者帳戶重新建立憑證</title>
-    <link href="http://blog.lusw.dev/renew-xcode-profile-free-develope-account.html"/>
-    <id>http://blog.lusw.dev/renew-xcode-profile-free-develope-account.html</id>
+    <link href="https://blog.lusw.dev/renew-xcode-profile-free-develope-account.html"/>
+    <id>https://blog.lusw.dev/renew-xcode-profile-free-develope-account.html</id>
     <published>2020-03-23T03:54:33.000Z</published>
     <updated>2020-04-19T14:29:53.843Z</updated>
     
@@ -162,23 +162,23 @@
     </summary>
     
     
-      <category term="Note" scheme="http://blog.lusw.dev/categories/Note/"/>
+      <category term="Note" scheme="https://blog.lusw.dev/categories/Note/"/>
     
     
-      <category term="Xcode" scheme="http://blog.lusw.dev/tags/Xcode/"/>
+      <category term="Xcode" scheme="https://blog.lusw.dev/tags/Xcode/"/>
     
-      <category term="ios" scheme="http://blog.lusw.dev/tags/ios/"/>
+      <category term="ios" scheme="https://blog.lusw.dev/tags/ios/"/>
     
-      <category term="renew" scheme="http://blog.lusw.dev/tags/renew/"/>
+      <category term="renew" scheme="https://blog.lusw.dev/tags/renew/"/>
     
-      <category term="certificate" scheme="http://blog.lusw.dev/tags/certificate/"/>
+      <category term="certificate" scheme="https://blog.lusw.dev/tags/certificate/"/>
     
   </entry>
   
   <entry>
     <title>CSS3選擇器 :not()</title>
-    <link href="http://blog.lusw.dev/css-not-selecter.html"/>
-    <id>http://blog.lusw.dev/css-not-selecter.html</id>
+    <link href="https://blog.lusw.dev/css-not-selecter.html"/>
+    <id>https://blog.lusw.dev/css-not-selecter.html</id>
     <published>2020-01-29T06:03:34.000Z</published>
     <updated>2020-04-23T13:07:38.000Z</updated>
     
@@ -194,19 +194,19 @@
     </summary>
     
     
-      <category term="Note" scheme="http://blog.lusw.dev/categories/Note/"/>
+      <category term="Note" scheme="https://blog.lusw.dev/categories/Note/"/>
     
     
-      <category term="selector" scheme="http://blog.lusw.dev/tags/selector/"/>
+      <category term="selector" scheme="https://blog.lusw.dev/tags/selector/"/>
     
-      <category term="note" scheme="http://blog.lusw.dev/tags/note/"/>
+      <category term="note" scheme="https://blog.lusw.dev/tags/note/"/>
     
   </entry>
   
   <entry>
     <title>Perl 模組安裝</title>
-    <link href="http://blog.lusw.dev/perl-install-module.html"/>
-    <id>http://blog.lusw.dev/perl-install-module.html</id>
+    <link href="https://blog.lusw.dev/perl-install-module.html"/>
+    <id>https://blog.lusw.dev/perl-install-module.html</id>
     <published>2019-12-27T10:40:13.000Z</published>
     <updated>2020-04-22T04:30:49.000Z</updated>
     
@@ -222,17 +222,17 @@
     </summary>
     
     
-      <category term="Note" scheme="http://blog.lusw.dev/categories/Note/"/>
+      <category term="Note" scheme="https://blog.lusw.dev/categories/Note/"/>
     
     
-      <category term="perl" scheme="http://blog.lusw.dev/tags/perl/"/>
+      <category term="perl" scheme="https://blog.lusw.dev/tags/perl/"/>
     
   </entry>
   
   <entry>
     <title>在 Arduino 上使用中斷</title>
-    <link href="http://blog.lusw.dev/arduino-interrupt.html"/>
-    <id>http://blog.lusw.dev/arduino-interrupt.html</id>
+    <link href="https://blog.lusw.dev/arduino-interrupt.html"/>
+    <id>https://blog.lusw.dev/arduino-interrupt.html</id>
     <published>2019-12-26T15:36:34.000Z</published>
     <updated>2020-04-22T06:55:23.000Z</updated>
     
@@ -248,19 +248,19 @@
     </summary>
     
     
-      <category term="Note" scheme="http://blog.lusw.dev/categories/Note/"/>
+      <category term="Note" scheme="https://blog.lusw.dev/categories/Note/"/>
     
     
-      <category term="Arduino" scheme="http://blog.lusw.dev/tags/Arduino/"/>
+      <category term="Arduino" scheme="https://blog.lusw.dev/tags/Arduino/"/>
     
-      <category term="interrupt" scheme="http://blog.lusw.dev/tags/interrupt/"/>
+      <category term="interrupt" scheme="https://blog.lusw.dev/tags/interrupt/"/>
     
   </entry>
   
   <entry>
     <title>使用 ANSI 跳脫碼印出有色文字</title>
-    <link href="http://blog.lusw.dev/ascii-color.html"/>
-    <id>http://blog.lusw.dev/ascii-color.html</id>
+    <link href="https://blog.lusw.dev/ascii-color.html"/>
+    <id>https://blog.lusw.dev/ascii-color.html</id>
     <published>2019-12-26T14:50:57.000Z</published>
     <updated>2020-04-24T08:54:49.000Z</updated>
     
@@ -276,23 +276,23 @@
     </summary>
     
     
-      <category term="C語言" scheme="http://blog.lusw.dev/categories/Clang/"/>
+      <category term="C語言" scheme="https://blog.lusw.dev/categories/Clang/"/>
     
     
-      <category term="C" scheme="http://blog.lusw.dev/tags/C/"/>
+      <category term="C" scheme="https://blog.lusw.dev/tags/C/"/>
     
-      <category term="C語言" scheme="http://blog.lusw.dev/tags/Clang/"/>
+      <category term="C語言" scheme="https://blog.lusw.dev/tags/Clang/"/>
     
-      <category term="ASCII" scheme="http://blog.lusw.dev/tags/ASCII/"/>
+      <category term="ASCII" scheme="https://blog.lusw.dev/tags/ASCII/"/>
     
-      <category term="ANSI" scheme="http://blog.lusw.dev/tags/ANSI/"/>
+      <category term="ANSI" scheme="https://blog.lusw.dev/tags/ANSI/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread GUI 繪圖引擎 - 硬體</title>
-    <link href="http://blog.lusw.dev/rtgui-dc-hw.html"/>
-    <id>http://blog.lusw.dev/rtgui-dc-hw.html</id>
+    <link href="https://blog.lusw.dev/rtgui-dc-hw.html"/>
+    <id>https://blog.lusw.dev/rtgui-dc-hw.html</id>
     <published>2019-03-13T03:27:41.000Z</published>
     <updated>2020-04-23T05:01:49.000Z</updated>
     
@@ -308,23 +308,23 @@
     </summary>
     
     
-      <category term="RT-Thread GUI" scheme="http://blog.lusw.dev/categories/RT-Thread-GUI/"/>
+      <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="GUI" scheme="http://blog.lusw.dev/tags/GUI/"/>
+      <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
     
-      <category term="dc" scheme="http://blog.lusw.dev/tags/dc/"/>
+      <category term="dc" scheme="https://blog.lusw.dev/tags/dc/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread GUI Server</title>
-    <link href="http://blog.lusw.dev/rtgui-server.html"/>
-    <id>http://blog.lusw.dev/rtgui-server.html</id>
+    <link href="https://blog.lusw.dev/rtgui-server.html"/>
+    <id>https://blog.lusw.dev/rtgui-server.html</id>
     <published>2019-02-23T07:08:11.000Z</published>
     <updated>2020-04-23T05:02:07.000Z</updated>
     
@@ -340,23 +340,23 @@
     </summary>
     
     
-      <category term="RT-Thread GUI" scheme="http://blog.lusw.dev/categories/RT-Thread-GUI/"/>
+      <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="GUI" scheme="http://blog.lusw.dev/tags/GUI/"/>
+      <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
     
-      <category term="server" scheme="http://blog.lusw.dev/tags/server/"/>
+      <category term="server" scheme="https://blog.lusw.dev/tags/server/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread GUI Window</title>
-    <link href="http://blog.lusw.dev/rtgui-window.html"/>
-    <id>http://blog.lusw.dev/rtgui-window.html</id>
+    <link href="https://blog.lusw.dev/rtgui-window.html"/>
+    <id>https://blog.lusw.dev/rtgui-window.html</id>
     <published>2019-01-29T12:53:02.000Z</published>
     <updated>2020-04-23T05:02:18.000Z</updated>
     
@@ -372,23 +372,23 @@
     </summary>
     
     
-      <category term="RT-Thread GUI" scheme="http://blog.lusw.dev/categories/RT-Thread-GUI/"/>
+      <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="GUI" scheme="http://blog.lusw.dev/tags/GUI/"/>
+      <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
     
-      <category term="window" scheme="http://blog.lusw.dev/tags/window/"/>
+      <category term="window" scheme="https://blog.lusw.dev/tags/window/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread GUI Widget</title>
-    <link href="http://blog.lusw.dev/rtgui-widget.html"/>
-    <id>http://blog.lusw.dev/rtgui-widget.html</id>
+    <link href="https://blog.lusw.dev/rtgui-widget.html"/>
+    <id>https://blog.lusw.dev/rtgui-widget.html</id>
     <published>2019-01-01T10:42:37.000Z</published>
     <updated>2020-04-23T05:02:26.000Z</updated>
     
@@ -404,23 +404,23 @@
     </summary>
     
     
-      <category term="RT-Thread GUI" scheme="http://blog.lusw.dev/categories/RT-Thread-GUI/"/>
+      <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="GUI" scheme="http://blog.lusw.dev/tags/GUI/"/>
+      <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
     
-      <category term="widget" scheme="http://blog.lusw.dev/tags/widget/"/>
+      <category term="widget" scheme="https://blog.lusw.dev/tags/widget/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread GUI Object</title>
-    <link href="http://blog.lusw.dev/rtgui-object.html"/>
-    <id>http://blog.lusw.dev/rtgui-object.html</id>
+    <link href="https://blog.lusw.dev/rtgui-object.html"/>
+    <id>https://blog.lusw.dev/rtgui-object.html</id>
     <published>2019-01-01T07:08:37.000Z</published>
     <updated>2020-04-23T05:02:31.000Z</updated>
     
@@ -436,23 +436,23 @@
     </summary>
     
     
-      <category term="RT-Thread GUI" scheme="http://blog.lusw.dev/categories/RT-Thread-GUI/"/>
+      <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="GUI" scheme="http://blog.lusw.dev/tags/GUI/"/>
+      <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
     
-      <category term="OOP" scheme="http://blog.lusw.dev/tags/OOP/"/>
+      <category term="OOP" scheme="https://blog.lusw.dev/tags/OOP/"/>
     
   </entry>
   
   <entry>
     <title>使用 crontab 自動備份網站原始碼</title>
-    <link href="http://blog.lusw.dev/auto-backup-with-crontab.html"/>
-    <id>http://blog.lusw.dev/auto-backup-with-crontab.html</id>
+    <link href="https://blog.lusw.dev/auto-backup-with-crontab.html"/>
+    <id>https://blog.lusw.dev/auto-backup-with-crontab.html</id>
     <published>2018-12-26T04:14:07.000Z</published>
     <updated>2020-04-22T08:51:04.000Z</updated>
     
@@ -468,19 +468,19 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://blog.lusw.dev/categories/Linux/"/>
+      <category term="Linux" scheme="https://blog.lusw.dev/categories/Linux/"/>
     
     
-      <category term="Linux" scheme="http://blog.lusw.dev/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.lusw.dev/tags/Linux/"/>
     
-      <category term="crontab" scheme="http://blog.lusw.dev/tags/crontab/"/>
+      <category term="crontab" scheme="https://blog.lusw.dev/tags/crontab/"/>
     
   </entry>
   
   <entry>
     <title>自訂網域名稱：Google Domain</title>
-    <link href="http://blog.lusw.dev/custom-domain-by-google-domain.html"/>
-    <id>http://blog.lusw.dev/custom-domain-by-google-domain.html</id>
+    <link href="https://blog.lusw.dev/custom-domain-by-google-domain.html"/>
+    <id>https://blog.lusw.dev/custom-domain-by-google-domain.html</id>
     <published>2018-12-13T03:17:28.000Z</published>
     <updated>2020-04-24T08:51:09.000Z</updated>
     
@@ -496,21 +496,21 @@
     </summary>
     
     
-      <category term="Hexo" scheme="http://blog.lusw.dev/categories/Hexo/"/>
+      <category term="Hexo" scheme="https://blog.lusw.dev/categories/Hexo/"/>
     
     
-      <category term="hexo" scheme="http://blog.lusw.dev/tags/hexo/"/>
+      <category term="hexo" scheme="https://blog.lusw.dev/tags/hexo/"/>
     
-      <category term="github-page" scheme="http://blog.lusw.dev/tags/github-page/"/>
+      <category term="github-page" scheme="https://blog.lusw.dev/tags/github-page/"/>
     
-      <category term="CNAME" scheme="http://blog.lusw.dev/tags/CNAME/"/>
+      <category term="CNAME" scheme="https://blog.lusw.dev/tags/CNAME/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread SLAB 動態管理</title>
-    <link href="http://blog.lusw.dev/rt-slab.html"/>
-    <id>http://blog.lusw.dev/rt-slab.html</id>
+    <link href="https://blog.lusw.dev/rt-slab.html"/>
+    <id>https://blog.lusw.dev/rt-slab.html</id>
     <published>2018-12-05T07:42:50.000Z</published>
     <updated>2020-04-23T05:02:42.000Z</updated>
     
@@ -527,23 +527,23 @@
     </summary>
     
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/categories/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="記憶體管理" scheme="http://blog.lusw.dev/tags/MemMan/"/>
+      <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
-      <category term="SLAB" scheme="http://blog.lusw.dev/tags/SLAB/"/>
+      <category term="SLAB" scheme="https://blog.lusw.dev/tags/SLAB/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread 小記憶體動態管理</title>
-    <link href="http://blog.lusw.dev/rt-small-mem.html"/>
-    <id>http://blog.lusw.dev/rt-small-mem.html</id>
+    <link href="https://blog.lusw.dev/rt-small-mem.html"/>
+    <id>https://blog.lusw.dev/rt-small-mem.html</id>
     <published>2018-12-05T07:42:44.000Z</published>
     <updated>2020-04-23T05:02:36.000Z</updated>
     
@@ -560,21 +560,21 @@
     </summary>
     
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/categories/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="記憶體管理" scheme="http://blog.lusw.dev/tags/MemMan/"/>
+      <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread Memory Heap</title>
-    <link href="http://blog.lusw.dev/rt-memheap.html"/>
-    <id>http://blog.lusw.dev/rt-memheap.html</id>
+    <link href="https://blog.lusw.dev/rt-memheap.html"/>
+    <id>https://blog.lusw.dev/rt-memheap.html</id>
     <published>2018-12-05T07:42:29.000Z</published>
     <updated>2020-04-23T05:02:48.000Z</updated>
     
@@ -591,23 +591,23 @@
     </summary>
     
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/categories/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="記憶體管理" scheme="http://blog.lusw.dev/tags/MemMan/"/>
+      <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
-      <category term="Memory Heap" scheme="http://blog.lusw.dev/tags/Memory-Heap/"/>
+      <category term="Memory Heap" scheme="https://blog.lusw.dev/tags/Memory-Heap/"/>
     
   </entry>
   
   <entry>
     <title>RT-Thread Memory Pool</title>
-    <link href="http://blog.lusw.dev/rt-mem.html"/>
-    <id>http://blog.lusw.dev/rt-mem.html</id>
+    <link href="https://blog.lusw.dev/rt-mem.html"/>
+    <id>https://blog.lusw.dev/rt-mem.html</id>
     <published>2018-11-29T03:24:59.000Z</published>
     <updated>2020-04-23T05:02:54.000Z</updated>
     
@@ -624,16 +624,16 @@
     </summary>
     
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/categories/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="http://blog.lusw.dev/tags/kernel/"/>
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
-      <category term="RT-Thread" scheme="http://blog.lusw.dev/tags/RT-Thread/"/>
+      <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
-      <category term="記憶體管理" scheme="http://blog.lusw.dev/tags/MemMan/"/>
+      <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
-      <category term="Memory Pool" scheme="http://blog.lusw.dev/tags/Memory-Pool/"/>
+      <category term="Memory Pool" scheme="https://blog.lusw.dev/tags/Memory-Pool/"/>
     
   </entry>
   
