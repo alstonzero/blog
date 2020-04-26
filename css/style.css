@@ -863,6 +863,9 @@ details.alert {
 .ui-toc.dropup .dropdown-menu .toc-menu {
   font-size: 0.8em;
 }
+#gitalk-container .gt-link {
+  border-bottom: 0;
+}
 #gitalk-container .gt-link-counts {
   color: #6c757d;
 }
@@ -883,6 +886,24 @@ details.alert {
   background-color: #0085a1;
   border-color: #0085a1;
   color: #fff;
+}
+#gitalk-container .gt-user .gt-user-inner .gt-ico svg {
+  margin-top: -9px;
+}
+#gitalk-container .gt-user .gt-user-inner.is--poping .gt-ico svg {
+  fill: #404040;
+}
+#gitalk-container .gt-popup .gt-action:not(is--active) {
+  color: #404040;
+}
+#gitalk-container .gt-popup .gt-action:not(is--active) .gt-action-text {
+  color: #404040;
+}
+#gitalk-container .gt-popup .gt-action.is--active .gt-action-text {
+  color: #0085a1;
+}
+#gitalk-container .gt-popup .gt-copyright .gt-link {
+  color: #404040;
 }
 @media only screen and (min-width: 426px) {
   .table-responsive table.table {
