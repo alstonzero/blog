@@ -902,6 +902,9 @@ details.alert {
 #gitalk-container .gt-popup .gt-action.is--active .gt-action-text {
   color: #0085a1;
 }
+#gitalk-container .gt-popup .gt-action.is--active:before {
+  background-color: #0085a1;
+}
 #gitalk-container .gt-popup .gt-copyright .gt-link {
   color: #404040;
 }
