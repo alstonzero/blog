@@ -6,5 +6,8 @@ Allow: /tags/
 Allow: /about/ 
 Disallow: /img/
 Disallow: /css/
+Disallow: /js/
+Disallow: /friends/
+Disallow: /pages/
 
 Sitemap: https://blog.lusw.dev/sitemap.xml
