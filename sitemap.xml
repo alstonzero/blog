@@ -233,20 +233,6 @@
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/add-bs-label-for-hexo.html</loc>
-    
-    <lastmod>2020-04-26T07:42:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.lusw.dev/add-bs-card-for-hexo.html</loc>
-    
-    <lastmod>2020-04-26T07:42:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.lusw.dev/vim-instruction.html</loc>
     
     <lastmod>2020-04-26T07:42:44.000Z</lastmod>
@@ -254,7 +240,21 @@
   </url>
   
   <url>
+    <loc>https://blog.lusw.dev/add-bs-label-for-hexo.html</loc>
+    
+    <lastmod>2020-04-26T07:42:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.lusw.dev/add-bs-panel-for-hexo.html</loc>
+    
+    <lastmod>2020-04-26T07:42:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.lusw.dev/add-bs-card-for-hexo.html</loc>
     
     <lastmod>2020-04-26T07:42:44.000Z</lastmod>
     
