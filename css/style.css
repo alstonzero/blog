@@ -794,6 +794,9 @@ details.alert {
 .pagination .next>span {
   float: right;
 }
+.pagination .page-item .page-link {
+  border-radius: 0;
+}
 .img-caption {
   font-size: 14px;
   margin: 0;
@@ -859,6 +862,27 @@ details.alert {
 }
 .ui-toc.dropup .dropdown-menu .toc-menu {
   font-size: 0.8em;
+}
+#gitalk-container .gt-link-counts {
+  color: #6c757d;
+}
+#gitalk-container .gt-header-controls .gt-ico {
+  color: #6c757d;
+}
+#gitalk-container .gt-header-controls .gt-ico .gt-svg svg {
+  fill: #6c757d;
+  margin-top: -9px;
+}
+#gitalk-container .gt-header-controls .gt-btn {
+  color: #404040;
+  background-color: unset;
+  border-color: #dee2e6;
+}
+#gitalk-container .gt-header-controls .gt-btn:hover,
+#gitalk-container .gt-header-controls .gt-btn:focus {
+  background-color: #0085a1;
+  border-color: #0085a1;
+  color: #fff;
 }
 @media only screen and (min-width: 426px) {
   .table-responsive table.table {
