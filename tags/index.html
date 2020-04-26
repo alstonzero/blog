@@ -58,7 +58,7 @@
     <title>標籤雲 - 技術筆記</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -107,12 +107,14 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top p-0" id="nav">
+    <div class="container-fluid pl-0 pr-0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
             <a class="navbar-brand" href="/">技術筆記</a>
-            <button class="btn btn-link search-btn pull-right" data-toggle="modal" data-target="#searchModal">
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -127,7 +129,7 @@
     <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="site-heading">
                         <h1>標籤雲</h1>
                     </div>
@@ -137,570 +139,431 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container tags">
-        <ul class="pager">
-            
-                <li class="tag-category-item">
-    <a href="/tags/ItC/">
-        計算機概論
-        <span class="badge">13</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/DigRes/">
-        數字表示
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/gate/">
-        閘
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/LogicG/">
-        邏輯圖
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/circuit/">
-        電路
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/com/">
-        電腦
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/DataStructure/">
-        資料結構
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/XV6/">
-        XV6
-        <span class="badge">11</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/kernel/">
-        kernel
-        <span class="badge">22</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/lock/">
-        lock
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/register/">
-        暫存器
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/x86/">
-        x86
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/vim/">
-        vim
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Linux/">
-        Linux
-        <span class="badge">5</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/C/">
-        C
-        <span class="badge">3</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Clang/">
-        C語言
-        <span class="badge">3</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/attribute/">
-        attribute
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Ubuntu/">
-        Ubuntu
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/RT-Thread/">
-        RT-Thread
-        <span class="badge">17</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/GUI/">
-        GUI
-        <span class="badge">6</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/RTM-EXPORT/">
-        RTM_EXPORT
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/clock/">
-        clock
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/hexo/">
-        hexo
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/github-page/">
-        github-page
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/CNAME/">
-        CNAME
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/crontab/">
-        crontab
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/OOP/">
-        OOP
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/server/">
-        server
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Arduino/">
-        Arduino
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/interrupt/">
-        interrupt
-        <span class="badge">2</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/ASCII/">
-        ASCII
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/ANSI/">
-        ANSI
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/perl/">
-        perl
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/selector/">
-        selector
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/note/">
-        note
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Xcode/">
-        Xcode
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/ios/">
-        ios
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/renew/">
-        renew
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/certificate/">
-        certificate
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/init/">
-        init
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/port/">
-        port
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/lsof/">
-        lsof
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/netstat/">
-        netstat
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/bit/">
-        bit
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/union/">
-        union
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Hexo/">
-        Hexo
-        <span class="badge">2</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/label/">
-        label
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/bootstrap/">
-        bootstrap
-        <span class="badge">2</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/tags/">
-        tags
-        <span class="badge">2</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/process/">
-        process
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/pages/">
-        分頁
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/MemMan/">
-        記憶體管理
-        <span class="badge">5</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/scheduler/">
-        scheduler
-        <span class="badge">2</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/file-system/">
-        file system
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/makefile/">
-        makefile
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/FunPtr/">
-        函數指標
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/timer/">
-        timer
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/dc/">
-        dc
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/panel/">
-        panel
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/trap/">
-        trap
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/thread/">
-        thread
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Memory-Pool/">
-        Memory Pool
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/widget/">
-        widget
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/SLAB/">
-        SLAB
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/window/">
-        window
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/semaphore/">
-        semaphore
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/event/">
-        event
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/message/">
-        message
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/mailbox/">
-        mailbox
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-                <li class="tag-category-item">
-    <a href="/tags/Memory-Heap/">
-        Memory Heap
-        <span class="badge">1</span>
-    </a>
-</li>
-
-            
-        </ul>
+    <div class="container tags text-center">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                
+                    <a href="/tags/ItC/" class="btn btn-outline-dark m-2">
+    計算機概論
+    <span class="badge badge-light">13</span>
+</a>
+
+                
+                    <a href="/tags/DigRes/" class="btn btn-outline-dark m-2">
+    數字表示
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/gate/" class="btn btn-outline-dark m-2">
+    閘
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/LogicG/" class="btn btn-outline-dark m-2">
+    邏輯圖
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/circuit/" class="btn btn-outline-dark m-2">
+    電路
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/com/" class="btn btn-outline-dark m-2">
+    電腦
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/DataStructure/" class="btn btn-outline-dark m-2">
+    資料結構
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/XV6/" class="btn btn-outline-dark m-2">
+    XV6
+    <span class="badge badge-light">11</span>
+</a>
+
+                
+                    <a href="/tags/kernel/" class="btn btn-outline-dark m-2">
+    kernel
+    <span class="badge badge-light">22</span>
+</a>
+
+                
+                    <a href="/tags/lock/" class="btn btn-outline-dark m-2">
+    lock
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/register/" class="btn btn-outline-dark m-2">
+    暫存器
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/x86/" class="btn btn-outline-dark m-2">
+    x86
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/vim/" class="btn btn-outline-dark m-2">
+    vim
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Linux/" class="btn btn-outline-dark m-2">
+    Linux
+    <span class="badge badge-light">5</span>
+</a>
+
+                
+                    <a href="/tags/C/" class="btn btn-outline-dark m-2">
+    C
+    <span class="badge badge-light">3</span>
+</a>
+
+                
+                    <a href="/tags/Clang/" class="btn btn-outline-dark m-2">
+    C語言
+    <span class="badge badge-light">3</span>
+</a>
+
+                
+                    <a href="/tags/attribute/" class="btn btn-outline-dark m-2">
+    attribute
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Ubuntu/" class="btn btn-outline-dark m-2">
+    Ubuntu
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/RT-Thread/" class="btn btn-outline-dark m-2">
+    RT-Thread
+    <span class="badge badge-light">17</span>
+</a>
+
+                
+                    <a href="/tags/GUI/" class="btn btn-outline-dark m-2">
+    GUI
+    <span class="badge badge-light">6</span>
+</a>
+
+                
+                    <a href="/tags/RTM-EXPORT/" class="btn btn-outline-dark m-2">
+    RTM_EXPORT
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/clock/" class="btn btn-outline-dark m-2">
+    clock
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/hexo/" class="btn btn-outline-dark m-2">
+    hexo
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/github-page/" class="btn btn-outline-dark m-2">
+    github-page
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/CNAME/" class="btn btn-outline-dark m-2">
+    CNAME
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/crontab/" class="btn btn-outline-dark m-2">
+    crontab
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/OOP/" class="btn btn-outline-dark m-2">
+    OOP
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/server/" class="btn btn-outline-dark m-2">
+    server
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Arduino/" class="btn btn-outline-dark m-2">
+    Arduino
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/interrupt/" class="btn btn-outline-dark m-2">
+    interrupt
+    <span class="badge badge-light">2</span>
+</a>
+
+                
+                    <a href="/tags/ASCII/" class="btn btn-outline-dark m-2">
+    ASCII
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/ANSI/" class="btn btn-outline-dark m-2">
+    ANSI
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/perl/" class="btn btn-outline-dark m-2">
+    perl
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/selector/" class="btn btn-outline-dark m-2">
+    selector
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/note/" class="btn btn-outline-dark m-2">
+    note
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Xcode/" class="btn btn-outline-dark m-2">
+    Xcode
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/ios/" class="btn btn-outline-dark m-2">
+    ios
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/renew/" class="btn btn-outline-dark m-2">
+    renew
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/certificate/" class="btn btn-outline-dark m-2">
+    certificate
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/init/" class="btn btn-outline-dark m-2">
+    init
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/port/" class="btn btn-outline-dark m-2">
+    port
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/lsof/" class="btn btn-outline-dark m-2">
+    lsof
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/netstat/" class="btn btn-outline-dark m-2">
+    netstat
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/bit/" class="btn btn-outline-dark m-2">
+    bit
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/union/" class="btn btn-outline-dark m-2">
+    union
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Hexo/" class="btn btn-outline-dark m-2">
+    Hexo
+    <span class="badge badge-light">2</span>
+</a>
+
+                
+                    <a href="/tags/label/" class="btn btn-outline-dark m-2">
+    label
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/bootstrap/" class="btn btn-outline-dark m-2">
+    bootstrap
+    <span class="badge badge-light">2</span>
+</a>
+
+                
+                    <a href="/tags/tags/" class="btn btn-outline-dark m-2">
+    tags
+    <span class="badge badge-light">2</span>
+</a>
+
+                
+                    <a href="/tags/process/" class="btn btn-outline-dark m-2">
+    process
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/pages/" class="btn btn-outline-dark m-2">
+    分頁
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/MemMan/" class="btn btn-outline-dark m-2">
+    記憶體管理
+    <span class="badge badge-light">5</span>
+</a>
+
+                
+                    <a href="/tags/scheduler/" class="btn btn-outline-dark m-2">
+    scheduler
+    <span class="badge badge-light">2</span>
+</a>
+
+                
+                    <a href="/tags/file-system/" class="btn btn-outline-dark m-2">
+    file system
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/makefile/" class="btn btn-outline-dark m-2">
+    makefile
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/FunPtr/" class="btn btn-outline-dark m-2">
+    函數指標
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/timer/" class="btn btn-outline-dark m-2">
+    timer
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/dc/" class="btn btn-outline-dark m-2">
+    dc
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/card/" class="btn btn-outline-dark m-2">
+    card
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/trap/" class="btn btn-outline-dark m-2">
+    trap
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/thread/" class="btn btn-outline-dark m-2">
+    thread
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Memory-Pool/" class="btn btn-outline-dark m-2">
+    Memory Pool
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/widget/" class="btn btn-outline-dark m-2">
+    widget
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/SLAB/" class="btn btn-outline-dark m-2">
+    SLAB
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/window/" class="btn btn-outline-dark m-2">
+    window
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/semaphore/" class="btn btn-outline-dark m-2">
+    semaphore
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/event/" class="btn btn-outline-dark m-2">
+    event
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/message/" class="btn btn-outline-dark m-2">
+    message
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/mailbox/" class="btn btn-outline-dark m-2">
+    mailbox
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+                    <a href="/tags/Memory-Heap/" class="btn btn-outline-dark m-2">
+    Memory Heap
+    <span class="badge badge-light">1</span>
+</a>
+
+                
+            </div>
         </div>
     </div>
 
@@ -716,14 +579,14 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <ul class="list-inline text-center">
                     
 
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -734,7 +597,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -745,7 +608,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -817,7 +680,7 @@
 <script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
 
 <!-- Gallery -->
 <script src="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.js"></script>

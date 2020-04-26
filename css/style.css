@@ -23,8 +23,8 @@ h6,
 .intro-header .page-heading .subheading,
 .intro-header .post-heading .subheading,
 .btn,
-.pager li > a,
-.pager li > span {
+.pagination li > a.page-link,
+.pagination li > span {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 body {
@@ -365,7 +365,6 @@ form .row:first-child .floating-label-form-group {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 1px;
-  border-radius: 0;
   padding: 15px 25px;
 }
 .btn-lg {
@@ -378,11 +377,11 @@ form .row:first-child .floating-label-form-group {
   border: 1px solid #0085a1;
   color: #fff;
 }
-.pager {
+.pagination {
   margin: 20px 0 0;
 }
-.pager li > a,
-.pager li > span {
+.pagination li > a.page-link,
+.pagination li > span {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
@@ -390,17 +389,18 @@ form .row:first-child .floating-label-form-group {
   padding: 15px 25px;
   background-color: #fff;
   border-radius: 0;
+  color: #404040;
 }
-.pager li > a:hover,
-.pager li > a:focus {
+.pagination li > a.page-link:hover,
+.pagination li > a.page-link:focus {
   color: #fff;
   background-color: #0085a1;
   border: 1px solid #0085a1;
 }
-.pager .disabled > a,
-.pager .disabled > a:hover,
-.pager .disabled > a:focus,
-.pager .disabled > span {
+.pagination .disabled > a,
+.pagination .disabled > a:hover,
+.pagination .disabled > a:focus,
+.pagination .disabled > span {
   color: #808080;
   background-color: #404040;
   cursor: not-allowed;
@@ -878,31 +878,31 @@ details.alert {
 .f-btn:nth-child(2) {
   bottom: calc(3% + 50px);
 }
-.panel p:first-child,
-.panel ul:first-child,
-.panel ol:first-child,
-.panel table:first-child,
-.panel pre:first-child,
-.panel blockquote:first-child,
-.panel figure:first-child {
+.card p:first-child,
+.card ul:first-child,
+.card ol:first-child,
+.card table:first-child,
+.card pre:first-child,
+.card blockquote:first-child,
+.card figure:first-child {
   margin-top: 0;
 }
-.panel p:last-child,
-.panel ul:last-child,
-.panel ol:last-child,
-.panel table:last-child,
-.panel pre:last-child,
-.panel blockquote:last-child,
-.panel figure:last-child {
+.card p:last-child,
+.card ul:last-child,
+.card ol:last-child,
+.card table:last-child,
+.card pre:last-child,
+.card blockquote:last-child,
+.card figure:last-child {
   margin-bottom: 0;
 }
-.panel h2:before,
-.panel h3:before,
-.panel h4:before,
-.panel h5:before {
+.card h2:before,
+.card h3:before,
+.card h4:before,
+.card h5:before {
   content: '';
 }
-.panel .panel-footer figure.highlight {
+.card .card-footer figure.highlight {
   background: none;
   padding: 0 16px;
 }
@@ -945,6 +945,10 @@ details.alert {
   color: #e96900;
   font-style: normal;
   white-space: pre-wrap;
+}
+.pagination .next>a,
+.pagination .next>span {
+  float: right;
 }
 @media only screen and (min-width: 426px) {
   .table-responsive table.table {

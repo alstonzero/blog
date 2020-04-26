@@ -58,7 +58,7 @@
     <title>RT-Thread GUI Object - 技術筆記</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -107,12 +107,14 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top p-0" id="nav">
+    <div class="container-fluid pl-0 pr-0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
             <a class="navbar-brand" href="/">技術筆記</a>
-            <button class="btn btn-link search-btn pull-right" data-toggle="modal" data-target="#searchModal">
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -170,7 +172,7 @@
             
 
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="RT-Thread-GUI-物件架構"><a class="header-anchor" href="#RT-Thread-GUI-物件架構">#</a>RT-Thread GUI 物件架構</h2>
 <p>在 RTGUI 中，最小的物件為 widget，再來是 window，window 也是一個 widget；而每個 widget 也是一個 object，這是為了仿造 C++ 的物件導向所設計的，相同的概念我們在 RT-Thread 中已經看過許多次了，在 GUI engine 中也是相同的設計，其中在 object 結構中又串在 type 的結構上，type 中定義了兩個函式：<code>constructor</code> 與 <code>destructor</code>，在 C++ 的 class 中，常使用 <code>init</code> 函式來初始化新建的 class，這裡的 <code>constructor</code> 與 <code>destructor</code> 即用來初始化新建立的物件，及在刪除物件時，釋放該釋放的記憶體。<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[RTGUI粗讲（个人见解篇之三、RTGUI WIDGET （2））](https://blog.csdn.net/xuzhenglim/article/details/11883351)">[1]</span></a></sup></p>
 <hr>
@@ -347,7 +349,7 @@
                 
             </div>
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-tags">
                     
                         tags: 
 
@@ -360,20 +362,20 @@
             
 
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="pager">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <ul class="pagination d-block text-center">
                         
-                            <li class="previous"><a href="/rtgui-widget.html">&larr;  下一頁</a></li>
+                            <li class="previous page-item d-inline"><a href="/rtgui-widget.html" class="page-link float-left">&larr;  下一頁</a></li>
                         
                         
-                            <li class="next"><a href="/auto-backup-with-crontab.html">上一頁  &rarr;</a></li>
+                            <li class="next page-item d-inline"><a href="/auto-backup-with-crontab.html" class="page-link float-right">上一頁  &rarr;</a></li>
                         
                     </ul>
                 </div>
             
             <!-- Comments -->
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     
     <hr class="block-hr"/>
     <h3>留言:</h3>
@@ -410,14 +412,14 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <ul class="list-inline text-center">
                     
 
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -428,7 +430,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -439,7 +441,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -511,7 +513,7 @@
 <script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
 
 <!-- Gallery -->
 <script src="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.js"></script>

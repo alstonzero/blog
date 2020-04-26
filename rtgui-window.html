@@ -58,7 +58,7 @@
     <title>RT-Thread GUI Window - 技術筆記</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -107,12 +107,14 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top p-0" id="nav">
+    <div class="container-fluid pl-0 pr-0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
             <a class="navbar-brand" href="/">技術筆記</a>
-            <button class="btn btn-link search-btn pull-right" data-toggle="modal" data-target="#searchModal">
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -170,7 +172,7 @@
             
 
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div class="alert alert-success"><p><strong>File:</strong> window.h</p></div>
 <h2 id="結構"><a class="header-anchor" href="#結構">#</a>結構</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rtgui_win</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="comment">/* inherit from container */</span></span><br><span class="line">    <span class="keyword">rtgui_container_t</span> parent;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* update count */</span></span><br><span class="line">    <span class="keyword">rt_base_t</span> update;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* drawing count */</span></span><br><span class="line">    <span class="keyword">rt_base_t</span> drawing;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_rect</span> <span class="title">drawing_rect</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* parent window. RT_NULL if the window is a top level window */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_win</span> *<span class="title">parent_window</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_region</span> <span class="title">outer_clip</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_rect</span> <span class="title">outer_extent</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* the widget that will grab the focus in current window */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_widget</span> *<span class="title">focused_widget</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* which app I belong */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_app</span> *<span class="title">app</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* window style */</span></span><br><span class="line">    <span class="keyword">rt_uint16_t</span> style;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* window state flag */</span></span><br><span class="line">    <span class="keyword">enum</span> rtgui_win_flag flag;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">rtgui_modal_code_t</span> modal_code;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* last mouse event handled widget */</span></span><br><span class="line">    <span class="keyword">rtgui_widget_t</span> *last_mevent_widget;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* window title */</span></span><br><span class="line">    <span class="keyword">char</span> *title;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rtgui_wintitle</span> *_<span class="title">title_wgt</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* call back */</span></span><br><span class="line">    <span class="keyword">rt_bool_t</span> (*on_activate)(struct rtgui_object *widget, struct rtgui_event *event);</span><br><span class="line">    <span class="keyword">rt_bool_t</span> (*on_deactivate)(struct rtgui_object *widget, struct rtgui_event *event);</span><br><span class="line">    <span class="keyword">rt_bool_t</span> (*on_close)(struct rtgui_object *widget, struct rtgui_event *event);</span><br><span class="line">    <span class="comment">/* the key is sent to the focused widget by default. If the focused widget</span></span><br><span class="line"><span class="comment">     * and all of it's parents didn't handle the key event, it will be handled</span></span><br><span class="line"><span class="comment">     * by @func on_key</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * If you want to handle key event on your own, it's better to overload</span></span><br><span class="line"><span class="comment">     * this function other than handle EVENT_KBD in event_handler.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">rt_bool_t</span> (*on_key)(struct rtgui_object *widget, struct rtgui_event *event);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* reserved user data */</span></span><br><span class="line">    <span class="keyword">void</span> *user_data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Private data. */</span></span><br><span class="line">    <span class="keyword">rt_base_t</span> (*_do_show)(struct rtgui_win *win);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* app ref_count */</span></span><br><span class="line">    <span class="keyword">rt_uint16_t</span> app_ref_count;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* win magic flag, magic value is 0xA5A55A5A */</span></span><br><span class="line">    <span class="keyword">rt_uint32_t</span>	magic;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
@@ -774,7 +776,7 @@
                 
             </div>
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-tags">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-tags">
                     
                         tags: 
 
@@ -787,20 +789,20 @@
             
 
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="pager">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <ul class="pagination d-block text-center">
                         
-                            <li class="previous"><a href="/rtgui-server.html">&larr;  下一頁</a></li>
+                            <li class="previous page-item d-inline"><a href="/rtgui-server.html" class="page-link float-left">&larr;  下一頁</a></li>
                         
                         
-                            <li class="next"><a href="/rtgui-widget.html">上一頁  &rarr;</a></li>
+                            <li class="next page-item d-inline"><a href="/rtgui-widget.html" class="page-link float-right">上一頁  &rarr;</a></li>
                         
                     </ul>
                 </div>
             
             <!-- Comments -->
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     
     <hr class="block-hr"/>
     <h3>留言:</h3>
@@ -837,14 +839,14 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <ul class="list-inline text-center">
                     
 
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -855,7 +857,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -866,7 +868,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -938,7 +940,7 @@
 <script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
 
 <!-- Gallery -->
 <script src="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.js"></script>

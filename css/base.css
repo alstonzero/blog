@@ -23,8 +23,8 @@ h6,
 .intro-header .page-heading .subheading,
 .intro-header .post-heading .subheading,
 .btn,
-.pager li > a,
-.pager li > span {
+.pagination li > a.page-link,
+.pagination li > span {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 body {
@@ -365,7 +365,6 @@ form .row:first-child .floating-label-form-group {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 1px;
-  border-radius: 0;
   padding: 15px 25px;
 }
 .btn-lg {
@@ -378,11 +377,11 @@ form .row:first-child .floating-label-form-group {
   border: 1px solid #0085a1;
   color: #fff;
 }
-.pager {
+.pagination {
   margin: 20px 0 0;
 }
-.pager li > a,
-.pager li > span {
+.pagination li > a.page-link,
+.pagination li > span {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
@@ -390,17 +389,18 @@ form .row:first-child .floating-label-form-group {
   padding: 15px 25px;
   background-color: #fff;
   border-radius: 0;
+  color: #404040;
 }
-.pager li > a:hover,
-.pager li > a:focus {
+.pagination li > a.page-link:hover,
+.pagination li > a.page-link:focus {
   color: #fff;
   background-color: #0085a1;
   border: 1px solid #0085a1;
 }
-.pager .disabled > a,
-.pager .disabled > a:hover,
-.pager .disabled > a:focus,
-.pager .disabled > span {
+.pagination .disabled > a,
+.pagination .disabled > a:hover,
+.pagination .disabled > a:focus,
+.pagination .disabled > span {
   color: #808080;
   background-color: #404040;
   cursor: not-allowed;

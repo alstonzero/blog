@@ -58,7 +58,7 @@
     <title>所有分類 - 技術筆記</title>
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
@@ -107,12 +107,14 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="nav">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top p-0" id="nav">
+    <div class="container-fluid pl-0 pr-0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
             <a class="navbar-brand" href="/">技術筆記</a>
-            <button class="btn btn-link search-btn pull-right" data-toggle="modal" data-target="#searchModal">
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -127,7 +129,7 @@
     <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="site-heading">
                         <h1>所有分類</h1>
                     </div>
@@ -137,74 +139,59 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container categories">
-        <ul class="pager">
-            
-                <li class="tag-category-item">
-    <a href="/categories/ItC/">
-        計算機概論
-        <span class="badge">13</span>
-    </a>
-</li>
+    <div class="container categories text-center">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                
+                    <a href="/categories/ItC/" class="btn btn-outline-dark m-2">
+    計算機概論
+    <span class="badge badge-light">13</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/XV6/">
-        XV6
-        <span class="badge">11</span>
-    </a>
-</li>
+                
+                    <a href="/categories/XV6/" class="btn btn-outline-dark m-2">
+    XV6
+    <span class="badge badge-light">11</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/Linux/">
-        Linux
-        <span class="badge">5</span>
-    </a>
-</li>
+                
+                    <a href="/categories/Linux/" class="btn btn-outline-dark m-2">
+    Linux
+    <span class="badge badge-light">5</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/Clang/">
-        C語言
-        <span class="badge">3</span>
-    </a>
-</li>
+                
+                    <a href="/categories/Clang/" class="btn btn-outline-dark m-2">
+    C語言
+    <span class="badge badge-light">3</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/RT-Thread/">
-        RT-Thread
-        <span class="badge">12</span>
-    </a>
-</li>
+                
+                    <a href="/categories/RT-Thread/" class="btn btn-outline-dark m-2">
+    RT-Thread
+    <span class="badge badge-light">12</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/Hexo/">
-        Hexo
-        <span class="badge">3</span>
-    </a>
-</li>
+                
+                    <a href="/categories/Hexo/" class="btn btn-outline-dark m-2">
+    Hexo
+    <span class="badge badge-light">3</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/RT-Thread-GUI/">
-        RT-Thread GUI
-        <span class="badge">5</span>
-    </a>
-</li>
+                
+                    <a href="/categories/RT-Thread-GUI/" class="btn btn-outline-dark m-2">
+    RT-Thread GUI
+    <span class="badge badge-light">5</span>
+</a>
 
-            
-                <li class="tag-category-item">
-    <a href="/categories/Note/">
-        Note
-        <span class="badge">4</span>
-    </a>
-</li>
+                
+                    <a href="/categories/Note/" class="btn btn-outline-dark m-2">
+    Note
+    <span class="badge badge-light">4</span>
+</a>
 
-            
-        </ul>
+                
+            </div>
         </div>
     </div>
 
@@ -220,14 +207,14 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <ul class="list-inline text-center">
                     
 
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://github.com/luswdev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -238,7 +225,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="https://www.linkedin.com/in/callum-lu-0aa77066/" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -249,7 +236,7 @@
                     
 
                     
-                        <li>
+                        <li class="list-inline-item">
                             <a rel="external nofollow" href="mailto:info@lusw.dev" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -321,7 +308,7 @@
 <script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<script src="//cdn.jsdelivr.net/npm/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
 
 <!-- Gallery -->
 <script src="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.js"></script>
