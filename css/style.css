@@ -1,14 +1,12 @@
 .transition-all {
   transition: all 0.5s;
 }
-.background-cover,
-.intro-header {
+.background-cover {
   background-size: cover;
   -o-background-size: cover;
 }
 .serif,
 body,
-.intro-header .post-heading .meta,
 .ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item.is-active-li {
   font-family: 'Lora', 'Times New Roman', serif;
 }
@@ -22,10 +20,6 @@ h6,
 .btn,
 .pagination li > a.page-link,
 .pagination li > span,
-.navbar-custom,
-.intro-header .site-heading .subheading,
-.intro-header .post-heading .subheading,
-#searchModal .search-result-list li a.search-result-title,
 .ui-toc.dropup .dropdown-menu #toc-content {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -336,6 +330,7 @@ img::-moz-selection {
   background: transparent;
 }
 .navbar-custom {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   top: 0;
   left: 0;
   z-index: 3;
@@ -344,6 +339,8 @@ img::-moz-selection {
   font-weight: 800;
 }
 .intro-header {
+  background-size: cover;
+  -o-background-size: cover;
   background-color: #808080;
   background-position: center center;
   background-attachment: scroll;
@@ -364,6 +361,7 @@ img::-moz-selection {
   font-size: 50px;
 }
 .intro-header .site-heading .subheading {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 24px;
   line-height: 1.1;
@@ -381,11 +379,13 @@ img::-moz-selection {
   line-height: 1.1;
 }
 .intro-header .post-heading .subheading {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 600;
   font-size: 24px;
   margin: 10px 0 30px;
 }
 .intro-header .post-heading .meta {
+  font-family: 'Lora', 'Times New Roman', serif;
   font-weight: 300;
   font-size: 20px;
 }
@@ -588,6 +588,7 @@ pre .meta {
   border-bottom: 0;
 }
 #searchModal .search-result-list li a.search-result-title {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-decoration: none;
   font-size: 1.4rem;
   font-weight: 800;
