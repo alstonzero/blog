@@ -274,14 +274,6 @@ CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，�
     </div>
 </article> 
 
-<div class="f-btn-box">   
-    
-
-    
-        <a href="#nav" class="b2t f-btn">
-            <i class="fa fa-caret-up"></i>
-        </a>
-    
 
     
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
@@ -297,13 +289,18 @@ CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，�
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
         <div class="ui-toc dropup scrollspy-body pull-right" style="right: 3%;">
-            <button type="button" class="f-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <button type="button" class="toc-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                 <i class="fas fa-list"></i>
             </button>
-            <div class="dropdown-menu dropdown-menu-right p-2">
+            <div class="dropdown-menu dropdown-menu-right p-2"  aria-labelledby="tocLabel">
                 <div class="toc-widget">
-                    <div id="toc-content">
+                    <div id="toc-content" class="text-truncate">
                     </div>
+                </div>
+                <div class="toc-menu pt-3 pl-4">
+                    <a class="expand-toggle d-block text-muted py-1" href="#!"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                    <a class="back-to-top d-block text-muted py-1" href="#nav">回到頂部</a>
+                    <a class="go-to-bottom d-block text-muted py-1" href="#footer">移至底部</a>
                 </div>
             </div>
         </div>
@@ -320,7 +317,7 @@ CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，�
             });
         </script>
     
-</div>
+
 
 
 

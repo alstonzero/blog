@@ -38,7 +38,7 @@ h6,
   margin-bottom: 0;
 }
 *:focus {
-  outline: none;
+  outline: 0 !important;
 }
 body {
   font-size: 18px;

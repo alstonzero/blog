@@ -60,7 +60,37 @@ $(document).ready( function () {
             var oldText = $(this).text();
             var newText = oldText.replace('#','');
             $(this).text(newText);
+
+            if ($(this).hasClass("toc-link")) {
+                $(this).addClass("text-truncate d-block");
+            }
         });
     }
     tocInit();
+
+    $(".dropdown-menu a").on('click', function () {
+        event.preventDefault(); 
+        event.stopPropagation(); 
+        
+        if ($(this).hasClass("toc-link")) {
+            const elem = $(this).attr("href");
+            window.location.href = elem;
+        } 
+    });
+
+    $('.expand-toggle').on('click', function () {
+        $("#toc-content").toggleClass("expand");
+        $(".expand-text").toggle()
+        $(".close-text").toggle()
+    })
+
+    $('.back-to-top').on('click', function () {
+        const elem = $(this).attr("href");
+        window.location.href = elem;
+    });
+
+    $('.go-to-bottom').on('click', function () {
+        const elem = $(this).attr("href");
+        window.location.href = elem;
+    });
 });
