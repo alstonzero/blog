@@ -107,11 +107,11 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top p-0" id="nav">
-    <div class="container-fluid pl-0 pr-0">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top bg-transparent position-absolute w-100 p-0" id="nav">
+    <div class="container pl-0 pr-0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <a class="navbar-brand" href="/">技術筆記</a>
+            <a class="navbar-brand text-white p-1 pl-3" href="/">技術筆記</a>
         </div>
         <div class="navbar-nav float-right">
             <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
@@ -130,10 +130,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
-                <div class="post-heading">
+                <div class="post-heading text-white">
                     <h1>Add Bootstrap badge Tags into Hexo</h1>
                     
-                    <span class="meta">
+                    <span class="meta d-inline text-white-50">
                         
                             <i class="far fa-bookmark fa-fw"></i>
                             
@@ -201,13 +201,13 @@ So as <a href="/add-bs-card-for-hexo.html">last post</a>, let build a tags to in
 <hr>
 <h3 id="Classes"><a class="header-anchor" href="#Classes">#</a>Classes</h3>
 <p>badge has some <a href="https://getbootstrap.com/docs/4.4/components/badge/#contextual-variations" target="_blank" rel="noopener">different styles</a>, we can use args to implement it.</p>
-<div class="card bg-default  mt-3 mb-3"><div class="card-body"><p>Args is given by hexo tag api, we can pass argument to tag.<br>
+<div class="card bg-default  my-3"><div class="card-body"><p>Args is given by hexo tag api, we can pass argument to tag.<br>
 so we combine style name into bs classes, this is the code.</p></div><div class="card-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postbadge</span> (<span class="params">args</span>) </span>{</span><br><span class="line">    args = args.join(<span class="string">' '</span>).split(<span class="string">'@'</span>);</span><br><span class="line">    <span class="keyword">var</span> classes = args[<span class="number">0</span>] || <span class="string">'secondary'</span>;</span><br><span class="line">  </span><br><span class="line">    ...</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;span class="badge badge-'</span> + classes + <span class="string">'"&gt;'</span> + text + <span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
-<div class="card bg-default  mt-3 mb-3"><div class="card-body"><p><span class="badge badge-primary">Primary</span> <span class="badge badge-secondary">Secondary</span> <span class="badge badge-success">Success</span> <span class="badge badge-danger">Danger</span> <span class="badge badge-warning">Warning</span>  <span class="badge badge-info">Info</span> <span class="badge badge-light">Light</span>  <span class="badge badge-dark">Dark</span></p></div><div class="card-footer"><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">{% badge primary @Primary %}</span><br><span class="line">{% badge secondary @Secondary %}</span><br><span class="line">{% badge success @Success %}</span><br><span class="line">{% badge danger @Danger %}</span><br><span class="line">{% badge warning @Warning %}</span><br><span class="line">{% badge info @Info %}</span><br><span class="line">{% badge light @Light %}</span><br><span class="line">{% badge dark @Dark %}</span><br></pre></td></tr></tbody></table></figure></div></div>
+<div class="card bg-default  my-3"><div class="card-body"><p><span class="badge badge-primary">Primary</span> <span class="badge badge-secondary">Secondary</span> <span class="badge badge-success">Success</span> <span class="badge badge-danger">Danger</span> <span class="badge badge-warning">Warning</span>  <span class="badge badge-info">Info</span> <span class="badge badge-light">Light</span>  <span class="badge badge-dark">Dark</span></p></div><div class="card-footer"><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">{% badge primary @Primary %}</span><br><span class="line">{% badge secondary @Secondary %}</span><br><span class="line">{% badge success @Success %}</span><br><span class="line">{% badge danger @Danger %}</span><br><span class="line">{% badge warning @Warning %}</span><br><span class="line">{% badge info @Info %}</span><br><span class="line">{% badge light @Light %}</span><br><span class="line">{% badge dark @Dark %}</span><br></pre></td></tr></tbody></table></figure></div></div>
 <hr>
 <h3 id="Content"><a class="header-anchor" href="#Content">#</a>Content</h3>
 <p>This is how content show.</p>
-<div class="card bg-default  mt-3 mb-3"><div class="card-body"><p>Content is given by hexo tag api, this is a string inside tag (of course markdown). We can use hexo render engine to show it.</p></div><div class="card-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postbadge</span> (<span class="params">args</span>) </span>{</span><br><span class="line">    args = args.join(<span class="string">' '</span>).split(<span class="string">'@'</span>);</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> text = args[<span class="number">1</span>] || <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;span class="badge badge-'</span> + classes + <span class="string">'"&gt;'</span> + text + <span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
+<div class="card bg-default  my-3"><div class="card-body"><p>Content is given by hexo tag api, this is a string inside tag (of course markdown). We can use hexo render engine to show it.</p></div><div class="card-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postbadge</span> (<span class="params">args</span>) </span>{</span><br><span class="line">    args = args.join(<span class="string">' '</span>).split(<span class="string">'@'</span>);</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> text = args[<span class="number">1</span>] || <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;span class="badge badge-'</span> + classes + <span class="string">'"&gt;'</span> + text + <span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
 <hr>
 <h3 id="Remind"><a class="header-anchor" href="#Remind">#</a>Remind</h3>
 <p>This badge styling is using <a href="https://getbootstrap.com/docs/4.4/" target="_blank" rel="noopener">Bootstrap</a> v4.4, so you need to include bs stylesheet in <code>&lt;head&gt;</code>.</p>
@@ -447,7 +447,7 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
     <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
+      <div class="modal-content overflow-auto">
         <div class="modal-header">
             <h5 class="modal-title" id="myModalLabel"><i class="fas fa-search"></i> Searching...</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

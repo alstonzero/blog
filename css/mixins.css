@@ -11,3 +11,19 @@
 .sans-serif {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+.remove-spacer p:first-child,
+.remove-spacer ul:first-child,
+.remove-spacer ol:first-child,
+.remove-spacer table:first-child,
+.remove-spacer pre:first-child,
+.remove-spacer blockquote:first-child {
+  margin-top: 0;
+}
+.remove-spacer p:last-child,
+.remove-spacer ul:last-child,
+.remove-spacer ol:last-child,
+.remove-spacer table:last-child,
+.remove-spacer pre:last-child,
+.remove-spacer blockquote:last-child {
+  margin-bottom: 0;
+}

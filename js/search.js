@@ -50,7 +50,7 @@ var searchFunc = function (path, search_id, content_id) {
                     }
                     // show search results
                     if (isMatch) {
-                        str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                        str += "<li class='mt-3 mb-1'><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
                         var content = data.content.trim().replace(/<[^>]+>/g, "");
                         if (first_occur >= 0) {
                             // cut out 100 characters
@@ -69,10 +69,10 @@ var searchFunc = function (path, search_id, content_id) {
                             // highlight all keywords
                             keywords.forEach(function (keyword) {
                                 var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                match_content = match_content.replace(regS, "<em class=\"search-keyword mx-1\">" + keyword + "</em>");
                             });
 
-                            str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            str += "<p class=\"search-result my-3\">" + match_content + "...</p>"
                         }
                         str += "</li>";
                     }

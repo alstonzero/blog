@@ -107,11 +107,11 @@
 
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
     <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top p-0" id="nav">
-    <div class="container-fluid pl-0 pr-0">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top bg-transparent position-absolute w-100 p-0" id="nav">
+    <div class="container pl-0 pr-0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <a class="navbar-brand" href="/">技術筆記</a>
+            <a class="navbar-brand text-white p-1 pl-3" href="/">技術筆記</a>
         </div>
         <div class="navbar-nav float-right">
             <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
@@ -130,10 +130,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
-                <div class="post-heading">
+                <div class="post-heading text-white">
                     <h1>CSS3選擇器 :not()</h1>
                     
-                    <span class="meta">
+                    <span class="meta d-inline text-white-50">
                         
                             <i class="far fa-bookmark fa-fw"></i>
                             
@@ -176,7 +176,7 @@
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="用途"><a class="header-anchor" href="#用途">#</a>用途</h2>
 <p>假設有多個一樣 <code>label</code> 的元素要套用一種樣式，但又有幾個需要排除在外時使用。</p>
 <h3 id="例子"><a class="header-anchor" href="#例子">#</a>例子</h3>
-<div class="card bg-default  mt-3 mb-3"><div class="card-body"><style>
+<div class="card bg-default  my-3"><div class="card-body"><style>
 .ex-box {
     text-align: center;
 }
@@ -194,7 +194,7 @@
 <figure class="highlight css"><table><tbody><tr><td class="code"><pre><span class="line"><span class="selector-class">.ex-box</span> {</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">}</span><br><span class="line"><span class="selector-class">.ex</span> {</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#f00</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: italic;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
 <div class="alert alert-info"><p>可以看到上面：1~4 都有<em>斜體</em>跟<strong>粗體</strong>，為了方便觀察，這裡讓文字變為紅色</p></div>
 <hr>
-<div class="card bg-default  mt-3 mb-3"><div class="card-header"><p>接著將 3 號加上 <code>not-ex-ignored</code> 的 id，並將此 id 略過（使用 <code>:not</code> 選擇器）</p></div><div class="card-body"><style>
+<div class="card bg-default  my-3"><div class="card-header"><p>接著將 3 號加上 <code>not-ex-ignored</code> 的 id，並將此 id 略過（使用 <code>:not</code> 選擇器）</p></div><div class="card-body"><style>
 .not-ex-box {
     text-align: center;
 }
@@ -436,7 +436,7 @@
     <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
+      <div class="modal-content overflow-auto">
         <div class="modal-header">
             <h5 class="modal-title" id="myModalLabel"><i class="fas fa-search"></i> Searching...</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
