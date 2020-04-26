@@ -200,7 +200,7 @@ So as <a href="/add-bs-card-for-hexo.html">last post</a>, let build a tags to in
 <div class="alert alert-danger"><p>Line 2 should not be write down in post markdown file.</p></div>
 <hr>
 <h3 id="Classes"><a class="header-anchor" href="#Classes">#</a>Classes</h3>
-<p>badge has some <a href="https://getbootstrap.com/docs/3.3/components/#available-variations" target="_blank" rel="noopener">different styles</a>, we can use args to implement it.</p>
+<p>badge has some <a href="https://getbootstrap.com/docs/4.4/components/badge/#contextual-variations" target="_blank" rel="noopener">different styles</a>, we can use args to implement it.</p>
 <div class="card bg-default  mt-3 mb-3"><div class="card-body"><p>Args is given by hexo tag api, we can pass argument to tag.<br>
 so we combine style name into bs classes, this is the code.</p></div><div class="card-footer"><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postbadge</span> (<span class="params">args</span>) </span>{</span><br><span class="line">    args = args.join(<span class="string">' '</span>).split(<span class="string">'@'</span>);</span><br><span class="line">    <span class="keyword">var</span> classes = args[<span class="number">0</span>] || <span class="string">'secondary'</span>;</span><br><span class="line">  </span><br><span class="line">    ...</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">'&lt;span class="badge badge-'</span> + classes + <span class="string">'"&gt;'</span> + text + <span class="string">'&lt;/span&gt;'</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></div>
 <div class="card bg-default  mt-3 mb-3"><div class="card-body"><p><span class="badge badge-primary">Primary</span> <span class="badge badge-secondary">Secondary</span> <span class="badge badge-success">Success</span> <span class="badge badge-danger">Danger</span> <span class="badge badge-warning">Warning</span>  <span class="badge badge-info">Info</span> <span class="badge badge-light">Light</span>  <span class="badge badge-dark">Dark</span></p></div><div class="card-footer"><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">{% badge primary @Primary %}</span><br><span class="line">{% badge secondary @Secondary %}</span><br><span class="line">{% badge success @Success %}</span><br><span class="line">{% badge danger @Danger %}</span><br><span class="line">{% badge warning @Warning %}</span><br><span class="line">{% badge info @Info %}</span><br><span class="line">{% badge light @Light %}</span><br><span class="line">{% badge dark @Dark %}</span><br></pre></td></tr></tbody></table></figure></div></div>
@@ -263,7 +263,7 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
                     <ul class="pagination d-block text-center">
                         
                         
-                            <li class="next page-item d-inline"><a href="/add-bs-card-for-hexo.html" class="page-link float-right">上一頁  &rarr;</a></li>
+                            <li class="next page-item d-inline"><a href="/add-bs-panel-for-hexo.html" class="page-link float-right">上一頁  &rarr;</a></li>
                         
                     </ul>
                 </div>
@@ -449,8 +449,8 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel"><i class="fas fa-search"></i> Searching...</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><i class="fas fa-search"></i> Searching...</h4>
         </div>
         <div class="modal-body">
             <input type="text" class="form-control" placeholder="Searching keyword..." id="searchInput">

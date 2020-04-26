@@ -228,7 +228,7 @@
 <li>由上述設定能確保當 boot loader 進入 protected mode 時，邏輯地址映射到物理地址會是 1-1 的。</li>
 <li><code>lgdt</code> 指令將 GDT 暫存器(指向 gdt) 載入 gdtdesc 的值。</li>
 </ul>
-<details class="alert"><summary>GDT 補充</summary><p>在創建 GDT 的時候，第一項須為空(規定)，接著我們為此臨時的 GDT 設立 code 及 data 段。</p>
+<details class="alert alert-secondary"><summary>GDT 補充</summary><p>在創建 GDT 的時候，第一項須為空(規定)，接著我們為此臨時的 GDT 設立 code 及 data 段。</p>
 <figure class="highlight x86asm"><table><tbody><tr><td class="code"><pre><span class="line"># Line <span class="number">78</span> <span class="keyword">in</span> bootasm.S</span><br><span class="line"># Bootstrap GDT</span><br><span class="line"><span class="meta">.p2align</span> <span class="number">2</span>                                   # force <span class="number">4</span> <span class="built_in">byte</span> alignment</span><br><span class="line"><span class="symbol">gdt:</span></span><br><span class="line">     SEG_NULLASM                             # null <span class="built_in">seg</span></span><br><span class="line">     SEG_ASM(STA_X|STA_R, <span class="number">0x0</span>, <span class="number">0xffffffff</span>)   # code <span class="built_in">seg</span></span><br><span class="line">     SEG_ASM(STA_W, <span class="number">0x0</span>, <span class="number">0xffffffff</span>)         # data <span class="built_in">seg</span></span><br><span class="line"><span class="symbol">gdtdesc:</span></span><br><span class="line"><span class="meta">     .word</span>   (gdtdesc - gdt - <span class="number">1</span>)             # sizeof(gdt) - <span class="number">1</span></span><br><span class="line"><span class="meta">     .long</span>   gdt                             # address gdt</span><br></pre></td></tr></tbody></table></figure></details>
 <figure class="highlight x86asm"><table><tbody><tr><td class="gutter"><pre><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># Switch from real to protected mode.  Use a bootstrap GDT that makes</span><br><span class="line"># virtual addresses map directly to physical addresses so that the</span><br><span class="line"># effective memory map doesn<span class="string">'t change during the transition.</span></span><br><span class="line"><span class="string">lgdt    gdtdesc</span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
@@ -611,8 +611,8 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
+            <h5 class="modal-title" id="myModalLabel"><i class="fas fa-search"></i> Searching...</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><i class="fas fa-search"></i> Searching...</h4>
         </div>
         <div class="modal-body">
             <input type="text" class="form-control" placeholder="Searching keyword..." id="searchInput">

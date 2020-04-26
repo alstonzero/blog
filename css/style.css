@@ -932,7 +932,7 @@ details.alert {
 #searchModal .search-result-list li a.search-result-title {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 800;
 }
 #searchModal .search-result-list li p.search-result {
