@@ -8,8 +8,8 @@ $(document).ready( function () {
             let captionText = $(this).attr('alt') || $(this).attr('title') || "";
             
             if (captionText !== "") {
-                let caption = "<div class='img-caption text-center'>";
-                caption += "<b class='center-caption'>" + captionText + "</b>";
+                let caption = "<div class='img-caption d-block text-center'>";
+                caption += "<span class='center-caption text-muted border-bottom'>" + captionText + "</span>";
                 caption += "</div>";
 
                 let captionHtml = $.parseHTML(caption);
@@ -54,4 +54,13 @@ $(document).ready( function () {
         $("#footnotelist").prepend(headingHtml);
     }
     footnoteInit();
+
+    let tocInit = function () {
+        $("#toc-content a").each( function () {
+            var oldText = $(this).text();
+            var newText = oldText.replace('#','');
+            $(this).text(newText);
+        });
+    }
+    tocInit();
 });

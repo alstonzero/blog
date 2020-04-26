@@ -323,7 +323,7 @@ $$</p>
     </div>
 </article> 
 
-<div class="f-btn-box">    
+<div class="f-btn-box">   
     
 
     
@@ -331,8 +331,45 @@ $$</p>
             <i class="fa fa-caret-up"></i>
         </a>
     
-</div>
 
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+        <style>
+            #toc-content .toc-link::before {
+                background-color: transparent;
+                max-height: 25px;
+            }
+
+            #toc-content .toc-link.is-active-link::before {
+                background-color: #404040;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+        <div class="ui-toc dropup scrollspy-body pull-right" style="right: 3%;">
+            <button type="button" class="f-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                <i class="fas fa-list"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right p-2">
+                <div class="toc-widget">
+                    <div id="toc-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            tocbot.init({
+                // Where to render the table of contents.
+                tocSelector: '#toc-content',
+                // Where to grab the headings to build the table of contents.
+                contentSelector: 'article',
+                // Which headings to grab inside of the contentSelector element.
+                headingSelector: 'h1, h2, h3',
+                // For headings inside relative or absolute positioned containers within content.
+                hasInnerContainers: true,
+            });
+        </script>
+    
+</div>
 
 
 <script src="//cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -450,6 +487,8 @@ $$</p>
     
 <!-- jQuery -->
 <script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 <!-- Bootstrap -->
 <script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>

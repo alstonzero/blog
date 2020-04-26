@@ -797,6 +797,16 @@ details.alert {
 .f-btn:nth-child(2) {
   bottom: calc(3% + 50px);
 }
+.f-btn:hover,
+.f-btn:focus {
+  outline: 0;
+}
+.dropup .f-btn {
+  bottom: calc(3% + 50px);
+}
+.dropup .f-btn i {
+  margin-left: -2px;
+}
 .card .card-footer figure.highlight {
   background: none;
   padding: 0 16px;
@@ -813,6 +823,31 @@ details.alert {
 .pagination .next>a,
 .pagination .next>span {
   float: right;
+}
+.img-caption {
+  font-size: 14px;
+  margin: 0;
+  padding: 10px;
+}
+.ui-toc {
+  position: fixed;
+  bottom: 20px;
+  z-index: 998;
+}
+.pull-right>.dropdown-menu {
+  right: 0;
+  left: auto;
+  margin-bottom: calc(3% + 100px);
+}
+#toc-content ol {
+  -webkit-padding-start: 20px;
+          padding-inline-start: 20px;
+}
+#toc-content li.toc-list-item {
+  list-style: none;
+}
+#toc-content li.toc-list-item a {
+  text-decoration: none;
 }
 @media only screen and (min-width: 426px) {
   .table-responsive table.table {
