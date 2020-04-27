@@ -43,13 +43,13 @@ $(document).ready( function () {
 
     let footnoteInit = function () {
         $("#footnotes hr").addClass("block-hr");
-        $("#footnotelist").addClass("panel panel-default");
-        $("#footnotelist ol").addClass("list-group");
+        $("#footnotelist").addClass("card card-default");
+        $("#footnotelist ol").addClass("list-group list-group-flush");
         $("#footnotelist li").addClass("list-group-item");
         $("#footnotelist ol").css({"margin-left": "0"});
         $("#footnotelist li span:first-child").css({"margin-left": "0"});
 
-        var heading = '<div class="panel-heading">Reference</div>'
+        var heading = '<div class="card-header">Reference</div>'
         let headingHtml = $.parseHTML(heading);
         $("#footnotelist").prepend(headingHtml);
     }
