@@ -18,8 +18,8 @@
   
   <entry>
     <title>Add Bootstrap badge Tags into Hexo</title>
-    <link href="https://blog.lusw.dev/add-bs-label-for-hexo.html"/>
-    <id>https://blog.lusw.dev/add-bs-label-for-hexo.html</id>
+    <link href="https://blog.lusw.dev/hexo-2020-04-25-add-bs-label-for-hexo.html"/>
+    <id>https://blog.lusw.dev/hexo-2020-04-25-add-bs-label-for-hexo.html</id>
     <published>2020-04-25T13:35:18.000Z</published>
     <updated>2020-04-26T07:42:44.000Z</updated>
     
@@ -50,8 +50,8 @@
   
   <entry>
     <title>Add Bootstrap Card Tags into Hexo</title>
-    <link href="https://blog.lusw.dev/add-bs-card-for-hexo.html"/>
-    <id>https://blog.lusw.dev/add-bs-card-for-hexo.html</id>
+    <link href="https://blog.lusw.dev/hexo-2020-04-23-add-bs-card-for-hexo.html"/>
+    <id>https://blog.lusw.dev/hexo-2020-04-23-add-bs-card-for-hexo.html</id>
     <published>2020-04-23T13:11:09.000Z</published>
     <updated>2020-04-26T07:42:44.000Z</updated>
     
@@ -82,10 +82,10 @@
   
   <entry>
     <title>C 語言 - 位元欄位</title>
-    <link href="https://blog.lusw.dev/c-bit-operation.html"/>
-    <id>https://blog.lusw.dev/c-bit-operation.html</id>
+    <link href="https://blog.lusw.dev/CLang-2020-04-10-c-bit-operation.html"/>
+    <id>https://blog.lusw.dev/CLang-2020-04-10-c-bit-operation.html</id>
     <published>2020-04-10T09:28:52.000Z</published>
-    <updated>2020-04-26T07:56:55.000Z</updated>
+    <updated>2020-04-28T04:40:44.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在 C 語言中，如果我們要對特定的 bit(s) 做操作的話，最直覺的方式是用 bit and（<code>&amp;</code>）跟 bit or（<code>|</code>）：</p><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> bit_sample = <span class="number">0x0123</span>; <span class="comment">/* 0000 0001 0010 0011 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 將第 2 個 bit 改成 1 */</span></span><br><span class="line">bit_samplee |= (<span class="number">0x1</span> &lt;&lt; <span class="number">2</span>); <span class="comment">/* 0000 0001 0010 0011 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 將第 5 個 bit 改成 1 */</span></span><br><span class="line">bit_samplee |= ~(<span class="number">0x1</span> &lt;&lt; <span class="number">5</span>); <span class="comment">/* 0000 0001 0010 0011 */</span></span><br></pre></td></tr></tbody></table></figure><p>從上面的例子可以看到如何使用 bit and/or 來操作特定的 bit，這種方式對於單一個 bit 並不會太麻煩，但有以下缺點：</p><ul><li>無法覆用：這種方式不能快速地建立一個方法，也比較不好理解</li><li>對於區間上就不好使了</li></ul><p>如果要解決上述缺點，有一個方式是使用 <code>union</code>，一個在嵌入式、驅動程式裡常常用到的方法。</p><hr><h2 id="Union"><a class="header-anchor" href="#Union">#</a>Union</h2><p><code>union</code> 是 C 語言裡面可以對一個結構裡面的元素，可以有不同的資料型態去理解，如以下例子：</p><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> sample {</span><br><span class="line">    <span class="keyword">int</span> sample_int;</span><br><span class="line">    <span class="keyword">char</span> sample_str[<span class="number">4</span>];</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure><blockquote><p>需要注意的是：同一時間內只能存取一個屬性，準確來說他們是共用一個記憶體區塊，所以改第一個值第二個值會同時更改。<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[[C 語言] 程式設計教學：如何使用聯合 (Union)](https://michaelchen.tech/c-programming/union/)">[1]</span></a></sup></p></blockquote><h3 id="struct"><a class="header-anchor" href="#struct">#</a>struct</h3><p>奇怪，不是在講 <code>union</code> 嗎，怎麼會提到 <code>struct</code> 呢？那是因為 C 裡面有一個有趣的東西叫做位元欄位<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[位元欄](https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%AE%B5)">[2]</span></a></sup>，這個東西必須搭配結構使用；先看例子：</p><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bit_row</span> {</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> row1 : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> row2 : <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> row3 : <span class="number">1</span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure><p>乍看之下好像跟一般的結構差不多，可是我們注意到在每個元素宣告的結尾多了一個 <code>: 數字</code>，這是什麼意思？</p><ol><li>首先，<code>unsigned short</code> 在 64 位元裡大小是 4位，<code>unsigned int</code> 則是 8位</li><li>加上 <code>: 數字</code>，這個東西就叫位元欄位，我們可以限制當前元素的大小</li><li>因此，元素 1 的大小就被我們縮至 1 位，依此類推</li></ol><hr><p>有了上述的<strong>工具</strong>就可以建立一個好用而且好理解的位元操作方法！</p><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5to7 : <span class="number">3</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>建立好上面這個 union 後，如果要將某一個整數的第 3 到 4 位 的值改掉，可以這樣寫</p><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex int_ex;</span><br><span class="line">int_ex.real_val = <span class="number">0x0123</span>; <span class="comment">/* 0000 0001 0010 0011 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* change 3 and 4 bits to 01 */</span></span><br><span class="line">int_ex.bits.bit3and4 = B01; <span class="comment">/* 0000 0001 0010 1011 */</span></span><br></pre></td></tr></tbody></table></figure><p>這樣的寫法，更簡單，更易懂。</p><hr><h3 id="剩下的空間"><a class="header-anchor" href="#剩下的空間">#</a>剩下的空間</h3><p>值得注意的一件事，我們沿用上面的例子；<code>method_ex</code> 有一個元素叫<em>真正的值</em>，他是一個整數（8 位），剛好另外一個元素我們使用位元欄位的技巧也控制在 8 位；但，如果我們沒有這麼做呢？</p><div class="alert alert-warning"><p>答案是：你可以這麼寫，不會有什麼問題，但不建議。</p></div><h4 id="更大"><a class="header-anchor" href="#更大">#</a>更大</h4><p>如果 <code>bits</code> 結構今天大於 8 位，那我們就沒辦法透過更改<em>真正的值</em>來改變到高於 8 位的值，因此這麼做是<strong>沒意義</strong>的。</p><h4 id="更小"><a class="header-anchor" href="#更小">#</a>更小</h4><p>如果 <code>bits</code> 結構今天小於 8 位，這麼做完全不會有任何問題，但習慣上，我們會把它補齊，像是我們在 <a href="/c-attribute">attribute</a> 篇裡提到的 padding。</p><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5and6 : <span class="number">2</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><div class="alert alert-info"><p>沒有定義第 7 位</p></div><figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> method_ex {</span><br><span class="line">    <span class="keyword">int</span> real_val;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bits</span> {</span></span><br><span class="line">        <span class="keyword">short</span> bit0to2 : <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">short</span> bit3and4 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> bit5and6 : <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">short</span> notused : <span class="number">1</span>;</span><br><span class="line">    };</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><div class="alert alert-info"><p>隨便取名，只要有定義就好</p></div><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://michaelchen.tech/c-programming/union/" target="_blank" rel="noopener">[C 語言] 程式設計教學：如何使用聯合 (Union)</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E6%AE%B5" target="_blank" rel="noopener">位元欄</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
     
@@ -114,8 +114,8 @@
   
   <entry>
     <title>如何查看 Linux 被佔用的 port</title>
-    <link href="https://blog.lusw.dev/linux-lookup-port.html"/>
-    <id>https://blog.lusw.dev/linux-lookup-port.html</id>
+    <link href="https://blog.lusw.dev/linux-2020-04-08-linux-lookup-port.html"/>
+    <id>https://blog.lusw.dev/linux-2020-04-08-linux-lookup-port.html</id>
     <published>2020-04-08T07:08:31.000Z</published>
     <updated>2020-04-26T07:56:44.000Z</updated>
     
@@ -147,8 +147,8 @@
   
   <entry>
     <title>Linux 的 &quot;init&quot; 行程</title>
-    <link href="https://blog.lusw.dev/linux-init-number.html"/>
-    <id>https://blog.lusw.dev/linux-init-number.html</id>
+    <link href="https://blog.lusw.dev/linux-2020-04-08-linux-init-number.html"/>
+    <id>https://blog.lusw.dev/linux-2020-04-08-linux-init-number.html</id>
     <published>2020-04-08T06:18:01.000Z</published>
     <updated>2020-04-22T04:29:36.000Z</updated>
     
@@ -323,8 +323,8 @@
   
   <entry>
     <title>RT-Thread GUI 繪圖引擎 - 硬體</title>
-    <link href="https://blog.lusw.dev/rtgui-dc-hw.html"/>
-    <id>https://blog.lusw.dev/rtgui-dc-hw.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2019-03-13-rtgui-dc-hw.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2019-03-13-rtgui-dc-hw.html</id>
     <published>2019-03-13T03:27:41.000Z</published>
     <updated>2020-04-26T07:55:35.000Z</updated>
     
@@ -343,11 +343,11 @@
       <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
       <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="dc" scheme="https://blog.lusw.dev/tags/dc/"/>
     
@@ -355,8 +355,8 @@
   
   <entry>
     <title>RT-Thread GUI Server</title>
-    <link href="https://blog.lusw.dev/rtgui-server.html"/>
-    <id>https://blog.lusw.dev/rtgui-server.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2019-02-23-rtgui-server.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2019-02-23-rtgui-server.html</id>
     <published>2019-02-23T07:08:11.000Z</published>
     <updated>2020-04-26T07:55:24.000Z</updated>
     
@@ -375,11 +375,11 @@
       <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
       <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="server" scheme="https://blog.lusw.dev/tags/server/"/>
     
@@ -387,8 +387,8 @@
   
   <entry>
     <title>RT-Thread GUI Window</title>
-    <link href="https://blog.lusw.dev/rtgui-window.html"/>
-    <id>https://blog.lusw.dev/rtgui-window.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2019-01-29-rtgui-window.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2019-01-29-rtgui-window.html</id>
     <published>2019-01-29T12:53:02.000Z</published>
     <updated>2020-04-26T07:55:13.000Z</updated>
     
@@ -407,11 +407,11 @@
       <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
       <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="window" scheme="https://blog.lusw.dev/tags/window/"/>
     
@@ -419,8 +419,8 @@
   
   <entry>
     <title>RT-Thread GUI Widget</title>
-    <link href="https://blog.lusw.dev/rtgui-widget.html"/>
-    <id>https://blog.lusw.dev/rtgui-widget.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2019-01-01-rtgui-widget.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2019-01-01-rtgui-widget.html</id>
     <published>2019-01-01T10:42:37.000Z</published>
     <updated>2020-04-26T07:55:00.000Z</updated>
     
@@ -439,11 +439,11 @@
       <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
       <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="widget" scheme="https://blog.lusw.dev/tags/widget/"/>
     
@@ -451,8 +451,8 @@
   
   <entry>
     <title>RT-Thread GUI Object</title>
-    <link href="https://blog.lusw.dev/rtgui-object.html"/>
-    <id>https://blog.lusw.dev/rtgui-object.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2019-01-01-rtgui-object.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2019-01-01-rtgui-object.html</id>
     <published>2019-01-01T07:08:37.000Z</published>
     <updated>2020-04-26T07:54:42.000Z</updated>
     
@@ -471,11 +471,11 @@
       <category term="RT-Thread GUI" scheme="https://blog.lusw.dev/categories/RT-Thread-GUI/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
     
       <category term="GUI" scheme="https://blog.lusw.dev/tags/GUI/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="OOP" scheme="https://blog.lusw.dev/tags/OOP/"/>
     
@@ -483,8 +483,8 @@
   
   <entry>
     <title>使用 crontab 自動備份網站原始碼</title>
-    <link href="https://blog.lusw.dev/auto-backup-with-crontab.html"/>
-    <id>https://blog.lusw.dev/auto-backup-with-crontab.html</id>
+    <link href="https://blog.lusw.dev/hexo-2018-12-26-auto-backup-with-crontab.html"/>
+    <id>https://blog.lusw.dev/hexo-2018-12-26-auto-backup-with-crontab.html</id>
     <published>2018-12-26T04:14:07.000Z</published>
     <updated>2020-04-26T07:54:22.000Z</updated>
     
@@ -511,8 +511,8 @@
   
   <entry>
     <title>自訂網域名稱：Google Domain</title>
-    <link href="https://blog.lusw.dev/custom-domain-by-google-domain.html"/>
-    <id>https://blog.lusw.dev/custom-domain-by-google-domain.html</id>
+    <link href="https://blog.lusw.dev/hexo-2018-12-13-custom-domain-by-google-domain.html"/>
+    <id>https://blog.lusw.dev/hexo-2018-12-13-custom-domain-by-google-domain.html</id>
     <published>2018-12-13T03:17:28.000Z</published>
     <updated>2020-04-26T07:54:08.000Z</updated>
     
@@ -541,8 +541,8 @@
   
   <entry>
     <title>RT-Thread SLAB 動態管理</title>
-    <link href="https://blog.lusw.dev/rt-slab.html"/>
-    <id>https://blog.lusw.dev/rt-slab.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2018-12-05-rt-slab.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2018-12-05-rt-slab.html</id>
     <published>2018-12-05T07:42:50.000Z</published>
     <updated>2020-04-26T07:53:48.000Z</updated>
     
@@ -562,9 +562,9 @@
       <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
@@ -574,8 +574,8 @@
   
   <entry>
     <title>RT-Thread 小記憶體動態管理</title>
-    <link href="https://blog.lusw.dev/rt-small-mem.html"/>
-    <id>https://blog.lusw.dev/rt-small-mem.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2018-12-05-rt-small-mem.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2018-12-05-rt-small-mem.html</id>
     <published>2018-12-05T07:42:44.000Z</published>
     <updated>2020-04-26T07:53:58.000Z</updated>
     
@@ -595,9 +595,9 @@
       <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
@@ -605,8 +605,8 @@
   
   <entry>
     <title>RT-Thread Memory Heap</title>
-    <link href="https://blog.lusw.dev/rt-memheap.html"/>
-    <id>https://blog.lusw.dev/rt-memheap.html</id>
+    <link href="https://blog.lusw.dev/RT-Thread-2018-12-05-rt-memheap.html"/>
+    <id>https://blog.lusw.dev/RT-Thread-2018-12-05-rt-memheap.html</id>
     <published>2018-12-05T07:42:29.000Z</published>
     <updated>2020-04-26T07:53:36.000Z</updated>
     
@@ -626,9 +626,9 @@
       <category term="RT-Thread" scheme="https://blog.lusw.dev/categories/RT-Thread/"/>
     
     
-      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
-    
       <category term="RT-Thread" scheme="https://blog.lusw.dev/tags/RT-Thread/"/>
+    
+      <category term="kernel" scheme="https://blog.lusw.dev/tags/kernel/"/>
     
       <category term="記憶體管理" scheme="https://blog.lusw.dev/tags/MemMan/"/>
     
