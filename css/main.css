@@ -571,6 +571,10 @@ figure.highlight pre .string {
 #searchModal .modal-body {
   position: unset;
 }
+#searchModal .search-empty i {
+  font-size: 4rem;
+  color: rgba(0,0,0,0.4);
+}
 #searchModal .search-result-list {
   padding-left: 2px;
 }
