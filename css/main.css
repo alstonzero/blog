@@ -243,6 +243,10 @@ footer .copyright {
   border: 0;
   border-radius: 0.25em;
 }
+.page-categories .btn {
+  text-transform: unset;
+  letter-spacing: 0;
+}
 .page-categories .post-preview a .post-title {
   font-size: 25px;
 }
@@ -269,6 +273,10 @@ footer .copyright {
   border: 0;
   border-radius: 0.25em;
 }
+.page-tags .btn {
+  text-transform: unset;
+  letter-spacing: 0;
+}
 .page-tags .post-preview a .post-title {
   font-size: 25px;
 }
@@ -286,6 +294,14 @@ footer .copyright {
 .page-tags .post-preview .post-meta > a:focus {
   color: #0085a1;
   text-decoration: underline;
+}
+article .container .row h1,
+article .container .row h2,
+article .container .row h3,
+article .container .row h4,
+article .container .row h5,
+article .container .row h6 {
+  margin-top: 0.5rem;
 }
 article .container .row h2 {
   border-bottom: 1px solid #eee;
@@ -419,6 +435,8 @@ code {
   font-size: 85%;
   color: unset;
   background-color: rgba(0,0,0,0.04);
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 figure.highlight {
   background: #f7f7f7;
