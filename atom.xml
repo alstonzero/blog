@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>技術筆記</title>
+  <title>Yap, Tech</title>
   
-  <subtitle>嵌入式 × 即時作業系統 × 韌體</subtitle>
+  <subtitle>Embedded × RTOS × Firmware</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.lusw.dev/"/>
