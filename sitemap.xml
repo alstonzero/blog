@@ -11,13 +11,6 @@
   <url>
     <loc>https://blog.lusw.dev/xv6/starting.html</loc>
     
-    <lastmod>2020-04-28T10:24:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.lusw.dev/xv6/starting.html</loc>
-    
     <lastmod>2020-04-28T10:19:50.000Z</lastmod>
     
   </url>
@@ -261,14 +254,14 @@
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/hexo/add-bs-label.html</loc>
+    <loc>https://blog.lusw.dev/hexo/add-bs-card.html</loc>
     
     <lastmod>2020-04-26T07:42:44.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/hexo/add-bs-card.html</loc>
+    <loc>https://blog.lusw.dev/hexo/add-bs-label.html</loc>
     
     <lastmod>2020-04-26T07:42:44.000Z</lastmod>
     
@@ -366,21 +359,14 @@
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/ItC/gate.html</loc>
+    <loc>https://blog.lusw.dev/ItC/database.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/ItC/OS.html</loc>
-    
-    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.lusw.dev/ItC/FS.html</loc>
+    <loc>https://blog.lusw.dev/ItC/OOP.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -401,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/xv6/headware.html</loc>
+    <loc>https://blog.lusw.dev/ItC/gate.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/ItC/database.html</loc>
+    <loc>https://blog.lusw.dev/xv6/headware.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
@@ -436,7 +422,14 @@
   </url>
   
   <url>
-    <loc>https://blog.lusw.dev/ItC/OOP.html</loc>
+    <loc>https://blog.lusw.dev/ItC/OS.html</loc>
+    
+    <lastmod>2020-01-26T16:54:30.121Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.lusw.dev/ItC/FS.html</loc>
     
     <lastmod>2020-01-26T16:54:30.121Z</lastmod>
     
