@@ -562,15 +562,6 @@ figure.highlight pre .string {
 .search-btn i {
   color: #fff;
 }
-#searchModal {
-  top: 10%;
-}
-#searchModal .modal-content {
-  max-height: 70vh;
-}
-#searchModal .modal-body {
-  position: unset;
-}
 #searchModal .search-empty i {
   font-size: 4rem;
   color: rgba(0,0,0,0.4);

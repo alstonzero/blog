@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -283,10 +283,10 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
     <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <ul class="pagination d-block text-center">
             
-                <li class="previous page-item d-inline"><a href="/hexo/add-bs-label.html" class="page-link float-left">&larr;  下一頁</a></li>
+                <li class="previous page-item d-inline"><a href="/hexo/add-bs-label.html" class="page-link float-left">&larr;  Newer</a></li>
             
             
-                <li class="next page-item d-inline"><a href="/CLang/c-bit-operation.html" class="page-link float-right">上一頁  &rarr;</a></li>
+                <li class="next page-item d-inline"><a href="/CLang/c-bit-operation.html" class="page-link float-right">Older  &rarr;</a></li>
             
         </ul>
     </div>
@@ -311,7 +311,8 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
             owner: 'luswdev',
             admin: "luswdev",
             id: '2020-04-23 21:11:09',
-            distractionFreeMode: false  // Facebook-like distraction free mode
+            distractionFreeMode: false,  // Facebook-like distraction free mode
+	    language: 'en'
         });
         gitalk.render('gitalk-container');
     </script>
@@ -348,9 +349,9 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#!"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#nav">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#footer">移至底部</a>
+                <a class="expand-toggle d-block text-muted py-1" href="#!"><span class="expand-text">Expand all</span><span class="close-text" style="display: none;">Collapse all</span></a>
+                <a class="back-to-top d-block text-muted py-1" href="#nav">Back to top</a>
+                <a class="go-to-bottom d-block text-muted py-1" href="#footer">Go to bottom</a>
             </div>
         </div>
     </div>
@@ -506,10 +507,16 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
     <!-- Search Modal -->
     <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
       <div class="modal-content overflow-auto">
+        <div class="modal-header">
+           <h5 class="modal-title">
+	      <i class="fas fa-search"></i>	
+	      Search
+	   </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+        </div>
         <div class="modal-body">
-            <button type="button" class="close pr-1 pb-3" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             <input type="text" class="form-control" placeholder="Searching keyword..." id="searchInput">
             <div id="searchResult">
                 <div class="search-empty text-center text-muted p-5">
@@ -520,6 +527,7 @@ so we combine style name into bs classes, this is the code.</p></div><div class=
       </div>
     </div>
 </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
 
 </body>
 </html>

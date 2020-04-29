@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -124,7 +124,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="site-heading text-center text-white">
-                    <h1>標籤：vim</h1>
+                    <h1>Tag: vim:</h1>
                 </div>
             </div>
         </div>
@@ -625,10 +625,16 @@
     <!-- Search Modal -->
     <!-- Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
       <div class="modal-content overflow-auto">
+        <div class="modal-header">
+           <h5 class="modal-title">
+	      <i class="fas fa-search"></i>	
+	      Search
+	   </h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+        </div>
         <div class="modal-body">
-            <button type="button" class="close pr-1 pb-3" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             <input type="text" class="form-control" placeholder="Searching keyword..." id="searchInput">
             <div id="searchResult">
                 <div class="search-empty text-center text-muted p-5">
@@ -639,6 +645,7 @@
       </div>
     </div>
 </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
 
 </body>
 </html>
