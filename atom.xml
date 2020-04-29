@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>技術筆記</title>
   
-  <subtitle>單晶片、即時作業系統與韌體相關之技術筆記</subtitle>
+  <subtitle>嵌入式 × 即時作業系統 × 韌體</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.lusw.dev/"/>
