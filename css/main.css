@@ -744,10 +744,10 @@ details.alert {
 .ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item a {
   text-decoration: none;
 }
-.ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item a:hover {
+.ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item:not(.is-active-li) a:hover {
   color: #000;
 }
-.ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item a:hover::before {
+.ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item:not(.is-active-li) a:hover::before {
   width: 1px;
   background-color: #000;
 }
