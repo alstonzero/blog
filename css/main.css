@@ -728,9 +728,6 @@ details.alert {
 .ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item a {
   text-decoration: none;
 }
-.ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item.is-active-li {
-  font-family: 'Lora', 'Times New Roman', serif;
-}
 .ui-toc.dropup .dropdown-menu #toc-content li.toc-list-item a:hover {
   color: #000;
 }
