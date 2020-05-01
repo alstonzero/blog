@@ -10,4 +10,4 @@ Disallow: /js/
 Disallow: /friends/
 Disallow: /pages/
 
-Sitemap: https://blog.lusw.dev/sitemap.xml
+Sitemap: https://lusw.dev/sitemap.xml

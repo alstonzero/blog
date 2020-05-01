@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lusw.dev/hexo/theme-clean-doc.html</loc>
+    
+    <lastmod>2020-05-01T10:18:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://lusw.dev/RT-Thread/gui-dc-hw.html</loc>
     
     <lastmod>2020-05-01T08:34:21.000Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://lusw.dev/tags/index.html</loc>
     
     <lastmod>2020-04-29T11:42:56.741Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://lusw.dev/hexo/theme-clean-doc.html</loc>
-    
-    <lastmod>2020-04-29T06:49:36.000Z</lastmod>
     
   </url>
   
