@@ -697,6 +697,7 @@ details.alert {
   z-index: 10;
   width: 40px;
   height: 40px;
+  opacity: 0.7;
 }
 .ui-toc.dropup .toc-btn:hover {
   color: #fff;
