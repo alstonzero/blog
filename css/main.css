@@ -119,9 +119,6 @@ img::-moz-selection {
   font-weight: 300;
   font-size: 20px;
 }
-.intro-header .post-heading .meta a {
-  color: rgba(255,255,255,0.5) !important;
-}
 footer {
   padding: 50px 0 65px;
 }
@@ -694,9 +691,6 @@ details.alert {
   font-weight: 800;
   letter-spacing: 1px;
   padding: 9px 15px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  border-radius: 0;
   position: fixed;
   right: 3%;
   bottom: 3%;
@@ -707,14 +701,12 @@ details.alert {
 .ui-toc.dropup .toc-btn:hover {
   color: #fff;
   background-color: #0085a1;
-  border-color: #0085a1;
 }
 .ui-toc.dropup .toc-btn i {
   margin-left: -2px;
 }
 .ui-toc.dropup.show button {
   background: #0085a1;
-  border-color: #0085a1;
   color: #fff;
 }
 .ui-toc.dropup .dropdown-menu {
