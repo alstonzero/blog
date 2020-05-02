@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        167
+        219
     
 
     
@@ -177,7 +177,7 @@
 <ul>
 <li>
 <p>從 Preference 中的 Accounts<br>
-<img src="https://i.imgur.com/JfTJGet.png" alt="Preference &gt; Accounts"></p>
+<img src="https://i.imgur.com/JfTJGet.png" alt="Preference > Accounts"></p>
 </li>
 <li>
 <p>選擇右下角的 Manage Certificates…<br>
@@ -194,7 +194,25 @@
 </ul>
 <p>之後就會新增一個憑證，可以回去 Targets 看憑證的確更新了。<br>
 <img src="https://i.imgur.com/9MsNUqd.png" alt="紅字"></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
 
             <!-- Post information -->

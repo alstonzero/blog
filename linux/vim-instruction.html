@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        821
+        868
     
 
     
@@ -500,9 +500,9 @@
 <h2 id="特殊指令"><a class="header-anchor" href="#特殊指令">#</a>特殊指令</h2>
 <ul>
 <li><code>:w !sudo tee %</code>：當要存檔的時候需要權限，可以用此指令來提升。</li>
-<li><code>&quot;+y</code>：將選取的內容複製到 + 暫存器（剪貼簿)，方便在其他程式中貼上。<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？](https://www.zhihu.com/question/19863631)">[2]</span></a></sup></li>
+<li><code>"+y</code>：將選取的內容複製到 + 暫存器（剪貼簿)，方便在其他程式中貼上。<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？](https://www.zhihu.com/question/19863631)">[2]</span></a></sup></li>
 </ul>
-<div class="alert alert-info"><p>vim 在複製、刪除時，會把資料放在預設暫存器中，有 0-9A-Za-z+&quot; 這些暫存器可選擇，其中：</p>
+<div class="alert alert-info"><p>vim 在複製、刪除時，會把資料放在預設暫存器中，有 0-9A-Za-z+" 這些暫存器可選擇，其中：</p>
 <ul>
 <li>0-9：vim 會用到 0-9，0 存放最近一次的資料</li>
 <li>“：預設暫存器</li>
@@ -512,11 +512,29 @@
 <hr>
 <h2 id="vim-rc-設定檔"><a class="header-anchor" href="#vim-rc-設定檔">#</a>vim.rc 設定檔</h2>
 <p>記錄我目前的設定檔。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span></span><br><span class="line"><span class="keyword">set</span> incsearch</span><br><span class="line"><span class="keyword">set</span> smartindent</span><br><span class="line"><span class="keyword">set</span> cursorline</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">inoremap</span> ( ()<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> [ []<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> <span class="string">' '</span><span class="string">'&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap " ""&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap &#123;&lt;CR&gt; &#123;&lt;CR&gt;&#125;&lt;Esc&gt;ko</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span></span><br><span class="line"><span class="keyword">set</span> incsearch</span><br><span class="line"><span class="keyword">set</span> smartindent</span><br><span class="line"><span class="keyword">set</span> cursorline</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">inoremap</span> ( ()<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> [ []<span class="symbol">&lt;Esc&gt;</span>i</span><br><span class="line"><span class="keyword">inoremap</span> <span class="string">' '</span><span class="string">'&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap " ""&lt;Esc&gt;i</span></span><br><span class="line"><span class="string">inoremap {&lt;CR&gt; {&lt;CR&gt;}&lt;Esc&gt;ko</span></span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li><code>set nu</code></li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.vixual.net/blog/archives/234" target="_blank" rel="noopener">vi 與 vim 的指令整理</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.zhihu.com/question/19863631" target="_blank" rel="noopener">如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.vixual.net/blog/archives/234" target="_blank" rel="noopener">vi 與 vim 的指令整理</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.zhihu.com/question/19863631" target="_blank" rel="noopener">如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
 
             <!-- Post information -->

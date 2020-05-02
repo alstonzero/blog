@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        365
+        417
     
 
     
@@ -210,7 +210,25 @@
 </ul>
 <hr>
 <h2 id="副程式"><a class="header-anchor" href="#副程式">#</a>副程式</h2>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">swap(num1,num2)</span><br><span class="line">temp ← num1</span><br><span class="line">num1 ← num2</span><br><span class="line">num2 ← temp</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">swap(num1,num2)</span><br><span class="line">temp ← num1</span><br><span class="line">num1 ← num2</span><br><span class="line">num2 ← temp</span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
 
             <!-- Post information -->

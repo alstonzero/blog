@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        616
+        668
     
 
     
@@ -243,7 +243,25 @@
 <li>繼承：類別可被繼承，衍生類即為執行繼承的類別。</li>
 <li>多形</li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
 
             <!-- Post information -->
