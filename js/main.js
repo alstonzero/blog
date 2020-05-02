@@ -68,6 +68,17 @@ $(document).ready( function () {
     }
     tocInit();
 
+    let cardListInit = function () {  
+	    $(".card ul").each( function () {
+	if ($(this).parent().hasClass("card-body")) {
+		$(this).unwrap();
+	}
+	    });
+	$(".card ul").addClass("list-group list-group-flush");
+	$(".card ul li").addClass("list-group-item");
+    }
+    cardListInit();
+
     $(".dropdown-menu a").on('click', function () {
         event.preventDefault(); 
         event.stopPropagation(); 

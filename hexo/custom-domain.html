@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        601
+        549
     
 
     
@@ -190,11 +190,11 @@ CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，�
 <div class="alert alert-warning"><p>一個很重要的事情是，發布 hexo 的 github repo 須為 <strong><a href="http://github.io" target="_blank" rel="noopener">github.io</a></strong> 類型的，否則設定會有誤</p></div>
 <h2 id="設定-github-CNAME"><a class="header-anchor" href="#設定-github-CNAME">#</a>設定 github CNAME</h2>
 <p>Github 官方有提供 301 轉址功能，只要在網頁的 branch 下建立一個 <code>CNAME</code> 檔案，就會把舊網址轉址到新網址。你的 CNAME 應該要填以下內容：</p>
-<figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure>
 <p>其中 <code>subdomain</code> 與 <code>domain</code> 與自己的有關，像我的就是</p>
-<figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">blog<span class="selector-class">.omuskywalker</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">blog<span class="selector-class">.omuskywalker</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure>
 <p>如果你上面的 subdomain 設定為 www，而你的頂級網域（也就是你買的 domain 名字）沒有要給特別的網站用的話，也可以這樣寫：</p>
-<figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">domain.com</span><br><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">domain.com</span><br><span class="line">subdomain<span class="selector-class">.domain</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure>
 <p>這麼一來不管是上面哪兩種，都會連到你的 blog</p>
 <div class="alert alert-info"><p>如果跟我一樣是用 hexo 的人，CNAME 請放在 /source 底下，這樣每次 <code>hexo d</code> 才不會被蓋掉</p></div>
 <p>如果這些都有設定好，你的 github 應該會長這樣：<br>
@@ -204,25 +204,7 @@ CNAME 的 data 請填 <code>你的 github ID</code>+<code>.github.io.</code>，�
 <p>Github page 有提供內建的 HTTPS，只要你的網站設定好一陣子（不會很久，一天內），會有這個選項可以按：<br>
 <img src="https://i.imgur.com/z9HdVbV.png" alt><br>
 按下去，就會獲得 HTTPS 了</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
 
             <!-- Post information -->

@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        736
+        684
     
 
     
@@ -216,13 +216,13 @@
 </li>
 <li>Shell 確保上述三個描述符每次都會被打開。</li>
 </ul>
-<figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// read something from file descriptor to "buf"</span></span><br><span class="line">read(fd, buf, n);</span><br><span class="line"><span class="comment">// write something from "buf" to file descriptor</span></span><br><span class="line">write(fd, buf, n);</span><br><span class="line"><span class="comment">// both read and write will return n of how much its read/write</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// read something from file descriptor to "buf"</span></span><br><span class="line">read(fd, buf, n);</span><br><span class="line"><span class="comment">// write something from "buf" to file descriptor</span></span><br><span class="line">write(fd, buf, n);</span><br><span class="line"><span class="comment">// both read and write will return n of how much its read/write</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="Pipes"><a class="header-anchor" href="#Pipes">#</a>Pipes</h2>
 <ul>
 <li>如同一條水管，pipes 的兩端連接不同的 process，其中一端寫入資料，其中一端讀取其資料。也就是說，pipes 提供使兩個不同的 process 互相溝通的方法。</li>
 </ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># sample of pipes</span></span><br><span class="line"><span class="built_in">echo</span> hello world | wc</span><br><span class="line"><span class="comment"># another way call "temporary files"</span></span><br><span class="line"><span class="built_in">echo</span> hello world &gt;/tmp/xyz; wc &lt;/tmp/xyz</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># sample of pipes</span></span><br><span class="line"><span class="built_in">echo</span> hello world | wc</span><br><span class="line"><span class="comment"># another way call "temporary files"</span></span><br><span class="line"><span class="built_in">echo</span> hello world &gt;/tmp/xyz; wc &lt;/tmp/xyz</span><br></pre></td></tr></table></figure>
 <ul>
 <li>比較
 <ol>
@@ -240,30 +240,12 @@
 <li>目錄的結構為樹，且有一個<strong>根目錄 /</strong>（例如：/a/b/c）。</li>
 <li>任何不從根目錄開始的路徑稱作 process 的當前目錄。</li>
 </ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># create a new director</span></span><br><span class="line">mkdir(<span class="string">"/dir"</span>);</span><br><span class="line"><span class="comment"># open with 0_CREATE flag create a new file</span></span><br><span class="line">open(<span class="string">"/dir/file"</span>,0_CREARTE|0_WRONLY);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a new director</span></span><br><span class="line">mkdir(<span class="string">"/dir"</span>);</span><br><span class="line"><span class="comment"># open with 0_CREATE flag create a new file</span></span><br><span class="line">open(<span class="string">"/dir/file"</span>,0_CREARTE|0_WRONLY);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>inode<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[理解inode](http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu)">[1]</span></a></sup>：儲存一個檔案的基本訊息，如檔案的權限、擁有者等等。</li>
 <li>每個 inode 有一組唯一的號碼，檔案系統用此號碼來識別文件。</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu" target="_blank" rel="noopener">理解inode</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu" target="_blank" rel="noopener">理解inode</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
             </div>
 
             <!-- Post information -->

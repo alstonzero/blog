@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        270
+        218
     
 
     
@@ -169,7 +169,7 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="新增中斷"><a class="header-anchor" href="#新增中斷">#</a>新增中斷</h2>
-<figure class="highlight arduino"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">attachInterrupt</span>(digitalPinToInterrupt(pin), ISR, mode);</span><br><span class="line"><span class="built_in">attachInterrupt</span>(interrupt, ISR, mode);</span><br><span class="line"><span class="built_in">attachInterrupt</span>(pin, ISR, mode);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">attachInterrupt</span>(digitalPinToInterrupt(pin), ISR, mode);</span><br><span class="line"><span class="built_in">attachInterrupt</span>(interrupt, ISR, mode);</span><br><span class="line"><span class="built_in">attachInterrupt</span>(pin, ISR, mode);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>有三種可選：
 <ul>
@@ -188,32 +188,14 @@
 <li>HIGH：當 pin 處於高電位時觸發中斷（只適用 arduino due）</li>
 </ul>
 <h2 id="移除中斷"><a class="header-anchor" href="#移除中斷">#</a>移除中斷</h2>
-<figure class="highlight arduino"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">detachInterrupt</span>(digitalPinToInterrupt(pin));</span><br><span class="line"><span class="built_in">detachInterrupt</span>(interrupt);</span><br><span class="line"><span class="built_in">detachInterrupt</span>(pin);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">detachInterrupt</span>(digitalPinToInterrupt(pin));</span><br><span class="line"><span class="built_in">detachInterrupt</span>(interrupt);</span><br><span class="line"><span class="built_in">detachInterrupt</span>(pin);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>一樣有三個寫法，與新增中斷的第一個參數相同。</li>
 </ul>
 <h2 id="關閉-開啟中斷"><a class="header-anchor" href="#關閉-開啟中斷">#</a>關閉/開啟中斷</h2>
-<figure class="highlight arduino"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">noInterrupts</span>();</span><br><span class="line"><span class="built_in">interrupts</span>();</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">noInterrupts</span>();</span><br><span class="line"><span class="built_in">interrupts</span>();</span><br></pre></td></tr></table></figure>
 <div class="alert alert-warning"><p><code>noInterrupts</code> 不會將 <code>reset</code> 中斷關閉。</p></div>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
 
             <!-- Post information -->

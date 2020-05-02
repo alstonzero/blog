@@ -147,7 +147,7 @@
     <!-- word count and read count -->
     
         &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        540
+        488
     
 
     
@@ -198,41 +198,23 @@
 <ul>
 <li>查詢：</li>
 </ul>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">FROM</span> <span class="keyword">table</span>-<span class="keyword">list</span> <span class="keyword">WHERE</span> condition</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">FROM</span> <span class="keyword">table</span>-<span class="keyword">list</span> <span class="keyword">WHERE</span> condition</span><br></pre></td></tr></table></figure>
 <p>如欲取回整個紀錄，可以用 *，需要字串比對，可以用 like：</p>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span>-<span class="keyword">list</span> <span class="keyword">WHERE</span> condition <span class="keyword">like</span> <span class="string">'%doc%'</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span>-<span class="keyword">list</span> <span class="keyword">WHERE</span> condition <span class="keyword">like</span> <span class="string">'%doc%'</span></span><br></pre></td></tr></table></figure>
 <p>也可以用 order by 來排序</p>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">FROM</span> <span class="keyword">table</span>-<span class="keyword">list</span> <span class="keyword">WHERE</span> condition <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">FROM</span> <span class="keyword">table</span>-<span class="keyword">list</span> <span class="keyword">WHERE</span> condition <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">id</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>修改：</li>
 </ul>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">values</span> (<span class="keyword">some</span> , <span class="string">'value'</span>)</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">set</span> field_name = <span class="string">'value'</span> <span class="keyword">where</span> another_field = <span class="string">'value2'</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">where</span> field_name = <span class="string">'value'</span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">values</span> (<span class="keyword">some</span> , <span class="string">'value'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">set</span> field_name = <span class="string">'value'</span> <span class="keyword">where</span> another_field = <span class="string">'value2'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">attribute</span>-<span class="keyword">list</span> <span class="keyword">where</span> field_name = <span class="string">'value'</span></span><br></pre></td></tr></table></figure>
 <h3 id="資料庫的設計"><a class="header-anchor" href="#資料庫的設計">#</a>資料庫的設計</h3>
 <ul>
 <li>實體 — 關係 ER 模型、ER圖</li>
 <li>一對一、一對多、多對多</li>
 </ul>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
 
             <!-- Post information -->
