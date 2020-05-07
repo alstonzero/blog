@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="計概：作業系統">
+    <meta property="og:title" content="計概 - 作業系統">
 
 
 <!--Open Graph Description-->
@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>計概：作業系統 - Yap, Tech</title>
+<title>計概 - 作業系統 - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -127,33 +127,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>計概：作業系統</h1>
-                    
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/ItC/">計算機概論</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-02-08
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        439
-    
-
-    
-
-    
-</span>  
+                    <h1>計概 - 作業系統</h1>
                     
                 </div>
             </div>
@@ -165,47 +139,74 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="作業系統的角色"><a class="header-anchor" href="#作業系統的角色">#</a>作業系統的角色</h2>
-<h3 id="記憶體、程序與CPU管理"><a class="header-anchor" href="#記憶體、程序與CPU管理">#</a>記憶體、程序與CPU管理</h3>
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/ItC/">計算機概論</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-02-08
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        439
+    
+
+    
+
+    
+</span>  
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="作業系統的角色">作業系統的角色<a class="header-anchor" href="#作業系統的角色">#</a></h2>
+<h3 id="記憶體、程序與CPU管理">記憶體、程序與CPU管理<a class="header-anchor" href="#記憶體、程序與CPU管理">#</a></h3>
 <ul>
 <li>持續追蹤什麼程式在記憶體，及其位置。</li>
 <li>程序 process 為執行中的程式，追蹤程序的進展及記錄。</li>
 <li>CPU 排程，為決定哪個程序可以執行。</li>
 </ul>
 <hr>
-<h2 id="記憶體管理"><a class="header-anchor" href="#記憶體管理">#</a>記憶體管理</h2>
+<h2 id="記憶體管理">記憶體管理<a class="header-anchor" href="#記憶體管理">#</a></h2>
 <ul>
 <li>邏輯位址：相對位址。</li>
 <li>位址聯繫 address binding：邏輯位址對應到實體位址的過程。</li>
 </ul>
-<h3 id="單一連續記憶體管理"><a class="header-anchor" href="#單一連續記憶體管理">#</a>單一連續記憶體管理</h3>
+<h3 id="單一連續記憶體管理">單一連續記憶體管理<a class="header-anchor" href="#單一連續記憶體管理">#</a></h3>
 <p>記憶體中只有作業系統及一個要執行的程式。</p>
-<h3 id="分割記憶體管理"><a class="header-anchor" href="#分割記憶體管理">#</a>分割記憶體管理</h3>
+<h3 id="分割記憶體管理">分割記憶體管理<a class="header-anchor" href="#分割記憶體管理">#</a></h3>
 <p>記憶體中允許多個程序。</p>
 <ul>
 <li>固定分割技術：分割區不需要相同大小，每個分割區的大小是固定的。</li>
 <li>動態分割技術：程式載入至分割區後，多餘的空間會分割成新的分割區。</li>
 </ul>
-<h3 id="分頁記憶體管理"><a class="header-anchor" href="#分頁記憶體管理">#</a>分頁記憶體管理</h3>
+<h3 id="分頁記憶體管理">分頁記憶體管理<a class="header-anchor" href="#分頁記憶體管理">#</a></h3>
 <p>記憶體分成固定大小的頁框 frame，程序分成同樣大小的分頁 page。</p>
 <hr>
-<h2 id="程序管理"><a class="header-anchor" href="#程序管理">#</a>程序管理</h2>
+<h2 id="程序管理">程序管理<a class="header-anchor" href="#程序管理">#</a></h2>
 <ul>
 <li>程序狀態：new、ready、running、waiting、terminated。</li>
 <li>程序控制區塊 PCB：儲存有關程序的各項資訊。</li>
 </ul>
 <hr>
-<h2 id="CPU排程"><a class="header-anchor" href="#CPU排程">#</a>CPU排程</h2>
+<h2 id="CPU排程">CPU排程<a class="header-anchor" href="#CPU排程">#</a></h2>
 <ul>
 <li>先佔式排程：程序有可能在尚未執行完就被強制移出CPU。</li>
 <li>非先佔式排程：程序不會在尚未執行完就被強制移出CPU。</li>
 </ul>
-<h3 id="先到先服務-FCFS（非先佔式）"><a class="header-anchor" href="#先到先服務-FCFS（非先佔式）">#</a>先到先服務 FCFS（非先佔式）</h3>
-<h3 id="最短工作優先-SJN（非先佔式）"><a class="header-anchor" href="#最短工作優先-SJN（非先佔式）">#</a>最短工作優先 SJN（非先佔式）</h3>
-<h3 id="循環輪流（先佔式）"><a class="header-anchor" href="#循環輪流（先佔式）">#</a>循環輪流（先佔式）</h3>
+<h3 id="先到先服務-FCFS（非先佔式）">先到先服務 FCFS（非先佔式）<a class="header-anchor" href="#先到先服務-FCFS（非先佔式）">#</a></h3>
+<h3 id="最短工作優先-SJN（非先佔式）">最短工作優先 SJN（非先佔式）<a class="header-anchor" href="#最短工作優先-SJN（非先佔式）">#</a></h3>
+<h3 id="循環輪流（先佔式）">循環輪流（先佔式）<a class="header-anchor" href="#循環輪流（先佔式）">#</a></h3>
 <p>建立一個時間片段 time slice，使用CPU時間超過時間片段的程序必須先移出，直到下一次輪到此程序時才能繼續使CPU。</p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -272,6 +273,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-02-08 10:18:22',
+            title: '計概 - 作業系統',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -309,9 +311,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -380,17 +382,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -399,6 +396,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -407,6 +408,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -415,6 +420,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -423,6 +432,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -431,6 +444,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>

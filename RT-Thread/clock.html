@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="RT-Thread Clock">
+    <meta property="og:title" content="RT-Thread - Clock">
 
 
 <!--Open Graph Description-->
@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>RT-Thread Clock - Yap, Tech</title>
+<title>RT-Thread - Clock - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -127,33 +127,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>RT-Thread Clock</h1>
-                    
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/RT-Thread/">RT-Thread</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-11-25
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        366
-    
-
-    
-
-    
-</span>  
+                    <h1>RT-Thread - Clock</h1>
                     
                 </div>
             </div>
@@ -165,13 +139,41 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/RT-Thread/">RT-Thread</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-11-25
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        366
+    
+
+    
+
+    
+</span>  
+                
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><div class="alert alert-success"><p><strong>File:</strong> clock.c</p></div>
-<h2 id="取得當前-tick"><a class="header-anchor" href="#取得當前-tick">#</a>取得當前 tick</h2>
+<h2 id="取得當前-tick">取得當前 tick<a class="header-anchor" href="#取得當前-tick">#</a></h2>
 <div class="alert alert-secondary"><p>即回傳全域變數 <code>rt_tick</code> 值</p></div>
-<table>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>功能</th>
@@ -184,10 +186,11 @@
 <td>tick 值</td>
 </tr>
 </tbody>
-</table>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will return current tick from operating system startup</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">rt_tick_t</span> rt_tick_get(<span class="keyword">void</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">/* return the global tick */</span></span><br><span class="line">    <span class="keyword">return</span> rt_tick;</span><br><span class="line">}</span><br><span class="line">RTM_EXPORT(rt_tick_get);</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="設定當前-tick"><a class="header-anchor" href="#設定當前-tick">#</a>設定當前 tick</h2>
-<table>
+</table></div>
+<figure class="highlight c line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will return current tick from operating system startup</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @return current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">rt_tick_t</span> rt_tick_get(<span class="keyword">void</span>)</span><br><span class="line">{</span><br><span class="line">    <span class="comment">/* return the global tick */</span></span><br><span class="line">    <span class="keyword">return</span> rt_tick;</span><br><span class="line">}</span><br><span class="line">RTM_EXPORT(rt_tick_get);</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="設定當前-tick">設定當前 tick<a class="header-anchor" href="#設定當前-tick">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>功能</th>
@@ -202,18 +205,19 @@
 <td>欲修改的結果</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li>由於需要修改全域變數，因此這裡需要將中斷關閉進入 critical region</li>
 </ul>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will set current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_set</span><span class="params">(<span class="keyword">rt_tick_t</span> tick)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">rt_base_t</span> level;</span><br><span class="line"></span><br><span class="line">    level = rt_hw_interrupt_disable();</span><br><span class="line">    rt_tick = tick;</span><br><span class="line">    rt_hw_interrupt_enable(level);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will set current tick</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_set</span><span class="params">(<span class="keyword">rt_tick_t</span> tick)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">rt_base_t</span> level;</span><br><span class="line"></span><br><span class="line">    level = rt_hw_interrupt_disable();</span><br><span class="line">    rt_tick = tick;</span><br><span class="line">    rt_hw_interrupt_enable(level);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="增加-tick"><a class="header-anchor" href="#增加-tick">#</a>增加 tick</h2>
+<h2 id="增加-tick">增加 tick<a class="header-anchor" href="#增加-tick">#</a></h2>
 <ul>
 <li>增加 tick 是由 ISR 所執行的動作，因此修改 <code>rt_tick</code> 值不需進入 critical region</li>
 <li>由於增加 tick 需要發出中斷，所以所有的 ISR 都不可以佔用太多時間（如果執行超過一個 tick 的時間，clock ISR 就無法在正確的時間發生中斷，時間就會不準）</li>
 </ul>
-<table>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>功能</th>
@@ -226,8 +230,8 @@
 <td>void</td>
 </tr>
 </tbody>
-</table>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will notify kernel there is one tick passed. Normally,</span></span><br><span class="line"><span class="comment"> * this function is invoked by clock ISR.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_increase</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">thread</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* increase the global tick */</span></span><br><span class="line">    ++ rt_tick;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check time slice */</span></span><br><span class="line">    thread = rt_thread_self();</span><br><span class="line"></span><br><span class="line">    -- thread-&gt;remaining_tick;</span><br><span class="line">    <span class="keyword">if</span> (thread-&gt;remaining_tick == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">/* change to initialized tick */</span></span><br><span class="line">        thread-&gt;remaining_tick = thread-&gt;init_tick;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* yield */</span></span><br><span class="line">        rt_thread_yield();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check timer */</span></span><br><span class="line">    rt_timer_check();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</table></div>
+<figure class="highlight c line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This function will notify kernel there is one tick passed. Normally,</span></span><br><span class="line"><span class="comment"> * this function is invoked by clock ISR.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_tick_increase</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_thread</span> *<span class="title">thread</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* increase the global tick */</span></span><br><span class="line">    ++ rt_tick;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check time slice */</span></span><br><span class="line">    thread = rt_thread_self();</span><br><span class="line"></span><br><span class="line">    -- thread-&gt;remaining_tick;</span><br><span class="line">    <span class="keyword">if</span> (thread-&gt;remaining_tick == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="comment">/* change to initialized tick */</span></span><br><span class="line">        thread-&gt;remaining_tick = thread-&gt;init_tick;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* yield */</span></span><br><span class="line">        rt_thread_yield();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check timer */</span></span><br><span class="line">    rt_timer_check();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>在增加 <code>rt_tick</code> 值的同時，也減少當前 thread 的剩餘 tick 值；當減至 0 時，重設剩餘 tick 並讓出處理器。</li>
 <li>（rt_timer_check()）</li>
@@ -297,6 +301,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-11-25 20:32:18',
+            title: 'RT-Thread - Clock',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -334,9 +339,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -405,17 +410,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -424,6 +424,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -432,6 +436,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -440,6 +448,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -448,6 +460,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -456,6 +472,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>

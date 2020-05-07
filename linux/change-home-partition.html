@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>Ubuntu 更改家目錄位置 - Yap, Tech</title>
+<title>Ubuntu 更改家目錄位置 - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -129,32 +129,6 @@
                 <div class="post-heading text-white">
                     <h1>Ubuntu 更改家目錄位置</h1>
                     
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/Linux/">Linux</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-11-01
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        475
-    
-
-    
-
-    
-</span>  
-                    
                 </div>
             </div>
         </div>
@@ -165,11 +139,38 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/Linux/">Linux</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-11-01
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        475
+    
+
+    
+
+    
+</span>  
+                
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>之前為了解決我的問題，上網<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Partitioning/Home/Moving](https://help.ubuntu.com/community/Partitioning/Home/Moving)">[1]</span></a></sup>找到的解答，紀錄一下。</p>
-<h2 id="1-找到目標分割的-UUID"><a class="header-anchor" href="#1-找到目標分割的-UUID">#</a>1. 找到目標分割的 UUID</h2>
+<h2 id="1-找到目標分割的-UUID">1. 找到目標分割的 UUID<a class="header-anchor" href="#1-找到目標分割的-UUID">#</a></h2>
 <ul>
 <li>command:</li>
 </ul>
@@ -182,7 +183,7 @@
 <li>其中 <code>UUID="1a2b3c4d-1a2b-1a2b-1a2b-1a2b3c4d5e6f"</code> 為此分割的 UUID，記著。</li>
 </ul>
 <hr>
-<h2 id="2-設定-fstab"><a class="header-anchor" href="#2-設定-fstab">#</a>2. 設定 fstab</h2>
+<h2 id="2-設定-fstab">2. 設定 fstab<a class="header-anchor" href="#2-設定-fstab">#</a></h2>
 <p>fstab 是用來設定開機時哪些分割需要被載入，接下來會將原本的 fstab 備份，並於檔名中加入當前日期，接著修改該文件。</p>
 <ul>
 <li>備份 (Duplicate)</li>
@@ -210,14 +211,14 @@
 <li>重開機。</li>
 </ul>
 <hr>
-<h2 id="3-複製原本的-home-到新分割"><a class="header-anchor" href="#3-複製原本的-home-到新分割">#</a>3. 複製原本的 home 到新分割</h2>
+<h2 id="3-複製原本的-home-到新分割">3. 複製原本的 home 到新分割<a class="header-anchor" href="#3-複製原本的-home-到新分割">#</a></h2>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo rsync -aXS --progress --exclude='/*/.gvfs' /home/. /media/home/.</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>檢查是否全複製過去了</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">sudo diff -r /home /media/home -x ".gvfs/*"</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="4-再次修改-fstab"><a class="header-anchor" href="#4-再次修改-fstab">#</a>4. 再次修改 fstab</h2>
+<h2 id="4-再次修改-fstab">4. 再次修改 fstab<a class="header-anchor" href="#4-再次修改-fstab">#</a></h2>
 <ul>
 <li>開啟</li>
 </ul>
@@ -227,19 +228,19 @@
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> (identifier)  (location, eg sda5)   (format, eg ext3 or ext4)      (some settings) </span></span><br><span class="line">UUID=????????   /home    ext3          defaults       0       2</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="5-備份舊的家目錄"><a class="header-anchor" href="#5-備份舊的家目錄">#</a>5. 備份舊的家目錄</h2>
+<h2 id="5-備份舊的家目錄">5. 備份舊的家目錄<a class="header-anchor" href="#5-備份舊的家目錄">#</a></h2>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">cd / &amp;&amp; sudo mv /home /old_home &amp;&amp; sudo mkdir /home</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="6-重開機，大功告成"><a class="header-anchor" href="#6-重開機，大功告成">#</a>6. 重開機，大功告成</h2>
+<h2 id="6-重開機，大功告成">6. 重開機，大功告成<a class="header-anchor" href="#6-重開機，大功告成">#</a></h2>
 <ol>
 <li>fstab 將新分割掛載在 /home 上</li>
 <li>原本的 /home 改名成 /old_home</li>
 </ol>
 <hr>
-<h2 id="刪除-old-home"><a class="header-anchor" href="#刪除-old-home">#</a>刪除 old_home</h2>
+<h2 id="刪除-old-home">刪除 old_home<a class="header-anchor" href="#刪除-old-home">#</a></h2>
 <p>如果磁碟空間不夠，或是想清理磁碟的話，可透過以下指令刪除。</p>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">cd /</span><br><span class="line">sudo rm -rI /old_home</span><br></pre></td></tr></tbody></table></figure>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://help.ubuntu.com/community/Partitioning/Home/Moving" target="_blank" rel="noopener">Partitioning/Home/Moving</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+<div id="footnotes"><hr class="block-hr"><div id="footnotelist" class="card card-default"><div class="card-header">Reference</div><ol class="list-group list-group-flush" style="list-style: none; padding-left: 0; margin-left: 0px"><li id="fn:1+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://help.ubuntu.com/community/Partitioning/Home/Moving" target="_blank" rel="noopener">Partitioning/Home/Moving</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -304,6 +305,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-11-01 10:18:59',
+            title: 'Ubuntu 更改家目錄位置',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -341,9 +343,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -412,17 +414,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -431,6 +428,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -439,6 +440,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -447,6 +452,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -455,6 +464,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -463,6 +476,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>

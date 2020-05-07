@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="XV6 Appendix A PC 硬體">
+    <meta property="og:title" content="XV6 - PC Hardware">
 
 
 <!--Open Graph Description-->
@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>XV6 Appendix A PC 硬體 - Yap, Tech</title>
+<title>XV6 - PC Hardware - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -127,33 +127,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>XV6 Appendix A PC 硬體</h1>
-                    
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/XV6/">XV6</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-08-27
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        481
-    
-
-    
-
-    
-</span>  
+                    <h1>XV6 - PC Hardware</h1>
                     
                 </div>
             </div>
@@ -165,11 +139,39 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="通用暫存器"><a class="header-anchor" href="#通用暫存器">#</a>通用暫存器</h2>
-<table>
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/XV6/">XV6</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-08-27
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        484
+    
+
+    
+
+    
+</span>  
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="通用暫存器">通用暫存器<a class="header-anchor" href="#通用暫存器">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>Name</th>
@@ -210,17 +212,18 @@
 <td>Stack 堆疊指針暫存器</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li><strong>程式計數器</strong> <code>%eip</code>：Instruction Pointer 指令指針暫存器</li>
 </ul>
 <p><code>e</code> 指的是 extended，為 16 位元暫存器的 32 位元擴展。<br>
 同時 <code>%ax</code> 為 <code>%eax</code> 的低位，以此類推；修改任意一個都會影響另一個。<br>
 另外，前四個暫存器有另一套低位別名：<code>%al</code>、<code>%ah</code>…etc，低八位為 <code>%al</code>，高八位為 <code>%ah</code>。</p>
-<p><img src="https://i.imgur.com/biz7b4q.png" alt="eax" title="Layout of eax."></p>
+<p><div class="img-item" data-src="https://i.imgur.com/biz7b4q.png" data-sub-html=".caption"><img src="https://i.imgur.com/biz7b4q.png" alt="eax" title="Layout of eax."><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">eax</span></div></div></p>
 <hr>
-<h2 id="控制暫存器"><a class="header-anchor" href="#控制暫存器">#</a>控制暫存器</h2>
-<table>
+<h2 id="控制暫存器">控制暫存器<a class="header-anchor" href="#控制暫存器">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>Name</th>
@@ -253,11 +256,12 @@
 <td>保存頁目錄表的物理地址</td>
 </tr>
 </tbody>
-</table>
-<p><img src="https://i.imgur.com/LjEa8lY.png" alt="cr" title="Layout of CR."></p>
+</table></div>
+<p><div class="img-item" data-src="https://i.imgur.com/LjEa8lY.png" data-sub-html=".caption"><img src="https://i.imgur.com/LjEa8lY.png" alt="cr" title="Layout of CR."><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">cr</span></div></div></p>
 <hr>
-<h2 id="段暫存器"><a class="header-anchor" href="#段暫存器">#</a>段暫存器</h2>
-<table>
+<h2 id="段暫存器">段暫存器<a class="header-anchor" href="#段暫存器">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>Name</th>
@@ -286,9 +290,9 @@
 <td>extra Segment</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr>
-<h2 id="其他"><a class="header-anchor" href="#其他">#</a>其他</h2>
+<h2 id="其他">其他<a class="header-anchor" href="#其他">#</a></h2>
 <ul>
 <li>
 <p><code>%gdtr</code> 全域段描述符表、<code>%ldtr</code> 區域段描述符表<br>
@@ -297,13 +301,14 @@
 <li>
 <p><code>%eflags</code> <strong>標誌暫存器</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)
 ">[1]</span></a></sup></p>
-<p><img src="https://i.imgur.com/tfPZm5w.png" alt="eflags" title="Layout of eflags."></p>
+<p><div class="img-item" data-src="https://i.imgur.com/tfPZm5w.png" data-sub-html=".caption"><img src="https://i.imgur.com/tfPZm5w.png" alt="eflags" title="Layout of eflags."><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">eflags</span></div></div></p>
 <ul>
 <li>灰色為保留位，值不變<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[x86—EFLAGS寄存器详解](https://blog.csdn.net/jn1158359135/article/details/7761011)">[2]</span></a></sup></li>
 </ul>
 </li>
 </ul>
-<table>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
 <thead>
 <tr>
 <th>Name</th>
@@ -368,8 +373,8 @@
 <td></td>
 </tr>
 </tbody>
-</table>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/jn1158359135/article/details/7761011" target="_blank" rel="noopener">x86—EFLAGS寄存器详解</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+</table></div>
+<div id="footnotes"><hr class="block-hr"><div id="footnotelist" class="card card-default"><div class="card-header">Reference</div><ol class="list-group list-group-flush" style="list-style: none; padding-left: 0; margin-left: 0px"><li id="fn:1+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[X86 彙編/X86 架構](https://zh.wikibooks.org/zh-tw/X86_汇编/X86_架构#16-位通用暂存器_(通存器_GPR)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/jn1158359135/article/details/7761011" target="_blank" rel="noopener">x86—EFLAGS寄存器详解</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -434,6 +439,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-08-27 14:14:57',
+            title: 'XV6 - PC Hardware',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -471,9 +477,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -542,17 +548,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -561,6 +562,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -569,6 +574,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -577,6 +586,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -585,6 +598,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -593,6 +610,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>

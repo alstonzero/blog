@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="XV6 Ch0 OS 介面">
+    <meta property="og:title" content="XV6 - OS Interfaces">
 
 
 <!--Open Graph Description-->
@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>XV6 Ch0 OS 介面 - Yap, Tech</title>
+<title>XV6 - OS Interfaces - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -127,33 +127,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>XV6 Ch0 OS 介面</h1>
-                    
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/XV6/">XV6</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-07-09
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        736
-    
-
-    
-
-    
-</span>  
+                    <h1>XV6 - OS Interfaces</h1>
                     
                 </div>
             </div>
@@ -165,9 +139,36 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/XV6/">XV6</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-07-09
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        739
+    
+
+    
+
+    
+</span>  
+                
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><ul>
 <li>OS的工作：有效率的在電腦上執行數個程式。</li>
 <li>Kernel：提供 process 服務</li>
@@ -184,12 +185,12 @@
 <li>procedure 即為 <strong>system call</strong></li>
 <li>system call 進入 kernel，kernel 回傳其服務。</li>
 </ol>
-<p><img src="https://i.imgur.com/N2chcG4.png" alt="System call sample" title="A kernel and two user processes."></p>
+<p><div class="img-item" data-src="https://i.imgur.com/N2chcG4.png" data-sub-html=".caption"><img src="https://i.imgur.com/N2chcG4.png" alt="System call sample" title="A kernel and two user processes."><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">System call sample</span></div></div></p>
 <ul>
 <li>Kernel 使用 CPU 的硬體保護機制去確保 process 只會在 user space 中執行，及只存取自己的記憶體（使用特權 privilege 機制）。</li>
 </ul>
 <hr>
-<h2 id="Process-及記憶體"><a class="header-anchor" href="#Process-及記憶體">#</a>Process 及記憶體</h2>
+<h2 id="Process-及記憶體">Process 及記憶體<a class="header-anchor" href="#Process-及記憶體">#</a></h2>
 <ul>
 <li>Time-share：透明的在等待執行的 process 中切換可用的CPU。
 <ul>
@@ -205,7 +206,7 @@
 <li><code>wait()</code>：在主 process 中使用；當子 process 結束後，才繼續執行主 process（通常搭配 <code>exit()</code> 使用）。</li>
 </ul>
 <hr>
-<h2 id="I-O-及檔案描述符"><a class="header-anchor" href="#I-O-及檔案描述符">#</a>I/O 及檔案描述符</h2>
+<h2 id="I-O-及檔案描述符">I/O 及檔案描述符<a class="header-anchor" href="#I-O-及檔案描述符">#</a></h2>
 <ul>
 <li>檔案描述符 file descriptor：一個小整數代表一個 process 可能會讀取或寫入的kernel-managed 物件；XV6 kernel 使用檔案描述符做為一個 pre-process table 的索引。
 <ul>
@@ -218,7 +219,7 @@
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// read something from file descriptor to "buf"</span></span><br><span class="line">read(fd, buf, n);</span><br><span class="line"><span class="comment">// write something from "buf" to file descriptor</span></span><br><span class="line">write(fd, buf, n);</span><br><span class="line"><span class="comment">// both read and write will return n of how much its read/write</span></span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<h2 id="Pipes"><a class="header-anchor" href="#Pipes">#</a>Pipes</h2>
+<h2 id="Pipes">Pipes<a class="header-anchor" href="#Pipes">#</a></h2>
 <ul>
 <li>如同一條水管，pipes 的兩端連接不同的 process，其中一端寫入資料，其中一端讀取其資料。也就是說，pipes 提供使兩個不同的 process 互相溝通的方法。</li>
 </ul>
@@ -233,7 +234,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="檔案系統"><a class="header-anchor" href="#檔案系統">#</a>檔案系統</h2>
+<h2 id="檔案系統">檔案系統<a class="header-anchor" href="#檔案系統">#</a></h2>
 <ul>
 <li>一個文件即為位元組陣列。</li>
 <li>一個目錄中包含一些檔案或其他的目錄。</li>
@@ -245,7 +246,7 @@
 <li>inode<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[理解inode](http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu)">[1]</span></a></sup>：儲存一個檔案的基本訊息，如檔案的權限、擁有者等等。</li>
 <li>每個 inode 有一組唯一的號碼，檔案系統用此號碼來識別文件。</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu" target="_blank" rel="noopener">理解inode</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
+<div id="footnotes"><hr class="block-hr"><div id="footnotelist" class="card card-default"><div class="card-header">Reference</div><ol class="list-group list-group-flush" style="list-style: none; padding-left: 0; margin-left: 0px"><li id="fn:1+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.ruanyifeng.com/blog/2011/12/inode.html?utm_source=tool.lu" target="_blank" rel="noopener">理解inode</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -310,6 +311,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-07-09 12:53:37',
+            title: 'XV6 - OS Interfaces',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -347,9 +349,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -418,17 +420,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -437,6 +434,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -445,6 +446,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -453,6 +458,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -461,6 +470,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -469,6 +482,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>

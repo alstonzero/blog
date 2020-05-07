@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>使用 crontab 自動備份網站原始碼 - Yap, Tech</title>
+<title>使用 crontab 自動備份網站原始碼 - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -129,32 +129,6 @@
                 <div class="post-heading text-white">
                     <h1>使用 crontab 自動備份網站原始碼</h1>
                     
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/Linux/">Linux</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-12-26
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        421
-    
-
-    
-
-    
-</span>  
-                    
                 </div>
             </div>
         </div>
@@ -165,24 +139,51 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="shell-script"><a class="header-anchor" href="#shell-script">#</a>shell script</h2>
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/Linux/">Linux</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-12-26
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        421
+    
+
+    
+
+    
+</span>  
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="shell-script">shell script<a class="header-anchor" href="#shell-script">#</a></h2>
 <p>透過 git 備份時，一定是使用下列指令</p>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add .</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">'log'</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push</span></span><br></pre></td></tr></tbody></table></figure>
 <p>而使用 shell script 可以讓我們一次執行一大串指令，因此我們來寫一個 shell script</p>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/zsh</span></span><br><span class="line">nowTime="$(date +'%Y-%m-%d %H:%M:%S')"</span><br><span class="line">echo "# Using crontab with auto.sh"</span><br><span class="line">echo "# File in ~/Desktop/auto.sh"</span><br><span class="line">echo "# Log  in ~/Desktop/cront.log"</span><br><span class="line">echo "#"</span><br><span class="line">echo "# Auto backup at ${nowTime}"</span><br><span class="line">echo "# --------------------------------------------------\n"</span><br><span class="line"></span><br><span class="line">cd /Users/username</span><br><span class="line">cd $1</span><br><span class="line">echo "Now at $(pwd)\n"</span><br><span class="line"></span><br><span class="line">log="auto backup at "${nowTime}</span><br><span class="line">git add .</span><br><span class="line">git commit -m "$log"</span><br><span class="line">result=$(git push site hexo_source_new 2&gt;&amp;1)</span><br><span class="line"></span><br><span class="line">case $result in</span><br><span class="line">    "Everything up-to-date")</span><br><span class="line">        osascript -e 'display notification "Everything up-to-date." with title "Automatically backup" sound name "basso"'</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        osascript -e 'display notification "Done!" with title "Automatically backup" sound name "hero"'</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br><span class="line">echo ${result}</span><br><span class="line">echo "Backup complete."</span><br></pre></td></tr></tbody></table></figure>
 <p>其中我們為了方便整理，在提交的紀錄上增加了時間；並且在 push 完根據結果有不同的通知</p>
 <div class="alert alert-danger"><p>此通知是基於 mac 上的 applescript 所寫的，在 linux 上會產生錯誤</p></div>
-<h2 id="建立-crontab"><a class="header-anchor" href="#建立-crontab">#</a>建立 crontab</h2>
+<h2 id="建立-crontab">建立 crontab<a class="header-anchor" href="#建立-crontab">#</a></h2>
 <p>寫好 script shell 後，再來就是要定時的執行它。使用 crontab 可以在指定的時間，或是固定的區間內執行。</p>
 <p>使用方式，輸入指令 <code>crontab -e</code>，接著會跳進 vim，寫入</p>
 <figure class="highlight vim"><table><tbody><tr><td class="code"><pre><span class="line">@hourly chmod +<span class="keyword">x</span> /Users/PATH_TO_YOUR.<span class="keyword">sh</span></span><br><span class="line">@hourly /Users/PATH_TO_YOUR.<span class="keyword">sh</span> PATH_TO_YOUR_SOURCE &gt;&gt; /Users/PATH_TO_YOUR.<span class="built_in">log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
 <p>這裡首先提升一次權限，並設定每一次整點都備份一次 <code>@hourly</code>，並將結果寫入 log 中。我們需要先建立一個 .log 檔：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch /Users/PATH_TO_YOUR.log</span></span><br></pre></td></tr></tbody></table></figure>
 <p>當然這裡的所有路徑因人而異，檔名也無所謂，最後 <code>:wq</code> 存檔退出，安裝完畢</p>
-<p><img src="https://i.imgur.com/w3qGjus.png" alt title="大功告成"></p>
+<p><div class="img-item" data-src="https://i.imgur.com/w3qGjus.png" data-sub-html=".caption"><img src="https://i.imgur.com/w3qGjus.png" alt title="大功告成"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom"></span></div></div></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -248,6 +249,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-12-26 12:14:07',
+            title: '使用 crontab 自動備份網站原始碼',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -285,9 +287,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -356,17 +358,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -375,6 +372,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -383,6 +384,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -391,6 +396,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -399,6 +408,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -407,6 +420,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>

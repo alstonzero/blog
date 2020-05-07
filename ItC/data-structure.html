@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="計概：抽象資料型態與副程式">
+    <meta property="og:title" content="計概 - 抽象資料型態與副程式">
 
 
 <!--Open Graph Description-->
@@ -28,7 +28,7 @@
 
 
 <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Yap, Tech">
+    <meta property="og:site_name" content="HackTech">
 
 <!--Type page-->
 
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>計概：抽象資料型態與副程式 - Yap, Tech</title>
+<title>計概 - 抽象資料型態與副程式 - HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -95,7 +95,7 @@
 
 
 
-<link rel="alternate" href="/atom.xml" title="Yap, Tech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <!-- Head tag -->
 
@@ -127,33 +127,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>計概：抽象資料型態與副程式</h1>
-                    
-                    
-                        <span class="meta d-inline text-white">
-    
-        <i class="far fa-bookmark fa-fw"></i>
-        
-
-<a class="text-white" href="/categories/ItC/">計算機概論</a>
-
-    
-    
-    <!-- Date -->
-    
-        &nbsp;|&nbsp;<i class="far fa-calendar-check fa-fw"></i>&nbsp;
-        2018-02-08
-    
-    <!-- word count and read count -->
-    
-        &nbsp;|&nbsp;<i class="far fa-file-word fa-fw"></i>&nbsp;
-        417
-    
-
-    
-
-    
-</span>  
+                    <h1>計概 - 抽象資料型態與副程式</h1>
                     
                 </div>
             </div>
@@ -165,51 +139,78 @@
 <article>
     <div class="container">
         <div class="row">
-            
             <!-- Post Main Content -->
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="抽象資料型態"><a class="header-anchor" href="#抽象資料型態">#</a>抽象資料型態</h2>
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/ItC/">計算機概論</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2018-02-08
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        427
+    
+
+    
+
+    
+</span>  
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="抽象資料型態">抽象資料型態<a class="header-anchor" href="#抽象資料型態">#</a></h2>
 <p>Abstract data type, ADT，就是一種容器。</p>
-<h2 id="堆疊-Stack"><a class="header-anchor" href="#堆疊-Stack">#</a>堆疊 Stack</h2>
+<h2 id="堆疊-Stack">堆疊 Stack<a class="header-anchor" href="#堆疊-Stack">#</a></h2>
 <p>為LIFO(Last In First Out)，後進先出，即當我們要放資料時，放在最上面（也就是最後一個），要拿資料的時候也是拿最上面。</p>
-<p><img src="https://i.imgur.com/5WjOSt2.png" alt="stack" title="堆疊"></p>
+<p><div class="img-item" data-src="https://i.imgur.com/5WjOSt2.png" data-sub-html=".caption"><img src="https://i.imgur.com/5WjOSt2.png" alt="stack" title="堆疊"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">stack</span></div></div></p>
 <ul>
 <li>插入 Push</li>
 <li>刪除 Pop</li>
 </ul>
 <hr>
-<h2 id="佇列-Queue"><a class="header-anchor" href="#佇列-Queue">#</a>佇列 Queue</h2>
+<h2 id="佇列-Queue">佇列 Queue<a class="header-anchor" href="#佇列-Queue">#</a></h2>
 <p>為FIFO(First In First Out)，先進先出，即當我們要放資料時，排在最後面 rear，拿資料時拿第一個 front；類似於排隊。</p>
-<p><img src="https://i.imgur.com/TT68nAV.png" alt="queue" title="佇列"></p>
+<p><div class="img-item" data-src="https://i.imgur.com/TT68nAV.png" data-sub-html=".caption"><img src="https://i.imgur.com/TT68nAV.png" alt="queue" title="佇列"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">queue</span></div></div></p>
 <hr>
-<h2 id="串列"><a class="header-anchor" href="#串列">#</a>串列</h2>
+<h2 id="串列">串列<a class="header-anchor" href="#串列">#</a></h2>
 <p>項目是同性質的、線性的、可變長度的；可由陣列實現。</p>
 <ul>
 <li>也可視為鍵結結構，基於節點 node的概念，一個接著下一個。</li>
 </ul>
 <hr>
-<h2 id="樹-Tree"><a class="header-anchor" href="#樹-Tree">#</a>樹 Tree</h2>
-<h3 id="二元樹"><a class="header-anchor" href="#二元樹">#</a>二元樹</h3>
+<h2 id="樹-Tree">樹 Tree<a class="header-anchor" href="#樹-Tree">#</a></h2>
+<h3 id="二元樹">二元樹<a class="header-anchor" href="#二元樹">#</a></h3>
 <p>每個node有兩個後繼節點，稱作子結點 children，可一直延續下去。起始節點稱作樹根 root。<br><br>
 一個node 可能有0至2個節點，左邊的稱作 left child，右邊的稱作 right child；如有一個節點沒有子結點，則稱作樹葉 leaf。</p>
-<p><img src="https://i.imgur.com/B9nhAz7.png" alt="二元樹" title="二元樹"></p>
-<h3 id="二元搜尋樹-BST"><a class="header-anchor" href="#二元搜尋樹-BST">#</a>二元搜尋樹 BST</h3>
+<p><div class="img-item" data-src="https://i.imgur.com/B9nhAz7.png" data-sub-html=".caption"><img src="https://i.imgur.com/B9nhAz7.png" alt="二元樹" title="二元樹"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">二元樹</span></div></div></p>
+<h3 id="二元搜尋樹-BST">二元搜尋樹 BST<a class="header-anchor" href="#二元搜尋樹-BST">#</a></h3>
 <p>如果 left child &lt; node &lt; right child，則此數為BST。</p>
-<p><img src="https://i.imgur.com/YJ2kFFZ.png" alt="二元搜尋樹" title="二元搜尋樹"></p>
+<p><div class="img-item" data-src="https://i.imgur.com/YJ2kFFZ.png" data-sub-html=".caption"><img src="https://i.imgur.com/YJ2kFFZ.png" alt="二元搜尋樹" title="二元搜尋樹"><div class="img-caption d-block text-center"><span class="center-caption text-muted border-bottom">二元搜尋樹</span></div></div></p>
 <hr>
-<h2 id="圖形-Graph"><a class="header-anchor" href="#圖形-Graph">#</a>圖形 Graph</h2>
+<h2 id="圖形-Graph">圖形 Graph<a class="header-anchor" href="#圖形-Graph">#</a></h2>
 <p>G=(V,E)，V 為圖形中的點集合，E 為編集合。<br><br>
 如果邊有方向，稱作有向圖，反之，則為無向圖。<br><br>
 若兩個邊之間存在一條邊，則稱作相鄰頂點。<br><br>
 兩點之間的路徑由一連串的相鄰頂點組成。</p>
-<h3 id="圖形演算法"><a class="header-anchor" href="#圖形演算法">#</a>圖形演算法</h3>
+<h3 id="圖形演算法">圖形演算法<a class="header-anchor" href="#圖形演算法">#</a></h3>
 <ul>
 <li>深度優先搜索 BFS</li>
 <li>廣度優先搜索 DFS</li>
 <li>最短路徑搜索</li>
 </ul>
 <hr>
-<h2 id="副程式"><a class="header-anchor" href="#副程式">#</a>副程式</h2>
+<h2 id="副程式">副程式<a class="header-anchor" href="#副程式">#</a></h2>
 <figure class="highlight c"><table><tbody><tr><td class="code"><pre><span class="line">swap(num1,num2)</span><br><span class="line">temp ← num1</span><br><span class="line">num1 ← num2</span><br><span class="line">num2 ← temp</span><br></pre></td></tr></tbody></table></figure><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -275,6 +276,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2018-02-08 10:18:16',
+            title: '計概 - 抽象資料型態與副程式',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
@@ -312,9 +314,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block text-muted py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
-                <a class="back-to-top d-block text-muted py-1" href="#">回到頂部</a>
-                <a class="go-to-bottom d-block text-muted py-1" href="#">移至底部</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -383,17 +385,12 @@
 
                     
                 </ul>
-                <p class="copyright text-muted footer-author">
-                    &copy; 2018-2020 
-                    <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
-                    Powered by <a rel="external" class="copyright-link text-muted" href="https://hexo.io/" target="_blank">Hexo</a>  
-                    &nbsp;|&nbsp;Theme <a rel="external" class="copyright-link text-muted" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                <ul class="copyright footer-menu list-inline">
                     
-                    
-                </p>
-                <ul class="copyright text-muted footer-menu list-inline">
                     
                         <li class="list-inline-item">
+                            
+                            
                             <a href="/">
                                 
                                     Home
@@ -402,6 +399,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/archives">
                                 
                                     Archives
@@ -410,6 +411,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/tags">
                                 
                                     Tags
@@ -418,6 +423,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/categories">
                                 
                                     Categories
@@ -426,6 +435,10 @@
                         </li>
                     
                         <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
                             <a href="/about">
                                 
                                     About
@@ -434,6 +447,15 @@
                         </li>
                     
                 </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
             </div>
         </div>
     </div>
