@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--Description-->
+
+
+
+    <meta name="description" content="Notes of single-chip microcompute, RTOS and Firmware.">
+
+
+<!--Author-->
+
+    <meta name="author" content="LuSkywalker">
+
+
+<!--Open Graph Title-->
+
+    <meta property="og:title" content="Building STM32 in Makefile">
+
+
+<!--Open Graph Description-->
+
+    <meta property="og:description" content="Notes of single-chip microcompute, RTOS and Firmware.">
+
+
+<!--Open Graph Site Name-->
+    <meta property="og:site_name" content="HackTech">
+
+<!--Type page-->
+
+    <meta property="og:type" content="article">
+
+
+<!--Page Cover-->
+
+
+    <meta property="og:image" content="https://lusw.dev/img/home-bg.jpg">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+
+
+
+    <meta name="twitter:image" content="https://lusw.dev/img/home-bg.jpg">
+
+
+<!-- Title -->
+
+<title>Building STM32 in Makefile | HackTech</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css">
+<link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Gallery -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.css" integrity="sha256-30DV/STftlyQ6v8yaOWlabammvCYtRJERLj/m0b3zno=" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/css/lightgallery.min.css">
+
+<!-- favicon -->
+
+<link rel="icon" href="/img/favicon.png">
+
+
+
+    <!-- Google Analytics -->
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158078787-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-158078787-1');
+</script>
+
+
+
+<link rel="alternate" href="/atom.xml" title="HackTech" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+<!-- Head tag -->
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top bg-transparent position-absolute w-100 p-0" id="nav">
+    <div class="container pl-0 pr-0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand text-white p-1 pl-3" href="/">LuSkywalker</a>
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading text-white">
+                    <h1>Building STM32 in Makefile</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/Linux/">Linux</a>
+
+    
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2020-05-02
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        927
+    
+
+    
+
+    
+</span>  
+                
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Directories-Structure">Directories Structure<a class="header-anchor" href="#Directories-Structure">#</a></h2>
+<p>First, we create 3 directories named “System”, “OS” and “User”.</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|-- System</span><br><span class="line">|</span><br><span class="line">|-- OS</span><br><span class="line">|</span><br><span class="line">`-- User</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>System is for driver</li>
+<li>OS of course for OS</li>
+<li>and User is for your own application</li>
+</ul>
+<p>Second, we add 4 makefiles into each directory (obtained base directory).</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|-- System</span><br><span class="line">|   `-- makefile</span><br><span class="line">|</span><br><span class="line">|-- OS</span><br><span class="line">|   `-- makefile</span><br><span class="line">|</span><br><span class="line">|-- User</span><br><span class="line">|   `-- makefile</span><br><span class="line">|</span><br><span class="line">`-- makefile</span><br></pre></td></tr></tbody></table></figure>
+<p>And last step of preparing, put all source codes into correct place. This is example:</p>
+<figure class="highlight gherkin"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|<span class="string">-- System</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- inc</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32F429</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- inc</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- CMSIS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- inc</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- OS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- User</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">`-- makefile</span><br></pre></td></tr></tbody></table></figure>
+<div class="alert alert-info"><p>In this example, we put three driver for STM32, so we separate source codes into 3 directory. Also you don’t need to do exactly same as me, just put those code into <code>src</code> and <code>inc</code> is fine.</p></div>
+<p>Finally, don’t forget add a makefile into each driver directory:</p>
+<figure class="highlight gherkin"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|<span class="string">-- System</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- makefile</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32F429</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- makefile</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- CMSIS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- makefile</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- OS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- User</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">`-- makefile</span><br></pre></td></tr></tbody></table></figure>
+<hr>
+<p>Next, let write some makefiles!</p>
+<h2 id="GCC">GCC<a class="header-anchor" href="#GCC">#</a></h2>
+<p>In Every Source directory (which only contain <code>inc</code> and <code>src</code>), we write some makefile like this:</p>
+<figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">TCPREFIX = arm-none-eabi-</span><br><span class="line">CC       = <span class="variable">$(TCPREFIX)</span>gcc</span><br><span class="line"></span><br><span class="line">CFLAGS 	= -c -Wall -fno-common -O0 -g -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=nosys.specs</span><br><span class="line"></span><br><span class="line">INCFLAG =\</span><br><span class="line">-I. \</span><br><span class="line">-Iinc</span><br><span class="line"></span><br><span class="line">CFLAGS  += <span class="variable">$(INCFLAG)</span></span><br><span class="line"></span><br><span class="line">OBJDIR 	= obj</span><br><span class="line"></span><br><span class="line">OBJS =\</span><br><span class="line"><span class="variable">$(OBJDIR)</span>/src.o </span><br><span class="line"></span><br><span class="line"><span class="section">all: <span class="variable">$(OBJS)</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(OBJDIR)</span>/%.o: src/%.c | <span class="variable">$(OBJDIR)</span></span><br><span class="line">	@echo <span class="string">"bulid file: <span class="variable">$&lt;</span>"</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -MMD -MF$(@:%.o=%.d) -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(OBJDIR)</span>:</span><br><span class="line">	@echo <span class="variable">$(NOW)</span> INFO Make new folder User/<span class="variable">$(OBJDIR)</span>.</span><br><span class="line">	mkdir -p <span class="variable">$(OBJDIR)</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	-rm -rf <span class="variable">$(OBJDIR)</span>/*.o </span><br><span class="line">	-rm -rf <span class="variable">$(OBJDIR)</span>/*.d</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Line 1 and 2 told makefile to use <code>arm-none-eabi-gcc</code> to complete object work.</li>
+<li>Line 4 told makefile which flag we use in <code>gcc</code>.</li>
+<li>Line 6 to 8 told which directory we need to include. (If other directory needed, add line here too.)</li>
+<li>Line 12 to 15 told which file to object, put all <code>.c</code> file location at <code>src</code> directory and rename to <code>.o</code>.</li>
+<li>Line 17 give <code>all</code> target to build all object file.</li>
+<li>Line 19 to 21 build all object file, this is a action after <code>all</code> called.</li>
+<li>If <code>obj</code> directory is not existed, new it at line 23 to 25.</li>
+<li>Line 27 to 29 helps us clean object files.</li>
+</ul>
+<p>And next, we need to told main makefile to build all, which seperated at different directories. So we need to exec make all at correct directory.</p>
+<figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">obj:</span></span><br><span class="line">	<span class="variable">$(MAKE)</span> all -C System</span><br><span class="line">	<span class="variable">$(MAKE)</span> all -C OS</span><br><span class="line">	<span class="variable">$(MAKE)</span> all -C User</span><br></pre></td></tr></tbody></table></figure>
+<p>This should write down at <code>./makefile</code>, <code>-C</code> flag tell makefile exec previous target at given directory. So line 2 is same as:</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">cd ./System</span><br><span class="line">make all</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="Startup-o">Startup.o<a class="header-anchor" href="#Startup-o">#</a></h3>
+<p>Startup.o is needed, so we put in <code>User</code> directory, and don’t put in <code>src</code>. Building code is similar:</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="code"><pre><span class="line">OBJS +=\</span><br><span class="line">startup.o</span><br><span class="line"></span><br><span class="line"><span class="section">Startup/startup.o: ./startup.s | <span class="variable">$(OBJDIR)</span></span></span><br><span class="line">	@echo <span class="string">"bulid file: <span class="variable">$&lt;</span>"</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -MMD -MF$(@:%.o=%.d) -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>And add a line at clean up.</p>
+<figure class="highlight makefile"><table><tbody><tr><td class="code"><pre><span class="line">-rm -rf *.o</span><br></pre></td></tr></tbody></table></figure>
+<p>This is a quick version about how object file build, next step we link them up into a <code>.bin</code> file.</p>
+<h2 id="G-Linker">G++ (Linker)<a class="header-anchor" href="#G-Linker">#</a></h2>
+<p>We write linker field at <code>home</code> directory, so this code should put in <code>./makefile</code></p>
+<figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TCPREFIX = arm-none-eabi-</span><br><span class="line">LD       = <span class="variable">$(TCPREFIX)</span>g++</span><br><span class="line"></span><br><span class="line">LFLAGS  = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Os -T<span class="variable">$(LDFILE)</span> --specs=nosys.specs</span><br><span class="line">LDFILE  = ./STM32F429ZI_FLASH.ld</span><br><span class="line"></span><br><span class="line">OBJS =\</span><br><span class="line"><span class="variable">$(<span class="built_in">wildcard</span> ./User/obj/*.o)</span> \</span><br><span class="line"><span class="variable">$(<span class="built_in">wildcard</span> ./System/*/obj/*.o)</span> \</span><br><span class="line"><span class="variable">$(<span class="built_in">wildcard</span> ./OS/obj/*.o)</span> \</span><br><span class="line">./User/startup.o</span><br><span class="line"></span><br><span class="line"><span class="section">main.elf: <span class="variable">$(OBJS)</span> <span class="variable">$(LDFILE)</span></span></span><br><span class="line">	@echo <span class="string">"link file: <span class="variable">$@</span>"</span></span><br><span class="line">	<span class="variable">$(LD)</span> <span class="variable">$(LFLAGS)</span> -o <span class="variable">$@</span> <span class="variable">$(OBJS)</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Line 6 to 10 combine all object files at different directories, we using <code>wildcard</code> to scan all files which match the regex.</li>
+<li>Line 12 to 14 linked things up.</li>
+</ul>
+<h3 id="Objdump-and-Objcopy">Objdump and Objcopy<a class="header-anchor" href="#Objdump-and-Objcopy">#</a></h3>
+<p>And we dump a <code>.bin</code> file from <code>.elf</code>, this is which we flash into board.</p>
+<figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TCPREFIX = arm-none-eabi-</span><br><span class="line">CP       = <span class="variable">$(TCPREFIX)</span>objcopy</span><br><span class="line">OD       = <span class="variable">$(TCPREFIX)</span>objdump</span><br><span class="line"></span><br><span class="line"><span class="section">main.bin: obj main.elf</span></span><br><span class="line">	@echo <span class="string">"copy file main.elf"</span></span><br><span class="line">	<span class="variable">$(CP)</span> <span class="variable">$(CPFLAGS)</span> main.elf <span class="variable">$@</span></span><br><span class="line">	<span class="variable">$(OD)</span> <span class="variable">$(ODFLAGS)</span> main.elf &gt; main.lst</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="Openocd">Openocd<a class="header-anchor" href="#Openocd">#</a></h2>
+<p>Last things, flash binary file into board. We use <a href="http://openocd.org/" target="_blank" rel="noopener">openocd</a>.</p>
+<figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">STM32FLASH 	= ./User/Startup/stm32.pl</span><br><span class="line"></span><br><span class="line"><span class="section">run: build</span></span><br><span class="line">	@echo <span class="string">"Flashing main.bin."</span></span><br><span class="line">	<span class="variable">$(STM32FLASH)</span> main.bin </span><br><span class="line">	@echo <span class="string">"Finish flashing main.bin."</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="stm32-pl"><a href="http://stm32.pl" target="_blank" rel="noopener">stm32.pl</a><a class="header-anchor" href="#stm32-pl">#</a></h3>
+<p>Openocd is using talnet to flash board, manually we can open a terminal and write down some commands. Or we can use a perl file like this.</p>
+<figure class="highlight pl line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/perl</span></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> needs libnet-telnet-perl package.</span></span><br><span class="line"><span class="keyword">use</span> Net::Telnet;</span><br><span class="line"><span class="keyword">use</span> Cwd <span class="string">'abs_path'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">my</span> $numArgs = $#ARGV + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span>($numArgs != <span class="number">1</span>) {</span><br><span class="line">    <span class="keyword">die</span>( <span class="string">"Usage ./stm32.pl [main.bin] \n"</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">my</span> $file = abs_path($ARGV[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">my</span> $ip = <span class="string">'127.0.0.1'</span>;   <span class="comment"># localhost</span></span><br><span class="line"><span class="keyword">my</span> $port = <span class="number">4444</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">my</span> $telnet = new Net::Telnet (</span><br><span class="line">    <span class="string">Port   =&gt;</span> $port,</span><br><span class="line">    <span class="string">Timeout=&gt;</span> <span class="number">30</span>,</span><br><span class="line">    <span class="string">Errmode=&gt;</span> <span class="string">'die'</span>,</span><br><span class="line">    <span class="string">Prompt =&gt;</span> <span class="string">'/&gt;/'</span>);</span><br><span class="line"></span><br><span class="line">$telnet-&gt;<span class="keyword">open</span>($ip);</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'halt'</span>);</span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'poll'</span>);</span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'flash probe 0'</span>);</span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'stm32f4x mass_erase 0'</span>);</span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'flash write_image erase '</span>.$file.<span class="string">' 0x08000000'</span>);</span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'reset'</span>);</span><br><span class="line"><span class="keyword">print</span> $telnet-&gt;cmd(<span class="string">'exit'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"\n"</span>;</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="All">All<a class="header-anchor" href="#All">#</a></h2>
+<p>Let combine together. This should write down at <code>./makefile</code></p>
+<figure class="highlight makefile"><table><tbody><tr><td class="code"><pre><span class="line"><span class="section">all: run</span></span><br><span class="line"></span><br><span class="line"><span class="section">build: main.bin</span></span><br></pre></td></tr></tbody></table></figure>
+<p>So we write command <code>make all</code>, and it will call run, and run will call build, build will make all binary files. All things will be done.</p>
+<hr>
+<p>This repo is a workspace build for my current project, you can learn more from this example.</p>
+<ul>
+<li><a href="https://github.com/luswdev/GUI-workspace" target="_blank" rel="noopener">GUI Workspace</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+
+            <!-- Post information -->
+            
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-tags">
+        
+            <i class="fas fa-tag" style="vertical-align: middle;font-size: .8rem;"></i>
+            tags:&nbsp;
+            
+            
+        
+            <a href="/tags/Linux/">#Linux</a> <a href="/tags/STM32/">#STM32</a> <a href="/tags/makefile/">#makefile</a>
+        
+    </div>
+
+            
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <ul class="pagination d-block text-center">
+            
+                <li class="previous page-item d-inline"><a href="/posts/linux/change-timezone.html" class="page-link float-left">&larr;  下一頁</a></li>
+            
+            
+                <li class="next page-item d-inline"><a href="/posts/hexo/theme-clean-doc.html" class="page-link float-right">上一頁  &rarr;</a></li>
+            
+        </ul>
+    </div>
+
+
+            
+                <!-- Comments -->
+                
+    
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <div id="gitalk-container"></div>
+    </div>
+
+    <script>
+        let gitalk = new Gitalk({
+            clientID: '97c34b7bba491c6a5007',
+            clientSecret: '6140d208bae6bbbc69c65e3e332a46d090094fc8',
+            repo: 'HackTech',
+            owner: 'luswdev',
+            admin: "luswdev",
+            id: '2020-05-02 14:46:29',
+            title: 'Building STM32 in Makefile',
+            distractionFreeMode: false  // Facebook-like distraction free mode
+        });
+        gitalk.render('gitalk-container');
+    </script>
+
+
+                
+
+            
+
+        </div>
+    </div>
+</article> 
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    <style>
+        #toc-content .toc-link::before {
+            background-color: transparent;
+            max-height: 25px;
+        }
+
+        #toc-content .toc-link.is-active-link::before {
+            background-color: #404040;
+        }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <div class="ui-toc dropup scrollspy-body pull-right" style="right: 3%;">
+        <button type="button" class="toc-btn btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <i class="fas fa-list"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right p-2" aria-labelledby="tocLabel">
+            <div class="toc-widget">
+                <div id="toc-content" class="text-truncate">
+                </div>
+            </div>
+            <div class="toc-menu pt-3 pl-4">
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '#toc-content',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: 'article',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h1, h2, h3',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: true,
+        });
+    </script>
+
+
+    
+
+
+    <!-- Footer -->
+    <hr>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
+                <ul class="list-inline">
+                    
+
+                    
+
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="https://github.com/luswdev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="https://www.linkedin.com/in/callum-lu" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="mailto:info@lusw.dev" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <ul class="copyright footer-menu list-inline">
+                    
+                    
+                        <li class="list-inline-item">
+                            
+                            
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+                <p class="copyright footer-author">
+                    &copy; 2018-2020 
+                    <a rel="external" class="copyright-link" href="https://github.com/luswdev" target="_blank">LuSkywalker</a><br>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    <!-- jQuery -->
+<script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
+
+<!-- For drop down -->
+<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+<!-- Gallery -->
+<script src="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery-all.min.js"></script>
+<!-- Busuanzi -->
+
+
+<!-- Search script -->
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    $(function () {
+        searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    });
+</script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <!-- Search Modal -->
+    <!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content overflow-auto">
+            <div class="modal-header">
+                <input type="text" class="form-control" placeholder="搜尋關鍵字..." id="searchInput">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="searchResult">
+                    <div class="search-empty text-center text-muted p-5">
+                        <i class="far fa-meh"></i>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
