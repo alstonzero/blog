@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="How to Change Time Zone in Linux">
+    <meta property="og:title" content="BMP (Bitmap) 檔案格式">
 
 
 <!--Open Graph Description-->
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>How to Change Time Zone in Linux | HackTech</title>
+<title>BMP (Bitmap) 檔案格式 | HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -129,7 +129,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>How to Change Time Zone in Linux</h1>
+                    <h1>BMP (Bitmap) 檔案格式</h1>
                     
                 </div>
             </div>
@@ -149,7 +149,7 @@
         <i class="far fa-bookmark fa-fw"></i>
         
 
-<a href="/categories/Linux/">Linux</a>
+<a href="/categories/Note/">Note</a>
 
     
     
@@ -157,13 +157,13 @@
     
         <span class="post-meta-split">&nbsp;|&nbsp;</span>
         <i class="far fa-calendar-check fa-fw"></i>
-        2020-05-07
+        2020-09-01
     
     <!-- word count and read count -->
     
         <span class="post-meta-split">&nbsp;|&nbsp;</span>
         <i class="far fa-file-word fa-fw"></i>
-        293
+        569
     
 
     
@@ -171,40 +171,214 @@
     
 </span>  
                 
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>For default, time zone in linux is <code>UTC</code>. And if we rent a VPS, it will set to where mechine location.</p>
-<p>But we want to show time as we location, thus we need to change time zone. So this is how we use: <code>timedatectl</code>.</p>
-<div class="alert alert-info"><p>This tool is used for Ubuntu, if your OS is not Ubuntu, maybe there will something different.</p></div>
-<h2 id="timedatectl">timedatectl<a class="header-anchor" href="#timedatectl">#</a></h2>
-<p>This is a tool that can show, list, and change time zone in linux.</p>
-<h3 id="Listing">Listing<a class="header-anchor" href="#Listing">#</a></h3>
-<p>We can use <code>timedatectl</code> to list all time zone code like this.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ timedatectl list-timezones</span><br></pre></td></tr></tbody></table></figure>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>點陣圖（<code>.bmp</code>）是 windows 使用的圖像格式，整個檔案由四個部分組成：<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[點陣圖（Bitmap）檔案格式 @ 瘋小貓的華麗冒險](https://crazycat1130.pixnet.net/blog/post/1345538)">[1]</span></a></sup></p>
 <ul>
-<li>Result will like this:</li>
+<li>Bitmap File Header</li>
+<li>Bitmap Info Header</li>
+<li>Color Table (Palette)</li>
+<li>Bitmap Array</li>
 </ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Aferica/...</span><br><span class="line">...</span><br></pre></td></tr></tbody></table></figure>
-<p>We can use <code>grep</code> to find we want. For example, we can just show Asia result like this.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ timedatectl list-timezones | grep Asia</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Show">Show<a class="header-anchor" href="#Show">#</a></h3>
-<p><code>timedatectl</code> also can show current time zone detail.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ timedatectl</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="1-Bitmap-File-Header">1. Bitmap File Header<a class="header-anchor" href="#1-Bitmap-File-Header">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+<th>Start</th>
+<th>Name</th>
+<th>Size (Byte)</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x0000</td>
+<td>ID</td>
+<td>2</td>
+<td>“BM”</td>
+</tr>
+<tr>
+<td>0x0002</td>
+<td>File Size</td>
+<td>4</td>
+<td>Total file size</td>
+</tr>
+<tr>
+<td>0x0004</td>
+<td>Reserved</td>
+<td>4</td>
+<td>Reserved</td>
+</tr>
+<tr>
+<td>0x000A</td>
+<td>Bitmap Data Offset</td>
+<td>4</td>
+<td>BMP offset</td>
+</tr>
+</tbody>
+</table></div>
 <ul>
-<li>Result will like this</li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Local time: Thu 2020-05-07 22:08:01 CST</span><br><span class="line">Universal time: Thu 2020-05-07 14:08:01 UST</span><br><span class="line">RTC time: Thu 2020-05-07 22:08:01</span><br><span class="line">Time zone: Asia/Taipei (CST +8000)</span><br><span class="line">System clock synchronized: yes</span><br><span class="line">NTP service: active</span><br><span class="line">RTC <span class="keyword">in</span> <span class="built_in">local</span> TZ: no</span><br></pre></td></tr></tbody></table></figure>
-<p>If we want to show setting, use <code>status</code>.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ timedatectl status</span><br></pre></td></tr></tbody></table></figure>
+<li>ID 欄位為識別碼，對應以下值：<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[BMP - 維基百科，自由的百科全書](https://zh.wikipedia.org/wiki/BMP)">[2]</span></a></sup>
 <ul>
-<li>Result will like this</li>
+<li>BM – Windows 3.1x, 95, NT, … etc.</li>
+<li>BA – OS/2 struct Bitmap Array</li>
+<li>CI – OS/2 struct Color Icon</li>
+<li>CP – OS/2 const Color Pointer</li>
+<li>IC – OS/2 struct Icon</li>
+<li>PT – OS/2 Pointer</li>
 </ul>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">Timezone=Asia/Taipei</span><br><span class="line">LocalRTC=no</span><br><span class="line">CanNTP=yes</span><br><span class="line">NTP=yes</span><br><span class="line">NTPSynchronized=yes</span><br><span class="line">TimeUSec=Thu 2020-05-07 22:08:01 CST</span><br><span class="line">RTCTimeUSec=Thu 2020-05-07 22:08:01 CTS</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="Changing">Changing<a class="header-anchor" href="#Changing">#</a></h3>
-<p>Changing time zone use <code>set-timezone</code>.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ timedatectl <span class="built_in">set</span>-timezone Zone</span><br></pre></td></tr></tbody></table></figure>
-<p><code>Zone</code> should replace as you wonder to change.</p>
-<p>After setting, you can show if success.</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ timedatectl show</span><br></pre></td></tr></tbody></table></figure>
-<script>
+</li>
+<li>Bitmap Data Offset：點陣圖資料（像素陣列）的位址偏移，也就是起始位址。</li>
+</ul>
+<h2 id="Bitmap-Info-Header">Bitmap Info Header<a class="header-anchor" href="#Bitmap-Info-Header">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+<th>Start</th>
+<th>Name</th>
+<th>Size (Byte)</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x000E</td>
+<td>Bitmap Header Size</td>
+<td>4</td>
+<td>BIH size</td>
+</tr>
+<tr>
+<td>0x0012</td>
+<td>Width</td>
+<td>4</td>
+<td>BMP width  (pixel)</td>
+</tr>
+<tr>
+<td>0x0016</td>
+<td>Height</td>
+<td>4</td>
+<td>BMP height (pixel)</td>
+</tr>
+<tr>
+<td>0x001A</td>
+<td>Planes</td>
+<td>2</td>
+<td>BMP plane counts</td>
+</tr>
+<tr>
+<td>0x001C</td>
+<td>Bits Per Pixel</td>
+<td>2</td>
+<td>Pixel size</td>
+</tr>
+<tr>
+<td>0x001E</td>
+<td>Compression</td>
+<td>4</td>
+<td>Compression method</td>
+</tr>
+<tr>
+<td>0x0022</td>
+<td>Bitmap Data Size</td>
+<td>4</td>
+<td>BMP data size</td>
+</tr>
+<tr>
+<td>0x0026</td>
+<td>H-Resolution</td>
+<td>4</td>
+<td>Horizontal Resolution</td>
+</tr>
+<tr>
+<td>0x002A</td>
+<td>V-Resolution</td>
+<td>4</td>
+<td>Vertical Resolution</td>
+</tr>
+<tr>
+<td>0x002E</td>
+<td>Used Colors</td>
+<td>4</td>
+<td>Palette colors used</td>
+</tr>
+<tr>
+<td>0x0032</td>
+<td>Important Colors</td>
+<td>4</td>
+<td>Important color count</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>高度為帶號值
+<ul>
+<li>若為正數，代表圖為倒向</li>
+<li>若為負數，代表圖為正向 <sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[BMP檔案格式詳解（BMP file format）[圖文解說] - IT閱讀](https://www.itread01.com/content/1549504280.html)">[3]</span></a></sup></li>
+</ul>
+</li>
+<li>Planes 為圖層數，不過永遠設成 1</li>
+<li>Bits/pixel 有 6 種不同方式:
+<ul>
+<li>1：單色點陣圖（使用 2 色調色盤）</li>
+<li>4：4 位元點陣圖（使用 16 色調色盤）</li>
+<li>8：8 位元點陣圖（使用 256 色調色盤）</li>
+<li>16：16 位元高彩點陣圖（不一定使用調色盤）</li>
+<li>24：24 位元全彩點陣圖（不使用調色盤）</li>
+<li>32：32 位元全彩點陣圖（不一定使用調色盤）</li>
+</ul>
+</li>
+<li>壓縮方式有 4 種
+<ul>
+<li>0：未壓縮，不使用調色盤</li>
+<li>1：RLE 8-bit/pixel</li>
+<li>2：RLE 4-bit/pixel</li>
+<li>3：Bitfields</li>
+</ul>
+</li>
+</ul>
+<h2 id="Palette">Palette<a class="header-anchor" href="#Palette">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+<th>Start</th>
+<th>Name</th>
+<th>Size (Byte)</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x0036</td>
+<td>Palette</td>
+<td>N*4</td>
+<td>Palette data</td>
+</tr>
+</tbody>
+</table></div>
+<p>每個索引值表示一個顏色：<code>0x00RRGGBB</code>，最高位保留 0</p>
+<h2 id="Bitmap-Array">Bitmap Array<a class="header-anchor" href="#Bitmap-Array">#</a></h2>
+<div class="table-responsive">
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+<th>Start</th>
+<th>Name</th>
+<th>Size (Byte)</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>Bitmap Data</td>
+<td>-</td>
+<td>BMP data</td>
+</tr>
+</tbody>
+</table></div>
+<p>根據 Height 設定的值不同，掃描的方向也不同；若為正向則為由下到上，反之亦然。而每個掃描列須為<strong>4 Bytes 的倍數</strong>。</p>
+<div id="footnotes"><hr class="block-hr"><div id="footnotelist" class="card card-default"><div class="card-header">Reference</div><ol class="list-group list-group-flush" style="list-style: none; padding-left: 0; margin-left: 0px"><li id="fn:1+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://crazycat1130.pixnet.net/blog/post/1345538" target="_blank" rel="noopener">點陣圖（Bitmap）檔案格式 @ 瘋小貓的華麗冒險</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://zh.wikipedia.org/wiki/BMP" target="_blank" rel="noopener">BMP - 維基百科，自由的百科全書</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3+" class="list-group-item"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: 0px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.itread01.com/content/1549504280.html" target="_blank" rel="noopener">BMP檔案格式詳解（BMP file format）[圖文解說] - IT閱讀</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -234,7 +408,7 @@
             
             
         
-            <a href="/tags/Linux/">#Linux</a> <a href="/tags/timezone/">#timezone</a> <a href="/tags/timedatectl/">#timedatectl</a>
+            <a href="/tags/Bitmap/">#Bitmap</a>
         
     </div>
 
@@ -242,10 +416,8 @@
     <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <ul class="pagination d-block text-center">
             
-                <li class="previous page-item d-inline"><a href="/posts/bitmap-file-structure.html" class="page-link float-left">&larr;  下一頁</a></li>
             
-            
-                <li class="next page-item d-inline"><a href="/posts/linux/building-stm32-in-makefile.html" class="page-link float-right">上一頁  &rarr;</a></li>
+                <li class="next page-item d-inline"><a href="/posts/linux/change-timezone.html" class="page-link float-right">上一頁  &rarr;</a></li>
             
         </ul>
     </div>
@@ -269,8 +441,8 @@
             repo: 'HackTech',
             owner: 'luswdev',
             admin: "luswdev",
-            id: '2020-05-07 21:51:50',
-            title: 'How to Change Time Zone in Linux',
+            id: '2020-09-01 10:37:48',
+            title: 'BMP (Bitmap) 檔案格式',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
