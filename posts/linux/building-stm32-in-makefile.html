@@ -19,7 +19,7 @@
 
 <!--Open Graph Title-->
 
-    <meta property="og:title" content="Building STM32 in Makefile">
+    <meta property="og:title" content="STM32 Makefile 專案建置">
 
 
 <!--Open Graph Description-->
@@ -51,7 +51,7 @@
 
 <!-- Title -->
 
-<title>Building STM32 in Makefile | HackTech</title>
+<title>STM32 Makefile 專案建置 | HackTech</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
@@ -129,7 +129,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="post-heading text-white">
-                    <h1>Building STM32 in Makefile</h1>
+                    <h1>STM32 Makefile 專案建置</h1>
                     
                 </div>
             </div>
@@ -163,7 +163,7 @@
     
         <span class="post-meta-split">&nbsp;|&nbsp;</span>
         <i class="far fa-file-word fa-fw"></i>
-        927
+        977
     
 
     
@@ -171,25 +171,26 @@
     
 </span>  
                 
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Directories-Structure">Directories Structure<a class="header-anchor" href="#Directories-Structure">#</a></h2>
-<p>First, we create 3 directories named “System”, “OS” and “User”.</p>
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="資料夾結構">資料夾結構<a class="header-anchor" href="#資料夾結構">#</a></h2>
+<p>第一步，建立三個資料夾 “System”、“OS” 及 “User”</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|-- System</span><br><span class="line">|</span><br><span class="line">|-- OS</span><br><span class="line">|</span><br><span class="line">`-- User</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>System is for driver</li>
-<li>OS of course for OS</li>
-<li>and User is for your own application</li>
+<li>System 放驅動程式</li>
+<li>OS 就是作業系統（也可不用）</li>
+<li>User 放的是我們的專案</li>
 </ul>
-<p>Second, we add 4 makefiles into each directory (obtained base directory).</p>
+<p>接著，在每個資料夾底下新增一個 makefile。</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|-- System</span><br><span class="line">|   `-- makefile</span><br><span class="line">|</span><br><span class="line">|-- OS</span><br><span class="line">|   `-- makefile</span><br><span class="line">|</span><br><span class="line">|-- User</span><br><span class="line">|   `-- makefile</span><br><span class="line">|</span><br><span class="line">`-- makefile</span><br></pre></td></tr></tbody></table></figure>
-<p>And last step of preparing, put all source codes into correct place. This is example:</p>
+<p>準備步驟的最後，將所有程式碼正確的擺放。如範例：</p>
 <figure class="highlight gherkin"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|<span class="string">-- System</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- inc</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32F429</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- inc</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- CMSIS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- inc</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- OS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- User</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">`-- makefile</span><br></pre></td></tr></tbody></table></figure>
-<div class="alert alert-info"><p>In this example, we put three driver for STM32, so we separate source codes into 3 directory. Also you don’t need to do exactly same as me, just put those code into <code>src</code> and <code>inc</code> is fine.</p></div>
-<p>Finally, don’t forget add a makefile into each driver directory:</p>
+<div class="alert alert-info"><p>在這個例子，我們在 System 底下放了三個驅動，所以需要將程式碼分成三個資料夾。<br>
+當然你也可以直接全部放在一起是沒問題的。</p></div>
+<p>最後的最後，別忘了在驅動的底下也加一個 makefile。</p>
 <figure class="highlight gherkin"><table><tbody><tr><td class="code"><pre><span class="line">.</span><br><span class="line">|<span class="string">-- System</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- makefile</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- STM32F429</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- makefile</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   </span>|<span class="string">-- CMSIS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">   `-- makefile</span></span><br><span class="line">|<span class="string">   </span>|</span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- OS</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">|<span class="string">-- User</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- src</span></span><br><span class="line">|<span class="string">   </span>|<span class="string">-- inc</span></span><br><span class="line">|<span class="string">   `-- makefile</span></span><br><span class="line">|</span><br><span class="line">`-- makefile</span><br></pre></td></tr></tbody></table></figure>
 <hr>
-<p>Next, let write some makefiles!</p>
+<p>下一步，來寫 makefile！</p>
 <h2 id="GCC">GCC<a class="header-anchor" href="#GCC">#</a></h2>
-<p>In Every Source directory (which only contain <code>inc</code> and <code>src</code>), we write some makefile like this:</p>
+<p>在最上層資料夾裡的 makefile 寫上以下程式碼：</p>
 <figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">TCPREFIX = arm-none-eabi-</span><br><span class="line">CC       = <span class="variable">$(TCPREFIX)</span>gcc</span><br><span class="line"></span><br><span class="line">CFLAGS 	= -c -Wall -fno-common -O0 -g -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=nosys.specs</span><br><span class="line"></span><br><span class="line">INCFLAG =\</span><br><span class="line">-I. \</span><br><span class="line">-Iinc</span><br><span class="line"></span><br><span class="line">CFLAGS  += <span class="variable">$(INCFLAG)</span></span><br><span class="line"></span><br><span class="line">OBJDIR 	= obj</span><br><span class="line"></span><br><span class="line">OBJS =\</span><br><span class="line"><span class="variable">$(OBJDIR)</span>/src.o </span><br><span class="line"></span><br><span class="line"><span class="section">all: <span class="variable">$(OBJS)</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(OBJDIR)</span>/%.o: src/%.c | <span class="variable">$(OBJDIR)</span></span><br><span class="line">	@echo <span class="string">"bulid file: <span class="variable">$&lt;</span>"</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -MMD -MF$(@:%.o=%.d) -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(OBJDIR)</span>:</span><br><span class="line">	@echo <span class="variable">$(NOW)</span> INFO Make new folder User/<span class="variable">$(OBJDIR)</span>.</span><br><span class="line">	mkdir -p <span class="variable">$(OBJDIR)</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	-rm -rf <span class="variable">$(OBJDIR)</span>/*.o </span><br><span class="line">	-rm -rf <span class="variable">$(OBJDIR)</span>/*.d</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>Line 1 and 2 told makefile to use <code>arm-none-eabi-gcc</code> to complete object work.</li>
@@ -302,7 +303,7 @@
             owner: 'luswdev',
             admin: "luswdev",
             id: '2020-05-02 14:46:29',
-            title: 'Building STM32 in Makefile',
+            title: 'STM32 Makefile 專案建置',
             distractionFreeMode: false  // Facebook-like distraction free mode
         });
         gitalk.render('gitalk-container');
