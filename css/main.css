@@ -229,7 +229,6 @@ footer .footer-menu li a:hover {
 }
 .page-index .post-preview.post-pin i {
   font-size: 0.5em;
-  transform: rotate(-45deg);
   vertical-align: middle;
 }
 .page-index .post-pin-hr:last-child {
