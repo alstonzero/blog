@@ -163,7 +163,7 @@
     
         <span class="post-meta-split">&nbsp;|&nbsp;</span>
         <i class="far fa-file-word fa-fw"></i>
-        977
+        926
     
 
     
@@ -190,21 +190,19 @@
 <hr>
 <p>下一步，來寫 makefile！</p>
 <h2 id="GCC">GCC<a class="header-anchor" href="#GCC">#</a></h2>
-<p>在最上層資料夾裡的 makefile 寫上以下程式碼：</p>
+<p>在所有的 makefile（除了最上層）寫上以下程式碼：</p>
 <figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">TCPREFIX = arm-none-eabi-</span><br><span class="line">CC       = <span class="variable">$(TCPREFIX)</span>gcc</span><br><span class="line"></span><br><span class="line">CFLAGS 	= -c -Wall -fno-common -O0 -g -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=nosys.specs</span><br><span class="line"></span><br><span class="line">INCFLAG =\</span><br><span class="line">-I. \</span><br><span class="line">-Iinc</span><br><span class="line"></span><br><span class="line">CFLAGS  += <span class="variable">$(INCFLAG)</span></span><br><span class="line"></span><br><span class="line">OBJDIR 	= obj</span><br><span class="line"></span><br><span class="line">OBJS =\</span><br><span class="line"><span class="variable">$(OBJDIR)</span>/src.o </span><br><span class="line"></span><br><span class="line"><span class="section">all: <span class="variable">$(OBJS)</span></span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(OBJDIR)</span>/%.o: src/%.c | <span class="variable">$(OBJDIR)</span></span><br><span class="line">	@echo <span class="string">"bulid file: <span class="variable">$&lt;</span>"</span></span><br><span class="line">	<span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -MMD -MF$(@:%.o=%.d) -o <span class="variable">$@</span> <span class="variable">$&lt;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$(OBJDIR)</span>:</span><br><span class="line">	@echo <span class="variable">$(NOW)</span> INFO Make new folder User/<span class="variable">$(OBJDIR)</span>.</span><br><span class="line">	mkdir -p <span class="variable">$(OBJDIR)</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	-rm -rf <span class="variable">$(OBJDIR)</span>/*.o </span><br><span class="line">	-rm -rf <span class="variable">$(OBJDIR)</span>/*.d</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>Line 1 and 2 told makefile to use <code>arm-none-eabi-gcc</code> to complete object work.</li>
-<li>Line 4 told makefile which flag we use in <code>gcc</code>.</li>
-<li>Line 6 to 8 told which directory we need to include. (If other directory needed, add line here too.)</li>
-<li>Line 12 to 15 told which file to object, put all <code>.c</code> file location at <code>src</code> directory and rename to <code>.o</code>.</li>
-<li>Line 17 give <code>all</code> target to build all object file.</li>
-<li>Line 19 to 21 build all object file, this is a action after <code>all</code> called.</li>
-<li>If <code>obj</code> directory is not existed, new it at line 23 to 25.</li>
-<li>Line 27 to 29 helps us clean object files.</li>
+<li>使用 <code>arm-none-eabi-gcc</code> 來進行編譯</li>
+<li>為 <code>gcc</code> 加入一些設定，如浮點數處理器。</li>
+<li>接著設定所有需要連結的 object file</li>
+<li>將所有 <code>.c</code> 編譯成 <code>.o</code></li>
+<li>Target <code>all</code> 將會完成編譯所有檔案</li>
+<li>Target <code>clean</code> 可以清理所有 object file</li>
 </ul>
-<p>And next, we need to told main makefile to build all, which seperated at different directories. So we need to exec make all at correct directory.</p>
+<p>接著告訴主要的 makefile 要去底下的 makefile 執行編譯</p>
 <figure class="highlight makefile line-number"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">obj:</span></span><br><span class="line">	<span class="variable">$(MAKE)</span> all -C System</span><br><span class="line">	<span class="variable">$(MAKE)</span> all -C OS</span><br><span class="line">	<span class="variable">$(MAKE)</span> all -C User</span><br></pre></td></tr></tbody></table></figure>
-<p>This should write down at <code>./makefile</code>, <code>-C</code> flag tell makefile exec previous target at given directory. So line 2 is same as:</p>
+<p><code>-C</code> 意味著要去下層資料夾執行目標，所以第二行等同於：</p>
 <figure class="highlight routeros"><table><tbody><tr><td class="code"><pre><span class="line">cd ./System</span><br><span class="line">make all</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="Startup-o">Startup.o<a class="header-anchor" href="#Startup-o">#</a></h3>
 <p>Startup.o is needed, so we put in <code>User</code> directory, and don’t put in <code>src</code>. Building code is similar:</p>
