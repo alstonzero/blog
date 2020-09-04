@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Apache 將網站架設於子目錄</title>
+      <link href="/posts/linux/apache-upload-in-subdir.html"/>
+      <url>/posts/linux/apache-upload-in-subdir.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>一般而言，如果要在不同目錄架設網站的話，需要使用 virtual host，但這是在子網域下的設定。</p><figure class="highlight stylus"><table><tbody><tr><td class="code"><pre><span class="line">example.com</span><br><span class="line">sub<span class="selector-class">.example</span><span class="selector-class">.com</span></span><br></pre></td></tr></tbody></table></figure><p>如果我們需要將網站建立在子目錄而不將網頁資料放在同一個資料夾裡呢？</p><figure class="highlight maxima"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">example</span>.com</span><br><span class="line"><span class="built_in">example</span>.com/sub/</span><br></pre></td></tr></tbody></table></figure><h2 id="a2ensite">a2ensite<a class="header-anchor" href="#a2ensite">#</a></h2><p>首先建立一個 apache site config，名字取名跟網站相關及可，放置於 <code>/etc/apache2/site-available/</code>。</p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo touch /etc/apache2/site-available/example.conf</span><br></pre></td></tr></tbody></table></figure><p>接著輸入以下指令啟用設定欓</p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">a2ensite example.conf</span><br></pre></td></tr></tbody></table></figure><h2 id="conf">.conf<a class="header-anchor" href="#conf">#</a></h2><p>下一步是撰寫設定欓</p><figure class="highlight apache"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">Alias</span> /example /path/to/source</span><br><span class="line"><span class="section">&lt;Directory /path/to/source&gt;</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">        <span class="attribute"><span class="nomarkup">allow</span></span> from <span class="literal">all</span></span><br><span class="line">        <span class="attribute">Allowoverride</span> <span class="literal">All</span></span><br><span class="line"><span class="section">&lt;/Directory&gt;</span></span><br></pre></td></tr></tbody></table></figure><p>如此一來，此資源將會被導向 <code>/example</code></p><h3 id="重啟">重啟<a class="header-anchor" href="#重啟">#</a></h3><p>最後請重啟 apache</p><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo service apache2 restart</span><br></pre></td></tr></tbody></table></figure><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Apache </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>BMP (Bitmap) 檔案格式</title>
       <link href="/posts/bitmap-file-structure.html"/>
       <url>/posts/bitmap-file-structure.html</url>
